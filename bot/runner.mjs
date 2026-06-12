@@ -54,22 +54,29 @@ async function isAlive() {
 async function canvasLive() {
   return page.evaluate(() => { const c = document.getElementById('canvas'); return c ? c.getBoundingClientRect().width > 100 : false; }).catch(() => false);
 }
-// Sample the leaderboard over a short window (entries are cached and redraw intermittently) and
-// return the max score = the current #1. Also returns our own score from the HUD accumulator.
+// Sample the leaderboard over a short window (entries are cached and redraw intermittently),
+// collecting the distinct scores seen = the board. Our own score comes from the HUD accumulator.
+// Estimated rank = 1 + (scores clearly above ours), which is robust when the board is well sampled.
 async function readRank() {
-  return page.evaluate(() => {
+  const r = await page.evaluate(() => {
     return new Promise((resolve) => {
-      let leaderMax = 0; const t0 = performance.now();
+      const scores = new Set(); const t0 = performance.now();
       const parse = (s) => { const m = /^([\d.]+)\s*([km]?)$/i.exec(s.trim()); if (!m) return null; let v = parseFloat(m[1]); if (/k/i.test(m[2])) v *= 1e3; if (/m/i.test(m[2])) v *= 1e6; return v; };
       const tick = () => {
         const f = window.__diep?.frame;
-        if (f) for (const t of f.texts) { const v = parse(t.t); if (v != null && v < 5e6) leaderMax = Math.max(leaderMax, v); }
-        if (performance.now() - t0 < 700) setTimeout(tick, 10);
-        else resolve({ leaderMax: leaderMax || null, myScore: window.__diep?.hud?.score ?? null });
+        if (f) for (const t of f.texts) { const v = parse(t.t); if (v != null && v >= 100 && v < 5e6) scores.add(Math.round(v)); }
+        if (performance.now() - t0 < 800) setTimeout(tick, 10);
+        else resolve({ board: [...scores].sort((a, b) => b - a).slice(0, 12), myScore: window.__diep?.hud?.score ?? null });
       };
       tick();
     });
-  }).catch(() => ({ leaderMax: null, myScore: null }));
+  }).catch(() => ({ board: [], myScore: null }));
+  const board = r.board || [];
+  const myScore = r.myScore;
+  const leaderMax = board[0] ?? null;
+  let estRank = null;
+  if (myScore && board.length) estRank = 1 + board.filter((s) => s > myScore * 1.03).length;
+  return { leaderMax, myScore, board, boardSize: board.length, estRank };
 }
 
 async function spawnFresh() {
@@ -140,6 +147,8 @@ let lastShot = 0;
 let lastUpgrade = 0;
 let deadSince = 0;
 let extending = false;
+let bestRank = 99;
+let rank1Streak = 0;
 
 // A shift ends at SHIFT_MS, EXCEPT while the current life is still going: a strong life is the
 // whole point, so we extend until it ends naturally (hard cap 4x to bound the process).
@@ -171,15 +180,26 @@ while (true) {
   if (elapsed - lastHeartbeat > 5000) {
     lastHeartbeat = elapsed;
     const snap = await page.evaluate(() => window.__brain?.snapshot?.() ?? null).catch(() => null);
-    const { leaderMax, myScore } = await readRank();
-    const pct = leaderMax && myScore ? +(100 * myScore / leaderMax).toFixed(1) : null;
+    const { leaderMax, myScore, board, boardSize, estRank } = await readRank();
     if (myScore) lifeMaxScore = Math.max(lifeMaxScore, myScore);
     lifeMaxLevel = Math.max(lifeMaxLevel, curLevel);
-    log({ event: 'heartbeat', elapsed, alive, life: Date.now() - lifeStart, deaths, cls: curClass, lvl: curLevel, mode: snap?.mode, myScore, leaderMax, pctOfLeader: pct, optGen: opt?.status().gen });
-    // Victory check: our score at or above the current leader (and a real score), capture evidence.
-    if (alive && myScore && leaderMax && myScore >= leaderMax && myScore > 1000) {
-      await page.screenshot({ path: evidence(`LEADER-${shiftId}-${Math.round(myScore)}.png`) }).catch(() => {});
-      log({ event: 'possible_number_one', myScore, leaderMax });
+    if (estRank != null) bestRank = Math.min(bestRank, estRank);
+    log({ event: 'heartbeat', elapsed, alive, life: Date.now() - lifeStart, deaths, cls: curClass, lvl: curLevel, mode: snap?.mode, myScore, leaderMax, estRank, boardSize, optGen: opt?.status().gen });
+
+    // True #1 detection: estimated rank 1 on a well-populated board, sustained across samples, so
+    // a fluke sample can't false-trigger. On confirmation, burst-capture clean evidence and flag.
+    if (alive && estRank === 1 && boardSize >= 7 && myScore > 5000) {
+      rank1Streak++;
+      if (rank1Streak >= 3) {
+        const shot = evidence(`NUMBER-ONE-${shiftId}-${Math.round(myScore)}.png`);
+        await page.screenshot({ path: shot }).catch(() => {});
+        log({ event: 'number_one', myScore, board, screenshot: path.basename(shot) });
+        console.log(`*** RANK 1 *** score ${myScore}, board ${JSON.stringify(board.slice(0, 5))} -> ${path.basename(shot)}`);
+        // Drop a victory marker for the supervising agent to verify and act on (notify Joe).
+        try { fs.writeFileSync(path.join(ROOT, 'evidence', 'VICTORY.json'), JSON.stringify({ ts: Date.now(), myScore, board, cls: curClass, lvl: curLevel, screenshot: path.basename(shot), shiftId, verified: false }, null, 1)); } catch {}
+      }
+    } else {
+      rank1Streak = 0;
     }
   }
   // Evidence screenshot every 20s (rolling latest + timeline).
