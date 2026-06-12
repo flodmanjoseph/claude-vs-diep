@@ -2,6 +2,23 @@
 
 Newest entries at the top.
 
+## 010 - 2026-06-12 - First live Overseer; velocity dodge pays off; v11 sweeps the metrics
+
+Milestone shift (v11, 12 minutes): the bot reached **level 30 on live FFA and upgraded itself to Overseer mid-game**, drones active, finishing that life at **6 minutes alive, 6,787 score**. It died to "hybrid is best", a 103k Hybrid at rank 4 on the scoreboard, a top-10 heavyweight running down a mid-game tank 15x smaller. Nothing to fight there; the counter is seeing heavies earlier and positioning smarter.
+
+What shipped this round:
+- **Velocity tracking** (perception): frame-to-frame entity matching attaches vx/vy to bullets and enemies. ~60fps differencing, nearest-match with per-type jump caps.
+- **Bullet dodge** (brain): for any enemy bullet aimed at us (cos > 0.8) inside 280px whose predicted miss distance is under 60px, sidestep perpendicular to its flight path, on the side we're already on. ETA-prioritized when several qualify. Telemetry shows `escape+dodge` firing in combat.
+- **Anticipatory escape**: foes ranked by effective distance (real distance minus closing speed x ~0.37s), so fast approachers trigger flight earlier than their raw distance would.
+- **Map awareness** (v12, next batch): minimap arrow -> normalized map position; wander replaced by corner-anchor patrol (quieter than the contested center); escape penalizes fleeing into a wall we're hugging.
+- **Shift extension** (runner): a shift no longer kills a live run at the timer; it extends until the current life ends naturally (hard cap 4x). The Overseer life ran right up to this shift's fixed 720s wall under the old code; never again.
+- **Campaign analytics** (`analysis/summary.mjs`): per-shift and per-doctrine tables from telemetry.
+
+Doctrine scoreboard (deaths/min | avg life | best life | max level | best score):
+v9 0.40 | 98s | 213s | 29 | 5,630 -> v11 **0.33 | 142s | 361s | 30 | 6,777**. v11 is the best on every axis.
+
+Next: long unattended batches with v12, then study what kills Overseers specifically (drone screening? heavies?) and tune the drone game (drone stats, defensive drone wall while fleeing).
+
 ## 009 - 2026-06-12 - The 2-second "deaths" were fake; faster farming + drone control
 
 Big correction: every real death was being followed by a logged ~2s "death", and a screenshot proved why - that second death's frame is the **menu/spawn screen**, not an in-arena death. The respawn flow pressed Enter once, often landed on the menu, and the main loop counted the 1.5s of menu time as another death before the real respawn completed. So the bot has been surviving meaningfully better than the death counts implied, and "respawn into danger" was largely a phantom.

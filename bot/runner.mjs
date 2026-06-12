@@ -116,13 +116,25 @@ let lastHeartbeat = 0;
 let lastShot = 0;
 let lastUpgrade = 0;
 let deadSince = 0;
+let extending = false;
 
-while (Date.now() - t0 < SHIFT_MS) {
+// A shift ends at SHIFT_MS, EXCEPT while the current life is still going: a strong life is the
+// whole point, so we extend until it ends naturally (hard cap 4x to bound the process).
+const HARD_CAP = SHIFT_MS * 4;
+
+while (true) {
   await page.waitForTimeout(400);
   const elapsed = Date.now() - t0;
 
   const alive = await isAlive();
   const live = await canvasLive();
+
+  if (elapsed >= HARD_CAP) break;
+  if (elapsed >= SHIFT_MS) {
+    // Life over AND its death already recorded (deadSince resets after the death block) -> end.
+    if (!alive && !deadSince) break;
+    if (alive && !extending) { extending = true; log({ event: 'shift_extending', elapsed }); console.log('shift timer up but life in progress; extending until death'); }
+  }
 
   // Take class upgrades when available (gated by current class), every ~1.5s while alive.
   if (alive && elapsed - lastUpgrade > 1500) {
@@ -168,9 +180,10 @@ while (Date.now() - t0 < SHIFT_MS) {
       const lastState = await page.evaluate(() => window.__readState?.() ?? null).catch(() => null);
       log({ event: 'death', n: deaths, lifeMs: life, cls: curClass, lvl: curLevel, screenshot: path.basename(shotPath), enemiesNear: lastState?.enemies?.slice(0, 3) ?? [] });
       console.log(`death #${deaths} after ${(life / 1000).toFixed(0)}s as ${curClass} L${curLevel}`);
+      deadSince = 0;
+      if (elapsed >= SHIFT_MS) break; // shift timer already up: record the death, don't respawn
       await respawn();
       lifeStart = Date.now();
-      deadSince = 0;
     }
   } else {
     deadSince = 0;

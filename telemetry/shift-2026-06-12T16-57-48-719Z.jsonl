@@ -79,3 +79,298 @@
 {"t":1781283729590,"event":"heartbeat","elapsed":255619,"alive":true,"life":99754,"deaths":1,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2408,"leaderMax":146800,"pctOfLeader":1.6}
 {"t":1781283734751,"event":"heartbeat","elapsed":260782,"alive":true,"life":104915,"deaths":1,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2523,"leaderMax":119000,"pctOfLeader":2.1}
 {"t":1781283739961,"event":"heartbeat","elapsed":265987,"alive":true,"life":110125,"deaths":1,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2593,"leaderMax":120600,"pctOfLeader":2.2}
+{"t":1781283745111,"event":"heartbeat","elapsed":271143,"alive":true,"life":115275,"deaths":1,"cls":"Sniper","lvl":23,"mode":"farm","myScore":2733,"leaderMax":null,"pctOfLeader":null}
+{"t":1781283750269,"event":"heartbeat","elapsed":276300,"alive":true,"life":120433,"deaths":1,"cls":"Sniper","lvl":23,"mode":"farm","myScore":2788,"leaderMax":122200,"pctOfLeader":2.3}
+{"t":1781283755039,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283755039,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283755039,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283755040,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283755040,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283755434,"event":"heartbeat","elapsed":281464,"alive":true,"life":125598,"deaths":1,"cls":"Sniper","lvl":23,"mode":"farm","myScore":2957,"leaderMax":122600,"pctOfLeader":2.4}
+{"t":1781283756274,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 (Not Found)"}
+{"t":1781283756275,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 (Not Found)"}
+{"t":1781283756314,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 (Not Found)"}
+{"t":1781283756363,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 (Not Found)"}
+{"t":1781283756413,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 (Not Found)"}
+{"t":1781283756491,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 ()"}
+{"t":1781283756604,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 400 ()"}
+{"t":1781283760638,"event":"heartbeat","elapsed":286672,"alive":true,"life":130802,"deaths":1,"cls":"Sniper","lvl":23,"mode":"farm","myScore":3079,"leaderMax":114200,"pctOfLeader":2.7}
+{"t":1781283765782,"event":"heartbeat","elapsed":291818,"alive":true,"life":135946,"deaths":1,"cls":"Sniper","lvl":24,"mode":"farm+dodge","myScore":3117,"leaderMax":22500,"pctOfLeader":13.9}
+{"t":1781283770931,"event":"heartbeat","elapsed":296965,"alive":true,"life":141095,"deaths":1,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3157,"leaderMax":123100,"pctOfLeader":2.6}
+{"t":1781283776075,"event":"heartbeat","elapsed":302107,"alive":true,"life":146239,"deaths":1,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3342,"leaderMax":120000,"pctOfLeader":2.8}
+{"t":1781283781282,"event":"heartbeat","elapsed":307307,"alive":true,"life":151446,"deaths":1,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3382,"leaderMax":132100,"pctOfLeader":2.6}
+{"t":1781283786319,"event":"pageerror","text":"Failed to load resource: net::ERR_TIMED_OUT"}
+{"t":1781283786438,"event":"heartbeat","elapsed":312466,"alive":true,"life":156602,"deaths":1,"cls":"Sniper","lvl":24,"mode":"kite-farm","myScore":3402,"leaderMax":23600,"pctOfLeader":14.4}
+{"t":1781283787303,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283787303,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283787303,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283787303,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283787303,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283788647,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283788648,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283791575,"event":"heartbeat","elapsed":317612,"alive":true,"life":161739,"deaths":1,"cls":"Sniper","lvl":25,"mode":"farm","myScore":3607,"leaderMax":23700,"pctOfLeader":15.2}
+{"t":1781283796727,"event":"heartbeat","elapsed":322760,"alive":true,"life":166891,"deaths":1,"cls":"Sniper","lvl":25,"mode":"farm","myScore":3749,"leaderMax":null,"pctOfLeader":null}
+{"t":1781283801925,"event":"heartbeat","elapsed":327959,"alive":true,"life":172089,"deaths":1,"cls":"Sniper","lvl":25,"mode":"farm","myScore":3947,"leaderMax":23900,"pctOfLeader":16.5}
+{"t":1781283807082,"event":"heartbeat","elapsed":333106,"alive":true,"life":177246,"deaths":1,"cls":"Sniper","lvl":26,"mode":"escape","myScore":4167,"leaderMax":133900,"pctOfLeader":3.1}
+{"t":1781283812231,"event":"heartbeat","elapsed":338267,"alive":true,"life":182395,"deaths":1,"cls":"Sniper","lvl":26,"mode":"farm","myScore":4262,"leaderMax":25200,"pctOfLeader":16.9}
+{"t":1781283817380,"event":"heartbeat","elapsed":343408,"alive":true,"life":187544,"deaths":1,"cls":"Sniper","lvl":26,"mode":"farm","myScore":4457,"leaderMax":25600,"pctOfLeader":17.4}
+{"t":1781283819638,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283819638,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283819638,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283819638,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283819638,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283819638,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283821064,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283821065,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283822596,"event":"heartbeat","elapsed":348623,"alive":true,"life":192760,"deaths":1,"cls":"Sniper","lvl":27,"mode":"farm","myScore":4732,"leaderMax":76600,"pctOfLeader":6.2}
+{"t":1781283827739,"event":"heartbeat","elapsed":353770,"alive":true,"life":197903,"deaths":1,"cls":"Sniper","lvl":27,"mode":"escape+dodge","myScore":4822,"leaderMax":135700,"pctOfLeader":3.6}
+{"t":1781283832893,"event":"heartbeat","elapsed":358919,"alive":true,"life":203057,"deaths":1,"cls":"Sniper","lvl":27,"mode":"farm","myScore":4907,"leaderMax":148900,"pctOfLeader":3.3}
+{"t":1781283838036,"event":"heartbeat","elapsed":364072,"alive":true,"life":208200,"deaths":1,"cls":"Sniper","lvl":28,"mode":"escape","myScore":5052,"leaderMax":27300,"pctOfLeader":18.5}
+{"t":1781283843255,"event":"heartbeat","elapsed":369288,"alive":true,"life":213419,"deaths":1,"cls":"Sniper","lvl":28,"mode":"farm","myScore":5082,"leaderMax":149200,"pctOfLeader":3.4}
+{"t":1781283848412,"event":"heartbeat","elapsed":374438,"alive":true,"life":218576,"deaths":1,"cls":"Sniper","lvl":28,"mode":"escape+dodge","myScore":5147,"leaderMax":139000,"pctOfLeader":3.7}
+{"t":1781283851614,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283851614,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283851614,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283851614,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283851614,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283851614,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283851614,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283853558,"event":"heartbeat","elapsed":379586,"alive":true,"life":223722,"deaths":1,"cls":"Sniper","lvl":28,"mode":"escape","myScore":5212,"leaderMax":149600,"pctOfLeader":3.5}
+{"t":1781283853804,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283853804,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283858714,"event":"heartbeat","elapsed":384745,"alive":true,"life":228878,"deaths":1,"cls":"Sniper","lvl":28,"mode":"kite-farm+dodge","myScore":5257,"leaderMax":149700,"pctOfLeader":3.5}
+{"t":1781283863920,"event":"heartbeat","elapsed":389947,"alive":false,"life":234084,"deaths":1,"cls":"Sniper","lvl":28,"mode":"farm","myScore":5367,"leaderMax":143700,"pctOfLeader":3.7}
+{"t":1781283869066,"event":"heartbeat","elapsed":395095,"alive":true,"life":239230,"deaths":1,"cls":"Sniper","lvl":28,"mode":"kite-farm","myScore":5419,"leaderMax":29500,"pctOfLeader":18.4}
+{"t":1781283874212,"event":"heartbeat","elapsed":400248,"alive":true,"life":244376,"deaths":1,"cls":"Sniper","lvl":28,"mode":"escape","myScore":5422,"leaderMax":147600,"pctOfLeader":3.7}
+{"t":1781283879367,"event":"heartbeat","elapsed":405392,"alive":true,"life":249531,"deaths":1,"cls":"Sniper","lvl":28,"mode":"farm+dodge","myScore":5432,"leaderMax":152100,"pctOfLeader":3.6}
+{"t":1781283882463,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283882463,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283882463,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283882463,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283882463,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283882463,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283882463,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283882463,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283884559,"event":"heartbeat","elapsed":410597,"alive":true,"life":254723,"deaths":1,"cls":"Sniper","lvl":28,"mode":"escape","myScore":5477,"leaderMax":153000,"pctOfLeader":3.6}
+{"t":1781283884647,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283884649,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283889711,"event":"heartbeat","elapsed":415736,"alive":true,"life":259875,"deaths":1,"cls":"Sniper","lvl":28,"mode":"farm","myScore":5536,"leaderMax":74700,"pctOfLeader":7.4}
+{"t":1781283894860,"event":"heartbeat","elapsed":420896,"alive":true,"life":265024,"deaths":1,"cls":"Sniper","lvl":29,"mode":"farm","myScore":5732,"leaderMax":37500,"pctOfLeader":15.3}
+{"t":1781283900016,"event":"heartbeat","elapsed":426043,"alive":true,"life":270180,"deaths":1,"cls":"Sniper","lvl":29,"mode":"farm","myScore":5967,"leaderMax":159800,"pctOfLeader":3.7}
+{"t":1781283905212,"event":"heartbeat","elapsed":431249,"alive":true,"life":275376,"deaths":1,"cls":"Sniper","lvl":29,"mode":"farm","myScore":6097,"leaderMax":39800,"pctOfLeader":15.3}
+{"t":1781283910361,"event":"heartbeat","elapsed":436390,"alive":true,"life":280525,"deaths":1,"cls":"Sniper","lvl":29,"mode":"farm","myScore":6212,"leaderMax":40300,"pctOfLeader":15.4}
+{"t":1781283911022,"event":"upgrade_attempt","from":"Sniper","tile":1,"to":"Overseer","level":30}
+{"t":1781283911425,"event":"upgrade_ok","to":"Overseer"}
+{"t":1781283914258,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283914258,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283914258,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283914258,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283914258,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283914258,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283914258,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283914258,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283914258,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283915430,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283915431,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283915764,"event":"heartbeat","elapsed":441793,"alive":true,"life":285928,"deaths":1,"cls":"Overseer","lvl":30,"mode":"farm+dodge","myScore":6322,"leaderMax":129800.00000000001,"pctOfLeader":4.9}
+{"t":1781283920911,"event":"heartbeat","elapsed":446948,"alive":true,"life":291075,"deaths":1,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6372,"leaderMax":51800,"pctOfLeader":12.3}
+{"t":1781283926126,"event":"heartbeat","elapsed":452154,"alive":true,"life":296290,"deaths":1,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6417,"leaderMax":32600,"pctOfLeader":19.7}
+{"t":1781283931277,"event":"heartbeat","elapsed":457305,"alive":true,"life":301441,"deaths":1,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6472,"leaderMax":152200,"pctOfLeader":4.3}
+{"t":1781283936427,"event":"heartbeat","elapsed":462455,"alive":true,"life":306591,"deaths":1,"cls":"Overseer","lvl":30,"mode":"escape+dodge","myScore":6502,"leaderMax":168500,"pctOfLeader":3.9}
+{"t":1781283941579,"event":"heartbeat","elapsed":467609,"alive":true,"life":311743,"deaths":1,"cls":"Overseer","lvl":30,"mode":"kite-farm","myScore":6514,"leaderMax":58300,"pctOfLeader":11.2}
+{"t":1781283946785,"event":"heartbeat","elapsed":472818,"alive":true,"life":316949,"deaths":1,"cls":"Overseer","lvl":30,"mode":"escape","myScore":6552,"leaderMax":62500,"pctOfLeader":10.5}
+{"t":1781283946859,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283946859,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283946860,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283946860,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283946860,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283946860,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283946860,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283946860,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283946860,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283946860,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283949049,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283949049,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283951933,"event":"heartbeat","elapsed":477966,"alive":true,"life":322097,"deaths":1,"cls":"Overseer","lvl":30,"mode":"escape","myScore":6572,"leaderMax":99600,"pctOfLeader":6.6}
+{"t":1781283957093,"event":"heartbeat","elapsed":483120,"alive":true,"life":327257,"deaths":1,"cls":"Overseer","lvl":30,"mode":"escape","myScore":6607,"leaderMax":65900,"pctOfLeader":10}
+{"t":1781283962244,"event":"heartbeat","elapsed":488272,"alive":true,"life":332408,"deaths":1,"cls":"Overseer","lvl":30,"mode":"escape","myScore":6637,"leaderMax":157000,"pctOfLeader":4.2}
+{"t":1781283967454,"event":"heartbeat","elapsed":493481,"alive":true,"life":337618,"deaths":1,"cls":"Overseer","lvl":30,"mode":"kite-farm","myScore":6657,"leaderMax":99900,"pctOfLeader":6.7}
+{"t":1781283972611,"event":"heartbeat","elapsed":498637,"alive":true,"life":342775,"deaths":1,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6687,"leaderMax":171100,"pctOfLeader":3.9}
+{"t":1781283977763,"event":"heartbeat","elapsed":503795,"alive":true,"life":347927,"deaths":1,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6733,"leaderMax":52400,"pctOfLeader":12.8}
+{"t":1781283978251,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283978251,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283978251,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283978251,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283978251,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283978251,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283978251,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283978251,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283978252,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283978252,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283978253,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283982906,"event":"heartbeat","elapsed":508940,"alive":true,"life":353070,"deaths":1,"cls":"Overseer","lvl":30,"mode":"escape","myScore":6767,"leaderMax":78600,"pctOfLeader":8.6}
+{"t":1781283988107,"event":"heartbeat","elapsed":514132,"alive":true,"life":358271,"deaths":1,"cls":"Overseer","lvl":30,"mode":"escape+dodge","myScore":6777,"leaderMax":83500,"pctOfLeader":8.1}
+{"t":1781283991416,"event":"death","n":2,"lifeMs":361496,"cls":"Overseer","lvl":30,"screenshot":"death-2026-06-12T16-57-48-719Z-2.png","enemiesNear":[{"x":633,"y":351,"r":22,"dx":-7,"dy":-9,"dist":11.40175425099138,"self":false,"vx":0,"vy":0},{"x":633,"y":351,"r":20,"dx":-7,"dy":-9,"dist":11.40175425099138,"self":false,"vx":0,"vy":0}]}
+{"t":1781283993215,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283993215,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283993215,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283993215,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283993215,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283993215,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283993215,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283993215,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283993216,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283993216,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283993217,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781283993531,"event":"respawned","alive":true}
+{"t":1781283994188,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":17}
+{"t":1781283994590,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781283995300,"event":"heartbeat","elapsed":520674,"alive":true,"life":1767,"deaths":2,"cls":"Sniper","lvl":17,"mode":"spawn-escape+dodge","myScore":1109,"leaderMax":84800,"pctOfLeader":1.3}
+{"t":1781284000050,"event":"heartbeat","elapsed":526075,"alive":true,"life":6517,"deaths":2,"cls":"Sniper","lvl":17,"mode":"spawn-escape","myScore":1109,"leaderMax":164900,"pctOfLeader":0.7}
+{"t":1781284005277,"event":"heartbeat","elapsed":531304,"alive":true,"life":11744,"deaths":2,"cls":"Sniper","lvl":17,"mode":"escape+dodge","myScore":1129,"leaderMax":59100,"pctOfLeader":1.9}
+{"t":1781284010432,"event":"heartbeat","elapsed":536465,"alive":true,"life":16899,"deaths":2,"cls":"Sniper","lvl":17,"mode":"kite-farm+dodge","myScore":1244,"leaderMax":175100,"pctOfLeader":0.7}
+{"t":1781284015578,"event":"heartbeat","elapsed":541610,"alive":true,"life":22045,"deaths":2,"cls":"Sniper","lvl":17,"mode":"escape","myScore":1244,"leaderMax":89800,"pctOfLeader":1.4}
+{"t":1781284020734,"event":"heartbeat","elapsed":546765,"alive":true,"life":27201,"deaths":2,"cls":"Sniper","lvl":17,"mode":"kite-farm","myScore":1244,"leaderMax":104600,"pctOfLeader":1.2}
+{"t":1781284025951,"event":"heartbeat","elapsed":551975,"alive":true,"life":32418,"deaths":2,"cls":"Sniper","lvl":20,"mode":"farm","myScore":2068,"leaderMax":104800,"pctOfLeader":2}
+{"t":1781284031096,"event":"heartbeat","elapsed":557130,"alive":true,"life":37563,"deaths":2,"cls":"Sniper","lvl":21,"mode":"escape","myScore":2108,"leaderMax":104700,"pctOfLeader":2}
+{"t":1781284036244,"event":"heartbeat","elapsed":562272,"alive":true,"life":42711,"deaths":2,"cls":"Sniper","lvl":21,"mode":"escape+dodge","myScore":2108,"leaderMax":81500,"pctOfLeader":2.6}
+{"t":1781284041393,"event":"heartbeat","elapsed":567427,"alive":true,"life":47860,"deaths":2,"cls":"Sniper","lvl":21,"mode":"spawn-escape+dodge","myScore":2108,"leaderMax":95300,"pctOfLeader":2.2}
+{"t":1781284042415,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284042415,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284042415,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284042415,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284042415,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284042415,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284042415,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284042415,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284042415,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284042415,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284042415,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284044382,"event":"death","n":3,"lifeMs":50764,"cls":"Sniper","lvl":21,"screenshot":"death-2026-06-12T16-57-48-719Z-3.png","enemiesNear":[{"x":632,"y":352,"r":22,"dx":-8,"dy":-8,"dist":11.313708498984761,"self":false,"vx":0,"vy":0},{"x":632,"y":352,"r":20,"dx":-8,"dy":-8,"dist":11.313708498984761,"self":false,"vx":0,"vy":0},{"x":400,"y":135,"r":16,"dx":-240,"dy":-225,"dist":328.97568299191965,"self":false,"vx":0,"vy":0}]}
+{"t":1781284044432,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284044432,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284045502,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284045503,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284045503,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284045504,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284045504,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284045504,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284045504,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284045504,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284045504,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284045505,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284045505,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284045505,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284046496,"event":"respawned","alive":true}
+{"t":1781284047155,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":15}
+{"t":1781284047557,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781284048261,"event":"heartbeat","elapsed":573641,"alive":true,"life":1762,"deaths":3,"cls":"Sniper","lvl":15,"mode":"farm","myScore":787,"leaderMax":96300,"pctOfLeader":0.8}
+{"t":1781284053002,"event":"heartbeat","elapsed":579039,"alive":true,"life":6503,"deaths":3,"cls":"Sniper","lvl":15,"mode":"farm","myScore":797,"leaderMax":97700,"pctOfLeader":0.8}
+{"t":1781284058169,"event":"heartbeat","elapsed":584192,"alive":true,"life":11670,"deaths":3,"cls":"Sniper","lvl":15,"mode":"escape+dodge","myScore":992,"leaderMax":107000,"pctOfLeader":0.9}
+{"t":1781284063334,"event":"heartbeat","elapsed":589365,"alive":true,"life":16835,"deaths":3,"cls":"Sniper","lvl":16,"mode":"farm","myScore":1122,"leaderMax":null,"pctOfLeader":null}
+{"t":1781284068566,"event":"heartbeat","elapsed":594601,"alive":true,"life":22067,"deaths":3,"cls":"Sniper","lvl":17,"mode":"escape","myScore":1332,"leaderMax":106500,"pctOfLeader":1.3}
+{"t":1781284073730,"event":"heartbeat","elapsed":599758,"alive":true,"life":27231,"deaths":3,"cls":"Sniper","lvl":18,"mode":"farm","myScore":1457,"leaderMax":102900,"pctOfLeader":1.4}
+{"t":1781284074193,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284074193,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284074193,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284074193,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284074193,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284074193,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284074193,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284074193,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284074193,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284074193,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284074193,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284074193,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284075556,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284075557,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284078922,"event":"heartbeat","elapsed":604954,"alive":true,"life":32423,"deaths":3,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1580,"leaderMax":107800,"pctOfLeader":1.5}
+{"t":1781284084085,"event":"heartbeat","elapsed":610115,"alive":true,"life":37586,"deaths":3,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1687,"leaderMax":111800,"pctOfLeader":1.5}
+{"t":1781284089291,"event":"heartbeat","elapsed":615323,"alive":true,"life":42792,"deaths":3,"cls":"Sniper","lvl":20,"mode":"farm","myScore":1785,"leaderMax":36000,"pctOfLeader":5}
+{"t":1781284094445,"event":"heartbeat","elapsed":620481,"alive":true,"life":47946,"deaths":3,"cls":"Sniper","lvl":20,"mode":"escape","myScore":1857,"leaderMax":89700,"pctOfLeader":2.1}
+{"t":1781284099599,"event":"heartbeat","elapsed":625634,"alive":true,"life":53100,"deaths":3,"cls":"Sniper","lvl":20,"mode":"farm","myScore":1942,"leaderMax":111000,"pctOfLeader":1.7}
+{"t":1781284104755,"event":"heartbeat","elapsed":630787,"alive":true,"life":58256,"deaths":3,"cls":"Sniper","lvl":20,"mode":"farm","myScore":2057,"leaderMax":112300,"pctOfLeader":1.8}
+{"t":1781284106271,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284106272,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284106272,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284106272,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284106272,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284106272,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284106272,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284106272,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284106273,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284106273,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284106273,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284106273,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284106273,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284107438,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284107439,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284110075,"event":"heartbeat","elapsed":636102,"alive":true,"life":63576,"deaths":3,"cls":"Sniper","lvl":21,"mode":"escape+dodge","myScore":2207,"leaderMax":112700,"pctOfLeader":2}
+{"t":1781284115221,"event":"heartbeat","elapsed":641254,"alive":true,"life":68722,"deaths":3,"cls":"Sniper","lvl":21,"mode":"kite-farm","myScore":2302,"leaderMax":113500,"pctOfLeader":2}
+{"t":1781284120382,"event":"heartbeat","elapsed":646411,"alive":true,"life":73883,"deaths":3,"cls":"Sniper","lvl":21,"mode":"farm+dodge","myScore":2332,"leaderMax":115200,"pctOfLeader":2}
+{"t":1781284125528,"event":"heartbeat","elapsed":651562,"alive":true,"life":79029,"deaths":3,"cls":"Sniper","lvl":22,"mode":"escape+dodge","myScore":2372,"leaderMax":116300,"pctOfLeader":2}
+{"t":1781284130749,"event":"heartbeat","elapsed":656774,"alive":false,"life":84250,"deaths":3,"cls":"Sniper","lvl":22,"mode":"escape","myScore":2402,"leaderMax":117700,"pctOfLeader":2}
+{"t":1781284131233,"event":"death","n":4,"lifeMs":84657,"cls":"Sniper","lvl":22,"screenshot":"death-2026-06-12T16-57-48-719Z-4.png","enemiesNear":[{"x":650,"y":360,"r":22,"dx":10,"dy":0,"dist":10,"self":false,"vx":0,"vy":0},{"x":650,"y":360,"r":20,"dx":10,"dy":0,"dist":10,"self":false,"vx":0,"vy":0}]}
+{"t":1781284132558,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284132558,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284132558,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284132558,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284132559,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284132559,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284132559,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284132559,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284132559,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284132559,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284132559,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284132559,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284132559,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284132559,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284133349,"event":"respawned","alive":true}
+{"t":1781284134007,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":15}
+{"t":1781284134411,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781284135924,"event":"heartbeat","elapsed":661959,"alive":true,"life":2573,"deaths":4,"cls":"Sniper","lvl":15,"mode":"farm","myScore":787,"leaderMax":130199.99999999999,"pctOfLeader":0.6}
+{"t":1781284137040,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284137040,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284137040,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284137040,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284137040,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284137040,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284137040,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284137040,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284137040,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284137040,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284137040,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284137040,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284137040,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284137040,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284138185,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284138186,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284141080,"event":"heartbeat","elapsed":667109,"alive":true,"life":7729,"deaths":4,"cls":"Sniper","lvl":15,"mode":"farm","myScore":842,"leaderMax":171900,"pctOfLeader":0.5}
+{"t":1781284146234,"event":"heartbeat","elapsed":672267,"alive":true,"life":12883,"deaths":4,"cls":"Sniper","lvl":15,"mode":"escape","myScore":932,"leaderMax":120300,"pctOfLeader":0.8}
+{"t":1781284151447,"event":"heartbeat","elapsed":677474,"alive":true,"life":18096,"deaths":4,"cls":"Sniper","lvl":16,"mode":"farm","myScore":1027,"leaderMax":null,"pctOfLeader":null}
+{"t":1781284156619,"event":"heartbeat","elapsed":682644,"alive":true,"life":23268,"deaths":4,"cls":"Sniper","lvl":16,"mode":"farm","myScore":1110,"leaderMax":122700,"pctOfLeader":0.9}
+{"t":1781284161776,"event":"heartbeat","elapsed":687806,"alive":true,"life":28425,"deaths":4,"cls":"Sniper","lvl":17,"mode":"farm","myScore":1287,"leaderMax":97700,"pctOfLeader":1.3}
+{"t":1781284166927,"event":"heartbeat","elapsed":692960,"alive":true,"life":33576,"deaths":4,"cls":"Sniper","lvl":18,"mode":"farm","myScore":1342,"leaderMax":124800,"pctOfLeader":1.1}
+{"t":1781284169457,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284169457,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284169457,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284169457,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284169457,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284169457,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284169457,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284169457,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284169457,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284169457,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284169457,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284169457,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284169458,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284169458,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284169458,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284170808,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284170809,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781284172129,"event":"heartbeat","elapsed":698162,"alive":true,"life":38778,"deaths":4,"cls":"Sniper","lvl":18,"mode":"farm","myScore":1442,"leaderMax":125600,"pctOfLeader":1.1}
+{"t":1781284177291,"event":"heartbeat","elapsed":703319,"alive":true,"life":43940,"deaths":4,"cls":"Sniper","lvl":18,"mode":"farm","myScore":1482,"leaderMax":57700,"pctOfLeader":2.6}
+{"t":1781284182448,"event":"heartbeat","elapsed":708483,"alive":true,"life":49097,"deaths":4,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1580,"leaderMax":127500,"pctOfLeader":1.2}
+{"t":1781284187609,"event":"heartbeat","elapsed":713642,"alive":true,"life":54258,"deaths":4,"cls":"Sniper","lvl":19,"mode":"kite-farm","myScore":1662,"leaderMax":100000,"pctOfLeader":1.7}
+{"t":1781284192832,"event":"heartbeat","elapsed":718857,"alive":true,"life":59481,"deaths":4,"cls":"Sniper","lvl":20,"mode":"farm","myScore":1887,"leaderMax":131500,"pctOfLeader":1.4}
+{"t":1781284193694,"event":"shift_end","elapsed":720435,"deaths":4}
