@@ -96,8 +96,15 @@ export const BRAIN_FN = function (DOCTRINE) {
   function bestEscapeDir(state) {
     let best = [0, 1], bestScore = -Infinity;
     const foes = enemiesOf(state);
+    const pos = state.map; // normalized map position or null
     for (const [dx, dy] of DIRS) {
       let score = 0;
+      // Never flee into an arena wall: penalize headings that push past an edge we're already near.
+      if (pos) {
+        const m = DOCTRINE.wallMargin;
+        if ((pos.x < m && dx < 0) || (pos.x > 1 - m && dx > 0)) score -= 5;
+        if ((pos.y < m && dy < 0) || (pos.y > 1 - m && dy > 0)) score -= 5;
+      }
       for (const e of foes) {
         const m = Math.hypot(e.dx, e.dy) || 1;
         const toward = (dx * e.dx + dy * e.dy) / m; // >0 => heading toward this enemy
@@ -204,9 +211,24 @@ export const BRAIN_FN = function (DOCTRINE) {
         aim = (nearest && nd < escapeR * 1.3) ? { x: nearest.x, y: nearest.y } : { x: target.x, y: target.y };
         moveKeys = (mvx || mvy) ? vectorToKeys(mvx, mvy) : new Set();
       } else if (DOCTRINE.wanderWhenEmpty) {
-        B.mode = 'wander';
-        moveKeys = vectorToKeys(0.6, -0.5);
-        aim = { x: 1000, y: 200 };
+        // Patrol between corner anchors using the minimap position; corners are quieter than the
+        // contested center. Without a map fix, fall back to a gentle drift.
+        B.mode = 'patrol';
+        const pos = state.map;
+        if (pos) {
+          const anchors = DOCTRINE.patrolAnchors;
+          B.anchorIdx = B.anchorIdx ?? 0;
+          let a = anchors[B.anchorIdx % anchors.length];
+          if (Math.hypot(a[0] - pos.x, a[1] - pos.y) < DOCTRINE.anchorReachedDist) {
+            B.anchorIdx = (B.anchorIdx + 1) % anchors.length;
+            a = anchors[B.anchorIdx];
+          }
+          moveKeys = vectorToKeys(a[0] - pos.x, a[1] - pos.y);
+          aim = { x: 640 + (a[0] - pos.x) * 600, y: 360 + (a[1] - pos.y) * 600 };
+        } else {
+          moveKeys = vectorToKeys(0.6, -0.5);
+          aim = { x: 1000, y: 200 };
+        }
       }
     }
 

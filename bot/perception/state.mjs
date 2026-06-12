@@ -45,7 +45,17 @@ export const STATE_FN = function () {
     }
 
     // Polys: shapes (farm targets) by color; ignore our own barrels (grey) and tiny bits.
+    // Also: the minimap (bottom-right, ~1152..1266 x 590..706) draws our position as a tiny
+    // arrow poly. Normalize it to map coords (0..1, x right, y down) for strategic navigation.
+    let map = null;
+    const MM = { x0: 1152, y0: 590, w: 114, h: 116 };
     for (const p of f.polys) {
+      if (p.x > MM.x0 - 6 && p.x < MM.x0 + MM.w + 6 && p.y > MM.y0 - 6 && p.y < MM.y0 + MM.h + 6) {
+        if (p.r >= 2 && p.r <= 10 && p.n >= 3 && p.n <= 6) {
+          map = { x: Math.min(1, Math.max(0, (p.x - MM.x0) / MM.w)), y: Math.min(1, Math.max(0, (p.y - MM.y0) / MM.h)) };
+        }
+        continue; // nothing inside the minimap region is a farmable shape
+      }
       let kind = null;
       if (near(p.c, SQUARE)) kind = 'square';
       else if (near(p.c, TRIANGLE)) kind = 'triangle';
@@ -81,6 +91,8 @@ export const STATE_FN = function () {
     attachVel(enemies, prev?.enemies, 10);
     window.__prevEnts = { t: f.t, bullets: bullets.map((b) => ({ x: b.x, y: b.y })), enemies: enemies.map((e) => ({ x: e.x, y: e.y })) };
 
-    return { ok: true, t: f.t, W, H, me, enemies, bullets, shapes };
+    // The minimap may redraw intermittently (cached layers), so persist the last-known position.
+    if (map) window.__lastMap = map;
+    return { ok: true, t: f.t, W, H, me, enemies, bullets, shapes, map: map || window.__lastMap || null };
   };
 };

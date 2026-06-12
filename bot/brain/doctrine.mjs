@@ -2,7 +2,7 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 11,
+  version: 12,
 
   // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
   // by the current class, so the right tile index is clicked even if level reads lag. Tile indices
@@ -31,6 +31,11 @@ export const DOCTRINE = {
   // of a life, flee from any enemy within an enlarged radius and do not farm.
   spawnGraceFrames: 210, // ~3.5s at 60fps
   spawnEscapeRadius: 330,
+
+  // Map awareness (positions normalized 0..1 from the minimap arrow).
+  wallMargin: 0.06, // treat being within this of an edge as "at the wall" for escape penalties
+  patrolAnchors: [[0.2, 0.2], [0.8, 0.2], [0.8, 0.8], [0.2, 0.8]], // quiet-ish corner waypoints
+  anchorReachedDist: 0.08, // advance to next anchor when this close
 
   // Farming. Target selection is distance-dominant: grab the nearest shape, only mildly preferring
   // higher-value kinds, so we don't trek across the map (slow + risky) chasing a far pentagon.
