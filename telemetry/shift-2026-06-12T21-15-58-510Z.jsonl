@@ -48,3 +48,8 @@
 {"t":1781299113710,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
 {"t":1781299113711,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
 {"t":1781299116115,"event":"rl_save","states":34,"decisions":809,"eps":0.334}
+{"t":1781299118947,"event":"heartbeat","elapsed":154950,"alive":true,"life":27514,"deaths":2,"cls":"Tank","lvl":13,"mode":"farm","myScore":666,"leaderMax":28500,"estRank":2,"boardSize":1}
+{"t":1781299124185,"event":"heartbeat","elapsed":160191,"alive":true,"life":32752,"deaths":2,"cls":"Tank","lvl":14,"mode":"farm","myScore":776,"leaderMax":88900,"estRank":4,"boardSize":3}
+{"t":1781299126509,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":15}
+{"t":1781299126912,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781299129340,"event":"heartbeat","elapsed":165336,"alive":true,"life":37907,"deaths":2,"cls":"Sniper","lvl":15,"mode":"escape","myScore":967,"leaderMax":29500,"estRank":2,"boardSize":1}

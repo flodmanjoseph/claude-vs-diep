@@ -6,7 +6,11 @@ import { launch, spawn, evidence, ROOT } from './lib/launch.mjs';
 import { SCRAPE_INIT } from './perception/scrape.mjs';
 import { STATE_FN } from './perception/state.mjs';
 import { BRAIN_FN } from './brain/brain.mjs';
-import { DOCTRINE } from './brain/doctrine.mjs';
+import { DOCTRINE as BASE_DOCTRINE, SMASHER_OVERRIDE } from './brain/doctrine.mjs';
+
+// BUILD selects the tank build: 'overlord' (default drone build) or 'smasher' (ram build).
+const BUILD = process.env.BUILD || 'overlord';
+const DOCTRINE = BUILD === 'smasher' ? { ...BASE_DOCTRINE, ...SMASHER_OVERRIDE, version: 'smasher' } : BASE_DOCTRINE;
 import { enableTrustedCanvasClicks, clickTile, readLevelClass } from './lib/upgrades.mjs';
 import { Optimizer, lifeFitness } from './brain/optimizer.mjs';
 
@@ -39,16 +43,11 @@ async function applyNextDoctrine() {
 }
 function scoreLife() {
   const fit = lifeFitness({ score: lifeMaxScore, level: lifeMaxLevel, lifeMs: Date.now() - lifeStart });
-  if (opt) {
-    opt.record(fit);
-    const st = opt.status();
-    log({ event: 'life_scored', mode: 'es', fitness: Math.round(fit), score: lifeMaxScore, level: lifeMaxLevel, gen: st.gen, champion: st.champion });
-    console.log(`  life fitness ${Math.round(fit)} (score ${lifeMaxScore}, L${lifeMaxLevel}) | gen ${st.gen} ${st.evalsThisGen} champ ${st.champion}`);
-  } else if (RL) {
-    // RL experiment: log fitness so we can A/B the learned policy against the rule baseline.
-    log({ event: 'life_scored', mode: 'rl', fitness: Math.round(fit), score: lifeMaxScore, level: lifeMaxLevel });
-    console.log(`  RL life fitness ${Math.round(fit)} (score ${lifeMaxScore}, L${lifeMaxLevel})`);
-  }
+  const tag = opt ? 'es' : RL ? 'rl' : 'rules';
+  if (opt) opt.record(fit);
+  // Always log per-life fitness so any build/policy can be A/B compared from telemetry.
+  log({ event: 'life_scored', mode: tag, build: BUILD, fitness: Math.round(fit), score: lifeMaxScore, level: lifeMaxLevel, lifeMs: Date.now() - lifeStart, ...(opt ? { gen: opt.status().gen, champion: opt.status().champion } : {}) });
+  console.log(`  ${BUILD} life fitness ${Math.round(fit)} (score ${lifeMaxScore}, L${lifeMaxLevel})${opt ? ` | gen ${opt.status().gen} ${opt.status().evalsThisGen}` : ''}`);
 }
 const TELEM = path.join(ROOT, 'telemetry');
 const shiftId = new Date().toISOString().replace(/[:.]/g, '-');

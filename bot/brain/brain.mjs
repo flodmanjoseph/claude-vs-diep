@@ -248,7 +248,9 @@ export const BRAIN_FN = function (initialDoctrine) {
     const bulletThreat = state.bullets.some((b) => b.enemy && b.dist < DOCTRINE.bulletDangerRadius);
     const escapeR = grace ? DOCTRINE.spawnEscapeRadius : DOCTRINE.escapeRadius;
     const myR = state.me.r || 17;
-    const huntable = DOCTRINE.huntEnabled && isDrone && nearest && !grace && !bulletThreat
+    // Hunting applies to drone classes (drones do the work) and to ram tanks (Smashers, which kill
+    // by colliding). A ram tank chases any enemy that isn't clearly bigger and rams it.
+    const huntable = DOCTRINE.huntEnabled && (isDrone || DOCTRINE.ramStyle) && nearest && !grace && !bulletThreat
       && nearest.r < myR * DOCTRINE.huntSizeRatio && nearest.dist < DOCTRINE.huntRange && foes.length <= DOCTRINE.huntMaxFoes;
 
     // Each tactical mode is an action: it returns the movement keys + aim and labels B.mode.

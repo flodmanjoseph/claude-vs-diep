@@ -64,6 +64,9 @@ export const DOCTRINE = {
   // Loop timing
   aimEveryFrame: true,
 
+  // Ram-style play (Smasher line): kill by colliding. Off for the default ranged/drone build.
+  ramStyle: false,
+
   // Reinforcement learning (tabular Q-learning mode arbitration). Off by default — runs as a
   // controlled experiment (RL=1) on frozen champion params, A/B'd against the hand rules.
   rl: {
@@ -77,4 +80,23 @@ export const DOCTRINE = {
     survivalReward: 0.08,
     deathPenalty: -25, // terminal penalty on death
   },
+};
+
+// Smasher ram build (Joe's idea: a tank that kills by colliding suits a bot — no aiming needed).
+// Path: stay Tank to 30, take Smasher (tile 4), then Spike (tile 2, highest body damage) at 45.
+// Merged over the base doctrine when BUILD=smasher. Ram tuning: close all the way, contact shapes.
+export const SMASHER_OVERRIDE = {
+  buildPath: [
+    { from: 'Tank', tile: 4, to: 'Smasher', minLevel: 30 },
+    { from: 'Smasher', tile: 2, to: 'Spike', minLevel: 45 },
+  ],
+  // Smasher stats are only Health Regen(1), Max Health(2), Body Damage(3), Movement Speed(8).
+  statSequence: [3, 2, 8, 3, 2, 8, 3, 2, 3, 8, 2, 1, 3, 2, 8, 1, 3, 2],
+  droneClasses: [], // a Smasher is never a drone class
+  ramStyle: true,
+  huntSizeRatio: 0.95, // ram enemies up to ~our size (we win body fights when tanky)
+  huntRange: 420, // chase rammable targets from far
+  huntStandoff: 0, // close all the way — contact is the kill
+  approachStopDist: 0, // drive into shapes to farm them
+  shapeBodyMargin: -999, // never back off a shape; ramming it is the point
 };
