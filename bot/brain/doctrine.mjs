@@ -94,9 +94,11 @@ export const SMASHER_OVERRIDE = {
   statSequence: [3, 2, 8, 3, 2, 8, 3, 2, 3, 8, 2, 1, 3, 2, 8, 1, 3, 2],
   droneClasses: [], // a Smasher is never a drone class
   ramStyle: true,
+  // Ram behavior only activates once we are an actual (tanky) Smasher; the base-Tank phase to
+  // level 30 still farms at range with its cannon so it doesn't ram-suicide while fragile.
+  ramClasses: ['Smasher', 'Spike', 'Landmine', 'Auto Smasher', 'Mega Smasher'],
   huntSizeRatio: 0.95, // ram enemies up to ~our size (we win body fights when tanky)
   huntRange: 420, // chase rammable targets from far
-  huntStandoff: 0, // close all the way — contact is the kill
-  approachStopDist: 0, // drive into shapes to farm them
-  shapeBodyMargin: -999, // never back off a shape; ramming it is the point
+  // approachStopDist / shapeBodyMargin / huntStandoff stay at ranged defaults; the brain overrides
+  // them to contact values only when we are a ram class.
 };

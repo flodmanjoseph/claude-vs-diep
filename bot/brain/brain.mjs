@@ -248,9 +248,14 @@ export const BRAIN_FN = function (initialDoctrine) {
     const bulletThreat = state.bullets.some((b) => b.enemy && b.dist < DOCTRINE.bulletDangerRadius);
     const escapeR = grace ? DOCTRINE.spawnEscapeRadius : DOCTRINE.escapeRadius;
     const myR = state.me.r || 17;
-    // Hunting applies to drone classes (drones do the work) and to ram tanks (Smashers, which kill
-    // by colliding). A ram tank chases any enemy that isn't clearly bigger and rams it.
-    const huntable = DOCTRINE.huntEnabled && (isDrone || DOCTRINE.ramStyle) && nearest && !grace && !bulletThreat
+    // Ram behavior is active only once we are an actual ram class (a tanky Smasher); the base-Tank
+    // phase farms at range. ramNow flips contact distances on and lets us chase+ram.
+    const ramNow = DOCTRINE.ramStyle && DOCTRINE.ramClasses && DOCTRINE.ramClasses.includes(cls);
+    const stopDist = ramNow ? 0 : DOCTRINE.approachStopDist;
+    const bodyMargin = ramNow ? -999 : DOCTRINE.shapeBodyMargin;
+    const standoff = ramNow ? 0 : DOCTRINE.huntStandoff;
+    // Hunting applies to drone classes (drones do the work) and to ram classes (kill by colliding).
+    const huntable = DOCTRINE.huntEnabled && (isDrone || ramNow) && nearest && !grace && !bulletThreat
       && nearest.r < myR * DOCTRINE.huntSizeRatio && nearest.dist < DOCTRINE.huntRange && foes.length <= DOCTRINE.huntMaxFoes;
 
     // Each tactical mode is an action: it returns the movement keys + aim and labels B.mode.
@@ -262,7 +267,7 @@ export const BRAIN_FN = function (initialDoctrine) {
     const actHunt = () => {
       if (!nearest) return actFarm();
       B.mode = 'hunt';
-      const mk = nearest.dist > DOCTRINE.huntStandoff ? vectorToKeys(nearest.dx, nearest.dy) : vectorToKeys(-nearest.dx, -nearest.dy);
+      const mk = nearest.dist > standoff ? vectorToKeys(nearest.dx, nearest.dy) : vectorToKeys(-nearest.dx, -nearest.dy);
       return { moveKeys: mk, aim: { x: nearest.x, y: nearest.y } };
     };
     function actFarm() {
@@ -270,9 +275,9 @@ export const BRAIN_FN = function (initialDoctrine) {
       if (!target) return actPatrol();
       B.mode = (nearest && nd < DOCTRINE.waryRadius) ? 'kite-farm' : 'farm';
       let mvx = 0, mvy = 0;
-      if (target.dist > DOCTRINE.approachStopDist) { const m = target.dist || 1; mvx += target.dx / m; mvy += target.dy / m; }
+      if (target.dist > stopDist) { const m = target.dist || 1; mvx += target.dx / m; mvy += target.dy / m; }
       for (const s of state.shapes) {
-        const contact = (state.me.r || 17) + s.r + DOCTRINE.shapeBodyMargin;
+        const contact = (state.me.r || 17) + s.r + bodyMargin;
         if (s.dist < contact) { const m = s.dist || 1; mvx -= (s.dx / m) * 1.5; mvy -= (s.dy / m) * 1.5; }
       }
       if (nearest && nd < DOCTRINE.waryRadius) {
