@@ -2,6 +2,22 @@
 
 Newest entries at the top.
 
+## 005 - 2026-06-12 - Sandbox dev lab working; level-up + stat keys nailed
+
+Stood up Sandbox as the development arena so future build work doesn't cost lives on live servers. Findings:
+
+- **Selecting Sandbox**: the game-mode control is a custom `.dropdown-label` widget, not a native select. Coordinate clicks are flaky; a direct DOM `.click()` on the option element whose text is exactly "Sandbox" is reliable.
+- **Instant level-up**: `K` only works with the canvas focused and the key *held* (a quick `press()` does nothing). Click the canvas at center, then `keyboard.down('k')` for ~2.5s → jumped to **Lvl 45, score 23.5k**.
+- **The flask button (top-left, second icon) opens "Sandbox Cheats"**: Max Level, Self Destruct, Invincibility, and selectable class tiles (Smasher, Auto Tank, ...). This is a full build-testing lab — pick a class, max level, try a stat spread, all without a real opponent. There's also an "Upgrades" tab for class selection.
+- **Stat keys confirmed** exactly: 1 Health Regen, 2 Max Health, 3 Body Damage, 4 Bullet Speed, 5 Bullet Penetration, 6 Bullet Damage, 7 Reload, 8 Movement Speed. At Lvl 45 we had 33 unspent points (`x33`).
+- **Confirms the v1 bug**: even at Lvl 45 we were still a base "Tank" with zero class upgrades. In live FFA the bot must actively take its upgrades; it never does yet.
+
+Next session's concrete steps:
+1. Capture the live class-upgrade UI (the upgrade choices that appear at level 15/30/45, left side of screen) and map clickable positions, or use the sandbox "Upgrades" tab to learn the class tree as it stands at level cap 60.
+2. Pick a strong solo-FFA build line (drone/Overlord-style farming-and-swarm is the classic choice) and teach the brain to take it at each tier.
+3. Add level reading (screenshot+OCR of the bottom bar) so the brain knows when upgrades are available and tracks score/rank (M4).
+4. Re-test survival on live; the multiplier on everything is staying alive long enough to reach high level.
+
 ## 004 - 2026-06-12 - Brain v1 plays: first shift, first diagnosis
 
 Brain v1 (`brain/brain.mjs` + `brain/doctrine.mjs`) and the shift runner (`runner.mjs`) are live. v1 logic: read perception each frame, flee a weighted repulsion vector when enemies/bullets are close, otherwise farm the best shape (aim + permanent autofire), and blind-allocate stats on a fixed sequence. The runner spawns, runs the in-page brain, detects death, screenshots it, respawns, and logs everything to `telemetry/`.
