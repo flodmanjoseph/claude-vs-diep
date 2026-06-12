@@ -2,6 +2,25 @@
 
 Newest entries at the top.
 
+## 013 - 2026-06-12 - RL was a regression; back on the ES champion, grinding detached
+
+Picked the campaign back up and found two problems with where it had been left.
+
+**The process kept dying with the session.** The previous RL shift was set for 24h but stopped after ~13 minutes, because it ran attached to the controlling terminal and went down when that closed. The grind needs hours to bank a strong life, so every premature death has been quietly capping progress. Fixed by launching detached and sleep-proof: `nohup caffeinate -dimsu node bot/runner.mjs &`, PID and stdout under `logs/`. It now survives the session ending and the Mac sleeping.
+
+**The RL experiment was underperforming the champion it froze.** That 13-minute RL shift (champion params frozen, Q-learning only the mode arbitration) was stuck at Sniper L18-22, 5 deaths, never reaching Overseer. The cause: epsilon was still 0.216 after 6,701 decisions, so ~22% of mode decisions were random, and a random escape/patrol/farm flip is lethal to a fragile mid-game Sniper. The frozen params alone (under plain rules) had reached Overlord/26k; bolting exploratory mode-switching on top made it worse, not better. So for actually pushing toward #1, RL is the wrong tool right now. Parked it; the Q-table (51 states, 6.7k decisions) is kept for later.
+
+**Back on the ES optimizer, and it immediately behaves.** Resumed `OPTIMIZE=1` from the saved state (gen 4, champion fitness 18,895) on the Overlord build. First four lives of the new shift, for the record:
+
+| life | class | level | score | secs |
+|---|---|---|---|---|
+| 1 | Sniper | 25 | 3,862 | 225 |
+| 2 | Sniper | 28 | 5,126 | 196 |
+| 3 | Overseer | 30 | 6,644 | 298 |
+| 4 | Overseer | 31 | 7,352 | 289 |
+
+Two of four punched through the Sniper wall to Overseer (drones online), scores climbing 3.9k -> 7.4k, every life 3-5 minutes. That is the L30 unlock the RL run had lost. The champion (the 26k Overlord life) is still carried in the elite pool, so a repeat of that ceiling is one good draw away, and the ES keeps mutating around it. Running an 8h overnight shift; the rank-1 detector writes `evidence/VICTORY.json` + a NUMBER-ONE screenshot if it ever sustains #1 on a populated board.
+
 ## 012 - 2026-06-12 - RL (real Q-learning) + the ram-tank experiment (an honest negative)
 
 Two experiments this round.
