@@ -130,10 +130,12 @@ while (true) {
   const live = await canvasLive();
 
   if (elapsed >= HARD_CAP) break;
-  if (elapsed >= SHIFT_MS) {
-    // Life over AND its death already recorded (deadSince resets after the death block) -> end.
-    if (!alive && !deadSince) break;
-    if (alive && !extending) { extending = true; log({ event: 'shift_extending', elapsed }); console.log('shift timer up but life in progress; extending until death'); }
+  // Past the shift timer we keep going while a life is in progress; the shift ends only when the
+  // current life's death has been fully recorded (the break lives in the death block below). Do
+  // NOT break here on first detecting death, or that death's screenshot/post-mortem is lost.
+  if (elapsed >= SHIFT_MS && alive && !extending) {
+    extending = true; log({ event: 'shift_extending', elapsed });
+    console.log('shift timer up but life in progress; extending until death');
   }
 
   // Take class upgrades when available (gated by current class), every ~1.5s while alive.
