@@ -38,12 +38,17 @@ async function applyNextDoctrine() {
   log({ event: 'doctrine_assigned', version: d.version, status: opt.status() });
 }
 function scoreLife() {
-  if (!opt) return;
   const fit = lifeFitness({ score: lifeMaxScore, level: lifeMaxLevel, lifeMs: Date.now() - lifeStart });
-  opt.record(fit);
-  const st = opt.status();
-  log({ event: 'life_scored', fitness: Math.round(fit), score: lifeMaxScore, level: lifeMaxLevel, gen: st.gen, champion: st.champion });
-  console.log(`  life fitness ${Math.round(fit)} (score ${lifeMaxScore}, L${lifeMaxLevel}) | gen ${st.gen} ${st.evalsThisGen} champ ${st.champion}`);
+  if (opt) {
+    opt.record(fit);
+    const st = opt.status();
+    log({ event: 'life_scored', mode: 'es', fitness: Math.round(fit), score: lifeMaxScore, level: lifeMaxLevel, gen: st.gen, champion: st.champion });
+    console.log(`  life fitness ${Math.round(fit)} (score ${lifeMaxScore}, L${lifeMaxLevel}) | gen ${st.gen} ${st.evalsThisGen} champ ${st.champion}`);
+  } else if (RL) {
+    // RL experiment: log fitness so we can A/B the learned policy against the rule baseline.
+    log({ event: 'life_scored', mode: 'rl', fitness: Math.round(fit), score: lifeMaxScore, level: lifeMaxLevel });
+    console.log(`  RL life fitness ${Math.round(fit)} (score ${lifeMaxScore}, L${lifeMaxLevel})`);
+  }
 }
 const TELEM = path.join(ROOT, 'telemetry');
 const shiftId = new Date().toISOString().replace(/[:.]/g, '-');

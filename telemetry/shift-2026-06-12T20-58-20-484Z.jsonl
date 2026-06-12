@@ -320,3 +320,4 @@
 {"t":1781298606869,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
 {"t":1781298611669,"event":"heartbeat","elapsed":705493,"alive":true,"life":17038,"deaths":4,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1796,"leaderMax":194300,"estRank":3,"boardSize":2,"optGen":4}
 {"t":1781298616924,"event":"heartbeat","elapsed":710752,"alive":true,"life":22293,"deaths":4,"cls":"Sniper","lvl":20,"mode":"farm","myScore":2061,"leaderMax":108800,"estRank":3,"boardSize":2,"optGen":4}
+{"t":1781298622166,"event":"heartbeat","elapsed":716001,"alive":true,"life":27535,"deaths":4,"cls":"Sniper","lvl":21,"mode":"farm","myScore":2121,"leaderMax":194600,"estRank":7,"boardSize":6,"optGen":4}

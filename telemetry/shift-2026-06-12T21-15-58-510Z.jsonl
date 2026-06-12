@@ -1,0 +1,50 @@
+{"t":1781298959089,"event":"shift_start","shiftId":"2026-06-12T21-15-58-510Z","doctrine":12,"shiftMs":86400000}
+{"t":1781298960327,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 401 ()"}
+{"t":1781298960667,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781298960667,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781298963188,"event":"spawn","ok":true}
+{"t":1781298965309,"event":"death","n":1,"lifeMs":2015,"cls":"Tank","lvl":1,"screenshot":"death-2026-06-12T21-15-58-510Z-1.png","enemiesNear":[{"x":758,"y":182,"r":14,"dx":118,"dy":-178,"dist":213.5602959353634,"self":false,"vx":0,"vy":0},{"x":758,"y":182,"r":12,"dx":118,"dy":-178,"dist":213.5602959353634,"self":false,"vx":0,"vy":0},{"x":685,"y":593,"r":19,"dx":45,"dy":233,"dist":237.30571000294114,"self":false,"vx":0,"vy":0}]}
+{"t":1781298966293,"event":"respawned","alive":true}
+{"t":1781298968453,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 400 ()"}
+{"t":1781298969132,"event":"heartbeat","elapsed":5129,"alive":false,"life":2836,"deaths":1,"cls":"Tank","lvl":1,"mode":"spawn-escape","myScore":10,"leaderMax":309600,"estRank":5,"boardSize":4}
+{"t":1781298974384,"event":"heartbeat","elapsed":10384,"alive":true,"life":8088,"deaths":1,"cls":"Tank","lvl":3,"mode":"patrol","myScore":150,"leaderMax":15900,"estRank":2,"boardSize":1}
+{"t":1781298978433,"event":"rl_save","states":2,"decisions":42,"eps":0.349}
+{"t":1781298979644,"event":"heartbeat","elapsed":15647,"alive":true,"life":13348,"deaths":1,"cls":"Tank","lvl":8,"mode":"farm","myScore":160,"leaderMax":83700,"estRank":3,"boardSize":2}
+{"t":1781298984993,"event":"heartbeat","elapsed":20995,"alive":true,"life":18697,"deaths":1,"cls":"Tank","lvl":8,"mode":"patrol","myScore":170,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781298990255,"event":"heartbeat","elapsed":26252,"alive":true,"life":23959,"deaths":1,"cls":"Tank","lvl":9,"mode":"farm","myScore":230,"leaderMax":85500,"estRank":5,"boardSize":4}
+{"t":1781298993494,"event":"rl_save","states":6,"decisions":124,"eps":0.348}
+{"t":1781298995511,"event":"heartbeat","elapsed":31513,"alive":true,"life":29215,"deaths":1,"cls":"Tank","lvl":9,"mode":"patrol","myScore":270,"leaderMax":29700,"estRank":7,"boardSize":6}
+{"t":1781299000755,"event":"heartbeat","elapsed":36759,"alive":true,"life":34459,"deaths":1,"cls":"Tank","lvl":9,"mode":"farm","myScore":270,"leaderMax":309900,"estRank":7,"boardSize":6}
+{"t":1781299006111,"event":"heartbeat","elapsed":42107,"alive":true,"life":39815,"deaths":1,"cls":"Tank","lvl":9,"mode":"escape","myScore":270,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781299008539,"event":"rl_save","states":7,"decisions":199,"eps":0.346}
+{"t":1781299011370,"event":"heartbeat","elapsed":47369,"alive":true,"life":45074,"deaths":1,"cls":"Tank","lvl":9,"mode":"patrol","myScore":295,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781299016616,"event":"heartbeat","elapsed":52624,"alive":true,"life":50320,"deaths":1,"cls":"Tank","lvl":10,"mode":"patrol","myScore":295,"leaderMax":317900,"estRank":7,"boardSize":6}
+{"t":1781299021864,"event":"heartbeat","elapsed":57867,"alive":true,"life":55568,"deaths":1,"cls":"Tank","lvl":10,"mode":"escape","myScore":305,"leaderMax":28500,"estRank":2,"boardSize":1}
+{"t":1781299023962,"event":"rl_save","states":7,"decisions":276,"eps":0.344}
+{"t":1781299027199,"event":"heartbeat","elapsed":63197,"alive":true,"life":60903,"deaths":1,"cls":"Tank","lvl":10,"mode":"escape","myScore":305,"leaderMax":318500,"estRank":9,"boardSize":8}
+{"t":1781299032443,"event":"heartbeat","elapsed":68449,"alive":true,"life":66147,"deaths":1,"cls":"Tank","lvl":10,"mode":"patrol","myScore":305,"leaderMax":119200,"estRank":13,"boardSize":12}
+{"t":1781299037695,"event":"heartbeat","elapsed":73696,"alive":true,"life":71399,"deaths":1,"cls":"Tank","lvl":10,"mode":"patrol","myScore":305,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781299038908,"event":"rl_save","states":7,"decisions":351,"eps":0.343}
+{"t":1781299042943,"event":"heartbeat","elapsed":78945,"alive":true,"life":76647,"deaths":1,"cls":"Tank","lvl":10,"mode":"escape","myScore":305,"leaderMax":87500,"estRank":4,"boardSize":3}
+{"t":1781299048266,"event":"heartbeat","elapsed":84269,"alive":true,"life":81970,"deaths":1,"cls":"Tank","lvl":10,"mode":"patrol","myScore":305,"leaderMax":18700,"estRank":3,"boardSize":2}
+{"t":1781299053517,"event":"heartbeat","elapsed":89526,"alive":true,"life":87221,"deaths":1,"cls":"Tank","lvl":10,"mode":"patrol","myScore":330,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781299053923,"event":"rl_save","states":7,"decisions":426,"eps":0.341}
+{"t":1781299058780,"event":"heartbeat","elapsed":94778,"alive":true,"life":92484,"deaths":1,"cls":"Tank","lvl":10,"mode":"patrol","myScore":330,"leaderMax":18900,"estRank":2,"boardSize":1}
+{"t":1781299064035,"event":"heartbeat","elapsed":100042,"alive":true,"life":97739,"deaths":1,"cls":"Tank","lvl":10,"mode":"patrol","myScore":340,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781299069360,"event":"heartbeat","elapsed":105362,"alive":true,"life":103064,"deaths":1,"cls":"Tank","lvl":10,"mode":"escape","myScore":340,"leaderMax":25100,"estRank":2,"boardSize":1}
+{"t":1781299069766,"event":"rl_save","states":13,"decisions":505,"eps":0.34}
+{"t":1781299074617,"event":"heartbeat","elapsed":110619,"alive":true,"life":108321,"deaths":1,"cls":"Tank","lvl":10,"mode":"farm","myScore":340,"leaderMax":47700,"estRank":9,"boardSize":8}
+{"t":1781299079865,"event":"heartbeat","elapsed":115866,"alive":true,"life":113569,"deaths":1,"cls":"Tank","lvl":10,"mode":"patrol","myScore":340,"leaderMax":73500,"estRank":3,"boardSize":2}
+{"t":1781299085109,"event":"heartbeat","elapsed":121110,"alive":true,"life":118813,"deaths":1,"cls":"Tank","lvl":10,"mode":"patrol","myScore":340,"leaderMax":19400,"estRank":2,"boardSize":1}
+{"t":1781299085583,"event":"rl_save","states":24,"decisions":584,"eps":0.338}
+{"t":1781299089304,"event":"death","n":2,"lifeMs":122916,"cls":"Tank","lvl":10,"screenshot":"death-2026-06-12T21-15-58-510Z-2.png","enemiesNear":[{"x":631,"y":368,"r":19,"dx":-9,"dy":8,"dist":12.041594578792296,"self":false,"vx":0,"vy":0},{"x":631,"y":368,"r":17,"dx":-9,"dy":8,"dist":12.041594578792296,"self":false,"vx":0,"vy":0}]}
+{"t":1781299091430,"event":"respawned","alive":true}
+{"t":1781299092640,"event":"heartbeat","elapsed":128647,"alive":true,"life":1207,"deaths":2,"cls":"Tank","lvl":9,"mode":"spawn-escape","myScore":221,"leaderMax":14600,"estRank":13,"boardSize":12}
+{"t":1781299097895,"event":"heartbeat","elapsed":133898,"alive":true,"life":6462,"deaths":2,"cls":"Tank","lvl":9,"mode":"kite-farm","myScore":286,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781299100716,"event":"rl_save","states":33,"decisions":732,"eps":0.335}
+{"t":1781299103133,"event":"heartbeat","elapsed":139140,"alive":true,"life":11700,"deaths":2,"cls":"Tank","lvl":10,"mode":"escape","myScore":381,"leaderMax":88500,"estRank":3,"boardSize":2}
+{"t":1781299108441,"event":"heartbeat","elapsed":144446,"alive":true,"life":17008,"deaths":2,"cls":"Tank","lvl":11,"mode":"patrol","myScore":476,"leaderMax":27800,"estRank":2,"boardSize":1}
+{"t":1781299113693,"event":"heartbeat","elapsed":149694,"alive":true,"life":22260,"deaths":2,"cls":"Tank","lvl":12,"mode":"farm","myScore":553,"leaderMax":34100,"estRank":4,"boardSize":3}
+{"t":1781299113710,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781299113711,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781299116115,"event":"rl_save","states":34,"decisions":809,"eps":0.334}

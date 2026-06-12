@@ -1,0 +1,8 @@
+{"t":1781298632619,"event":"shift_start","shiftId":"2026-06-12T21-10-32-041Z","doctrine":12,"shiftMs":86400000}
+{"t":1781298633484,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 401 ()"}
+{"t":1781298633910,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781298633910,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781298810843,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781298810844,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781298875931,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781298875932,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}

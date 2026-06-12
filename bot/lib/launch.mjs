@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 // Shared launch + spawn for diep.io under real Chrome with a clean automation fingerprint.
 import { chromium } from 'playwright';
 import path from 'node:path';
@@ -7,7 +8,12 @@ export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 export const evidence = (name) => path.join(ROOT, 'evidence', name);
 
 export async function launch({ headless = false } = {}) {
-  const ctx = await chromium.launchPersistentContext(path.join(ROOT, '.profile'), {
+  // Clear stale Singleton locks so a relaunch right after a kill doesn't hang on the profile lock.
+  const profile = path.join(ROOT, '.profile');
+  for (const f of ['SingletonLock', 'SingletonCookie', 'SingletonSocket']) {
+    try { fs.rmSync(path.join(profile, f), { force: true }); } catch {}
+  }
+  const ctx = await chromium.launchPersistentContext(profile, {
     headless,
     channel: 'chrome',
     viewport: { width: 1280, height: 720 },
