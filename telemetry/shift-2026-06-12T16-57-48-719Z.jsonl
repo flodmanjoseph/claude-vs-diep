@@ -1,0 +1,13 @@
+{"t":1781283469293,"event":"shift_start","shiftId":"2026-06-12T16-57-48-719Z","doctrine":11,"shiftMs":720000}
+{"t":1781283471118,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781283471119,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781283471668,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 401 ()"}
+{"t":1781283473259,"event":"spawn","ok":true}
+{"t":1781283479034,"event":"heartbeat","elapsed":5063,"alive":true,"life":5775,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":20,"leaderMax":41500,"pctOfLeader":0}
+{"t":1781283484179,"event":"heartbeat","elapsed":10214,"alive":true,"life":10920,"deaths":0,"cls":"Tank","lvl":3,"mode":"farm","myScore":45,"leaderMax":228900,"pctOfLeader":0}
+{"t":1781283489323,"event":"heartbeat","elapsed":15358,"alive":true,"life":16064,"deaths":0,"cls":"Tank","lvl":4,"mode":"farm","myScore":55,"leaderMax":142900,"pctOfLeader":0}
+{"t":1781283494541,"event":"heartbeat","elapsed":20577,"alive":true,"life":21282,"deaths":0,"cls":"Tank","lvl":5,"mode":"farm","myScore":85,"leaderMax":143200,"pctOfLeader":0.1}
+{"t":1781283499690,"event":"heartbeat","elapsed":25727,"alive":true,"life":26431,"deaths":0,"cls":"Tank","lvl":7,"mode":"farm","myScore":165,"leaderMax":229300,"pctOfLeader":0.1}
+{"t":1781283504845,"event":"heartbeat","elapsed":30870,"alive":true,"life":31586,"deaths":0,"cls":"Tank","lvl":8,"mode":"farm","myScore":225,"leaderMax":null,"pctOfLeader":null}
+{"t":1781283510000,"event":"heartbeat","elapsed":36035,"alive":true,"life":36741,"deaths":0,"cls":"Tank","lvl":10,"mode":"farm","myScore":345,"leaderMax":null,"pctOfLeader":null}
+{"t":1781283515206,"event":"heartbeat","elapsed":41243,"alive":true,"life":41947,"deaths":0,"cls":"Tank","lvl":11,"mode":"escape","myScore":375,"leaderMax":296100,"pctOfLeader":0.1}

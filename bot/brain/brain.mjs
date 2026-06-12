@@ -115,6 +115,38 @@ export const BRAIN_FN = function (DOCTRINE) {
     return best;
   }
 
+  // Effective distance of an enemy: its real distance minus how much it will close in the next
+  // ~anticipationFrames. A fast rammer 300px away is nearer, threat-wise, than a parked tank at 220.
+  function effectiveDist(e) {
+    const sp = Math.hypot(e.vx || 0, e.vy || 0);
+    if (!sp) return e.dist;
+    const closing = -((e.dx * (e.vx || 0)) + (e.dy * (e.vy || 0))) / (e.dist || 1); // px/frame toward us
+    return e.dist - Math.max(0, closing) * DOCTRINE.anticipationFrames;
+  }
+
+  // Velocity-based bullet dodge: find the most urgent enemy bullet aimed at us whose predicted
+  // miss distance is small, and return a unit sidestep perpendicular to its flight path, on the
+  // side of the line we are already on (increases miss distance fastest).
+  function bulletDodge(state) {
+    let urgent = null, urgency = Infinity;
+    for (const b of state.bullets) {
+      if (!b.enemy || b.dist > DOCTRINE.bulletDodgeRadius) continue;
+      const sp = Math.hypot(b.vx || 0, b.vy || 0);
+      if (sp < 1.5) continue;
+      const aimedCos = (-(b.dx * b.vx) - (b.dy * b.vy)) / ((b.dist || 1) * sp);
+      if (aimedCos < DOCTRINE.bulletAimedCos) continue;
+      const miss = b.dist * Math.sqrt(Math.max(0, 1 - aimedCos * aimedCos));
+      if (miss > DOCTRINE.bulletMissMargin) continue;
+      const eta = b.dist / sp; // frames until arrival
+      if (eta < urgency) { urgency = eta; urgent = b; }
+    }
+    if (!urgent) return null;
+    const sp = Math.hypot(urgent.vx, urgent.vy);
+    const cross = urgent.vx * (-urgent.dy) - urgent.vy * (-urgent.dx);
+    const s = cross >= 0 ? 1 : -1;
+    return [(-urgent.vy / sp) * s, (urgent.vx / sp) * s];
+  }
+
   function step() {
     if (!B.running) return;
     B.frames++;
@@ -139,9 +171,11 @@ export const BRAIN_FN = function (DOCTRINE) {
     let aim = null;
     let moveKeys = new Set();
 
+    // Rank foes by EFFECTIVE distance (closing speed shortens it), so fast approachers trigger
+    // escape earlier than their raw distance would.
     const foes = enemiesOf(state);
-    const nearest = foes[0]; // state.enemies is sorted by distance
-    const nd = nearest ? nearest.dist : Infinity;
+    let nearest = null, nd = Infinity;
+    for (const e of foes) { const ed = effectiveDist(e); if (ed < nd) { nd = ed; nearest = e; } }
     const bulletThreat = state.bullets.some((b) => b.enemy && b.dist < DOCTRINE.bulletDangerRadius);
     const escapeR = grace ? DOCTRINE.spawnEscapeRadius : DOCTRINE.escapeRadius;
 
@@ -175,6 +209,11 @@ export const BRAIN_FN = function (DOCTRINE) {
         aim = { x: 1000, y: 200 };
       }
     }
+
+    // Bullet dodge overrides movement in any mode: sidestepping an incoming shot beats whatever
+    // else we were doing for these few frames. Aim is unaffected.
+    const dodge = bulletDodge(state);
+    if (dodge) { moveKeys = vectorToKeys(dodge[0], dodge[1]); B.mode = B.mode + '+dodge'; }
 
     setHeld(moveKeys);
     if (aim && DOCTRINE.aimEveryFrame) moveMouse(aim.x, aim.y);

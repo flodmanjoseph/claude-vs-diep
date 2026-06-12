@@ -2,7 +2,7 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 10,
+  version: 11,
 
   // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
   // by the current class, so the right tile index is clicked even if level reads lag. Tile indices
@@ -15,10 +15,17 @@ export const DOCTRINE = {
   droneClasses: ['Overseer', 'Overlord', 'Necromancer', 'Manager', 'Battleship', 'Factory', 'Hybrid'],
 
   // Threat handling (tiered, screen-pixel distances; own tank is screen-center)
-  escapeRadius: 210, // enemy within this => drop everything and flee toward open space
+  escapeRadius: 210, // enemy within this (effective dist) => drop everything and flee
   waryRadius: 360, // enemy within this => keep farming but bias movement away from it
-  bulletDangerRadius: 160, // enemy bullet within this and approaching => dodge
+  bulletDangerRadius: 160, // enemy bullet within this and approaching => escape trigger
   enemySizeWeight: 0.05, // extra threat per pixel of enemy radius (bigger tanks are deadlier)
+  anticipationFrames: 22, // shrink an enemy's effective distance by closingSpeed * this (~0.37s lookahead)
+
+  // Bullet dodging (velocity-based): a bullet aimed at us (cos angle > aimedCos) inside dodgeRadius
+  // whose predicted miss distance is under missMargin triggers a perpendicular sidestep.
+  bulletDodgeRadius: 280,
+  bulletAimedCos: 0.8,
+  bulletMissMargin: 60,
 
   // Spawn safety: fresh respawns drop us at ~level 2 next to the killer. For the first few seconds
   // of a life, flee from any enemy within an enlarged radius and do not farm.

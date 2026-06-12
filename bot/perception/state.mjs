@@ -60,6 +60,27 @@ export const STATE_FN = function () {
     shapes.sort((a, b) => a.dist - b.dist);
     bullets.sort((a, b) => a.dist - b.dist);
 
+    // Velocity estimation: match entities to the previous frame by proximity and difference the
+    // positions (px/frame, ~60fps). Unmatched entities get v=0. The brain calls this every rAF,
+    // so the previous-frame store stays fresh; stale gaps (>20 frames) reset tracking.
+    const prev = window.__prevEnts;
+    const dt = prev ? f.t - prev.t : 0;
+    const attachVel = (arr, prevArr, maxJump) => {
+      for (const e of arr) {
+        e.vx = 0; e.vy = 0;
+        if (!prevArr || dt <= 0 || dt > 20) continue;
+        let best = null, bestD = maxJump * dt;
+        for (const p of prevArr) {
+          const d = Math.hypot(e.x - p.x, e.y - p.y);
+          if (d < bestD) { bestD = d; best = p; }
+        }
+        if (best) { e.vx = (e.x - best.x) / dt; e.vy = (e.y - best.y) / dt; }
+      }
+    };
+    attachVel(bullets, prev?.bullets, 14); // bullets move fast: allow up to 14 px/frame jump
+    attachVel(enemies, prev?.enemies, 10);
+    window.__prevEnts = { t: f.t, bullets: bullets.map((b) => ({ x: b.x, y: b.y })), enemies: enemies.map((e) => ({ x: e.x, y: e.y })) };
+
     return { ok: true, t: f.t, W, H, me, enemies, bullets, shapes };
   };
 };
