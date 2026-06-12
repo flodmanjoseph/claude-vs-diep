@@ -1,0 +1,116 @@
+{"t":1781279790234,"event":"shift_start","shiftId":"2026-06-12T15-56-29-657Z","doctrine":7,"shiftMs":300000}
+{"t":1781279791887,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781279791887,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781279792339,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 401 ()"}
+{"t":1781279792381,"event":"pageerror","text":"This document requires 'TrustedScript' assignment. The action has been blocked."}
+{"t":1781279792381,"event":"pageerror","text":"This document requires 'TrustedScript' assignment. The action has been blocked."}
+{"t":1781279794240,"event":"spawn","ok":true}
+{"t":1781279794611,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 (Not Found)"}
+{"t":1781279794629,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 (Not Found)"}
+{"t":1781279794652,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 (Not Found)"}
+{"t":1781279794836,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 ()"}
+{"t":1781279795112,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 400 ()"}
+{"t":1781279795162,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 400 ()"}
+{"t":1781279795237,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 (Not Found)"}
+{"t":1781279795310,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 (Not Found)"}
+{"t":1781279800260,"event":"heartbeat","elapsed":5313,"alive":true,"life":6020,"deaths":0,"cls":"Tank","lvl":5,"mode":"farm","myScore":70,"leaderMax":14900,"pctOfLeader":0.5}
+{"t":1781279805422,"event":"heartbeat","elapsed":10469,"alive":true,"life":11182,"deaths":0,"cls":"Tank","lvl":6,"mode":"farm","myScore":150,"leaderMax":14700,"pctOfLeader":1}
+{"t":1781279810593,"event":"heartbeat","elapsed":15636,"alive":true,"life":16353,"deaths":0,"cls":"Tank","lvl":8,"mode":"farm","myScore":300,"leaderMax":19200,"pctOfLeader":1.6}
+{"t":1781279815832,"event":"heartbeat","elapsed":20880,"alive":true,"life":21592,"deaths":0,"cls":"Tank","lvl":13,"mode":"flee","myScore":600,"leaderMax":19700,"pctOfLeader":3}
+{"t":1781279820995,"event":"heartbeat","elapsed":26041,"alive":true,"life":26755,"deaths":0,"cls":"Tank","lvl":13,"mode":"flee","myScore":650,"leaderMax":30700,"pctOfLeader":2.1}
+{"t":1781279825195,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1781279825250,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 ()"}
+{"t":1781279825613,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1781279825613,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 ()"}
+{"t":1781279826151,"event":"heartbeat","elapsed":31197,"alive":true,"life":31911,"deaths":0,"cls":"Tank","lvl":14,"mode":"flee","myScore":690,"leaderMax":30800,"pctOfLeader":2.2}
+{"t":1781279827451,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 500 ()"}
+{"t":1781279831309,"event":"heartbeat","elapsed":36360,"alive":true,"life":37069,"deaths":0,"cls":"Tank","lvl":14,"mode":"flee","myScore":855,"leaderMax":362300,"pctOfLeader":0.2}
+{"t":1781279831965,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":15}
+{"t":1781279832367,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781279836392,"event":"heartbeat","elapsed":41437,"alive":true,"life":42152,"deaths":0,"cls":"Sniper","lvl":15,"mode":"flee","myScore":945,"leaderMax":20900,"pctOfLeader":4.5}
+{"t":1781279841543,"event":"heartbeat","elapsed":46599,"alive":true,"life":47303,"deaths":0,"cls":"Sniper","lvl":16,"mode":"flee","myScore":974,"leaderMax":20600,"pctOfLeader":4.7}
+{"t":1781279846704,"event":"heartbeat","elapsed":51751,"alive":true,"life":52464,"deaths":0,"cls":"Sniper","lvl":16,"mode":"flee","myScore":1015,"leaderMax":null,"pctOfLeader":null}
+{"t":1781279851868,"event":"heartbeat","elapsed":56917,"alive":true,"life":57628,"deaths":0,"cls":"Sniper","lvl":16,"mode":"flee","myScore":1070,"leaderMax":null,"pctOfLeader":null}
+{"t":1781279857111,"event":"heartbeat","elapsed":62157,"alive":true,"life":62871,"deaths":0,"cls":"Sniper","lvl":16,"mode":"farm","myScore":1100,"leaderMax":32000,"pctOfLeader":3.4}
+{"t":1781279862276,"event":"heartbeat","elapsed":67322,"alive":true,"life":68036,"deaths":0,"cls":"Sniper","lvl":17,"mode":"flee","myScore":1130,"leaderMax":32200.000000000004,"pctOfLeader":3.5}
+{"t":1781279867432,"event":"heartbeat","elapsed":72484,"alive":true,"life":73192,"deaths":0,"cls":"Sniper","lvl":17,"mode":"flee","myScore":1165,"leaderMax":385900,"pctOfLeader":0.3}
+{"t":1781279869540,"event":"death","n":1,"lifeMs":75214,"cls":"Sniper","lvl":17,"screenshot":"death-2026-06-12T15-56-29-657Z-1.png","enemiesNear":[{"x":652,"y":360,"r":18,"dx":12,"dy":0,"dist":12,"self":false},{"x":652,"y":360,"r":16,"dx":12,"dy":0,"dist":12,"self":false}]}
+{"t":1781279870346,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 500 ()"}
+{"t":1781279870491,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781279872696,"event":"heartbeat","elapsed":77750,"alive":false,"life":1947,"deaths":1,"cls":"Tank","lvl":1,"mode":"flee","myScore":1165,"leaderMax":24900,"pctOfLeader":4.7}
+{"t":1781279872768,"event":"death","n":2,"lifeMs":1948,"cls":"Tank","lvl":1,"screenshot":"death-2026-06-12T15-56-29-657Z-2.png","enemiesNear":[{"x":652,"y":357,"r":18,"dx":12,"dy":-3,"dist":12.36931687685298,"self":false},{"x":652,"y":357,"r":16,"dx":12,"dy":-3,"dist":12.36931687685298,"self":false}]}
+{"t":1781279873446,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781279873447,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781279877988,"event":"heartbeat","elapsed":83033,"alive":true,"life":4013,"deaths":2,"cls":"Tank","lvl":13,"mode":"farm","myScore":538,"leaderMax":25200,"pctOfLeader":2.1}
+{"t":1781279883156,"event":"heartbeat","elapsed":88200,"alive":true,"life":9181,"deaths":2,"cls":"Tank","lvl":14,"mode":"farm","myScore":743,"leaderMax":30400,"pctOfLeader":2.4}
+{"t":1781279888310,"event":"heartbeat","elapsed":93360,"alive":true,"life":14335,"deaths":2,"cls":"Tank","lvl":14,"mode":"farm","myScore":808,"leaderMax":25900,"pctOfLeader":3.1}
+{"t":1781279888965,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":15}
+{"t":1781279889368,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781279891738,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781279892667,"event":"pageerror","text":"Error accessing iframe content: SecurityError: Failed to read a named property 'document' from 'Window': Blocked a frame with origin \"https://web-cf-event-cell8005.ads.aps.amazon-adsystem.com\" from ac"}
+{"t":1781279892965,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 400 ()"}
+{"t":1781279893229,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 400 ()"}
+{"t":1781279893310,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 400 ()"}
+{"t":1781279893701,"event":"heartbeat","elapsed":98758,"alive":false,"life":19726,"deaths":2,"cls":"Sniper","lvl":15,"mode":"farm","myScore":893,"leaderMax":46800,"pctOfLeader":1.9}
+{"t":1781279898923,"event":"heartbeat","elapsed":103969,"alive":true,"life":24948,"deaths":2,"cls":"Sniper","lvl":15,"mode":"farm","myScore":988,"leaderMax":49600,"pctOfLeader":2}
+{"t":1781279904088,"event":"heartbeat","elapsed":109136,"alive":true,"life":30113,"deaths":2,"cls":"Sniper","lvl":16,"mode":"farm","myScore":1038,"leaderMax":23800,"pctOfLeader":4.4}
+{"t":1781279909245,"event":"heartbeat","elapsed":114298,"alive":true,"life":35270,"deaths":2,"cls":"Sniper","lvl":16,"mode":"farm","myScore":1058,"leaderMax":31700,"pctOfLeader":3.3}
+{"t":1781279914413,"event":"heartbeat","elapsed":119460,"alive":true,"life":40438,"deaths":2,"cls":"Sniper","lvl":17,"mode":"farm","myScore":1263,"leaderMax":387100,"pctOfLeader":0.3}
+{"t":1781279919624,"event":"heartbeat","elapsed":124680,"alive":false,"life":45649,"deaths":2,"cls":"Sniper","lvl":18,"mode":"farm","myScore":1403,"leaderMax":387200,"pctOfLeader":0.4}
+{"t":1781279924781,"event":"heartbeat","elapsed":129832,"alive":true,"life":50806,"deaths":2,"cls":"Sniper","lvl":18,"mode":"flee","myScore":1503,"leaderMax":null,"pctOfLeader":null}
+{"t":1781279929934,"event":"heartbeat","elapsed":134989,"alive":true,"life":55959,"deaths":2,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1662,"leaderMax":24200,"pctOfLeader":6.9}
+{"t":1781279935094,"event":"heartbeat","elapsed":140144,"alive":true,"life":61119,"deaths":2,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1798,"leaderMax":34400,"pctOfLeader":5.2}
+{"t":1781279935475,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 500 ()"}
+{"t":1781279935481,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781279940314,"event":"heartbeat","elapsed":145363,"alive":true,"life":66339,"deaths":2,"cls":"Sniper","lvl":20,"mode":"farm","myScore":1863,"leaderMax":34700,"pctOfLeader":5.4}
+{"t":1781279945469,"event":"heartbeat","elapsed":150519,"alive":true,"life":71494,"deaths":2,"cls":"Sniper","lvl":20,"mode":"farm","myScore":1953,"leaderMax":63500,"pctOfLeader":3.1}
+{"t":1781279950622,"event":"heartbeat","elapsed":155678,"alive":true,"life":76647,"deaths":2,"cls":"Sniper","lvl":21,"mode":"farm","myScore":2148,"leaderMax":34800,"pctOfLeader":6.2}
+{"t":1781279955782,"event":"heartbeat","elapsed":160829,"alive":true,"life":81807,"deaths":2,"cls":"Sniper","lvl":21,"mode":"farm","myScore":2458,"leaderMax":36700,"pctOfLeader":6.7}
+{"t":1781279957391,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 500 ()"}
+{"t":1781279957392,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781279961060,"event":"heartbeat","elapsed":166115,"alive":true,"life":87085,"deaths":2,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2643,"leaderMax":82600,"pctOfLeader":3.2}
+{"t":1781279966223,"event":"heartbeat","elapsed":171270,"alive":true,"life":92248,"deaths":2,"cls":"Sniper","lvl":23,"mode":"farm","myScore":2934,"leaderMax":37100,"pctOfLeader":7.9}
+{"t":1781279971381,"event":"heartbeat","elapsed":176431,"alive":true,"life":97406,"deaths":2,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3113,"leaderMax":37300,"pctOfLeader":8.3}
+{"t":1781279976542,"event":"heartbeat","elapsed":181593,"alive":true,"life":102567,"deaths":2,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3163,"leaderMax":57200,"pctOfLeader":5.5}
+{"t":1781279978746,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 500 ()"}
+{"t":1781279978748,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781279981894,"event":"heartbeat","elapsed":186941,"alive":true,"life":107919,"deaths":2,"cls":"Sniper","lvl":24,"mode":"flee","myScore":3213,"leaderMax":16300,"pctOfLeader":19.7}
+{"t":1781279987060,"event":"heartbeat","elapsed":192108,"alive":true,"life":113085,"deaths":2,"cls":"Sniper","lvl":24,"mode":"flee","myScore":3318,"leaderMax":17700,"pctOfLeader":18.7}
+{"t":1781279992225,"event":"heartbeat","elapsed":197269,"alive":true,"life":118250,"deaths":2,"cls":"Sniper","lvl":24,"mode":"flee","myScore":3338,"leaderMax":39400,"pctOfLeader":8.5}
+{"t":1781279997392,"event":"heartbeat","elapsed":202436,"alive":true,"life":123417,"deaths":2,"cls":"Sniper","lvl":24,"mode":"flee","myScore":3358,"leaderMax":59400,"pctOfLeader":5.7}
+{"t":1781279999365,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 500 ()"}
+{"t":1781279999585,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781279999631,"event":"death","n":3,"lifeMs":125601,"cls":"Sniper","lvl":24,"screenshot":"death-2026-06-12T15-56-29-657Z-3.png","enemiesNear":[{"x":638,"y":352,"r":19,"dx":-2,"dy":-8,"dist":8.246211251235321,"self":false},{"x":638,"y":352,"r":17,"dx":-2,"dy":-8,"dist":8.246211251235321,"self":false},{"x":1229,"y":78,"r":16,"dx":589,"dy":-282,"dist":653.0275645024489,"self":false}]}
+{"t":1781280002743,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781280002744,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781280002759,"event":"heartbeat","elapsed":207806,"alive":false,"life":1920,"deaths":3,"cls":"Tank","lvl":1,"mode":"flee","myScore":3358,"leaderMax":39700,"pctOfLeader":8.5}
+{"t":1781280002854,"event":"death","n":4,"lifeMs":1920,"cls":"Tank","lvl":1,"screenshot":"death-2026-06-12T15-56-29-657Z-4.png","enemiesNear":[{"x":636,"y":350,"r":19,"dx":-4,"dy":-10,"dist":10.77032961426901,"self":false},{"x":636,"y":350,"r":17,"dx":-4,"dy":-10,"dist":10.77032961426901,"self":false},{"x":1266,"y":395,"r":16,"dx":626,"dy":35,"dist":626.9776710537625,"self":false}]}
+{"t":1781280004716,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":16}
+{"t":1781280005119,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781280007855,"event":"heartbeat","elapsed":212903,"alive":true,"life":3789,"deaths":4,"cls":"Sniper","lvl":16,"mode":"farm","myScore":938,"leaderMax":26800,"pctOfLeader":3.5}
+{"t":1781280013010,"event":"heartbeat","elapsed":218060,"alive":true,"life":8944,"deaths":4,"cls":"Sniper","lvl":16,"mode":"farm","myScore":1113,"leaderMax":null,"pctOfLeader":null}
+{"t":1781280018174,"event":"heartbeat","elapsed":223221,"alive":true,"life":14108,"deaths":4,"cls":"Sniper","lvl":17,"mode":"farm","myScore":1328,"leaderMax":65500,"pctOfLeader":2}
+{"t":1781280021223,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 500 ()"}
+{"t":1781280021225,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781280023548,"event":"heartbeat","elapsed":228597,"alive":true,"life":19482,"deaths":4,"cls":"Sniper","lvl":18,"mode":"farm","myScore":1591,"leaderMax":66000,"pctOfLeader":2.4}
+{"t":1781280028708,"event":"heartbeat","elapsed":233761,"alive":true,"life":24642,"deaths":4,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1653,"leaderMax":447400,"pctOfLeader":0.4}
+{"t":1781280033869,"event":"heartbeat","elapsed":238915,"alive":true,"life":29803,"deaths":4,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1838,"leaderMax":null,"pctOfLeader":null}
+{"t":1781280039026,"event":"heartbeat","elapsed":244079,"alive":true,"life":34960,"deaths":4,"cls":"Sniper","lvl":20,"mode":"farm","myScore":2158,"leaderMax":34400,"pctOfLeader":6.3}
+{"t":1781280042698,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 500 ()"}
+{"t":1781280042854,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781280044056,"event":"heartbeat","elapsed":249111,"alive":true,"life":39990,"deaths":4,"cls":"Sniper","lvl":21,"mode":"farm","myScore":2223,"leaderMax":35000,"pctOfLeader":6.4}
+{"t":1781280049212,"event":"heartbeat","elapsed":254267,"alive":true,"life":45146,"deaths":4,"cls":"Sniper","lvl":21,"mode":"farm","myScore":2283,"leaderMax":40600,"pctOfLeader":5.6}
+{"t":1781280054368,"event":"heartbeat","elapsed":259422,"alive":true,"life":50302,"deaths":4,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2483,"leaderMax":69000,"pctOfLeader":3.6}
+{"t":1781280059533,"event":"heartbeat","elapsed":264577,"alive":true,"life":55467,"deaths":4,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2743,"leaderMax":38900,"pctOfLeader":7.1}
+{"t":1781280063658,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 500 ()"}
+{"t":1781280063703,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781280064819,"event":"heartbeat","elapsed":269866,"alive":true,"life":60753,"deaths":4,"cls":"Sniper","lvl":23,"mode":"farm","myScore":2873,"leaderMax":39200,"pctOfLeader":7.3}
+{"t":1781280069982,"event":"heartbeat","elapsed":275021,"alive":true,"life":65916,"deaths":4,"cls":"Sniper","lvl":23,"mode":"flee","myScore":2968,"leaderMax":448100,"pctOfLeader":0.7}
+{"t":1781280075142,"event":"heartbeat","elapsed":280194,"alive":true,"life":71076,"deaths":4,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3068,"leaderMax":41900,"pctOfLeader":7.3}
+{"t":1781280080314,"event":"heartbeat","elapsed":285361,"alive":true,"life":76248,"deaths":4,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3193,"leaderMax":84800,"pctOfLeader":3.8}
+{"t":1781280084916,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781280085608,"event":"heartbeat","elapsed":290608,"alive":true,"life":81542,"deaths":4,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3308,"leaderMax":null,"pctOfLeader":null}
+{"t":1781280086142,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781280086142,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781280090761,"event":"heartbeat","elapsed":295812,"alive":true,"life":86695,"deaths":4,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3493,"leaderMax":93300,"pctOfLeader":3.7}
+{"t":1781280094464,"event":"shift_end","elapsed":300224,"deaths":4}

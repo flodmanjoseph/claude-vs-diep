@@ -41,16 +41,46 @@ async function clickTurnstile(page) {
   return true;
 }
 
+const MODE_RE = /^(FFA|Sandbox|2 Teams|4 Teams|Maze|Domination|Tag|Mothership|Survival|Battle Royale)$/i;
+
+// Read the currently selected gamemode (the gamemode dropdown's collapsed label).
+async function currentMode(page) {
+  return page.evaluate((reSrc) => {
+    const re = new RegExp(reSrc, 'i');
+    const labels = [...document.querySelectorAll('.dropdown-label')].filter((e) => re.test(e.textContent.trim()));
+    // The gamemode label sits in the left column (x < 660); region is on the right.
+    const gm = labels.find((e) => e.getBoundingClientRect().x < 660);
+    return gm ? gm.textContent.trim() : null;
+  }, MODE_RE.source).catch(() => null);
+}
+
+// Robustly select a gamemode using trusted coordinate clicks (DOM .click() doesn't register
+// reliably), then verify and retry once. Returns true if the target mode is selected.
 async function selectGamemode(page, gm) {
-  await page.evaluate((g) => {
-    const cur = [...document.querySelectorAll('.dropdown-label')].find((e) => /sandbox|ffa|teams|maze|domination|tag|mothership|survival/i.test(e.textContent || ''));
-    if (cur && cur.textContent.trim().toLowerCase() === g.toLowerCase()) return; // already selected
-    const label = [...document.querySelectorAll('.dropdown-label, [class*="dropdown"]')].find((e) => /game mode|ffa|sandbox|teams|maze/i.test(e.textContent || ''));
-    if (label) label.click();
-    const opt = [...document.querySelectorAll('*')].find((e) => e.childElementCount === 0 && (e.textContent || '').trim().toLowerCase() === g.toLowerCase());
-    if (opt) { opt.click(); if (opt.parentElement) opt.parentElement.click(); }
-  }, gm);
-  await page.waitForTimeout(500);
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const cur = await currentMode(page);
+    if (cur && cur.toLowerCase() === gm.toLowerCase()) return true;
+
+    // Open the dropdown by clicking the gamemode label at its real coordinates.
+    const open = await page.evaluate((reSrc) => {
+      const re = new RegExp(reSrc, 'i');
+      const gmLabel = [...document.querySelectorAll('.dropdown-label')].filter((e) => re.test(e.textContent.trim())).find((e) => e.getBoundingClientRect().x < 660);
+      if (!gmLabel) return null;
+      const r = gmLabel.getBoundingClientRect();
+      return { x: Math.round(r.x + r.width / 2), y: Math.round(r.y + r.height / 2) };
+    }, MODE_RE.source).catch(() => null);
+    if (open) { await page.mouse.click(open.x, open.y); await page.waitForTimeout(450); }
+
+    // Click the target option at its coordinates (left column, the now-expanded list).
+    const opt = await page.evaluate((g) => {
+      const el = [...document.querySelectorAll('*')].find((e) => e.childElementCount === 0 && (e.textContent || '').trim().toLowerCase() === g.toLowerCase() && e.getBoundingClientRect().x < 660 && e.getBoundingClientRect().width > 4);
+      if (!el) return null;
+      const r = el.getBoundingClientRect();
+      return { x: Math.round(r.x + r.width / 2), y: Math.round(r.y + r.height / 2) };
+    }, gm).catch(() => null);
+    if (opt) { await page.mouse.click(opt.x, opt.y); await page.waitForTimeout(500); }
+  }
+  return (await currentMode(page))?.toLowerCase() === gm.toLowerCase();
 }
 
 // Navigate, clear Turnstile, optionally select a gamemode, then spawn. Robust to flaky timing:

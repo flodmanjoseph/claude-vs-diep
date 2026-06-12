@@ -122,12 +122,20 @@ export const BRAIN_FN = function (DOCTRINE) {
       const nearestEnemy = state.enemies.find((e) => !e.self);
       aim = nearestEnemy ? { x: nearestEnemy.x, y: nearestEnemy.y } : (window.__lastAim || { x: 900, y: 360 });
     } else {
-      // Safe: farm the best shape.
+      // Safe: farm the best shape. Approach to shooting range but never body-contact a shape
+      // (pentagons especially do heavy collision damage to a fragile ranged tank).
       const target = bestShape(state.shapes);
       if (target) {
         B.mode = 'farm';
         aim = { x: target.x, y: target.y };
-        if (target.dist > DOCTRINE.approachStopDist) moveKeys = vectorToKeys(target.dx, target.dy);
+        // Back off from any shape we are about to ram.
+        let rx = 0, ry = 0;
+        for (const s of state.shapes) {
+          const contact = (state.me.r || 17) + s.r + DOCTRINE.shapeBodyMargin;
+          if (s.dist < contact) { const m = s.dist || 1; rx -= (s.dx / m); ry -= (s.dy / m); }
+        }
+        if (rx || ry) { moveKeys = vectorToKeys(rx, ry); }
+        else if (target.dist > DOCTRINE.approachStopDist) moveKeys = vectorToKeys(target.dx, target.dy);
       } else if (DOCTRINE.wanderWhenEmpty) {
         B.mode = 'wander';
         // drift toward screen-up-right to find shapes; aim forward

@@ -33,17 +33,22 @@ async function isAlive() {
 async function canvasLive() {
   return page.evaluate(() => { const c = document.getElementById('canvas'); return c ? c.getBoundingClientRect().width > 100 : false; }).catch(() => false);
 }
-// Best-effort: pull the largest leaderboard number we've seen rendered (the current #1 score).
-async function readLeaderTop() {
+// Sample the leaderboard over a short window (entries are cached and redraw intermittently) and
+// return the max score = the current #1. Also returns our own score from the HUD accumulator.
+async function readRank() {
   return page.evaluate(() => {
-    const f = window.__diep?.frame; if (!f) return null;
-    const nums = [];
-    for (const t of f.texts) {
-      const m = /^([\d.]+)\s*([km]?)$/i.exec(t.t.trim());
-      if (m) { let v = parseFloat(m[1]); if (/k/i.test(m[2])) v *= 1e3; if (/m/i.test(m[2])) v *= 1e6; nums.push(v); }
-    }
-    return nums.length ? Math.max(...nums) : null;
-  }).catch(() => null);
+    return new Promise((resolve) => {
+      let leaderMax = 0; const t0 = performance.now();
+      const parse = (s) => { const m = /^([\d.]+)\s*([km]?)$/i.exec(s.trim()); if (!m) return null; let v = parseFloat(m[1]); if (/k/i.test(m[2])) v *= 1e3; if (/m/i.test(m[2])) v *= 1e6; return v; };
+      const tick = () => {
+        const f = window.__diep?.frame;
+        if (f) for (const t of f.texts) { const v = parse(t.t); if (v != null && v < 5e6) leaderMax = Math.max(leaderMax, v); }
+        if (performance.now() - t0 < 700) setTimeout(tick, 10);
+        else resolve({ leaderMax: leaderMax || null, myScore: window.__diep?.hud?.score ?? null });
+      };
+      tick();
+    });
+  }).catch(() => ({ leaderMax: null, myScore: null }));
 }
 
 async function spawnFresh() {
@@ -127,8 +132,14 @@ while (Date.now() - t0 < SHIFT_MS) {
   if (elapsed - lastHeartbeat > 5000) {
     lastHeartbeat = elapsed;
     const snap = await page.evaluate(() => window.__brain?.snapshot?.() ?? null).catch(() => null);
-    const leaderTop = await readLeaderTop();
-    log({ event: 'heartbeat', elapsed, alive, life: Date.now() - lifeStart, deaths, cls: curClass, lvl: curLevel, mode: snap?.mode, frames: snap?.frames, statIdx: snap?.statIdx, leaderTop });
+    const { leaderMax, myScore } = await readRank();
+    const pct = leaderMax && myScore ? +(100 * myScore / leaderMax).toFixed(1) : null;
+    log({ event: 'heartbeat', elapsed, alive, life: Date.now() - lifeStart, deaths, cls: curClass, lvl: curLevel, mode: snap?.mode, myScore, leaderMax, pctOfLeader: pct });
+    // Victory check: our score at or above the current leader (and a real score), capture evidence.
+    if (alive && myScore && leaderMax && myScore >= leaderMax && myScore > 1000) {
+      await page.screenshot({ path: evidence(`LEADER-${shiftId}-${Math.round(myScore)}.png`) }).catch(() => {});
+      log({ event: 'possible_number_one', myScore, leaderMax });
+    }
   }
   // Evidence screenshot every 20s (rolling latest + timeline).
   if (elapsed - lastShot > 20000) {

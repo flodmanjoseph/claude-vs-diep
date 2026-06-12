@@ -2,6 +2,22 @@
 
 Newest entries at the top.
 
+## 007 - 2026-06-12 - First real FFA runs: survives minutes, climbs, dies to players now
+
+End-to-end on live FFA. The bot reliably spawns into FFA (hardened the gamemode dropdown with trusted coordinate clicks + verify/retry; DOM `.click()` on the canvas-drawn dropdown was silently failing, which is why earlier "FFA" runs were actually Sandbox). It farms, upgrades Tank->Sniper, and now survives 75-126s per life reaching Sniper L24, up from 30-40s as a base Tank.
+
+The no-ram-shapes fix landed (doctrine v7: keep 150px shooting distance, back off from any shape within body-contact range). Before it, deaths were "killed by Pentagon" (ramming a high-body shape as a fragile Sniper). After it, deaths are PvP: "killed by Blatcher2", a real player. That is the right problem to have now.
+
+Rank reading works. The scoreboard is captured over a sampling window; a clean death screen shows the live top 10: leader 441.8k, then 60.9k, MITo 39.5k, down to Registro 14.2k at rank 10. Our score climbed 1.8k -> 3.5k over the life; we sit at ~3-7% of the leader, well outside the top 10. Telemetry now logs myScore / leaderMax / pctOfLeader each heartbeat, and screenshots a LEADER-* frame if our score ever meets the leader's.
+
+Clear next-iteration targets, in priority order:
+1. **Kill the 2-second re-deaths.** Every real death is followed by a ~2s death: diep respawns us at level 2 next to the killer. Need a post-respawn phase that flees hard and refuses to farm until clear and a few levels up.
+2. **Kite as a ranged class.** We still get run down by players. Detect approaching enemies earlier, hold distance, exploit Sniper range instead of sitting in shapes.
+3. **Reach Overlord.** Survive past 30/45 so the drone build (Overseer->Overlord) actually comes online; then add drone control (left-mouse to steer drones onto shapes/enemies).
+4. **Reliable rank/#1 detection** by parsing the scoreboard entries in order (now that the full board is captured), for trustworthy victory evidence.
+
+The infrastructure is done; from here it is survival tuning and the grind. Leader was 441.8k this arena; we are at ~3.5k. Long way to climb.
+
 ## 006 - 2026-06-12 - Class upgrades work end to end (Tank -> Sniper -> Overseer -> Overlord)
 
 The bot now takes its class upgrades automatically. Validated in Sandbox: it farmed to 15 and upgraded to Sniper, then to level 30 and upgraded to Overseer (drones), surviving 200+ seconds as an Overseer. Overlord follows at 45. This was the biggest missing capability.

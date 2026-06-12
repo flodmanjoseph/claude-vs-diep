@@ -1,0 +1,57 @@
+{"t":1781279325360,"event":"shift_start","shiftId":"2026-06-12T15-48-44-774Z","doctrine":7,"shiftMs":240000}
+{"t":1781279327062,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781279327062,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781279327257,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 401 ()"}
+{"t":1781279327263,"event":"pageerror","text":"This document requires 'TrustedScript' assignment. The action has been blocked."}
+{"t":1781279327263,"event":"pageerror","text":"This document requires 'TrustedScript' assignment. The action has been blocked."}
+{"t":1781279329752,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781279329752,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781279330491,"event":"spawn","ok":true}
+{"t":1781279335648,"event":"heartbeat","elapsed":5151,"alive":true,"life":5156,"deaths":0,"cls":"Tank","lvl":4,"mode":"farm","frames":310,"statIdx":8,"leaderTop":null}
+{"t":1781279340924,"event":"heartbeat","elapsed":10428,"alive":true,"life":10432,"deaths":0,"cls":"Tank","lvl":4,"mode":"farm","frames":626,"statIdx":15,"leaderTop":null}
+{"t":1781279346195,"event":"heartbeat","elapsed":15698,"alive":true,"life":15703,"deaths":0,"cls":"Tank","lvl":9,"mode":"farm","frames":942,"statIdx":23,"leaderTop":null}
+{"t":1781279351542,"event":"heartbeat","elapsed":21046,"alive":true,"life":21050,"deaths":0,"cls":"Tank","lvl":11,"mode":"farm","frames":1263,"statIdx":30,"leaderTop":396}
+{"t":1781279356812,"event":"heartbeat","elapsed":26316,"alive":true,"life":26320,"deaths":0,"cls":"Tank","lvl":12,"mode":"farm","frames":1579,"statIdx":38,"leaderTop":null}
+{"t":1781279362090,"event":"heartbeat","elapsed":31593,"alive":true,"life":31598,"deaths":0,"cls":"Tank","lvl":12,"mode":"farm","frames":1896,"statIdx":45,"leaderTop":null}
+{"t":1781279367364,"event":"heartbeat","elapsed":36867,"alive":true,"life":36872,"deaths":0,"cls":"Tank","lvl":14,"mode":"farm","frames":2212,"statIdx":52,"leaderTop":null}
+{"t":1781279372953,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":15}
+{"t":1781279373356,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781279373359,"event":"heartbeat","elapsed":42207,"alive":true,"life":42867,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":2557,"statIdx":61,"leaderTop":null}
+{"t":1781279377826,"event":"heartbeat","elapsed":47328,"alive":true,"life":47334,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":2825,"statIdx":67,"leaderTop":null}
+{"t":1781279383103,"event":"heartbeat","elapsed":52602,"alive":true,"life":52611,"deaths":0,"cls":"Sniper","lvl":17,"mode":"farm","frames":3142,"statIdx":75,"leaderTop":null}
+{"t":1781279388384,"event":"heartbeat","elapsed":57884,"alive":true,"life":57892,"deaths":0,"cls":"Sniper","lvl":17,"mode":"farm","frames":3459,"statIdx":82,"leaderTop":null}
+{"t":1781279393740,"event":"heartbeat","elapsed":63245,"alive":true,"life":63248,"deaths":0,"cls":"Sniper","lvl":18,"mode":"farm","frames":3780,"statIdx":90,"leaderTop":null}
+{"t":1781279399012,"event":"heartbeat","elapsed":68514,"alive":true,"life":68520,"deaths":0,"cls":"Sniper","lvl":18,"mode":"farm","frames":4096,"statIdx":97,"leaderTop":null}
+{"t":1781279404293,"event":"heartbeat","elapsed":73797,"alive":true,"life":73801,"deaths":0,"cls":"Sniper","lvl":19,"mode":"farm","frames":4413,"statIdx":105,"leaderTop":null}
+{"t":1781279409570,"event":"heartbeat","elapsed":79070,"alive":true,"life":79078,"deaths":0,"cls":"Sniper","lvl":19,"mode":"farm","frames":4730,"statIdx":112,"leaderTop":null}
+{"t":1781279414913,"event":"heartbeat","elapsed":84416,"alive":true,"life":84421,"deaths":0,"cls":"Sniper","lvl":20,"mode":"farm","frames":5050,"statIdx":120,"leaderTop":null}
+{"t":1781279420193,"event":"heartbeat","elapsed":89695,"alive":true,"life":89701,"deaths":0,"cls":"Sniper","lvl":20,"mode":"farm","frames":5367,"statIdx":127,"leaderTop":null}
+{"t":1781279425472,"event":"heartbeat","elapsed":94976,"alive":true,"life":94980,"deaths":0,"cls":"Sniper","lvl":20,"mode":"farm","frames":5684,"statIdx":134,"leaderTop":null}
+{"t":1781279430746,"event":"heartbeat","elapsed":100250,"alive":true,"life":100254,"deaths":0,"cls":"Sniper","lvl":21,"mode":"farm","frames":6000,"statIdx":142,"leaderTop":null}
+{"t":1781279436088,"event":"heartbeat","elapsed":105591,"alive":true,"life":105596,"deaths":0,"cls":"Sniper","lvl":21,"mode":"farm","frames":6321,"statIdx":149,"leaderTop":null}
+{"t":1781279441362,"event":"heartbeat","elapsed":110864,"alive":true,"life":110870,"deaths":0,"cls":"Sniper","lvl":22,"mode":"farm","frames":6637,"statIdx":157,"leaderTop":null}
+{"t":1781279446635,"event":"heartbeat","elapsed":116134,"alive":true,"life":116143,"deaths":0,"cls":"Sniper","lvl":22,"mode":"farm","frames":6954,"statIdx":164,"leaderTop":null}
+{"t":1781279451910,"event":"heartbeat","elapsed":121412,"alive":true,"life":121418,"deaths":0,"cls":"Sniper","lvl":22,"mode":"farm","frames":7270,"statIdx":172,"leaderTop":null}
+{"t":1781279457272,"event":"heartbeat","elapsed":126776,"alive":true,"life":126780,"deaths":0,"cls":"Sniper","lvl":23,"mode":"farm","frames":7592,"statIdx":179,"leaderTop":null}
+{"t":1781279462545,"event":"heartbeat","elapsed":132050,"alive":true,"life":132053,"deaths":0,"cls":"Sniper","lvl":23,"mode":"farm","frames":7908,"statIdx":187,"leaderTop":null}
+{"t":1781279467819,"event":"heartbeat","elapsed":137319,"alive":true,"life":137327,"deaths":0,"cls":"Sniper","lvl":23,"mode":"farm","frames":8225,"statIdx":194,"leaderTop":null}
+{"t":1781279473160,"event":"heartbeat","elapsed":142664,"alive":true,"life":142668,"deaths":0,"cls":"Sniper","lvl":23,"mode":"farm","frames":8545,"statIdx":202,"leaderTop":null}
+{"t":1781279478426,"event":"heartbeat","elapsed":147929,"alive":true,"life":147934,"deaths":0,"cls":"Sniper","lvl":24,"mode":"farm","frames":8861,"statIdx":209,"leaderTop":null}
+{"t":1781279483704,"event":"heartbeat","elapsed":153205,"alive":true,"life":153212,"deaths":0,"cls":"Sniper","lvl":24,"mode":"farm","frames":9178,"statIdx":217,"leaderTop":null}
+{"t":1781279488989,"event":"heartbeat","elapsed":158492,"alive":true,"life":158497,"deaths":0,"cls":"Sniper","lvl":24,"mode":"farm","frames":9495,"statIdx":224,"leaderTop":null}
+{"t":1781279494338,"event":"heartbeat","elapsed":163838,"alive":true,"life":163846,"deaths":0,"cls":"Sniper","lvl":25,"mode":"farm","frames":9816,"statIdx":232,"leaderTop":null}
+{"t":1781279499608,"event":"heartbeat","elapsed":169110,"alive":true,"life":169116,"deaths":0,"cls":"Sniper","lvl":25,"mode":"farm","frames":10132,"statIdx":239,"leaderTop":null}
+{"t":1781279504880,"event":"heartbeat","elapsed":174381,"alive":true,"life":174388,"deaths":0,"cls":"Sniper","lvl":25,"mode":"farm","frames":10448,"statIdx":246,"leaderTop":null}
+{"t":1781279510154,"event":"heartbeat","elapsed":179657,"alive":true,"life":179662,"deaths":0,"cls":"Sniper","lvl":26,"mode":"farm","frames":10765,"statIdx":254,"leaderTop":null}
+{"t":1781279515490,"event":"heartbeat","elapsed":184993,"alive":true,"life":184998,"deaths":0,"cls":"Sniper","lvl":26,"mode":"farm","frames":11085,"statIdx":261,"leaderTop":null}
+{"t":1781279520759,"event":"heartbeat","elapsed":190263,"alive":true,"life":190267,"deaths":0,"cls":"Sniper","lvl":26,"mode":"farm","frames":11401,"statIdx":269,"leaderTop":null}
+{"t":1781279526036,"event":"heartbeat","elapsed":195535,"alive":true,"life":195544,"deaths":0,"cls":"Sniper","lvl":26,"mode":"farm","frames":11718,"statIdx":276,"leaderTop":null}
+{"t":1781279531301,"event":"heartbeat","elapsed":200804,"alive":true,"life":200809,"deaths":0,"cls":"Sniper","lvl":27,"mode":"farm","frames":12034,"statIdx":284,"leaderTop":null}
+{"t":1781279536663,"event":"heartbeat","elapsed":206163,"alive":true,"life":206171,"deaths":0,"cls":"Sniper","lvl":27,"mode":"farm","frames":12355,"statIdx":291,"leaderTop":null}
+{"t":1781279541934,"event":"heartbeat","elapsed":211434,"alive":true,"life":211442,"deaths":0,"cls":"Sniper","lvl":27,"mode":"farm","frames":12672,"statIdx":299,"leaderTop":null}
+{"t":1781279547204,"event":"heartbeat","elapsed":216707,"alive":true,"life":216712,"deaths":0,"cls":"Sniper","lvl":27,"mode":"farm","frames":12988,"statIdx":306,"leaderTop":null}
+{"t":1781279552485,"event":"heartbeat","elapsed":221985,"alive":true,"life":221993,"deaths":0,"cls":"Sniper","lvl":27,"mode":"farm","frames":13305,"statIdx":314,"leaderTop":null}
+{"t":1781279557833,"event":"heartbeat","elapsed":227333,"alive":true,"life":227341,"deaths":0,"cls":"Sniper","lvl":27,"mode":"farm","frames":13626,"statIdx":321,"leaderTop":null}
+{"t":1781279563103,"event":"heartbeat","elapsed":232606,"alive":true,"life":232611,"deaths":0,"cls":"Sniper","lvl":28,"mode":"farm","frames":13942,"statIdx":329,"leaderTop":null}
+{"t":1781279568375,"event":"heartbeat","elapsed":237878,"alive":true,"life":237883,"deaths":0,"cls":"Sniper","lvl":28,"mode":"farm","frames":14258,"statIdx":336,"leaderTop":null}
+{"t":1781279570883,"event":"shift_end","elapsed":240391,"deaths":0}
