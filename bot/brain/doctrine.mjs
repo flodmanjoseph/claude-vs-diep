@@ -63,4 +63,18 @@ export const DOCTRINE = {
 
   // Loop timing
   aimEveryFrame: true,
+
+  // Reinforcement learning (tabular Q-learning mode arbitration). Off by default — runs as a
+  // controlled experiment (RL=1) on frozen champion params, A/B'd against the hand rules.
+  rl: {
+    enabled: false,
+    alpha: 0.15, // learning rate
+    gamma: 0.9, // discount
+    epsMax: 0.35, epsMin: 0.06, epsDecay: 0.00002, // exploration, decayed by total decisions
+    decisionFrames: 12, // re-decide the mode ~5x/sec
+    optimistic: 6, // optimistic init encourages trying unseen actions
+    scoreScale: 40, // reward = scoreGain/scoreScale + survivalReward per decision
+    survivalReward: 0.08,
+    deathPenalty: -25, // terminal penalty on death
+  },
 };

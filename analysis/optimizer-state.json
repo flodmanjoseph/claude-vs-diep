@@ -1,6 +1,6 @@
 {
  "gen": 4,
- "evalNo": 78,
+ "evalNo": 82,
  "population": [
   {
    "params": {
@@ -16,7 +16,10 @@
     "spawnEscapeRadius": 348,
     "kindDistancePenalty": 70,
     "approachStopDist": 146,
-    "shapeBodyMargin": 34
+    "shapeBodyMargin": 34,
+    "huntSizeRatio": 0.78,
+    "huntRange": 340,
+    "huntStandoff": 170
    },
    "fits": [
     1472.3364,
@@ -38,7 +41,10 @@
     "spawnEscapeRadius": 200,
     "kindDistancePenalty": 70,
     "approachStopDist": 150,
-    "shapeBodyMargin": 30
+    "shapeBodyMargin": 30,
+    "huntSizeRatio": 0.78,
+    "huntRange": 340,
+    "huntStandoff": 170
    },
    "fits": [
     8695.4092,
@@ -60,9 +66,16 @@
     "spawnEscapeRadius": 221,
     "kindDistancePenalty": 49,
     "approachStopDist": 188,
-    "shapeBodyMargin": 17
+    "shapeBodyMargin": 17,
+    "huntSizeRatio": 0.78,
+    "huntRange": 340,
+    "huntStandoff": 170
    },
-   "fits": []
+   "fits": [
+    43.9308,
+    7487.08,
+    8313.1348
+   ]
   },
   {
    "params": {
@@ -78,9 +91,14 @@
     "spawnEscapeRadius": 200,
     "kindDistancePenalty": 70,
     "approachStopDist": 155,
-    "shapeBodyMargin": 30
+    "shapeBodyMargin": 30,
+    "huntSizeRatio": 0.78,
+    "huntRange": 340,
+    "huntStandoff": 170
    },
-   "fits": []
+   "fits": [
+    9176.166
+   ]
   },
   {
    "params": {
@@ -96,7 +114,10 @@
     "spawnEscapeRadius": 200,
     "kindDistancePenalty": 67,
     "approachStopDist": 139,
-    "shapeBodyMargin": 24
+    "shapeBodyMargin": 24,
+    "huntSizeRatio": 0.78,
+    "huntRange": 340,
+    "huntStandoff": 170
    },
    "fits": []
   },
@@ -114,7 +135,10 @@
     "spawnEscapeRadius": 233,
     "kindDistancePenalty": 89,
     "approachStopDist": 174,
-    "shapeBodyMargin": 40
+    "shapeBodyMargin": 40,
+    "huntSizeRatio": 0.78,
+    "huntRange": 340,
+    "huntStandoff": 170
    },
    "fits": []
   },
@@ -132,7 +156,10 @@
     "spawnEscapeRadius": 200,
     "kindDistancePenalty": 70,
     "approachStopDist": 205,
-    "shapeBodyMargin": 34
+    "shapeBodyMargin": 34,
+    "huntSizeRatio": 0.78,
+    "huntRange": 340,
+    "huntStandoff": 170
    },
    "fits": []
   },
@@ -150,7 +177,10 @@
     "spawnEscapeRadius": 384,
     "kindDistancePenalty": 70,
     "approachStopDist": 147,
-    "shapeBodyMargin": 32
+    "shapeBodyMargin": 32,
+    "huntSizeRatio": 0.78,
+    "huntRange": 340,
+    "huntStandoff": 170
    },
    "fits": []
   }
@@ -169,7 +199,10 @@
    "spawnEscapeRadius": 348,
    "kindDistancePenalty": 70,
    "approachStopDist": 146,
-   "shapeBodyMargin": 34
+   "shapeBodyMargin": 34,
+   "huntSizeRatio": 0.78,
+   "huntRange": 340,
+   "huntStandoff": 170
   },
   "fitness": 18895.095
  },
@@ -245,6 +278,18 @@
   "shapeBodyMargin": [
    10,
    60
+  ],
+  "huntSizeRatio": [
+   0.5,
+   1
+  ],
+  "huntRange": [
+   200,
+   460
+  ],
+  "huntStandoff": [
+   110,
+   260
   ]
  },
  "updated": null

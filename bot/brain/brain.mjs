@@ -7,6 +7,9 @@ export const BRAIN_FN = function (initialDoctrine) {
   let DOCTRINE = initialDoctrine;
   window.__setDoctrine = (d) => { if (d) DOCTRINE = d; };
   window.__getDoctrineVersion = () => DOCTRINE.version;
+  // Q-learning state lives on window so the runner can seed it on launch and persist it to disk.
+  window.__qtable = window.__qtableSeed || window.__qtable || {};
+  window.__rlMeta = window.__rlMetaSeed || window.__rlMeta || { decisions: 0, eps: 0 };
   const CENTER = { x: 640, y: 360 };
   const KEYCODE = { w: 87, a: 65, s: 83, d: 68, e: 69, c: 67, '1': 49, '2': 50, '3': 51, '4': 52, '5': 53, '6': 54, '7': 55, '8': 56 };
 
@@ -159,6 +162,58 @@ export const BRAIN_FN = function (initialDoctrine) {
     return [(-urgent.vy / sp) * s, (urgent.vx / sp) * s];
   }
 
+  // --- Q-learning mode arbitration (real RL: tabular TD(0), epsilon-greedy, reward-driven) ---
+  // State is a coarse discretization of the tactical situation; actions are the macro-modes.
+  function qStateKey(state, c) {
+    const drone = c.isDrone ? 'D' : 'G';
+    const threat = !c.nearest ? '0' : c.nd < c.escapeR ? 'N' : c.nd < DOCTRINE.waryRadius ? 'W' : 'F';
+    const rel = !c.nearest ? '-' : c.nearest.r < c.myR * 0.85 ? 's' : c.nearest.r > c.myR * 1.15 ? 'b' : 'e';
+    const crowd = c.foes.length >= 2 ? '2' : c.foes.length === 1 ? '1' : '0';
+    const bul = c.bulletThreat ? 'B' : '.';
+    const shp = state.shapes.length ? 'S' : '.';
+    return drone + threat + rel + crowd + bul + shp;
+  }
+  function qValidActions(state, c) {
+    const v = ['patrol', 'escape'];
+    if (c.isDrone && c.nearest) v.push('hunt');
+    if (state.shapes.length) v.push('farm');
+    return v;
+  }
+  function qLearn(s, a, r, sNext, rl) {
+    if (!s || !a) return;
+    const Q = window.__qtable;
+    Q[s] = Q[s] || {};
+    const cur = Q[s][a] != null ? Q[s][a] : rl.optimistic;
+    let maxNext = 0;
+    if (sNext && Q[sNext]) { const vals = Object.values(Q[sNext]); if (vals.length) maxNext = Math.max(...vals); }
+    Q[s][a] = cur + rl.alpha * (r + rl.gamma * maxNext - cur);
+  }
+  // Apply the terminal death penalty to the last decision of the life that just ended.
+  function rlTerminal() {
+    const rl = DOCTRINE.rl;
+    if (rl && rl.enabled && B.rlPrevState != null) { qLearn(B.rlPrevState, B.rlAction, rl.deathPenalty, null, rl); }
+    B.rlPrevState = null; B.rlAction = null; B.lastScore = 0;
+  }
+  function rlSelect(state, c, rl) {
+    const Q = window.__qtable, meta = window.__rlMeta;
+    const s = qStateKey(state, c);
+    const due = B.rlAction == null || (B.frames - (B.rlSince || 0)) >= rl.decisionFrames;
+    if (due) {
+      const score = (window.__diep && window.__diep.hud && window.__diep.hud.score) || 0;
+      const r = Math.max(0, score - (B.lastScore != null ? B.lastScore : score)) / rl.scoreScale + rl.survivalReward;
+      B.lastScore = score;
+      if (B.rlPrevState != null) qLearn(B.rlPrevState, B.rlAction, r, s, rl);
+      const valid = qValidActions(state, c);
+      const eps = Math.max(rl.epsMin, rl.epsMax - rl.epsDecay * (meta.decisions || 0));
+      let a;
+      if (Math.random() < eps) { a = valid[(Math.random() * valid.length) | 0]; }
+      else { Q[s] = Q[s] || {}; let bv = -Infinity; a = valid[0]; for (const cc of valid) { const v = Q[s][cc] != null ? Q[s][cc] : rl.optimistic; if (v > bv) { bv = v; a = cc; } } }
+      B.rlAction = a; B.rlPrevState = s; B.rlSince = B.frames;
+      meta.decisions = (meta.decisions || 0) + 1; meta.eps = +eps.toFixed(3);
+    }
+    return B.rlAction;
+  }
+
   function step() {
     if (!B.running) return;
     B.frames++;
@@ -167,8 +222,10 @@ export const BRAIN_FN = function (initialDoctrine) {
 
     // Track life boundaries: a gap in alive frames means we just (re)spawned.
     if (state.me.alive) {
-      if (B.frames - B.lastAliveFrame > 10) B.lifeStartFrame = B.frames;
+      if (B.frames - B.lastAliveFrame > 10) { B.lifeStartFrame = B.frames; B.lastScore = 0; }
       B.lastAliveFrame = B.frames;
+    } else {
+      rlTerminal(); // death: charge the terminal penalty to the last RL decision, reset the episode
     }
     const sinceSpawn = B.frames - (B.lifeStartFrame || 0);
     const grace = sinceSpawn < DOCTRINE.spawnGraceFrames;
@@ -190,66 +247,68 @@ export const BRAIN_FN = function (initialDoctrine) {
     for (const e of foes) { const ed = effectiveDist(e); if (ed < nd) { nd = ed; nearest = e; } }
     const bulletThreat = state.bullets.some((b) => b.enemy && b.dist < DOCTRINE.bulletDangerRadius);
     const escapeR = grace ? DOCTRINE.spawnEscapeRadius : DOCTRINE.escapeRadius;
-
-    // Drone-class hunting: a kill is worth far more XP than shapes. When we have a drone swarm and
-    // the nearest enemy is clearly smaller and alone, chase it down with drones instead of fleeing.
     const myR = state.me.r || 17;
     const huntable = DOCTRINE.huntEnabled && isDrone && nearest && !grace && !bulletThreat
-      && nearest.r < myR * DOCTRINE.huntSizeRatio
-      && nearest.dist < DOCTRINE.huntRange
-      && foes.length <= DOCTRINE.huntMaxFoes;
+      && nearest.r < myR * DOCTRINE.huntSizeRatio && nearest.dist < DOCTRINE.huntRange && foes.length <= DOCTRINE.huntMaxFoes;
 
-    if (nearest && (nd < escapeR || bulletThreat) && !huntable) {
-      // Flee toward open space; keep shooting the nearest enemy.
+    // Each tactical mode is an action: it returns the movement keys + aim and labels B.mode.
+    const actEscape = () => {
       B.mode = grace ? 'spawn-escape' : 'escape';
       const [dx, dy] = bestEscapeDir(state);
-      moveKeys = vectorToKeys(dx, dy);
-      aim = { x: nearest.x, y: nearest.y };
-    } else if (huntable) {
-      // Hunt the weakling: send drones onto it, close to standoff range without ramming.
+      return { moveKeys: vectorToKeys(dx, dy), aim: nearest ? { x: nearest.x, y: nearest.y } : (window.__lastAim || { x: 900, y: 360 }) };
+    };
+    const actHunt = () => {
+      if (!nearest) return actFarm();
       B.mode = 'hunt';
-      aim = { x: nearest.x, y: nearest.y };
-      if (nearest.dist > DOCTRINE.huntStandoff) moveKeys = vectorToKeys(nearest.dx, nearest.dy);
-      else moveKeys = vectorToKeys(-nearest.dx, -nearest.dy);
-    } else {
-      // Farm. Approach to shooting range, never body-contact a shape, and keep distance from any
-      // enemy inside the wary radius (kite). Shoot a close-ish enemy, otherwise shoot the shape.
+      const mk = nearest.dist > DOCTRINE.huntStandoff ? vectorToKeys(nearest.dx, nearest.dy) : vectorToKeys(-nearest.dx, -nearest.dy);
+      return { moveKeys: mk, aim: { x: nearest.x, y: nearest.y } };
+    };
+    function actFarm() {
       const target = bestShape(state.shapes);
-      if (target) {
-        B.mode = (nearest && nd < DOCTRINE.waryRadius) ? 'kite-farm' : 'farm';
-        let mvx = 0, mvy = 0;
-        if (target.dist > DOCTRINE.approachStopDist) { const m = target.dist || 1; mvx += target.dx / m; mvy += target.dy / m; }
-        for (const s of state.shapes) {
-          const contact = (state.me.r || 17) + s.r + DOCTRINE.shapeBodyMargin;
-          if (s.dist < contact) { const m = s.dist || 1; mvx -= (s.dx / m) * 1.5; mvy -= (s.dy / m) * 1.5; }
-        }
-        if (nearest && nd < DOCTRINE.waryRadius) {
-          const m = nd || 1; const wb = (DOCTRINE.waryRadius - nd) / DOCTRINE.waryRadius;
-          mvx -= (nearest.dx / m) * wb * 1.8; mvy -= (nearest.dy / m) * wb * 1.8;
-        }
-        aim = (nearest && nd < escapeR * 1.3) ? { x: nearest.x, y: nearest.y } : { x: target.x, y: target.y };
-        moveKeys = (mvx || mvy) ? vectorToKeys(mvx, mvy) : new Set();
-      } else if (DOCTRINE.wanderWhenEmpty) {
-        // Patrol between corner anchors using the minimap position; corners are quieter than the
-        // contested center. Without a map fix, fall back to a gentle drift.
-        B.mode = 'patrol';
-        const pos = state.map;
-        if (pos) {
-          const anchors = DOCTRINE.patrolAnchors;
-          B.anchorIdx = B.anchorIdx ?? 0;
-          let a = anchors[B.anchorIdx % anchors.length];
-          if (Math.hypot(a[0] - pos.x, a[1] - pos.y) < DOCTRINE.anchorReachedDist) {
-            B.anchorIdx = (B.anchorIdx + 1) % anchors.length;
-            a = anchors[B.anchorIdx];
-          }
-          moveKeys = vectorToKeys(a[0] - pos.x, a[1] - pos.y);
-          aim = { x: 640 + (a[0] - pos.x) * 600, y: 360 + (a[1] - pos.y) * 600 };
-        } else {
-          moveKeys = vectorToKeys(0.6, -0.5);
-          aim = { x: 1000, y: 200 };
-        }
+      if (!target) return actPatrol();
+      B.mode = (nearest && nd < DOCTRINE.waryRadius) ? 'kite-farm' : 'farm';
+      let mvx = 0, mvy = 0;
+      if (target.dist > DOCTRINE.approachStopDist) { const m = target.dist || 1; mvx += target.dx / m; mvy += target.dy / m; }
+      for (const s of state.shapes) {
+        const contact = (state.me.r || 17) + s.r + DOCTRINE.shapeBodyMargin;
+        if (s.dist < contact) { const m = s.dist || 1; mvx -= (s.dx / m) * 1.5; mvy -= (s.dy / m) * 1.5; }
       }
+      if (nearest && nd < DOCTRINE.waryRadius) {
+        const m = nd || 1; const wb = (DOCTRINE.waryRadius - nd) / DOCTRINE.waryRadius;
+        mvx -= (nearest.dx / m) * wb * 1.8; mvy -= (nearest.dy / m) * wb * 1.8;
+      }
+      const a = (nearest && nd < escapeR * 1.3) ? { x: nearest.x, y: nearest.y } : { x: target.x, y: target.y };
+      return { moveKeys: (mvx || mvy) ? vectorToKeys(mvx, mvy) : new Set(), aim: a };
     }
+    function actPatrol() {
+      B.mode = 'patrol';
+      const pos = state.map;
+      if (pos) {
+        const anchors = DOCTRINE.patrolAnchors;
+        B.anchorIdx = B.anchorIdx ?? 0;
+        let a = anchors[B.anchorIdx % anchors.length];
+        if (Math.hypot(a[0] - pos.x, a[1] - pos.y) < DOCTRINE.anchorReachedDist) { B.anchorIdx = (B.anchorIdx + 1) % anchors.length; a = anchors[B.anchorIdx]; }
+        return { moveKeys: vectorToKeys(a[0] - pos.x, a[1] - pos.y), aim: { x: 640 + (a[0] - pos.x) * 600, y: 360 + (a[1] - pos.y) * 600 } };
+      }
+      return { moveKeys: vectorToKeys(0.6, -0.5), aim: { x: 1000, y: 200 } };
+    }
+    const ACT = { escape: actEscape, hunt: actHunt, farm: actFarm, patrol: actPatrol };
+
+    // --- Mode selection: spawn-grace forces escape; otherwise Q-learning (if enabled) or rules. ---
+    const rl = DOCTRINE.rl;
+    let chosen;
+    if (grace) {
+      chosen = 'escape';
+    } else if (rl && rl.enabled) {
+      chosen = rlSelect(state, { nearest, nd, foes, bulletThreat, escapeR, myR, isDrone }, rl);
+    } else {
+      if (nearest && (nd < escapeR || bulletThreat) && !huntable) chosen = 'escape';
+      else if (huntable) chosen = 'hunt';
+      else if (state.shapes.length) chosen = 'farm';
+      else chosen = 'patrol';
+    }
+    const out = (ACT[chosen] || actFarm)();
+    moveKeys = out.moveKeys; aim = out.aim;
 
     // Bullet dodge overrides movement in any mode: sidestepping an incoming shot beats whatever
     // else we were doing for these few frames. Aim is unaffected.

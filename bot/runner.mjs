@@ -14,12 +14,24 @@ const SHIFT_MS = +(process.env.SHIFT_MS || 360_000);
 const NAME = process.env.NAME || 'claude';
 const GAMEMODE = process.env.GAMEMODE || 'FFA';
 const OPTIMIZE = process.env.OPTIMIZE === '1';
-const opt = OPTIMIZE ? new Optimizer() : null;
+const RL = process.env.RL === '1'; // controlled RL experiment: freeze champion params, Q-learn modes
+const opt = (OPTIMIZE && !RL) ? new Optimizer() : null;
+const QPATH = path.join(ROOT, 'analysis', 'qtable.json');
 
-// Per-life bests, used to score the life for the optimizer.
+// For the RL experiment we freeze the best-known parameters (the ES champion) so the only thing
+// changing is the learned mode policy. A/B'd against the hand rules via per-life fitness.
+function loadChampionParams() {
+  try { const s = JSON.parse(fs.readFileSync(path.join(ROOT, 'analysis', 'optimizer-state.json'), 'utf8')); return s.champion?.params || {}; } catch { return {}; }
+}
+function loadQTable() { try { return JSON.parse(fs.readFileSync(QPATH, 'utf8')); } catch { return { q: {}, meta: { decisions: 0, eps: 0 } }; } }
+function saveQTable(d) { try { fs.writeFileSync(QPATH, JSON.stringify(d)); } catch {} }
+const rlDoctrine = RL ? { ...DOCTRINE, ...loadChampionParams(), rl: { ...DOCTRINE.rl, enabled: true }, version: 'rl-champion' } : null;
+
+// Per-life bests, used to score the life for the optimizer / RL comparison.
 let lifeMaxScore = 0, lifeMaxLevel = 0;
 async function applyNextDoctrine() {
   lifeMaxScore = 0; lifeMaxLevel = 0;
+  if (RL) { await page.evaluate((doc) => window.__setDoctrine && window.__setDoctrine(doc), rlDoctrine).catch(() => {}); return; }
   if (!opt) return;
   const d = opt.nextDoctrine();
   await page.evaluate((doc) => window.__setDoctrine && window.__setDoctrine(doc), d).catch(() => {});
@@ -43,6 +55,11 @@ page.on('console', (m) => { if (m.type() === 'error') log({ event: 'pageerror', 
 
 await page.addInitScript(SCRAPE_INIT);
 await page.addInitScript(STATE_FN);
+if (RL) {
+  const seed = loadQTable();
+  await page.addInitScript(`window.__qtableSeed = ${JSON.stringify(seed.q || {})}; window.__rlMetaSeed = ${JSON.stringify(seed.meta || { decisions: 0 })};`);
+  console.log(`RL experiment: champion params frozen, Q-learning modes. seed ${Object.keys(seed.q || {}).length} states, ${seed.meta?.decisions || 0} prior decisions.`);
+}
 await page.addInitScript(`(${BRAIN_FN})(${JSON.stringify(DOCTRINE)})`);
 
 log({ event: 'shift_start', shiftId, doctrine: DOCTRINE.version, shiftMs: SHIFT_MS });
@@ -145,6 +162,7 @@ let deaths = 0;
 let lastHeartbeat = 0;
 let lastShot = 0;
 let lastUpgrade = 0;
+let lastQSave = 0;
 let deadSince = 0;
 let extending = false;
 let bestRank = 99;
@@ -206,6 +224,12 @@ while (true) {
   if (elapsed - lastShot > 20000) {
     lastShot = elapsed;
     await page.screenshot({ path: evidence('latest.png') }).catch(() => {});
+  }
+  // Persist the Q-table every 15s so the RL policy survives restarts.
+  if (RL && elapsed - lastQSave > 15000) {
+    lastQSave = elapsed;
+    const snap = await page.evaluate(() => ({ q: window.__qtable, meta: window.__rlMeta })).catch(() => null);
+    if (snap && snap.q) { saveQTable(snap); log({ event: 'rl_save', states: Object.keys(snap.q).length, decisions: snap.meta?.decisions, eps: snap.meta?.eps }); }
   }
 
   if (!live) {
