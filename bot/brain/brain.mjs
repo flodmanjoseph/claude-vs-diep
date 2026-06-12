@@ -142,7 +142,12 @@ export const BRAIN_FN = function (DOCTRINE) {
     B._raf = requestAnimationFrame(step);
   }
 
+  // start() begins a fresh life: autofire is off on a new tank, so allow it to be re-enabled.
   B.start = () => { if (B.running) return; B.running = true; B.autofireOn = false; B._raf = requestAnimationFrame(step); };
   B.stop = () => { B.running = false; releaseAll(); };
+  // pause()/resume() bracket a brief external action (e.g. an upgrade click) WITHOUT touching
+  // autofire state, so resuming does not toggle E and turn our guns off mid-life.
+  B.pause = () => { B.running = false; releaseAll(); };
+  B.resume = () => { if (B.running) return; B.running = true; B._raf = requestAnimationFrame(step); };
   B.snapshot = () => ({ frames: B.frames, mode: B.mode, statIdx: B.statIdx, autofireOn: B.autofireOn });
 };

@@ -20,11 +20,12 @@ export async function clickTile(page, index) {
   await page.mouse.up().catch(() => {});
 }
 
-// Read "Lvl N <Class>" from the canvas text hook (captured intermittently). Returns {level,cls} or null.
+// Read the current level/class from the HUD accumulator (kept fresh by the scraper on each
+// level-up). Returns {level,cls} or null.
 export async function readLevelClass(page) {
   return page.evaluate(() => {
-    const f = window.__diep?.frame; if (!f) return null;
-    for (const t of f.texts) { const m = /^Lvl\s+(\d+)\s+(.+)$/.exec(t.t.trim()); if (m) return { level: +m[1], cls: m[2].trim() }; }
+    const h = window.__diep?.hud;
+    if (h && h.level != null && h.cls) return { level: h.level, cls: h.cls };
     return null;
   }).catch(() => null);
 }

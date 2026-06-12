@@ -1,0 +1,92 @@
+{"t":1781278331409,"event":"shift_start","shiftId":"2026-06-12T15-32-10-832Z","doctrine":6,"shiftMs":150000}
+{"t":1781278333876,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 401 ()"}
+{"t":1781278333969,"event":"pageerror","text":"This document requires 'TrustedScript' assignment. The action has been blocked."}
+{"t":1781278333969,"event":"pageerror","text":"This document requires 'TrustedScript' assignment. The action has been blocked."}
+{"t":1781278334137,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781278334138,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781278336523,"event":"spawn","ok":true}
+{"t":1781278336887,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781278336888,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781278341627,"event":"heartbeat","elapsed":5096,"alive":true,"life":5103,"deaths":0,"cls":"Tank","lvl":2,"mode":"farm","frames":306,"statIdx":8,"leaderTop":null}
+{"t":1781278346887,"event":"heartbeat","elapsed":10358,"alive":true,"life":10363,"deaths":0,"cls":"Tank","lvl":7,"mode":"farm","frames":622,"statIdx":15,"leaderTop":154}
+{"t":1781278352146,"event":"heartbeat","elapsed":15616,"alive":true,"life":15622,"deaths":0,"cls":"Tank","lvl":9,"mode":"farm","frames":937,"statIdx":22,"leaderTop":null}
+{"t":1781278357499,"event":"heartbeat","elapsed":20966,"alive":true,"life":20975,"deaths":0,"cls":"Tank","lvl":10,"mode":"farm","frames":1259,"statIdx":30,"leaderTop":null}
+{"t":1781278362772,"event":"heartbeat","elapsed":26244,"alive":true,"life":26248,"deaths":0,"cls":"Tank","lvl":10,"mode":"farm","frames":1575,"statIdx":37,"leaderTop":null}
+{"t":1781278368040,"event":"heartbeat","elapsed":31511,"alive":true,"life":31516,"deaths":0,"cls":"Tank","lvl":11,"mode":"farm","frames":1891,"statIdx":45,"leaderTop":null}
+{"t":1781278368754,"event":"pageerror","text":"Failed to load resource: net::ERR_HTTP2_PROTOCOL_ERROR"}
+{"t":1781278373310,"event":"heartbeat","elapsed":36781,"alive":true,"life":36786,"deaths":0,"cls":"Tank","lvl":11,"mode":"farm","frames":2207,"statIdx":52,"leaderTop":null}
+{"t":1781278378657,"event":"heartbeat","elapsed":42128,"alive":true,"life":42133,"deaths":0,"cls":"Tank","lvl":13,"mode":"farm","frames":2528,"statIdx":60,"leaderTop":null}
+{"t":1781278383932,"event":"heartbeat","elapsed":47398,"alive":true,"life":47408,"deaths":0,"cls":"Tank","lvl":14,"mode":"farm","frames":2845,"statIdx":67,"leaderTop":null}
+{"t":1781278389032,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":15}
+{"t":1781278389839,"event":"heartbeat","elapsed":53312,"alive":true,"life":53315,"deaths":0,"cls":"Tank","lvl":15,"mode":"farm","frames":3199,"statIdx":76,"leaderTop":null}
+{"t":1781278390895,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":15}
+{"t":1781278392762,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":15}
+{"t":1781278394629,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":15}
+{"t":1781278395436,"event":"heartbeat","elapsed":58909,"alive":true,"life":58912,"deaths":0,"cls":"Tank","lvl":15,"mode":"farm","frames":3535,"statIdx":84,"leaderTop":null}
+{"t":1781278396496,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":15}
+{"t":1781278398030,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":16}
+{"t":1781278399897,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":16}
+{"t":1781278400703,"event":"heartbeat","elapsed":64176,"alive":true,"life":64179,"deaths":0,"cls":"Tank","lvl":16,"mode":"farm","frames":3851,"statIdx":91,"leaderTop":null}
+{"t":1781278402160,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":16}
+{"t":1781278404010,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":16}
+{"t":1781278405876,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":17}
+{"t":1781278406687,"event":"heartbeat","elapsed":70159,"alive":true,"life":70163,"deaths":0,"cls":"Tank","lvl":17,"mode":"farm","frames":4210,"statIdx":99,"leaderTop":null}
+{"t":1781278407744,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":17}
+{"t":1781278409612,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":17}
+{"t":1781278411480,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":17}
+{"t":1781278412287,"event":"heartbeat","elapsed":75759,"alive":true,"life":75763,"deaths":0,"cls":"Tank","lvl":17,"mode":"farm","frames":4546,"statIdx":107,"leaderTop":null}
+{"t":1781278413347,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":17}
+{"t":1781278415207,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":17}
+{"t":1781278417077,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":18}
+{"t":1781278417887,"event":"heartbeat","elapsed":81360,"alive":true,"life":81363,"deaths":0,"cls":"Tank","lvl":18,"mode":"farm","frames":4882,"statIdx":115,"leaderTop":null}
+{"t":1781278418614,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":18}
+{"t":1781278420478,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":18}
+{"t":1781278422344,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":18}
+{"t":1781278423153,"event":"heartbeat","elapsed":86626,"alive":true,"life":86629,"deaths":0,"cls":"Tank","lvl":18,"mode":"farm","frames":5198,"statIdx":123,"leaderTop":null}
+{"t":1781278424211,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":18}
+{"t":1781278426078,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":19}
+{"t":1781278428342,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":19}
+{"t":1781278429152,"event":"heartbeat","elapsed":92624,"alive":true,"life":92628,"deaths":0,"cls":"Tank","lvl":19,"mode":"farm","frames":5558,"statIdx":131,"leaderTop":null}
+{"t":1781278430214,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":19}
+{"t":1781278432075,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":19}
+{"t":1781278433945,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":20}
+{"t":1781278434754,"event":"heartbeat","elapsed":98226,"alive":true,"life":98230,"deaths":0,"cls":"Tank","lvl":20,"mode":"farm","frames":5894,"statIdx":139,"leaderTop":null}
+{"t":1781278435812,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":20}
+{"t":1781278437679,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":20}
+{"t":1781278439208,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":20}
+{"t":1781278440017,"event":"heartbeat","elapsed":103490,"alive":false,"life":103493,"deaths":0,"cls":"Tank","lvl":20,"mode":"farm","frames":6210,"statIdx":147,"leaderTop":null}
+{"t":1781278441078,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":20}
+{"t":1781278442945,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":20}
+{"t":1781278444812,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":20}
+{"t":1781278445619,"event":"heartbeat","elapsed":109092,"alive":true,"life":109095,"deaths":0,"cls":"Tank","lvl":20,"mode":"farm","frames":6546,"statIdx":154,"leaderTop":null}
+{"t":1781278446679,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":20}
+{"t":1781278448544,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":21}
+{"t":1781278450414,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":21}
+{"t":1781278451228,"event":"heartbeat","elapsed":114697,"alive":true,"life":114704,"deaths":0,"cls":"Tank","lvl":21,"mode":"farm","frames":6882,"statIdx":162,"leaderTop":null}
+{"t":1781278452276,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":21}
+{"t":1781278454147,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":21}
+{"t":1781278456014,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":21}
+{"t":1781278456822,"event":"heartbeat","elapsed":120295,"alive":true,"life":120298,"deaths":0,"cls":"Tank","lvl":21,"mode":"farm","frames":7218,"statIdx":170,"leaderTop":null}
+{"t":1781278457875,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":21}
+{"t":1781278459412,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":21}
+{"t":1781278461280,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":21}
+{"t":1781278462090,"event":"heartbeat","elapsed":125562,"alive":true,"life":125566,"deaths":0,"cls":"Tank","lvl":21,"mode":"farm","frames":7534,"statIdx":178,"leaderTop":null}
+{"t":1781278463148,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":22}
+{"t":1781278465010,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":22}
+{"t":1781278466878,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":22}
+{"t":1781278467689,"event":"heartbeat","elapsed":131160,"alive":true,"life":131165,"deaths":0,"cls":"Tank","lvl":22,"mode":"farm","frames":7870,"statIdx":186,"leaderTop":null}
+{"t":1781278468747,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":22}
+{"t":1781278470610,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":22}
+{"t":1781278472479,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":22}
+{"t":1781278473290,"event":"heartbeat","elapsed":136762,"alive":true,"life":136766,"deaths":0,"cls":"Tank","lvl":22,"mode":"farm","frames":8206,"statIdx":194,"leaderTop":null}
+{"t":1781278474347,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":22}
+{"t":1781278476214,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":22}
+{"t":1781278478079,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":23}
+{"t":1781278478885,"event":"heartbeat","elapsed":142358,"alive":true,"life":142361,"deaths":0,"cls":"Tank","lvl":23,"mode":"farm","frames":8542,"statIdx":202,"leaderTop":null}
+{"t":1781278479597,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":23}
+{"t":1781278481464,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":23}
+{"t":1781278483328,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":23}
+{"t":1781278484135,"event":"heartbeat","elapsed":147608,"alive":true,"life":147611,"deaths":0,"cls":"Tank","lvl":23,"mode":"farm","frames":8857,"statIdx":209,"leaderTop":null}
+{"t":1781278485194,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":23}
+{"t":1781278487064,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":23}
+{"t":1781278487532,"event":"shift_end","elapsed":151008,"deaths":0}

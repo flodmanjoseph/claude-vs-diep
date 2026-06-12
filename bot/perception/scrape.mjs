@@ -12,7 +12,17 @@ export const SCRAPE_INIT = () => {
     frameCount: 0,
     W: 1280,
     H: 720,
+    // HUD accumulator: diep caches HUD text (level/class/score) on offscreen canvases and only
+    // re-renders the string when it changes. We capture those fillText calls and keep the latest,
+    // so the current level/class/score is always available even though it isn't drawn every frame.
+    hud: { levelClass: null, level: null, cls: null, score: null, scoreAt: 0 },
   });
+  S._noteText = (s) => {
+    const lc = /^Lvl\s+(\d+)\s+(.+)$/.exec(s);
+    if (lc) { S.hud.levelClass = s; S.hud.level = +lc[1]; S.hud.cls = lc[2].trim(); return; }
+    const sc = /^Score:\s*([\d,]+)$/i.exec(s);
+    if (sc) { S.hud.score = +sc[1].replace(/,/g, ''); S.hud.scoreAt = S.frameCount; }
+  };
 
   // Frames are delimited by requestAnimationFrame: at the start of each animation frame we
   // publish the buffer that accumulated during the previous frame and start a fresh one.
@@ -86,7 +96,9 @@ export const SCRAPE_INIT = () => {
     proto.fillText = function (text, x, y, ...rest) {
       const p = xf(x, y);
       if (text != null && String(text).length) {
-        S._buf.texts.push({ t: String(text), x: Math.round(p.x), y: Math.round(p.y), font: proto.font, c: typeof proto.fillStyle === 'string' ? proto.fillStyle : '' });
+        const s = String(text);
+        S._buf.texts.push({ t: s, x: Math.round(p.x), y: Math.round(p.y), font: proto.font, c: typeof proto.fillStyle === 'string' ? proto.fillStyle : '' });
+        S._noteText(s.trim());
       }
       return origFillText(text, x, y, ...rest);
     };

@@ -69,8 +69,12 @@ async function takeUpgrades() {
   const idx = DOCTRINE.buildPath.findIndex((s, i) => !doneSteps.has(i) && s.from === curClass && curLevel >= (s.minLevel || 0));
   if (idx < 0) return;
   const step = DOCTRINE.buildPath[idx];
+  // Pause the brain so its per-frame synthetic aim (mousemove) does not drag diep's tracked
+  // pointer off the tile between our move and mousedown. Trusted UI clicks need a stable pointer.
+  await page.evaluate(() => window.__brain && window.__brain.pause()).catch(() => {});
   await enableTrustedCanvasClicks(page);
   await clickTile(page, step.tile);
+  await page.evaluate(() => window.__brain && window.__brain.resume()).catch(() => {});
   log({ event: 'upgrade_attempt', from: step.from, tile: step.tile, to: step.to, level: curLevel });
   // Re-read shortly to confirm.
   await page.waitForTimeout(400);

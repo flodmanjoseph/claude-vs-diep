@@ -1,0 +1,40 @@
+{"t":1781278536488,"event":"shift_start","shiftId":"2026-06-12T15-35-35-903Z","doctrine":6,"shiftMs":150000}
+{"t":1781278538504,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 401 ()"}
+{"t":1781278538655,"event":"pageerror","text":"This document requires 'TrustedScript' assignment. The action has been blocked."}
+{"t":1781278538655,"event":"pageerror","text":"This document requires 'TrustedScript' assignment. The action has been blocked."}
+{"t":1781278538792,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781278538792,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781278541501,"event":"spawn","ok":true}
+{"t":1781278541722,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781278541722,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781278546719,"event":"heartbeat","elapsed":5212,"alive":true,"life":5217,"deaths":0,"cls":"Tank","lvl":4,"mode":"farm","frames":313,"statIdx":8,"leaderTop":null}
+{"t":1781278551986,"event":"heartbeat","elapsed":10479,"alive":true,"life":10484,"deaths":0,"cls":"Tank","lvl":6,"mode":"farm","frames":629,"statIdx":15,"leaderTop":null}
+{"t":1781278557255,"event":"heartbeat","elapsed":15747,"alive":true,"life":15753,"deaths":0,"cls":"Tank","lvl":8,"mode":"farm","frames":945,"statIdx":23,"leaderTop":null}
+{"t":1781278562614,"event":"heartbeat","elapsed":21103,"alive":true,"life":21112,"deaths":0,"cls":"Tank","lvl":9,"mode":"farm","frames":1266,"statIdx":30,"leaderTop":null}
+{"t":1781278567878,"event":"heartbeat","elapsed":26373,"alive":true,"life":26376,"deaths":0,"cls":"Tank","lvl":10,"mode":"farm","frames":1583,"statIdx":38,"leaderTop":null}
+{"t":1781278573146,"event":"heartbeat","elapsed":31637,"alive":true,"life":31644,"deaths":0,"cls":"Tank","lvl":11,"mode":"farm","frames":1898,"statIdx":45,"leaderTop":null}
+{"t":1781278578421,"event":"heartbeat","elapsed":36914,"alive":true,"life":36919,"deaths":0,"cls":"Tank","lvl":11,"mode":"farm","frames":2215,"statIdx":53,"leaderTop":null}
+{"t":1781278583774,"event":"heartbeat","elapsed":42266,"alive":true,"life":42272,"deaths":0,"cls":"Tank","lvl":12,"mode":"farm","frames":2536,"statIdx":60,"leaderTop":null}
+{"t":1781278589054,"event":"heartbeat","elapsed":47547,"alive":true,"life":47552,"deaths":0,"cls":"Tank","lvl":13,"mode":"farm","frames":2853,"statIdx":68,"leaderTop":null}
+{"t":1781278594334,"event":"heartbeat","elapsed":52826,"alive":true,"life":52832,"deaths":0,"cls":"Tank","lvl":14,"mode":"farm","frames":3170,"statIdx":75,"leaderTop":null}
+{"t":1781278597415,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":15}
+{"t":1781278597819,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781278599445,"event":"heartbeat","elapsed":57938,"alive":true,"life":57943,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":3461,"statIdx":82,"leaderTop":null}
+{"t":1781278604782,"event":"heartbeat","elapsed":63276,"alive":true,"life":63280,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":3782,"statIdx":90,"leaderTop":null}
+{"t":1781278610060,"event":"heartbeat","elapsed":68554,"alive":true,"life":68558,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":4098,"statIdx":97,"leaderTop":null}
+{"t":1781278615330,"event":"heartbeat","elapsed":73820,"alive":true,"life":73828,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":4414,"statIdx":105,"leaderTop":null}
+{"t":1781278620606,"event":"heartbeat","elapsed":79099,"alive":true,"life":79104,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":4731,"statIdx":112,"leaderTop":null}
+{"t":1781278625955,"event":"heartbeat","elapsed":84449,"alive":true,"life":84453,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":5052,"statIdx":120,"leaderTop":null}
+{"t":1781278631220,"event":"heartbeat","elapsed":89713,"alive":true,"life":89718,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":5368,"statIdx":127,"leaderTop":null}
+{"t":1781278636494,"event":"heartbeat","elapsed":94986,"alive":true,"life":94992,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":5684,"statIdx":134,"leaderTop":null}
+{"t":1781278641766,"event":"heartbeat","elapsed":100255,"alive":true,"life":100264,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":6001,"statIdx":142,"leaderTop":null}
+{"t":1781278647126,"event":"heartbeat","elapsed":105619,"alive":true,"life":105624,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":6322,"statIdx":149,"leaderTop":null}
+{"t":1781278652401,"event":"heartbeat","elapsed":110892,"alive":true,"life":110899,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":6639,"statIdx":157,"leaderTop":null}
+{"t":1781278657673,"event":"heartbeat","elapsed":116166,"alive":false,"life":116171,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":6955,"statIdx":164,"leaderTop":null}
+{"t":1781278662951,"event":"heartbeat","elapsed":121441,"alive":true,"life":121449,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":7272,"statIdx":172,"leaderTop":null}
+{"t":1781278668306,"event":"heartbeat","elapsed":126798,"alive":true,"life":126804,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":7593,"statIdx":179,"leaderTop":null}
+{"t":1781278673579,"event":"heartbeat","elapsed":132070,"alive":true,"life":132077,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":7909,"statIdx":187,"leaderTop":null}
+{"t":1781278678861,"event":"heartbeat","elapsed":137354,"alive":true,"life":137359,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":8226,"statIdx":194,"leaderTop":null}
+{"t":1781278684227,"event":"heartbeat","elapsed":142720,"alive":true,"life":142725,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":8548,"statIdx":202,"leaderTop":null}
+{"t":1781278689507,"event":"heartbeat","elapsed":148000,"alive":true,"life":148005,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","frames":8865,"statIdx":209,"leaderTop":null}
+{"t":1781278691619,"event":"shift_end","elapsed":150117,"deaths":0}
