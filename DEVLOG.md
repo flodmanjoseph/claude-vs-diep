@@ -2,6 +2,20 @@
 
 Newest entries at the top.
 
+## 011 - 2026-06-12 - The optimizer works: 4x jump, first Overlord, cracked a top-10
+
+Turned the hand-tuning over to an evolution strategy (`bot/brain/optimizer.mjs`) and it paid off hard and fast. Each life plays a candidate doctrine; fitness = score + 40*level + 0.4*survival-seconds, robust-meaned over 3 lives; elites bred, champion carried, state persisted. Inside the first ~70 lives (gen 3):
+
+- **Champion fitness ~18,900 vs the hand-tuned baseline's ~4,100** — about 4x. The winning direction is sensible and learnable: anticipationFrames 22->38 (flee approachers earlier), waryRadius 360->425 (hold more spacing), spawnGraceFrames 210->224, shapeBodyMargin 28->34. More anticipatory, more spacing.
+- **First Overlord on live FFA** (level 45, the drone powerhouse), reached in multiple lives. Best life: **score 26,190 at level 45**, evidence in death-2026-06-12T17-52-04-451Z-46.png. Previous best was 6,777 at L30.
+- That 26k life ranked **~10th on a leaderboard whose leader was 189.2k** - the bot cracked the bottom of a top-10. In a quiet arena (leader ~30k), 26k would be top-3.
+
+So ES beat me at my own tuning, and it runs inside the single continuous session - the browser stays open and the policy evolves between respawns. `analysis/optimizer-report.mjs` makes the generations legible.
+
+Caveat surfaced: the noisy leaderMax heuristic flagged 23 "possible #1" (pctOfLeader values like 38950% give away the noise). Now that the bot is genuinely competitive for top-10, real scoreboard-rank parsing is the next must-build, so #1 is detected and evidenced for real rather than guessed.
+
+Next: keep the ES cooking (refine the champion, push past 26k), and build reliable ordered-scoreboard rank reading for true #1 detection.
+
 ## 010 - 2026-06-12 - First live Overseer; velocity dodge pays off; v11 sweeps the metrics
 
 Milestone shift (v11, 12 minutes): the bot reached **level 30 on live FFA and upgraded itself to Overseer mid-game**, drones active, finishing that life at **6 minutes alive, 6,787 score**. It died to "hybrid is best", a 103k Hybrid at rank 4 on the scoreboard, a top-10 heavyweight running down a mid-game tank 15x smaller. Nothing to fight there; the counter is seeing heavies earlier and positioning smarter.
