@@ -2,6 +2,17 @@
 
 Newest entries at the top.
 
+## 008 - 2026-06-12 - Survival tuning: spawn-grace, directional escape, kiting
+
+Reworked the brain's survival (doctrine v7->v9). Changes:
+- **Directional escape.** Instead of fleeing along a raw repulsion sum (which can point through a third enemy), sample 8 headings and pick the one moving most away from all threats, weighted by closeness and enemy size. Flees toward genuine open space.
+- **Tiered threat response.** escapeRadius (flee + shoot back) / waryRadius (farm but bias movement away) / clear (farm freely). Replaces the single danger threshold.
+- **No-shoot spawn grace.** Every real death was followed by a ~2s re-death: diep respawns you at level 2 next to the killer, and the bot broke its own spawn protection by opening fire instantly. Now, for the first ~3.5s of a life, it does not fire and just flees to open space on the protection.
+
+A misstep along the way: v8 over-corrected into timidity (wary radius too large in a busy arena, so it kited constantly and farmed too slowly, 6 deaths). v9 dialed it back. Result on a 5-min FFA shift: 2 deaths, and after an early stumble it ran one unbroken 3.5-minute life to Sniper L29 / 5,630 score. The no-shoot grace clearly reduced re-deaths (one slipped through vs several before).
+
+Reality check: reaching #1 means surviving 10-20+ minutes unbroken, because every death resets to level 1. Best single life so far is ~3.5 min to L29. The early game (L1-30) is the fragile stretch; getting reliably to Overseer/Overlord, where drones defend while farming, is the unlock. That plus faster farming is the next focus.
+
 ## 007 - 2026-06-12 - First real FFA runs: survives minutes, climbs, dies to players now
 
 End-to-end on live FFA. The bot reliably spawns into FFA (hardened the gamemode dropdown with trusted coordinate clicks + verify/retry; DOM `.click()` on the canvas-drawn dropdown was silently failing, which is why earlier "FFA" runs were actually Sandbox). It farms, upgrades Tank->Sniper, and now survives 75-126s per life reaching Sniper L24, up from 30-40s as a base Tank.

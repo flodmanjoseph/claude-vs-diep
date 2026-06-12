@@ -77,28 +77,32 @@ export const BRAIN_FN = function (DOCTRINE) {
     return best;
   }
 
-  function threatVector(state) {
-    let vx = 0, vy = 0, danger = 0;
-    for (const e of state.enemies) {
-      if (e.self) continue;
-      if (e.dist < DOCTRINE.enemyDangerRadius) {
-        const w = (DOCTRINE.enemyDangerRadius - e.dist) / DOCTRINE.enemyDangerRadius;
+  const enemiesOf = (state) => state.enemies.filter((e) => !e.self);
+
+  // Pick the 8-direction heading that moves most away from all weighted threats (toward open
+  // space). Bigger/closer enemies and incoming bullets weigh more. Beats a raw repulsion sum,
+  // which can point straight through a third enemy.
+  const DIRS = [[0, -1], [0.71, -0.71], [1, 0], [0.71, 0.71], [0, 1], [-0.71, 0.71], [-1, 0], [-0.71, -0.71]];
+  function bestEscapeDir(state) {
+    let best = [0, 1], bestScore = -Infinity;
+    const foes = enemiesOf(state);
+    for (const [dx, dy] of DIRS) {
+      let score = 0;
+      for (const e of foes) {
         const m = Math.hypot(e.dx, e.dy) || 1;
-        vx -= (e.dx / m) * w; vy -= (e.dy / m) * w;
-        danger = Math.max(danger, w);
+        const toward = (dx * e.dx + dy * e.dy) / m; // >0 => heading toward this enemy
+        const w = (1 + e.r * DOCTRINE.enemySizeWeight) / Math.max(50, e.dist);
+        score -= toward * w * 200;
       }
-    }
-    for (const b of state.bullets) {
-      if (!b.enemy) continue;
-      if (b.dist < DOCTRINE.bulletDangerRadius) {
-        // dodge perpendicular to the bullet's bearing from us
+      for (const b of state.bullets) {
+        if (!b.enemy) continue;
         const m = Math.hypot(b.dx, b.dy) || 1;
-        const w = (DOCTRINE.bulletDangerRadius - b.dist) / DOCTRINE.bulletDangerRadius;
-        vx -= (-b.dy / m) * w * 0.8; vy -= (b.dx / m) * w * 0.8;
-        danger = Math.max(danger, w * 0.7);
+        const toward = (dx * b.dx + dy * b.dy) / m;
+        score -= toward * (1 / Math.max(40, b.dist)) * 120;
       }
+      if (score > bestScore) { bestScore = score; best = [dx, dy]; }
     }
-    return { vx, vy, danger };
+    return best;
   }
 
   function step() {
@@ -107,40 +111,56 @@ export const BRAIN_FN = function (DOCTRINE) {
     const state = window.__readState();
     if (!state || !state.ok) { B._raf = requestAnimationFrame(step); return; }
 
-    if (state.me.alive) B.lastAliveFrame = B.frames;
-    ensureAutofire();
+    // Track life boundaries: a gap in alive frames means we just (re)spawned.
+    if (state.me.alive) {
+      if (B.frames - B.lastAliveFrame > 10) B.lifeStartFrame = B.frames;
+      B.lastAliveFrame = B.frames;
+    }
+    const sinceSpawn = B.frames - (B.lifeStartFrame || 0);
+    const grace = sinceSpawn < DOCTRINE.spawnGraceFrames;
+
+    // During spawn grace, do NOT fire: diep's spawn protection ends on your first shot. Stay
+    // unshielded only after we've used the protection window to flee to open space.
+    if (!grace) ensureAutofire();
     allocStats();
 
-    const threat = threatVector(state);
     let aim = null;
     let moveKeys = new Set();
 
-    if (threat.danger > 0.02) {
-      // Under threat: flee, but keep shooting at the nearest enemy.
-      B.mode = 'flee';
-      moveKeys = vectorToKeys(threat.vx, threat.vy);
-      const nearestEnemy = state.enemies.find((e) => !e.self);
-      aim = nearestEnemy ? { x: nearestEnemy.x, y: nearestEnemy.y } : (window.__lastAim || { x: 900, y: 360 });
+    const foes = enemiesOf(state);
+    const nearest = foes[0]; // state.enemies is sorted by distance
+    const nd = nearest ? nearest.dist : Infinity;
+    const bulletThreat = state.bullets.some((b) => b.enemy && b.dist < DOCTRINE.bulletDangerRadius);
+    const escapeR = grace ? DOCTRINE.spawnEscapeRadius : DOCTRINE.escapeRadius;
+
+    if (nearest && (nd < escapeR || bulletThreat)) {
+      // Flee toward open space; keep shooting the nearest enemy.
+      B.mode = grace ? 'spawn-escape' : 'escape';
+      const [dx, dy] = bestEscapeDir(state);
+      moveKeys = vectorToKeys(dx, dy);
+      aim = { x: nearest.x, y: nearest.y };
     } else {
-      // Safe: farm the best shape. Approach to shooting range but never body-contact a shape
-      // (pentagons especially do heavy collision damage to a fragile ranged tank).
+      // Farm. Approach to shooting range, never body-contact a shape, and keep distance from any
+      // enemy inside the wary radius (kite). Shoot a close-ish enemy, otherwise shoot the shape.
       const target = bestShape(state.shapes);
       if (target) {
-        B.mode = 'farm';
-        aim = { x: target.x, y: target.y };
-        // Back off from any shape we are about to ram.
-        let rx = 0, ry = 0;
+        B.mode = (nearest && nd < DOCTRINE.waryRadius) ? 'kite-farm' : 'farm';
+        let mvx = 0, mvy = 0;
+        if (target.dist > DOCTRINE.approachStopDist) { const m = target.dist || 1; mvx += target.dx / m; mvy += target.dy / m; }
         for (const s of state.shapes) {
           const contact = (state.me.r || 17) + s.r + DOCTRINE.shapeBodyMargin;
-          if (s.dist < contact) { const m = s.dist || 1; rx -= (s.dx / m); ry -= (s.dy / m); }
+          if (s.dist < contact) { const m = s.dist || 1; mvx -= (s.dx / m) * 1.5; mvy -= (s.dy / m) * 1.5; }
         }
-        if (rx || ry) { moveKeys = vectorToKeys(rx, ry); }
-        else if (target.dist > DOCTRINE.approachStopDist) moveKeys = vectorToKeys(target.dx, target.dy);
+        if (nearest && nd < DOCTRINE.waryRadius) {
+          const m = nd || 1; const wb = (DOCTRINE.waryRadius - nd) / DOCTRINE.waryRadius;
+          mvx -= (nearest.dx / m) * wb * 1.8; mvy -= (nearest.dy / m) * wb * 1.8;
+        }
+        aim = (nearest && nd < escapeR * 1.3) ? { x: nearest.x, y: nearest.y } : { x: target.x, y: target.y };
+        moveKeys = (mvx || mvy) ? vectorToKeys(mvx, mvy) : new Set();
       } else if (DOCTRINE.wanderWhenEmpty) {
         B.mode = 'wander';
-        // drift toward screen-up-right to find shapes; aim forward
-        moveKeys = vectorToKeys(1, -0.4);
-        aim = { x: 1000, y: 250 };
+        moveKeys = vectorToKeys(0.6, -0.5);
+        aim = { x: 1000, y: 200 };
       }
     }
 
