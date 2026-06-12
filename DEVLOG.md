@@ -2,6 +2,18 @@
 
 Newest entries at the top.
 
+## 009 - 2026-06-12 - The 2-second "deaths" were fake; faster farming + drone control
+
+Big correction: every real death was being followed by a logged ~2s "death", and a screenshot proved why - that second death's frame is the **menu/spawn screen**, not an in-arena death. The respawn flow pressed Enter once, often landed on the menu, and the main loop counted the 1.5s of menu time as another death before the real respawn completed. So the bot has been surviving meaningfully better than the death counts implied, and "respawn into danger" was largely a phantom.
+
+Fix: `respawn()` now polls until we are actually ALIVE again, re-issuing the spawn action each round, instead of a one-shot Enter. Clean 6-minute FFA shift after the fix: **2 real deaths**, lives of ~32s, ~162s, and a final unbroken ~166s to Sniper L27 / 4.7k score. No more phantom re-deaths.
+
+Also this round (doctrine v10):
+- **Faster farming.** Target selection is now distance-dominant (nearest shape wins, value only a small tiebreak) instead of always trekking to the highest-value pentagon, which wasted time and walked us into danger. Levels through the fragile early game quicker.
+- **Drone control.** For drone classes (Overseer/Overlord) the brain now holds left-mouse toward the aim, sending drones at the target to farm and fight. Layered on top of gun firing so non-drone classes are unchanged.
+
+Honest standing: reliable 2-3 minute lives reaching Sniper L21-27, ~2 real deaths per 6 min. Still dying in the low-to-mid 20s before Overseer (L30). The next wall is pushing through the 20s to get the drone build online; arena competitiveness also swings hard (leaders seen from ~11k to 1.28m), which sets how reachable #1 is in any given server.
+
 ## 008 - 2026-06-12 - Survival tuning: spawn-grace, directional escape, kiting
 
 Reworked the brain's survival (doctrine v7->v9). Changes:

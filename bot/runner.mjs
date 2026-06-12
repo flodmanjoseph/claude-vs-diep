@@ -87,17 +87,19 @@ async function takeUpgrades() {
   if (lc2 && lc2.cls === step.to) { doneSteps.add(idx); curClass = lc2.cls; log({ event: 'upgrade_ok', to: step.to }); console.log(`upgraded -> ${step.to}`); }
 }
 
+// Get from the death screen back into the arena. The death screen -> menu transition takes a
+// moment, so poll until we are actually ALIVE again, re-issuing the spawn action each round.
+// (A one-shot Enter often lands on the menu, which the main loop then miscounts as a death.)
 async function respawn() {
   await page.evaluate(() => window.__brain && window.__brain.stop());
-  // Death screen -> press Enter / click continue to return home, then play again.
-  await page.keyboard.press('Enter').catch(() => {});
-  await page.waitForTimeout(1200);
-  if (!(await canvasLive())) {
-    // back at home screen: set nickname + enter again
+  let alive = false;
+  for (let i = 0; i < 24 && !alive; i++) {
     await page.evaluate((nm) => { const nn = document.getElementById('spawn-nickname'); if (nn) { nn.value = nm; nn.dispatchEvent(new Event('input', { bubbles: true })); } }, NAME);
     await page.keyboard.press('Enter').catch(() => {});
-    await page.waitForTimeout(1500);
+    await page.waitForTimeout(700);
+    alive = await isAlive();
   }
+  log({ event: 'respawned', alive });
   await enableTrustedCanvasClicks(page);
   resetUpgrades();
   await page.evaluate(() => window.__brain && window.__brain.start());

@@ -2,7 +2,7 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 9,
+  version: 10,
 
   // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
   // by the current class, so the right tile index is clicked even if level reads lag. Tile indices
@@ -25,8 +25,10 @@ export const DOCTRINE = {
   spawnGraceFrames: 210, // ~3.5s at 60fps
   spawnEscapeRadius: 330,
 
-  // Farming
-  preferKinds: ['pentagon', 'square', 'triangle'], // value order to seek (pentagons worth most)
+  // Farming. Target selection is distance-dominant: grab the nearest shape, only mildly preferring
+  // higher-value kinds, so we don't trek across the map (slow + risky) chasing a far pentagon.
+  preferKinds: ['pentagon', 'square', 'triangle'], // value order; pentagons worth most
+  kindDistancePenalty: 70, // pixels of "extra distance" each value rank costs in target scoring
   approachStopDist: 150, // stop closing on a shape inside this; shoot it from range
   shapeBodyMargin: 28, // if a shape is within me.r+shape.r+this, back off (avoid lethal body contact)
   wanderWhenEmpty: true,

@@ -17,7 +17,7 @@ export const BRAIN_FN = function (DOCTRINE) {
     for (const k of held) if (!want.has(k)) { dispatchKey('keyup', k); held.delete(k); }
     for (const k of want) if (!held.has(k)) { dispatchKey('keydown', k); held.add(k); }
   };
-  const releaseAll = () => setHeld(new Set());
+  const releaseAll = () => { setHeld(new Set()); setMouseHold(false); };
 
   const moveMouse = (x, y) => {
     const cv = document.getElementById('canvas');
@@ -25,6 +25,16 @@ export const BRAIN_FN = function (DOCTRINE) {
     (cv || document).dispatchEvent(ev);
     window.__lastAim = { x, y };
   };
+
+  // Hold/release the left mouse button. For drone tanks (Overseer/Overlord) holding it sends the
+  // drones toward the cursor (our aim), which is how they farm and fight.
+  let mouseDown = false;
+  function setMouseHold(down) {
+    const cv = document.getElementById('canvas');
+    const a = window.__lastAim || { x: 900, y: 360 };
+    if (down && !mouseDown) { cv && cv.dispatchEvent(new MouseEvent('mousedown', { clientX: a.x, clientY: a.y, button: 0, buttons: 1, bubbles: true, cancelable: true })); mouseDown = true; }
+    else if (!down && mouseDown) { cv && cv.dispatchEvent(new MouseEvent('mouseup', { clientX: a.x, clientY: a.y, button: 0, buttons: 0, bubbles: true, cancelable: true })); mouseDown = false; }
+  }
 
   // Convert a desired screen-space vector into the set of WASD keys to hold (8-direction).
   const vectorToKeys = (vx, vy) => {
@@ -67,11 +77,11 @@ export const BRAIN_FN = function (DOCTRINE) {
 
   function bestShape(shapes) {
     if (!shapes.length) return null;
-    // Score by kind preference then proximity.
-    const rank = (k) => { const i = DOCTRINE.preferKinds.indexOf(k); return i < 0 ? 99 : i; };
+    // Distance-dominant: nearest shape wins, higher-value kinds get a small distance discount.
+    const rank = (k) => { const i = DOCTRINE.preferKinds.indexOf(k); return i < 0 ? 5 : i; };
     let best = null, bestScore = Infinity;
     for (const s of shapes) {
-      const score = rank(s.kind) * 1000 + s.dist;
+      const score = s.dist + rank(s.kind) * DOCTRINE.kindDistancePenalty;
       if (score < bestScore) { bestScore = score; best = s; }
     }
     return best;
@@ -121,7 +131,9 @@ export const BRAIN_FN = function (DOCTRINE) {
 
     // During spawn grace, do NOT fire: diep's spawn protection ends on your first shot. Stay
     // unshielded only after we've used the protection window to flee to open space.
-    if (!grace) ensureAutofire();
+    const cls = (window.__diep && window.__diep.hud && window.__diep.hud.cls) || 'Tank';
+    const isDrone = DOCTRINE.droneClasses.includes(cls);
+    if (!grace) { ensureAutofire(); setMouseHold(isDrone); } else { setMouseHold(false); }
     allocStats();
 
     let aim = null;
