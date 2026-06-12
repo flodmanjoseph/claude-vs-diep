@@ -8,10 +8,31 @@ import { STATE_FN } from './perception/state.mjs';
 import { BRAIN_FN } from './brain/brain.mjs';
 import { DOCTRINE } from './brain/doctrine.mjs';
 import { enableTrustedCanvasClicks, clickTile, readLevelClass } from './lib/upgrades.mjs';
+import { Optimizer, lifeFitness } from './brain/optimizer.mjs';
 
 const SHIFT_MS = +(process.env.SHIFT_MS || 360_000);
 const NAME = process.env.NAME || 'claude';
 const GAMEMODE = process.env.GAMEMODE || 'FFA';
+const OPTIMIZE = process.env.OPTIMIZE === '1';
+const opt = OPTIMIZE ? new Optimizer() : null;
+
+// Per-life bests, used to score the life for the optimizer.
+let lifeMaxScore = 0, lifeMaxLevel = 0;
+async function applyNextDoctrine() {
+  lifeMaxScore = 0; lifeMaxLevel = 0;
+  if (!opt) return;
+  const d = opt.nextDoctrine();
+  await page.evaluate((doc) => window.__setDoctrine && window.__setDoctrine(doc), d).catch(() => {});
+  log({ event: 'doctrine_assigned', version: d.version, status: opt.status() });
+}
+function scoreLife() {
+  if (!opt) return;
+  const fit = lifeFitness({ score: lifeMaxScore, level: lifeMaxLevel, lifeMs: Date.now() - lifeStart });
+  opt.record(fit);
+  const st = opt.status();
+  log({ event: 'life_scored', fitness: Math.round(fit), score: lifeMaxScore, level: lifeMaxLevel, gen: st.gen, champion: st.champion });
+  console.log(`  life fitness ${Math.round(fit)} (score ${lifeMaxScore}, L${lifeMaxLevel}) | gen ${st.gen} ${st.evalsThisGen} champ ${st.champion}`);
+}
 const TELEM = path.join(ROOT, 'telemetry');
 const shiftId = new Date().toISOString().replace(/[:.]/g, '-');
 const logPath = path.join(TELEM, `shift-${shiftId}.jsonl`);
@@ -54,6 +75,7 @@ async function readRank() {
 async function spawnFresh() {
   const ok = await spawn(page, { name: NAME, gamemode: GAMEMODE });
   await enableTrustedCanvasClicks(page); // let trusted upgrade clicks reach the canvas
+  await applyNextDoctrine();
   await page.evaluate(() => window.__brain && window.__brain.start());
   log({ event: 'spawn', ok });
   return ok;
@@ -102,6 +124,7 @@ async function respawn() {
   log({ event: 'respawned', alive });
   await enableTrustedCanvasClicks(page);
   resetUpgrades();
+  await applyNextDoctrine();
   await page.evaluate(() => window.__brain && window.__brain.start());
 }
 
@@ -150,7 +173,9 @@ while (true) {
     const snap = await page.evaluate(() => window.__brain?.snapshot?.() ?? null).catch(() => null);
     const { leaderMax, myScore } = await readRank();
     const pct = leaderMax && myScore ? +(100 * myScore / leaderMax).toFixed(1) : null;
-    log({ event: 'heartbeat', elapsed, alive, life: Date.now() - lifeStart, deaths, cls: curClass, lvl: curLevel, mode: snap?.mode, myScore, leaderMax, pctOfLeader: pct });
+    if (myScore) lifeMaxScore = Math.max(lifeMaxScore, myScore);
+    lifeMaxLevel = Math.max(lifeMaxLevel, curLevel);
+    log({ event: 'heartbeat', elapsed, alive, life: Date.now() - lifeStart, deaths, cls: curClass, lvl: curLevel, mode: snap?.mode, myScore, leaderMax, pctOfLeader: pct, optGen: opt?.status().gen });
     // Victory check: our score at or above the current leader (and a real score), capture evidence.
     if (alive && myScore && leaderMax && myScore >= leaderMax && myScore > 1000) {
       await page.screenshot({ path: evidence(`LEADER-${shiftId}-${Math.round(myScore)}.png`) }).catch(() => {});
@@ -180,8 +205,10 @@ while (true) {
       const shotPath = evidence(`death-${shiftId}-${deaths}.png`);
       await page.screenshot({ path: shotPath }).catch(() => {});
       const lastState = await page.evaluate(() => window.__readState?.() ?? null).catch(() => null);
+      lifeMaxLevel = Math.max(lifeMaxLevel, curLevel);
       log({ event: 'death', n: deaths, lifeMs: life, cls: curClass, lvl: curLevel, screenshot: path.basename(shotPath), enemiesNear: lastState?.enemies?.slice(0, 3) ?? [] });
       console.log(`death #${deaths} after ${(life / 1000).toFixed(0)}s as ${curClass} L${curLevel}`);
+      scoreLife();
       deadSince = 0;
       if (elapsed >= SHIFT_MS) break; // shift timer already up: record the death, don't respawn
       await respawn();
