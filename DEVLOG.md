@@ -2,6 +2,20 @@
 
 Newest entries at the top.
 
+## 004 - 2026-06-12 - Brain v1 plays: first shift, first diagnosis
+
+Brain v1 (`brain/brain.mjs` + `brain/doctrine.mjs`) and the shift runner (`runner.mjs`) are live. v1 logic: read perception each frame, flee a weighted repulsion vector when enemies/bullets are close, otherwise farm the best shape (aim + permanent autofire), and blind-allocate stats on a fixed sequence. The runner spawns, runs the in-page brain, detects death, screenshots it, respawns, and logs everything to `telemetry/`.
+
+First 90s validation shift (doctrine v5): 4 deaths, best lives 27s and 41s. It genuinely plays: correctly alternates farm/flee, allocated 100+ stat points. The death screen tells the story: **Score 961, Level 16, class still "Tank."**
+
+Findings that set the next priorities:
+1. **No class upgrades.** Biggest problem by far. We hit level 16 but never took the level-15 upgrade, so we fight leveled enemies as a stock Tank and get deleted. Class upgrades at 15/30/45 are the next build target.
+2. **Respawn-into-danger.** Two of four deaths were ~2s: diep respawns you near the killer at level 2, and a level-2 tank next to a camper dies instantly. The brain needs a post-respawn "get clear first, farm later" phase.
+3. **Survival ceiling.** Lives of 30-40s cap us at ~level 16 / ~1k score. #1 is 120k+, which means living for many minutes at a high level. Survival is the multiplier on everything.
+4. **Rank reading is unreliable** from the canvas hook (leaderboard text is cached/composited). Confirmed: M4 needs screenshot+OCR.
+
+Next: develop class upgrades in Sandbox mode (K to instant-level), nail the upgrade UI and a strong solo-FFA build line, then re-test survival on live.
+
 ## 003 - 2026-06-12 - Foundation complete: perception + control both proven
 
 The canvas scraper and control are both working. Foundation done.
