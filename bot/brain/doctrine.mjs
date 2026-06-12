@@ -2,7 +2,17 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 5,
+  version: 6,
+
+  // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
+  // by the current class, so the right tile index is clicked even if level reads lag. Tile indices
+  // map to the canvas upgrade grid (2 columns; index 0=TL,1=TR,2=ML,3=MR,4=BL,5=BR).
+  buildPath: [
+    { from: 'Tank', tile: 1, to: 'Sniper', minLevel: 15 },
+    { from: 'Sniper', tile: 1, to: 'Overseer', minLevel: 30 },
+    { from: 'Overseer', tile: 0, to: 'Overlord', minLevel: 45 },
+  ],
+  droneClasses: ['Overseer', 'Overlord', 'Necromancer', 'Manager', 'Battleship', 'Factory', 'Hybrid'],
 
   // Threat handling
   enemyDangerRadius: 240, // an enemy tank within this distance is a threat

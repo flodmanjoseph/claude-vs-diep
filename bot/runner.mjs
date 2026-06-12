@@ -7,9 +7,11 @@ import { SCRAPE_INIT } from './perception/scrape.mjs';
 import { STATE_FN } from './perception/state.mjs';
 import { BRAIN_FN } from './brain/brain.mjs';
 import { DOCTRINE } from './brain/doctrine.mjs';
+import { enableTrustedCanvasClicks, clickTile, readLevelClass } from './lib/upgrades.mjs';
 
 const SHIFT_MS = +(process.env.SHIFT_MS || 360_000);
 const NAME = process.env.NAME || 'claude';
+const GAMEMODE = process.env.GAMEMODE || 'FFA';
 const TELEM = path.join(ROOT, 'telemetry');
 const shiftId = new Date().toISOString().replace(/[:.]/g, '-');
 const logPath = path.join(TELEM, `shift-${shiftId}.jsonl`);
@@ -45,10 +47,35 @@ async function readLeaderTop() {
 }
 
 async function spawnFresh() {
-  const ok = await spawn(page, { name: NAME });
+  const ok = await spawn(page, { name: NAME, gamemode: GAMEMODE });
+  await enableTrustedCanvasClicks(page); // let trusted upgrade clicks reach the canvas
   await page.evaluate(() => window.__brain && window.__brain.start());
   log({ event: 'spawn', ok });
   return ok;
+}
+
+// Class-upgrade state for the current life. Gated by current class so the right tile is clicked.
+let curClass = 'Tank';
+let curLevel = 1;
+const doneSteps = new Set();
+function resetUpgrades() { curClass = 'Tank'; curLevel = 1; doneSteps.clear(); }
+
+async function takeUpgrades() {
+  const lc = await readLevelClass(page);
+  if (lc) { curClass = lc.cls; curLevel = lc.level; }
+  // Mark steps whose target class we've reached as done.
+  DOCTRINE.buildPath.forEach((s, i) => { if (curClass === s.to) doneSteps.add(i); });
+  // Find the next step to take: matches current class, not done, level threshold met.
+  const idx = DOCTRINE.buildPath.findIndex((s, i) => !doneSteps.has(i) && s.from === curClass && curLevel >= (s.minLevel || 0));
+  if (idx < 0) return;
+  const step = DOCTRINE.buildPath[idx];
+  await enableTrustedCanvasClicks(page);
+  await clickTile(page, step.tile);
+  log({ event: 'upgrade_attempt', from: step.from, tile: step.tile, to: step.to, level: curLevel });
+  // Re-read shortly to confirm.
+  await page.waitForTimeout(400);
+  const lc2 = await readLevelClass(page);
+  if (lc2 && lc2.cls === step.to) { doneSteps.add(idx); curClass = lc2.cls; log({ event: 'upgrade_ok', to: step.to }); console.log(`upgraded -> ${step.to}`); }
 }
 
 async function respawn() {
@@ -62,6 +89,8 @@ async function respawn() {
     await page.keyboard.press('Enter').catch(() => {});
     await page.waitForTimeout(1500);
   }
+  await enableTrustedCanvasClicks(page);
+  resetUpgrades();
   await page.evaluate(() => window.__brain && window.__brain.start());
 }
 
@@ -74,6 +103,7 @@ let life = 0;
 let deaths = 0;
 let lastHeartbeat = 0;
 let lastShot = 0;
+let lastUpgrade = 0;
 let deadSince = 0;
 
 while (Date.now() - t0 < SHIFT_MS) {
@@ -83,12 +113,18 @@ while (Date.now() - t0 < SHIFT_MS) {
   const alive = await isAlive();
   const live = await canvasLive();
 
+  // Take class upgrades when available (gated by current class), every ~1.5s while alive.
+  if (alive && elapsed - lastUpgrade > 1500) {
+    lastUpgrade = elapsed;
+    await takeUpgrades().catch(() => {});
+  }
+
   // Heartbeat telemetry every 5s.
   if (elapsed - lastHeartbeat > 5000) {
     lastHeartbeat = elapsed;
     const snap = await page.evaluate(() => window.__brain?.snapshot?.() ?? null).catch(() => null);
     const leaderTop = await readLeaderTop();
-    log({ event: 'heartbeat', elapsed, alive, life: Date.now() - lifeStart, deaths, mode: snap?.mode, frames: snap?.frames, statIdx: snap?.statIdx, leaderTop });
+    log({ event: 'heartbeat', elapsed, alive, life: Date.now() - lifeStart, deaths, cls: curClass, lvl: curLevel, mode: snap?.mode, frames: snap?.frames, statIdx: snap?.statIdx, leaderTop });
   }
   // Evidence screenshot every 20s (rolling latest + timeline).
   if (elapsed - lastShot > 20000) {
@@ -113,8 +149,8 @@ while (Date.now() - t0 < SHIFT_MS) {
       const shotPath = evidence(`death-${shiftId}-${deaths}.png`);
       await page.screenshot({ path: shotPath }).catch(() => {});
       const lastState = await page.evaluate(() => window.__readState?.() ?? null).catch(() => null);
-      log({ event: 'death', n: deaths, lifeMs: life, screenshot: path.basename(shotPath), enemiesNear: lastState?.enemies?.slice(0, 3) ?? [] });
-      console.log(`death #${deaths} after ${(life / 1000).toFixed(0)}s`);
+      log({ event: 'death', n: deaths, lifeMs: life, cls: curClass, lvl: curLevel, screenshot: path.basename(shotPath), enemiesNear: lastState?.enemies?.slice(0, 3) ?? [] });
+      console.log(`death #${deaths} after ${(life / 1000).toFixed(0)}s as ${curClass} L${curLevel}`);
       await respawn();
       lifeStart = Date.now();
       deadSince = 0;

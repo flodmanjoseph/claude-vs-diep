@@ -22,42 +22,65 @@ export async function launch({ headless = false } = {}) {
   return { ctx, page };
 }
 
-// Navigate, clear Turnstile, and spawn. Returns when the canvas is live.
-// gamemode: pass a value to switch the FFA dropdown later; for now spawns whatever is selected.
-export async function spawn(page, { name = 'claude', timeoutMs = 90_000 } = {}) {
+const canvasLive = (page) =>
+  page.evaluate(() => (document.getElementById('canvas')?.getBoundingClientRect().width || 0) > 100).catch(() => false);
+
+// Clear the Cloudflare Turnstile if its challenge is present. The checkbox lives in a nested
+// iframe the top-level locator can't see, so we detect the CF frame via page.frames() and click
+// the checkbox at its fixed screen position (~510,339 in our 1280x720 viewport) with human-like
+// motion. In stealth Chrome this reliably passes the managed challenge. Harmless if already clear.
+async function clickTurnstile(page) {
+  const hasCf = page.frames().some((f) => f.url().includes('challenges.cloudflare'));
+  if (!hasCf) return false;
+  await page.mouse.move(300, 500, { steps: 4 }).catch(() => {});
+  await page.waitForTimeout(100);
+  await page.mouse.move(480, 345, { steps: 10 }).catch(() => {});
+  await page.waitForTimeout(120);
+  await page.mouse.move(510, 339, { steps: 5 }).catch(() => {});
+  await page.mouse.click(510, 339).catch(() => {});
+  return true;
+}
+
+async function selectGamemode(page, gm) {
+  await page.evaluate((g) => {
+    const cur = [...document.querySelectorAll('.dropdown-label')].find((e) => /sandbox|ffa|teams|maze|domination|tag|mothership|survival/i.test(e.textContent || ''));
+    if (cur && cur.textContent.trim().toLowerCase() === g.toLowerCase()) return; // already selected
+    const label = [...document.querySelectorAll('.dropdown-label, [class*="dropdown"]')].find((e) => /game mode|ffa|sandbox|teams|maze/i.test(e.textContent || ''));
+    if (label) label.click();
+    const opt = [...document.querySelectorAll('*')].find((e) => e.childElementCount === 0 && (e.textContent || '').trim().toLowerCase() === g.toLowerCase());
+    if (opt) { opt.click(); if (opt.parentElement) opt.parentElement.click(); }
+  }, gm);
+  await page.waitForTimeout(500);
+}
+
+// Navigate, clear Turnstile, optionally select a gamemode, then spawn. Robust to flaky timing:
+// the Turnstile may show a fresh checkbox that must be clicked before Enter will spawn, so we
+// interleave checkbox-click + Enter + canvas-check until the canvas goes live. gamemode e.g. 'Sandbox'.
+export async function spawn(page, { name = 'claude', gamemode = null, timeoutMs = 90_000 } = {}) {
   await page.goto('https://diep.io', { waitUntil: 'domcontentloaded', timeout: 60_000 });
 
-  const deadline = Date.now ? null : null; // Date.now unavailable in some contexts; use loop counter
-  let clicked = false;
-  for (let i = 0; i < Math.ceil(timeoutMs / 1500); i++) {
-    await page.waitForTimeout(1_500);
-    const s = await page.evaluate(() => {
-      const c = document.getElementById('canvas');
-      const cr = c ? c.getBoundingClientRect() : { width: 0 };
-      const nn = document.getElementById('spawn-nickname');
-      return { canvasW: Math.round(cr.width), nick: !!(nn && (nn.offsetWidth || nn.offsetHeight)) };
-    });
-    if (s.canvasW > 100 || s.nick) break;
-    if (!clicked && i >= 2) {
-      const ts = page.locator('iframe[src*="challenges.cloudflare"]').first();
-      if (await ts.count()) {
-        const box = await ts.boundingBox();
-        if (box) { await page.mouse.click(box.x + 30, box.y + box.height / 2); clicked = true; }
-      }
-    }
+  // Wait for the menu (nickname field) to exist.
+  for (let i = 0; i < 16; i++) {
+    await page.waitForTimeout(1_000);
+    if (await page.evaluate(() => !!document.getElementById('spawn-nickname')).catch(() => false)) break;
+    await clickTurnstile(page);
   }
 
-  await page.evaluate((nm) => {
-    const nn = document.getElementById('spawn-nickname');
-    if (nn) { nn.value = nm; nn.dispatchEvent(new Event('input', { bubbles: true })); }
-  }, name);
-  await page.waitForTimeout(400);
-  await page.keyboard.press('Enter');
-  await page.waitForTimeout(3_000);
+  if (gamemode) await selectGamemode(page, gamemode);
 
-  const live = await page.evaluate(() => {
-    const c = document.getElementById('canvas');
-    return c ? Math.round(c.getBoundingClientRect().width) : 0;
-  });
-  return live > 100;
+  // Spawn loop: clear Turnstile, set nickname, Enter, check canvas. Repeat until live.
+  const attempts = Math.ceil(timeoutMs / 4000);
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    await clickTurnstile(page);
+    await page.waitForTimeout(1500); // give the challenge a moment to clear
+    if (gamemode) await selectGamemode(page, gamemode);
+    await page.evaluate((nm) => {
+      const nn = document.getElementById('spawn-nickname');
+      if (nn) { nn.value = nm; nn.dispatchEvent(new Event('input', { bubbles: true })); }
+    }, name);
+    await page.waitForTimeout(250);
+    await page.keyboard.press('Enter').catch(() => {});
+    for (let i = 0; i < 5; i++) { await page.waitForTimeout(500); if (await canvasLive(page)) return true; }
+  }
+  return canvasLive(page);
 }
