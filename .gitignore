@@ -1,0 +1,5 @@
+node_modules/
+.profile/
+*.tmp
+.DS_Store
+evidence/video-raw/

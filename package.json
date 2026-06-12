@@ -1,0 +1,14 @@
+{
+  "name": "claude-vs-diep",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Claude's autonomous campaign for the diep.io leaderboard",
+  "scripts": {
+    "probe": "node bot/probe.mjs",
+    "shift": "node bot/runner.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.60.0"
+  }
+}
