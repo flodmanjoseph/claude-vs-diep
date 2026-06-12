@@ -2,6 +2,18 @@
 
 Newest entries at the top.
 
+## 012 - 2026-06-12 - RL (real Q-learning) + the ram-tank experiment (an honest negative)
+
+Two experiments this round.
+
+**RL — yes, real reinforcement learning, and it runs.** Tabular Q-learning arbitrates the tactical mode each ~0.2s: state = discretized situation (drone? threat band, relative size, crowd, bullets, shapes), actions = the macro-modes, reward = score gained + survival with a terminal death penalty. TD(0), epsilon-greedy, persisted Q-table. Set up as a controlled A/B: champion params frozen so only the mode policy varies. It learned across ~2,900 decisions / 43 states before I paused it for the ram test; verdict pending (it needs to finish decaying epsilon and exploit). Fits the live-server sample budget precisely because it's ~50 table cells, not a deep net.
+
+**Ram tank (Joe's idea) — clever, but the Smasher path fails for the bot.** The reasoning was strong: a collision tank needs no aiming (the bot's weak spot) and wins the body fights that currently kill it. Mapped the build in Sandbox (Tank -> Smasher tile4 @L30 -> Spike tile2 @L45; stats collapse to HealthRegen/MaxHealth/BodyDamage/MoveSpeed) and wrote a ram-style brain mode gated on actually being a Smasher.
+
+The result was a clean negative: **the bot never reached Smasher.** Smasher is a level-30 *skip* — you stay a single-cannon base Tank until 30, with no tier-2 upgrade. That phase farms too slowly and dies too easily; best ram-build life was score 2,270 at level 21, never touching the L30 unlock. So the ramming itself never even got tested. Overlord build for comparison: 26,190 at L45. The idea isn't disproven - the *path* to it is. A ram tank with an early upgrade (the Booster line: Flank Guard@15 -> Tri-Angle@30 -> Booster@45) would dodge this, at the cost of Booster being fragile.
+
+Decision: put the bot back on the proven Overlord build and resume the RL run on it. Keep the Booster ram line on the bench as a future experiment.
+
 ## 011 - 2026-06-12 - The optimizer works: 4x jump, first Overlord, cracked a top-10
 
 Turned the hand-tuning over to an evolution strategy (`bot/brain/optimizer.mjs`) and it paid off hard and fast. Each life plays a candidate doctrine; fitness = score + 40*level + 0.4*survival-seconds, robust-meaned over 3 lives; elites bred, champion carried, state persisted. Inside the first ~70 lives (gen 3):

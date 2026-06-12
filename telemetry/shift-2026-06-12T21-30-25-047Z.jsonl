@@ -57,3 +57,4 @@
 {"t":1781300019540,"event":"heartbeat","elapsed":185093,"alive":true,"life":111959,"deaths":2,"cls":"Tank","lvl":16,"mode":"farm","myScore":1110,"leaderMax":41700,"estRank":3,"boardSize":2}
 {"t":1781300024838,"event":"heartbeat","elapsed":190395,"alive":true,"life":117257,"deaths":2,"cls":"Tank","lvl":18,"mode":"farm","myScore":1380,"leaderMax":16000,"estRank":2,"boardSize":1}
 {"t":1781300030094,"event":"heartbeat","elapsed":195645,"alive":true,"life":122513,"deaths":2,"cls":"Tank","lvl":18,"mode":"farm","myScore":1440,"leaderMax":140900,"estRank":2,"boardSize":1}
+{"t":1781300034806,"event":"heartbeat","elapsed":200894,"alive":true,"life":127225,"deaths":2,"cls":"Tank","lvl":18,"mode":"farm","myScore":null,"leaderMax":null,"estRank":null,"boardSize":0}
