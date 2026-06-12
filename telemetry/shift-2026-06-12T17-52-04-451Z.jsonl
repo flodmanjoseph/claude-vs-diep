@@ -5431,3 +5431,5 @@
 {"t":1781296836837,"event":"heartbeat","elapsed":10106579,"alive":true,"life":146641,"deaths":72,"cls":"Overlord","lvl":45,"mode":"farm","myScore":31826,"leaderMax":36000,"pctOfLeader":88.4,"optGen":4}
 {"t":1781296842052,"event":"heartbeat","elapsed":10111788,"alive":true,"life":151856,"deaths":72,"cls":"Overlord","lvl":45,"mode":"farm","myScore":32231,"leaderMax":58100,"pctOfLeader":55.5,"optGen":4}
 {"t":1781296847211,"event":"heartbeat","elapsed":10116946,"alive":true,"life":157015,"deaths":72,"cls":"Overlord","lvl":45,"mode":"farm","myScore":33186,"leaderMax":36400,"pctOfLeader":91.2,"optGen":4}
+{"t":1781296852363,"event":"heartbeat","elapsed":10122101,"alive":true,"life":162167,"deaths":72,"cls":"Overlord","lvl":45,"mode":"farm","myScore":33511,"leaderMax":164000,"pctOfLeader":20.4,"optGen":4}
+{"t":1781296857136,"event":"heartbeat","elapsed":10127259,"alive":true,"life":166940,"deaths":72,"cls":"Overlord","lvl":45,"mode":"farm","myScore":null,"leaderMax":null,"pctOfLeader":null,"optGen":4}

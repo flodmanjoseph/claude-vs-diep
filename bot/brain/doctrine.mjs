@@ -45,6 +45,14 @@ export const DOCTRINE = {
   shapeBodyMargin: 28, // if a shape is within me.r+shape.r+this, back off (avoid lethal body contact)
   wanderWhenEmpty: true,
 
+  // Drone-class hunting: chase weaker tanks for kill XP (worth far more than shapes). Thresholds
+  // are tunable so the optimizer decides how aggressive to be.
+  huntEnabled: true,
+  huntSizeRatio: 0.78, // hunt only enemies whose radius is < this fraction of ours (clearly smaller)
+  huntRange: 340, // only hunt within this distance
+  huntMaxFoes: 1, // never hunt when more than this many enemies are near (don't get swarmed)
+  huntStandoff: 170, // close to this distance, then hold (drones do the work; don't ram)
+
   // Aim / fire
   autofire: true,
 

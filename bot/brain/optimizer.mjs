@@ -26,6 +26,9 @@ export const SPACE = {
   kindDistancePenalty: [0, 200],
   approachStopDist: [80, 260],
   shapeBodyMargin: [10, 60],
+  huntSizeRatio: [0.5, 1.0],
+  huntRange: [200, 460],
+  huntStandoff: [110, 260],
 };
 const KEYS = Object.keys(SPACE);
 
@@ -35,7 +38,8 @@ const EVALS = 3; // lives per candidate (averaged) to fight arena variance
 const SIGMA = 0.16; // mutation stddev as a fraction of each parameter's range
 
 const clamp = (v, [lo, hi]) => Math.max(lo, Math.min(hi, v));
-const round = (k, v) => (k === 'bulletAimedCos' || k === 'enemySizeWeight') ? +v.toFixed(3) : Math.round(v);
+const FRACTIONAL = new Set(['bulletAimedCos', 'enemySizeWeight', 'huntSizeRatio']);
+const round = (k, v) => FRACTIONAL.has(k) ? +v.toFixed(3) : Math.round(v);
 
 function gauss() { // Box-Muller
   let u = 0, v = 0;
@@ -82,6 +86,11 @@ export class Optimizer {
     this.history = []; // [{ gen, bestMean, championFitness }]
     this.load();
     if (!this.population.length) this.seed();
+    // Backfill any params added to SPACE since the state was saved (from base), so older
+    // candidates and the champion gain the new search dimensions without resetting progress.
+    const fix = (p) => { if (p) for (const k of KEYS) if (p[k] == null) p[k] = round(k, BASE[k]); return p; };
+    for (const c of this.population) fix(c.params);
+    if (this.champion) fix(this.champion.params);
   }
 
   seed() {

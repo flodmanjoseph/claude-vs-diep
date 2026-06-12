@@ -191,12 +191,26 @@ export const BRAIN_FN = function (initialDoctrine) {
     const bulletThreat = state.bullets.some((b) => b.enemy && b.dist < DOCTRINE.bulletDangerRadius);
     const escapeR = grace ? DOCTRINE.spawnEscapeRadius : DOCTRINE.escapeRadius;
 
-    if (nearest && (nd < escapeR || bulletThreat)) {
+    // Drone-class hunting: a kill is worth far more XP than shapes. When we have a drone swarm and
+    // the nearest enemy is clearly smaller and alone, chase it down with drones instead of fleeing.
+    const myR = state.me.r || 17;
+    const huntable = DOCTRINE.huntEnabled && isDrone && nearest && !grace && !bulletThreat
+      && nearest.r < myR * DOCTRINE.huntSizeRatio
+      && nearest.dist < DOCTRINE.huntRange
+      && foes.length <= DOCTRINE.huntMaxFoes;
+
+    if (nearest && (nd < escapeR || bulletThreat) && !huntable) {
       // Flee toward open space; keep shooting the nearest enemy.
       B.mode = grace ? 'spawn-escape' : 'escape';
       const [dx, dy] = bestEscapeDir(state);
       moveKeys = vectorToKeys(dx, dy);
       aim = { x: nearest.x, y: nearest.y };
+    } else if (huntable) {
+      // Hunt the weakling: send drones onto it, close to standoff range without ramming.
+      B.mode = 'hunt';
+      aim = { x: nearest.x, y: nearest.y };
+      if (nearest.dist > DOCTRINE.huntStandoff) moveKeys = vectorToKeys(nearest.dx, nearest.dy);
+      else moveKeys = vectorToKeys(-nearest.dx, -nearest.dy);
     } else {
       // Farm. Approach to shooting range, never body-contact a shape, and keep distance from any
       // enemy inside the wary radius (kite). Shoot a close-ish enemy, otherwise shoot the shape.

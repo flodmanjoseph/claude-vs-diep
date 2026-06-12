@@ -1,6 +1,6 @@
 {
  "gen": 4,
- "evalNo": 72,
+ "evalNo": 78,
  "population": [
   {
    "params": {
@@ -18,7 +18,11 @@
     "approachStopDist": 146,
     "shapeBodyMargin": 34
    },
-   "fits": []
+   "fits": [
+    1472.3364,
+    1139.6552,
+    3628.3976
+   ]
   },
   {
    "params": {
@@ -36,7 +40,11 @@
     "approachStopDist": 150,
     "shapeBodyMargin": 30
    },
-   "fits": []
+   "fits": [
+    8695.4092,
+    3889.3572,
+    4072.1628
+   ]
   },
   {
    "params": {
