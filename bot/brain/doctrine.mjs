@@ -2,7 +2,7 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 15,
+  version: 16,
 
   // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
   // by the current class, so the right tile index is clicked even if level reads lag. Tile indices
@@ -39,9 +39,14 @@ export const DOCTRINE = {
   // now drives its drones straight ONTO the hunter to pressure/chip it instead of at the nearest
   // threat - the right counter to a faster ranged poker. Measured vs v14 via the same encounter log.
   droneScreen: true,
-  // Edge-farming bias: GATED OFF (0). When > 0, farming drifts toward the nearest single arena edge so
-  // converging foes have fewer approach angles. ES-tunable when enabled; built now, off this shift.
-  edgeBiasWeight: 0,
+  // Edge-farming bias: ENABLED v16 (the pre-registered next lever after the drone screen banked).
+  // 80% of deaths are still point-blank with 2-3 foes converging - the bot gets COLLAPSED on, in
+  // every phase (114/184 deaths last shift were in the no-drone Sniper valley). Farming now drifts
+  // toward the nearest single arena edge (one axis only, never a corner -> no trap; targets 0.12/0.88,
+  // a buffer inside wallMargin 0.06) so converging foes have ~half the approach angles. Only shapes
+  // WHERE we farm during calm farming; escape/flee are untouched, so we still break away freely when
+  // attacked. ES-tunable (SPACE edgeBiasWeight [0,2.2]); 0.8 is a moderate drift the optimizer dials.
+  edgeBiasWeight: 0.8,
 
   // Bullet dodging (velocity-based): a bullet aimed at us (cos angle > aimedCos) inside dodgeRadius
   // whose predicted miss distance is under missMargin triggers a perpendicular sidestep.

@@ -4,3 +4,6 @@ node_modules/
 .DS_Store
 evidence/video-raw/
 logs/*.pid
+
+# routine per-death screenshots are large and numerous; keep locally, commit only notable ones (git add -f)
+evidence/death-*.png

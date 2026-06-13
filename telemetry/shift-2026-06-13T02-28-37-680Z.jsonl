@@ -3185,3 +3185,5 @@
 {"t":1781327668546,"event":"heartbeat","elapsed":9945398,"alive":true,"life":203095,"deaths":58,"cls":"Sniper","lvl":25,"mode":"farm","myScore":3888,"leaderMax":40000,"estRank":4,"boardSize":4,"optGen":10}
 {"t":1781327673795,"event":"heartbeat","elapsed":9950647,"alive":true,"life":208344,"deaths":58,"cls":"Sniper","lvl":26,"mode":"farm+dodge","myScore":4008,"leaderMax":20200,"estRank":2,"boardSize":1,"optGen":10}
 {"t":1781327679049,"event":"heartbeat","elapsed":9955903,"alive":true,"life":213598,"deaths":58,"cls":"Sniper","lvl":26,"mode":"kite-farm","myScore":4058,"leaderMax":38900,"estRank":3,"boardSize":2,"optGen":10}
+{"t":1781327684294,"event":"heartbeat","elapsed":9961152,"alive":true,"life":218843,"deaths":58,"cls":"Sniper","lvl":26,"mode":"farm","myScore":4108,"leaderMax":58300,"estRank":4,"boardSize":3,"optGen":10}
+{"t":1781327689613,"event":"heartbeat","elapsed":9966457,"alive":true,"life":224162,"deaths":58,"cls":"Sniper","lvl":26,"mode":"farm","myScore":4148,"leaderMax":81700,"estRank":13,"boardSize":12,"optGen":10}

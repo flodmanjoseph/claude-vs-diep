@@ -32,6 +32,7 @@ export const SPACE = {
   crowdRadius: [180, 420], // how far out a converging swarm triggers forced flight
   predatorRatio: [1.05, 1.5], // size ratio at which a bigger tank counts as a hunter to flee
   predatorFleeRadius: [220, 420], // how early to flee a confirmed hunter
+  edgeBiasWeight: [0, 2.2], // strength of the farm-toward-nearest-edge drift (0 = off); v16's live lever
 };
 const KEYS = Object.keys(SPACE);
 
@@ -41,7 +42,7 @@ const EVALS = 3; // lives per candidate (averaged) to fight arena variance
 const SIGMA = 0.16; // mutation stddev as a fraction of each parameter's range
 
 const clamp = (v, [lo, hi]) => Math.max(lo, Math.min(hi, v));
-const FRACTIONAL = new Set(['bulletAimedCos', 'enemySizeWeight', 'huntSizeRatio', 'predatorRatio']);
+const FRACTIONAL = new Set(['bulletAimedCos', 'enemySizeWeight', 'huntSizeRatio', 'predatorRatio', 'edgeBiasWeight']);
 const round = (k, v) => FRACTIONAL.has(k) ? +v.toFixed(3) : Math.round(v);
 
 function gauss() { // Box-Muller

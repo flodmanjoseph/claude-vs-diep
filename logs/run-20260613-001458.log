@@ -1,0 +1,596 @@
+shift 2026-06-13T05-14-58-607Z | doctrine v15 | 28800s
+death #1 after 2s as Tank L1
+  overlord life fitness 41 (score 0, L1) | gen 10 18/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #2 after 380s as Overseer L30
+  overlord life fitness 7617 (score 6265, L30) | gen 10 19/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #3 after 286s as Overseer L31
+  overlord life fitness 8508 (score 7154, L31) | gen 10 20/24
+upgraded -> Sniper
+death #4 after 91s as Sniper L23
+  overlord life fitness 3643 (score 2686, L23) | gen 10 21/24
+upgraded -> Sniper
+death #5 after 224s as Sniper L24
+  overlord life fitness 4467 (score 3417, L24) | gen 10 22/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #6 after 428s as Overseer L31
+  overlord life fitness 8869 (score 7458, L31) | gen 10 23/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #7 after 330s as Overseer L32
+  overlord life fitness 9444 (score 8032, L32) | gen 10 24/24
+upgraded -> Sniper
+death #8 after 62s as Sniper L21
+  overlord life fitness 2936 (score 2071, L21) | gen 11 1/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #9 after 477s as Overseer L31
+  overlord life fitness 8869 (score 7438, L31) | gen 11 2/24
+upgraded -> Sniper
+death #10 after 155s as Sniper L27
+  overlord life fitness 5666 (score 4524, L27) | gen 11 3/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #11 after 487s as Overseer L32
+  overlord life fitness 9349 (score 7874, L32) | gen 11 4/24
+upgraded -> Sniper
+death #12 after 254s as Sniper L29
+  overlord life fitness 7217 (score 5955, L29) | gen 11 5/24
+upgraded -> Sniper
+death #13 after 25s as Sniper L17
+  overlord life fitness 1989 (score 1299, L17) | gen 11 6/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #14 after 374s as Overseer L30
+  overlord life fitness 7963 (score 6613, L30) | gen 11 7/24
+upgraded -> Sniper
+death #15 after 79s as Sniper L23
+  overlord life fitness 3816 (score 2864, L23) | gen 11 8/24
+upgraded -> Sniper
+death #16 after 103s as Sniper L21
+  overlord life fitness 2973 (score 2092, L21) | gen 11 9/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #17 after 626s as Overseer L32
+  overlord life fitness 9683 (score 8152, L32) | gen 11 10/24
+upgraded -> Sniper
+death #18 after 59s as Sniper L20
+  overlord life fitness 2735 (score 1911, L20) | gen 11 11/24
+upgraded -> Sniper
+death #19 after 93s as Sniper L20
+  overlord life fitness 2827 (score 1990, L20) | gen 11 12/24
+upgraded -> Sniper
+death #20 after 111s as Sniper L24
+  overlord life fitness 4399 (score 3395, L24) | gen 11 13/24
+upgraded -> Sniper
+upgraded -> Overseer
+upgraded -> Overlord
+death #21 after 72s as Overlord L45
+  overlord life fitness 27164 (score 25335, L45) | gen 11 14/24
+upgraded -> Sniper
+death #22 after 58s as Sniper L23
+  overlord life fitness 3788 (score 2845, L23) | gen 11 15/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #23 after 467s as Overseer L37
+  overlord life fitness 14865 (score 13198, L37) | gen 11 16/24
+upgraded -> Sniper
+death #24 after 76s as Sniper L23
+  overlord life fitness 3861 (score 2911, L23) | gen 11 17/24
+upgraded -> Sniper
+death #25 after 59s as Sniper L20
+  overlord life fitness 2631 (score 1807, L20) | gen 11 18/24
+death #26 after 25s as Tank L14
+  overlord life fitness 1275 (score 705, L14) | gen 11 19/24
+upgraded -> Sniper
+death #27 after 192s as Sniper L25
+  overlord life fitness 4694 (score 3617, L25) | gen 11 20/24
+upgraded -> Sniper
+death #28 after 126s as Sniper L27
+  overlord life fitness 6014 (score 4883, L27) | gen 11 21/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #29 after 196s as Overseer L30
+  overlord life fitness 7683 (score 6405, L30) | gen 11 22/24
+upgraded -> Sniper
+death #30 after 72s as Sniper L20
+  overlord life fitness 2793 (score 1964, L20) | gen 11 23/24
+death #31 after 11s as Tank L14
+  overlord life fitness 1250 (score 685, L14) | gen 11 24/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #32 after 305s as Overseer L30
+  overlord life fitness 7794 (score 6472, L30) | gen 12 1/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #33 after 298s as Overseer L31
+  overlord life fitness 8398 (score 7039, L31) | gen 12 2/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #34 after 295s as Overseer L30
+  overlord life fitness 7719 (score 6401, L30) | gen 12 3/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #35 after 377s as Overseer L30
+  overlord life fitness 8035 (score 6684, L30) | gen 12 4/24
+upgraded -> Sniper
+death #36 after 52s as Sniper L20
+  overlord life fitness 2685 (score 1864, L20) | gen 12 5/24
+upgraded -> Sniper
+death #37 after 54s as Sniper L18
+  overlord life fitness 2052 (score 1310, L18) | gen 12 6/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #38 after 179s as Overseer L30
+  overlord life fitness 7550 (score 6279, L30) | gen 12 7/24
+upgraded -> Sniper
+death #39 after 234s as Sniper L27
+  overlord life fitness 5878 (score 4704, L27) | gen 12 8/24
+upgraded -> Sniper
+death #40 after 96s as Sniper L24
+  overlord life fitness 4222 (score 3224, L24) | gen 12 9/24
+upgraded -> Sniper
+death #41 after 266s as Sniper L28
+  overlord life fitness 6200 (score 4973, L28) | gen 12 10/24
+upgraded -> Sniper
+death #42 after 189s as Sniper L26
+  overlord life fitness 5000 (score 3884, L26) | gen 12 11/24
+upgraded -> Sniper
+death #43 after 82s as Sniper L20
+  overlord life fitness 2596 (score 1763, L20) | gen 12 12/24
+upgraded -> Sniper
+death #44 after 96s as Sniper L22
+  overlord life fitness 3553 (score 2635, L22) | gen 12 13/24
+upgraded -> Sniper
+death #45 after 286s as Sniper L29
+  overlord life fitness 7416 (score 6142, L29) | gen 12 14/24
+upgraded -> Sniper
+death #46 after 91s as Sniper L22
+  overlord life fitness 3305 (score 2389, L22) | gen 12 15/24
+upgraded -> Sniper
+death #47 after 121s as Sniper L21
+  overlord life fitness 3015 (score 2127, L21) | gen 12 16/24
+upgraded -> Sniper
+death #48 after 170s as Sniper L24
+  overlord life fitness 4255 (score 3227, L24) | gen 12 17/24
+death #49 after 89s as Sniper L24
+  overlord life fitness 4303 (score 3307, L24) | gen 12 18/24
+upgraded -> Sniper
+death #50 after 85s as Sniper L20
+  overlord life fitness 2787 (score 1953, L20) | gen 12 19/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #51 after 265s as Overseer L30
+  overlord life fitness 7537 (score 6231, L30) | gen 12 20/24
+upgraded -> Sniper
+death #52 after 74s as Sniper L21
+  overlord life fitness 3174 (score 2304, L21) | gen 12 21/24
+upgraded -> Sniper
+death #53 after 51s as Sniper L19
+  overlord life fitness 2522 (score 1742, L19) | gen 12 22/24
+upgraded -> Sniper
+death #54 after 174s as Sniper L26
+  overlord life fitness 5345 (score 4235, L26) | gen 12 23/24
+upgraded -> Sniper
+death #55 after 24s as Sniper L18
+  overlord life fitness 2168 (score 1438, L18) | gen 12 24/24
+upgraded -> Sniper
+death #56 after 29s as Sniper L16
+  overlord life fitness 1620 (score 968, L16) | gen 13 1/24
+upgraded -> Sniper
+death #57 after 84s as Sniper L21
+  overlord life fitness 2927 (score 2053, L21) | gen 13 2/24
+upgraded -> Sniper
+death #58 after 104s as Sniper L25
+  overlord life fitness 4623 (score 3582, L25) | gen 13 3/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #59 after 247s as Overseer L32
+  overlord life fitness 9316 (score 7937, L32) | gen 13 4/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #60 after 191s as Overseer L31
+  overlord life fitness 8833 (score 7516, L31) | gen 13 5/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #61 after 297s as Overseer L31
+  overlord life fitness 8330 (score 6971, L31) | gen 13 6/24
+upgraded -> Sniper
+death #62 after 139s as Sniper L25
+  overlord life fitness 8804 (score 7749, L25) | gen 13 7/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #63 after 353s as Overseer L30
+  overlord life fitness 8187 (score 6846, L30) | gen 13 8/24
+upgraded -> Sniper
+death #64 after 127s as Sniper L25
+  overlord life fitness 4785 (score 3734, L25) | gen 13 9/24
+upgraded -> Sniper
+death #65 after 231s as Sniper L28
+  overlord life fitness 6595 (score 5383, L28) | gen 13 10/24
+upgraded -> Sniper
+death #66 after 8s as Sniper L17
+  overlord life fitness 1817 (score 1134, L17) | gen 13 11/24
+death #67 after 61s as Sniper L17
+  overlord life fitness 1862 (score 1158, L17) | gen 13 12/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #68 after 215s as Overseer L30
+  overlord life fitness 7704 (score 6418, L30) | gen 13 13/24
+upgraded -> Sniper
+upgraded -> Overseer
+upgraded -> Overlord
+death #69 after 204s as Overlord L45
+  overlord life fitness 30223 (score 28341, L45) | gen 13 14/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #70 after 175s as Overseer L30
+  overlord life fitness 7750 (score 6480, L30) | gen 13 15/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #71 after 353s as Overseer L33
+  overlord life fitness 10619 (score 9158, L33) | gen 13 16/24
+upgraded -> Sniper
+upgraded -> Overseer
+upgraded -> Overlord
+death #72 after 218s as Overlord L45
+  overlord life fitness 29541 (score 27654, L45) | gen 13 17/24
+upgraded -> Sniper
+death #73 after 188s as Sniper L29
+  overlord life fitness 7104 (score 5869, L29) | gen 13 18/24
+upgraded -> Sniper
+death #74 after 118s as Sniper L22
+  overlord life fitness 3396 (score 2469, L22) | gen 13 19/24
+upgraded -> Sniper
+death #75 after 29s as Sniper L21
+  overlord life fitness 3101 (score 2249, L21) | gen 13 20/24
+upgraded -> Sniper
+death #76 after 44s as Sniper L18
+  overlord life fitness 2185 (score 1447, L18) | gen 13 21/24
+upgraded -> Sniper
+death #77 after 53s as Sniper L18
+  overlord life fitness 2234 (score 1493, L18) | gen 13 22/24
+upgraded -> Sniper
+death #78 after 65s as Sniper L17
+  overlord life fitness 1816 (score 1110, L17) | gen 13 23/24
+death #79 after 17s as Tank L14
+  overlord life fitness 1305 (score 738, L14) | gen 13 24/24
+upgraded -> Sniper
+upgraded -> Overseer
+upgraded -> Overlord
+death #80 after 267s as Overlord L45
+  overlord life fitness 31081 (score 29174, L45) | gen 14 1/24
+upgraded -> Sniper
+death #81 after 204s as Sniper L28
+  overlord life fitness 6712 (score 5510, L28) | gen 14 2/24
+upgraded -> Sniper
+death #82 after 69s as Sniper L23
+  overlord life fitness 3787 (score 2839, L23) | gen 14 3/24
+upgraded -> Sniper
+death #83 after 181s as Sniper L27
+  overlord life fitness 5659 (score 4507, L27) | gen 14 4/24
+upgraded -> Sniper
+death #84 after 42s as Sniper L18
+  overlord life fitness 2111 (score 1374, L18) | gen 14 5/24
+upgraded -> Sniper
+death #85 after 199s as Sniper L25
+  overlord life fitness 4568 (score 3488, L25) | gen 14 6/24
+upgraded -> Sniper
+death #86 after 82s as Sniper L22
+  overlord life fitness 3531 (score 2618, L22) | gen 14 7/24
+upgraded -> Sniper
+death #87 after 80s as Sniper L19
+  overlord life fitness 2374 (score 1582, L19) | gen 14 8/24
+upgraded -> Sniper
+death #88 after 31s as Sniper L15
+  overlord life fitness 1507 (score 895, L15) | gen 14 9/24
+death #89 after 47s as Tank L12
+  overlord life fitness 1026 (score 527, L12) | gen 14 10/24
+upgraded -> Sniper
+death #90 after 172s as Sniper L21
+  overlord life fitness 3124 (score 2215, L21) | gen 14 11/24
+upgraded -> Sniper
+death #91 after 27s as Sniper L16
+  overlord life fitness 1593 (score 942, L16) | gen 14 12/24
+death #92 after 19s as Tank L14
+  overlord life fitness 1346 (score 778, L14) | gen 14 13/24
+upgraded -> Sniper
+death #93 after 149s as Sniper L25
+  overlord life fitness 4825 (score 3765, L25) | gen 14 14/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #94 after 427s as Overseer L32
+  overlord life fitness 9744 (score 8293, L32) | gen 14 15/24
+upgraded -> Sniper
+death #95 after 20s as Sniper L18
+  overlord life fitness 2234 (score 1506, L18) | gen 14 16/24
+upgraded -> Sniper
+death #96 after 45s as Sniper L15
+  overlord life fitness 1446 (score 828, L15) | gen 14 17/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #97 after 288s as Overseer L31
+  overlord life fitness 8469 (score 7114, L31) | gen 14 18/24
+upgraded -> Sniper
+death #98 after 114s as Sniper L24
+  overlord life fitness 4207 (score 3201, L24) | gen 14 19/24
+upgraded -> Sniper
+death #99 after 73s as Sniper L18
+  overlord life fitness 2198 (score 1449, L18) | gen 14 20/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #100 after 459s as Overseer L32
+  overlord life fitness 9705 (score 8241, L32) | gen 14 21/24
+upgraded -> Sniper
+death #101 after 167s as Sniper L26
+  overlord life fitness 5518 (score 4411, L26) | gen 14 22/24
+upgraded -> Sniper
+death #102 after 41s as Sniper L18
+  overlord life fitness 2181 (score 1444, L18) | gen 14 23/24
+death #103 after 59s as Sniper L22
+  overlord life fitness 3245 (score 2341, L22) | gen 14 24/24
+upgraded -> Sniper
+death #104 after 59s as Sniper L18
+  overlord life fitness 2209 (score 1465, L18) | gen 15 1/24
+upgraded -> Sniper
+death #105 after 217s as Sniper L28
+  overlord life fitness 6715 (score 5508, L28) | gen 15 2/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #106 after 176s as Overseer L32
+  overlord life fitness 9548 (score 8198, L32) | gen 15 3/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #107 after 428s as Overseer L32
+  overlord life fitness 9362 (score 7911, L32) | gen 15 4/24
+upgraded -> Sniper
+death #108 after 141s as Sniper L25
+  overlord life fitness 4792 (score 3736, L25) | gen 15 5/24
+upgraded -> Sniper
+death #109 after 126s as Sniper L22
+  overlord life fitness 3283 (score 2353, L22) | gen 15 6/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #110 after 297s as Overseer L30
+  overlord life fitness 7936 (score 6617, L30) | gen 15 7/24
+upgraded -> Sniper
+death #111 after 51s as Sniper L20
+  overlord life fitness 2579 (score 1759, L20) | gen 15 8/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #112 after 300s as Overseer L30
+  overlord life fitness 7535 (score 6215, L30) | gen 15 9/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #113 after 237s as Overseer L30
+  overlord life fitness 8055 (score 6760, L30) | gen 15 10/24
+upgraded -> Sniper
+death #114 after 101s as Sniper L23
+  overlord life fitness 3905 (score 2944, L23) | gen 15 11/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #115 after 375s as Overseer L32
+  overlord life fitness 9803 (score 8373, L32) | gen 15 12/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #116 after 243s as Overseer L30
+  overlord life fitness 8069 (score 6771, L30) | gen 15 13/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #117 after 210s as Overseer L30
+  overlord life fitness 7962 (score 6678, L30) | gen 15 14/24
+upgraded -> Sniper
+death #118 after 42s as Sniper L18
+  overlord life fitness 2041 (score 1304, L18) | gen 15 15/24
+death #119 after 17s as Tank L13
+  overlord life fitness 1095 (score 568, L13) | gen 15 16/24
+upgraded -> Sniper
+death #120 after 137s as Sniper L22
+  overlord life fitness 3390 (score 2455, L22) | gen 15 17/24
+upgraded -> Sniper
+death #121 after 240s as Sniper L28
+  overlord life fitness 6368 (score 5152, L28) | gen 15 18/24
+upgraded -> Sniper
+death #122 after 74s as Sniper L23
+  overlord life fitness 3839 (score 2889, L23) | gen 15 19/24
+upgraded -> Sniper
+death #123 after 36s as Sniper L16
+  overlord life fitness 1752 (score 1097, L16) | gen 15 20/24
+death #124 after 20s as Tank L13
+  overlord life fitness 1116 (score 588, L13) | gen 15 21/24
+death #125 after 12s as Tank L11
+  overlord life fitness 865 (score 420, L11) | gen 15 22/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #126 after 390s as Overseer L31
+  overlord life fitness 8501 (score 7105, L31) | gen 15 23/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #127 after 396s as Overseer L34
+  overlord life fitness 10963 (score 9445, L34) | gen 15 24/24
+upgraded -> Sniper
+death #128 after 64s as Sniper L23
+  overlord life fitness 3662 (score 2716, L23) | gen 16 1/24
+upgraded -> Sniper
+death #129 after 93s as Sniper L20
+  overlord life fitness 2604 (score 1767, L20) | gen 16 2/24
+upgraded -> Sniper
+death #130 after 41s as Sniper L18
+  overlord life fitness 2201 (score 1465, L18) | gen 16 3/24
+death #131 after 33s as Sniper L16
+  overlord life fitness 1611 (score 958, L16) | gen 16 4/24
+upgraded -> Sniper
+upgraded -> Overseer
+upgraded -> Overlord
+death #132 after 295s as Overlord L45
+  overlord life fitness 36286 (score 34368, L45) | gen 16 5/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #133 after 467s as Overseer L34
+  overlord life fitness 11222 (score 9675, L34) | gen 16 6/24
+upgraded -> Sniper
+death #134 after 114s as Sniper L25
+  overlord life fitness 4522 (score 3476, L25) | gen 16 7/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #135 after 282s as Overseer L30
+  overlord life fitness 7986 (score 6673, L30) | gen 16 8/24
+upgraded -> Sniper
+death #136 after 22s as Sniper L17
+  overlord life fitness 1988 (score 1299, L17) | gen 16 9/24
+upgraded -> Sniper
+death #137 after 125s as Sniper L20
+  overlord life fitness 2838 (score 1988, L20) | gen 16 10/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #138 after 267s as Overseer L31
+  overlord life fitness 8398 (score 7051, L31) | gen 16 11/24
+upgraded -> Sniper
+death #139 after 26s as Sniper L18
+  overlord life fitness 2241 (score 1511, L18) | gen 16 12/24
+death #140 after 12s as Tank L13
+  overlord life fitness 1088 (score 563, L13) | gen 16 13/24
+death #141 after 22s as Tank L11
+  overlord life fitness 819 (score 370, L11) | gen 16 14/24
+death #142 after 12s as Tank L10
+  overlord life fitness 710 (score 305, L10) | gen 16 15/24
+upgraded -> Sniper
+death #143 after 77s as Sniper L15
+  overlord life fitness 1457 (score 826, L15) | gen 16 16/24
+upgraded -> Sniper
+death #144 after 101s as Sniper L22
+  overlord life fitness 3457 (score 2537, L22) | gen 16 17/24
+upgraded -> Sniper
+death #145 after 47s as Sniper L19
+  overlord life fitness 2302 (score 1523, L19) | gen 16 18/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #146 after 355s as Overseer L32
+  overlord life fitness 9352 (score 7930, L32) | gen 16 19/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #147 after 455s as Overseer L32
+  overlord life fitness 9828 (score 8366, L32) | gen 16 20/24
+upgraded -> Sniper
+death #148 after 102s as Sniper L24
+  overlord life fitness 4167 (score 3166, L24) | gen 16 21/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #149 after 160s as Overseer L33
+  overlord life fitness 9971 (score 8587, L33) | gen 16 22/24
+upgraded -> Sniper
+death #150 after 10s as Sniper L18
+  overlord life fitness 2050 (score 1326, L18) | gen 16 23/24
+upgraded -> Sniper
+death #151 after 75s as Sniper L19
+  overlord life fitness 2508 (score 1718, L19) | gen 16 24/24
+upgraded -> Sniper
+death #152 after 55s as Sniper L18
+  overlord life fitness 2062 (score 1320, L18) | gen 17 1/24
+upgraded -> Sniper
+death #153 after 124s as Sniper L20
+  overlord life fitness 2838 (score 1988, L20) | gen 17 2/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #154 after 287s as Overseer L30
+  overlord life fitness 7545 (score 6230, L30) | gen 17 3/24
+upgraded -> Sniper
+death #155 after 52s as Sniper L20
+  overlord life fitness 2825 (score 2004, L20) | gen 17 4/24
+upgraded -> Sniper
+death #156 after 61s as Sniper L19
+  overlord life fitness 2407 (score 1622, L19) | gen 17 5/24
+upgraded -> Sniper
+death #157 after 28s as Sniper L15
+  overlord life fitness 1516 (score 905, L15) | gen 17 6/24
+death #158 after 26s as Tank L12
+  overlord life fitness 1158 (score 667, L12) | gen 17 7/24
+death #159 after 12s as Tank L12
+  overlord life fitness 962 (score 477, L12) | gen 17 8/24
+upgraded -> Sniper
+death #160 after 109s as Sniper L22
+  overlord life fitness 3388 (score 2465, L22) | gen 17 9/24
+upgraded -> Sniper
+death #161 after 140s as Sniper L21
+  overlord life fitness 2963 (score 2067, L21) | gen 17 10/24
+upgraded -> Sniper
+death #162 after 10s as Sniper L15
+  overlord life fitness 1401 (score 797, L15) | gen 17 11/24
+upgraded -> Sniper
+death #163 after 175s as Sniper L23
+  overlord life fitness 3807 (score 2817, L23) | gen 17 12/24
+upgraded -> Sniper
+death #164 after 37s as Sniper L19
+  overlord life fitness 2312 (score 1537, L19) | gen 17 13/24
+death #165 after 98s as Sniper L20
+  overlord life fitness 2709 (score 1870, L20) | gen 17 14/24
+upgraded -> Sniper
+death #166 after 199s as Sniper L29
+  overlord life fitness 7120 (score 5880, L29) | gen 17 15/24
+upgraded -> Sniper
+death #167 after 9s as Sniper L17
+  overlord life fitness 1802 (score 1119, L17) | gen 17 16/24
+upgraded -> Sniper
+death #168 after 105s as Sniper L23
+  overlord life fitness 3804 (score 2842, L23) | gen 17 17/24
+upgraded -> Sniper
+death #169 after 51s as Sniper L18
+  overlord life fitness 2182 (score 1442, L18) | gen 17 18/24
+upgraded -> Sniper
+death #170 after 107s as Sniper L23
+  overlord life fitness 3651 (score 2688, L23) | gen 17 19/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #171 after 215s as Overseer L31
+  overlord life fitness 8238 (score 6912, L31) | gen 17 20/24
+upgraded -> Sniper
+upgraded -> Overseer
+upgraded -> Overlord
+death #172 after 29s as Overlord L45
+  overlord life fitness 26774 (score 24962, L45) | gen 17 21/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #173 after 202s as Overseer L30
+  overlord life fitness 7589 (score 6308, L30) | gen 17 22/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #174 after 627s as Overseer L33
+  overlord life fitness 10758 (score 9187, L33) | gen 17 23/24
+upgraded -> Sniper
+death #175 after 52s as Sniper L21
+  overlord life fitness 2917 (score 2056, L21) | gen 17 24/24
+death #176 after 3s as Tank L1
+  overlord life fitness 828 (score 787, L1) | gen 18 1/24
+upgraded -> Sniper
+death #177 after 75s as Sniper L18
+  overlord life fitness 2102 (score 1352, L18) | gen 18 2/24
+upgraded -> Sniper
+death #178 after 36s as Sniper L17
+  overlord life fitness 1943 (score 1248, L17) | gen 18 3/24
+upgraded -> Sniper
+death #179 after 111s as Sniper L21
+  overlord life fitness 3177 (score 2293, L21) | gen 18 4/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #180 after 338s as Overseer L30
+  overlord life fitness 8052 (score 6717, L30) | gen 18 5/24
+upgraded -> Sniper
+death #181 after 64s as Sniper L21
+  overlord life fitness 3085 (score 2219, L21) | gen 18 6/24
+upgraded -> Sniper
+death #182 after 180s as Sniper L24
+  overlord life fitness 4394 (score 3362, L24) | gen 18 7/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #183 after 306s as Overseer L31
+  overlord life fitness 8719 (score 7357, L31) | gen 18 8/24
+upgraded -> Sniper
+shift timer up but life in progress; extending until death
+upgraded -> Overseer
+death #184 after 330s as Overseer L32
+  overlord life fitness 9218 (score 7806, L32) | gen 18 9/24
+shift done: 184 deaths over 28989s
