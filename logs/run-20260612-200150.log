@@ -4,3 +4,30 @@ death #1 after 1s as Tank L1
   overlord life fitness 41 (score 0, L1) | gen 7 3/24
 death #2 after 12s as Tank L1
   overlord life fitness 55 (score 10, L1) | gen 7 4/24
+upgraded -> Sniper
+death #3 after 131s as Sniper L20
+  overlord life fitness 2663 (score 1810, L20) | gen 7 5/24
+upgraded -> Sniper
+death #4 after 240s as Sniper L26
+  overlord life fitness 5406 (score 4270, L26) | gen 7 6/24
+upgraded -> Sniper
+death #5 after 65s as Sniper L19
+  overlord life fitness 2349 (score 1563, L19) | gen 7 7/24
+death #6 after 29s as Tank L14
+  overlord life fitness 1332 (score 760, L14) | gen 7 8/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #7 after 387s as Overseer L30
+  overlord life fitness 8247 (score 6892, L30) | gen 7 9/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #8 after 36s as Overseer L45
+  overlord life fitness 26786 (score 24971, L45) | gen 7 10/24
+upgraded -> Sniper
+upgraded -> Overseer
+death #9 after 209s as Overseer L30
+  overlord life fitness 7609 (score 6325, L30) | gen 7 11/24
+upgraded -> Sniper
+upgraded -> Overseer
+reboot: loop_error
+upgraded -> Sniper

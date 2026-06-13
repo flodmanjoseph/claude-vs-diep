@@ -1,0 +1,30 @@
+{"t":1781314124861,"event":"shift_start","shiftId":"2026-06-13T01-28-44-280Z","doctrine":13,"shiftMs":28800000}
+{"t":1781314126799,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 401 ()"}
+{"t":1781314127133,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781314127133,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781314129229,"event":"doctrine_assigned","version":"opt-g7-3","status":{"gen":7,"evalsThisGen":"10/24","totalEvals":155,"champion":18895}}
+{"t":1781314129231,"event":"spawn","ok":true}
+{"t":1781314135438,"event":"heartbeat","elapsed":5401,"alive":true,"life":6207,"deaths":0,"cls":"Tank","lvl":3,"mode":"kite-farm","myScore":25,"leaderMax":179800,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314140695,"event":"heartbeat","elapsed":10650,"alive":true,"life":11464,"deaths":0,"cls":"Tank","lvl":5,"mode":"farm","myScore":130,"leaderMax":180100,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314145945,"event":"heartbeat","elapsed":15905,"alive":true,"life":16714,"deaths":0,"cls":"Tank","lvl":8,"mode":"farm","myScore":195,"leaderMax":180400,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781314151275,"event":"heartbeat","elapsed":21236,"alive":true,"life":22044,"deaths":0,"cls":"Tank","lvl":9,"mode":"farm","myScore":365,"leaderMax":180500,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314156519,"event":"heartbeat","elapsed":26484,"alive":true,"life":27288,"deaths":0,"cls":"Tank","lvl":11,"mode":"farm","myScore":465,"leaderMax":57000,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314161770,"event":"heartbeat","elapsed":31733,"alive":true,"life":32539,"deaths":0,"cls":"Tank","lvl":12,"mode":"kite-farm","myScore":475,"leaderMax":63500,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314167024,"event":"heartbeat","elapsed":36982,"alive":true,"life":37793,"deaths":0,"cls":"Tank","lvl":12,"mode":"farm","myScore":505,"leaderMax":57800,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781314172357,"event":"heartbeat","elapsed":42312,"alive":true,"life":43126,"deaths":0,"cls":"Tank","lvl":13,"mode":"escape","myScore":570,"leaderMax":20800,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314177601,"event":"heartbeat","elapsed":47567,"alive":true,"life":48370,"deaths":0,"cls":"Tank","lvl":13,"mode":"farm","myScore":640,"leaderMax":188000,"estRank":10,"boardSize":9,"optGen":7}
+{"t":1781314182851,"event":"heartbeat","elapsed":52816,"alive":true,"life":53620,"deaths":0,"cls":"Tank","lvl":14,"mode":"kite-farm","myScore":715,"leaderMax":64400,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781314188105,"event":"heartbeat","elapsed":58061,"alive":true,"life":58874,"deaths":0,"cls":"Tank","lvl":14,"mode":"kite-farm","myScore":790,"leaderMax":59000,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314190379,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":15}
+{"t":1781314190781,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781314193268,"event":"heartbeat","elapsed":63225,"alive":true,"life":64037,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","myScore":1005,"leaderMax":193700,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314198529,"event":"heartbeat","elapsed":68483,"alive":true,"life":69298,"deaths":0,"cls":"Sniper","lvl":16,"mode":"farm","myScore":1083,"leaderMax":75200,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314203779,"event":"heartbeat","elapsed":73738,"alive":true,"life":74548,"deaths":0,"cls":"Sniper","lvl":17,"mode":"farm","myScore":1373,"leaderMax":83000,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314209024,"event":"heartbeat","elapsed":78988,"alive":true,"life":79793,"deaths":0,"cls":"Sniper","lvl":18,"mode":"escape","myScore":1435,"leaderMax":106100,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314214346,"event":"heartbeat","elapsed":84308,"alive":true,"life":85115,"deaths":0,"cls":"Sniper","lvl":18,"mode":"farm","myScore":1490,"leaderMax":83700,"estRank":11,"boardSize":10,"optGen":7}
+{"t":1781314219590,"event":"heartbeat","elapsed":89551,"alive":true,"life":90359,"deaths":0,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1570,"leaderMax":64500,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781314224846,"event":"heartbeat","elapsed":94804,"alive":true,"life":95615,"deaths":0,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1720,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781314230103,"event":"heartbeat","elapsed":100059,"alive":true,"life":100872,"deaths":0,"cls":"Sniper","lvl":20,"mode":"farm","myScore":1797,"leaderMax":85000,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314235421,"event":"heartbeat","elapsed":105385,"alive":true,"life":106190,"deaths":0,"cls":"Sniper","lvl":20,"mode":"farm","myScore":1925,"leaderMax":107900,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781314240666,"event":"heartbeat","elapsed":110630,"alive":true,"life":111435,"deaths":0,"cls":"Sniper","lvl":21,"mode":"farm","myScore":2130,"leaderMax":54000,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314245924,"event":"heartbeat","elapsed":115888,"alive":true,"life":116693,"deaths":0,"cls":"Sniper","lvl":21,"mode":"kite-farm+dodge","myScore":2300,"leaderMax":85700,"estRank":3,"boardSize":2,"optGen":7}

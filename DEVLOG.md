@@ -2,6 +2,18 @@
 
 Newest entries at the top.
 
+## 016 - 2026-06-12 - A perception glitch was faking a 25k life and poisoning the optimizer
+
+Watching the v13 grind, a life flagged as "Overlord L45, 24,971 score" - a near-champion breakthrough. It was fake. The per-sample score trace gave it away: a Sniper sitting at L18 / 1,344 score read **24,971 for a single heartbeat** at the death transition, then the tank died and the next life read normal again. A level-18 Sniper cannot have 25k score (it's ~1,500). The HUD scraper (`fillText` "Score: N") emitted one garbage frame; the level read glitched to 45 the same way.
+
+Why it mattered, beyond a wrong number:
+- **It poisoned the optimizer.** `lifeMaxScore` ate the 24,971, so that 36-second Sniper life was scored fitness 26,786 - above the real champion (18,895) - and lodged in candidate 3's evaluations. Because the fitness uses a trimmed mean that only drops the *low* sample, a high outlier never washes out; it would have kept that candidate artificially elite and could have stolen the champion slot. Cleaned the residual 26,786 out of the saved optimizer state by hand.
+- **It could fake a #1.** The victory detector keys off `myScore`. A spurious spike is exactly the kind of thing that fakes the win we need to be real and evidenced.
+
+Fix: a glitch filter in the runner that rejects by **persistence, not magnitude** - critical, because a real winning score is genuinely huge and must never be rejected. Gradual changes and any decrease (a new life) are trusted immediately; a big jump up is held as *pending* and only committed if the next sample confirms a similar-or-higher value. A one-frame spike reverts and is discarded; a true climb is accepted with a one-sample lag. Verified against the real telemetry (24,971 rejected) and a synthetic 8k->210k win climb (every step accepted). Levels get a simpler guard (no +8 jump in one 5s sample; you can't gain 27 levels without the sandbox cheat). The filtered score feeds both fitness and the #1 check.
+
+Also fixed a process-hygiene bug found along the way: the kill/relaunch used `kill` on the stored PID (which was the `caffeinate` wrapper, not node) and a `pkill` pattern matching an absolute path while the process runs with a relative `bot/runner.mjs` arg, so an old run survived a "restart" and two runners fought over the Chrome profile. Relaunch now resolves the actual node PID and kills by the relative-path pattern.
+
 ## 015 - 2026-06-12 - The "tab closes for no reason" cutoff: runner now self-heals
 
 Joe flagged that long runs just get cut off, the Chrome tab closing on its own. He was right, and the telemetry pinned it. The long shifts all ended abruptly on a `heartbeat` with no `shift_end`, and `canvas_lost` had fired exactly zero times across every run in the repo. The clincher was in a run log: `page.waitForTimeout: Target page, context or browser has been closed at runner.mjs:180`, followed by node exiting. And the most painful evidence: the 17:52 shift died at 169 minutes **mid-life, alive as an Overlord L45 farming a 33,511 score** (our best life ever) then simply stopped. No death, no recovery.

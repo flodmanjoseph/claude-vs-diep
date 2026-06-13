@@ -33,6 +33,29 @@ const rlDoctrine = RL ? { ...DOCTRINE, ...loadChampionParams(), rl: { ...DOCTRIN
 
 // Per-life bests, used to score the life for the optimizer / RL comparison.
 let lifeMaxScore = 0, lifeMaxLevel = 0;
+// Last perception readings trusted as real, used to reject single-frame HUD scraper glitches (a
+// L18 Sniper momentarily reading "Score: 24,971" at the death transition). Within a life score and
+// level only climb gradually; a multiplicative score jump or a many-level leap is a glitch. A
+// glitch must never enter optimizer fitness or the #1 victory check. Decreases are legit (new life).
+let lastGoodScore = 0, lastGoodLevel = 0, pendingScore = null;
+// Reject by PERSISTENCE, not magnitude: a real score (even a huge winning one) keeps climbing
+// across samples, while a glitch spikes for a single frame and reverts. So accept gradual changes
+// and any decrease (new life) immediately; a big jump up is held as "pending" and only committed if
+// the NEXT sample confirms a similar-or-higher value. A one-frame spike never gets committed, but a
+// genuine high score is accepted (with a one-sample lag) - so #1 detection is never blocked.
+function trustScore(s) {
+  if (s == null) return lastGoodScore || null;
+  if (s <= lastGoodScore * 2 + 4000) { lastGoodScore = s; pendingScore = null; return s; }
+  if (pendingScore != null && s >= pendingScore * 0.7) { lastGoodScore = s; pendingScore = null; return s; }
+  if (pendingScore == null) log({ event: 'score_jump_held', read: s, prev: lastGoodScore });
+  pendingScore = s;
+  return lastGoodScore || null; // hold the last trusted value while this jump is unconfirmed
+}
+function trustLevel(l) {
+  if (l == null) return lastGoodLevel || 1;
+  if (lastGoodLevel > 0 && l > lastGoodLevel + 8) { log({ event: 'level_glitch_rejected', read: l, prev: lastGoodLevel }); return lastGoodLevel; }
+  lastGoodLevel = l; return l;
+}
 async function applyNextDoctrine() {
   lifeMaxScore = 0; lifeMaxLevel = 0;
   if (RL) { await page.evaluate((doc) => window.__setDoctrine && window.__setDoctrine(doc), rlDoctrine).catch(() => {}); return; }
@@ -245,15 +268,18 @@ while (true) {
   if (elapsed - lastHeartbeat > 5000) {
     lastHeartbeat = elapsed;
     const snap = await page.evaluate(() => window.__brain?.snapshot?.() ?? null).catch(() => null);
-    const { leaderMax, myScore, board, boardSize, estRank } = await readRank();
+    const { leaderMax, myScore: rawScore, board, boardSize, estRank } = await readRank();
+    const myScore = trustScore(rawScore); // null if this sample was a glitch
+    const trustedLevel = trustLevel(curLevel);
     if (myScore) lifeMaxScore = Math.max(lifeMaxScore, myScore);
-    lifeMaxLevel = Math.max(lifeMaxLevel, curLevel);
+    lifeMaxLevel = Math.max(lifeMaxLevel, trustedLevel);
     if (estRank != null) bestRank = Math.min(bestRank, estRank);
-    log({ event: 'heartbeat', elapsed, alive, life: Date.now() - lifeStart, deaths, cls: curClass, lvl: curLevel, mode: snap?.mode, myScore, leaderMax, estRank, boardSize, optGen: opt?.status().gen });
+    log({ event: 'heartbeat', elapsed, alive, life: Date.now() - lifeStart, deaths, cls: curClass, lvl: trustedLevel, mode: snap?.mode, myScore, leaderMax, estRank, boardSize, optGen: opt?.status().gen });
 
     // True #1 detection: estimated rank 1 on a well-populated board, sustained across samples, so
-    // a fluke sample can't false-trigger. On confirmation, burst-capture clean evidence and flag.
-    if (alive && estRank === 1 && boardSize >= 7 && myScore > 5000) {
+    // a fluke sample can't false-trigger. Gated on a glitch-filtered score so a spurious spike can
+    // neither fake a win nor inflate our apparent rank.
+    if (alive && estRank === 1 && boardSize >= 7 && myScore && myScore > 5000) {
       rank1Streak++;
       if (rank1Streak >= 3) {
         const shot = evidence(`NUMBER-ONE-${shiftId}-${Math.round(myScore)}.png`);
@@ -296,7 +322,7 @@ while (true) {
       const shotPath = evidence(`death-${shiftId}-${deaths}.png`);
       await page.screenshot({ path: shotPath }).catch(() => {});
       const lastState = await page.evaluate(() => window.__readState?.() ?? null).catch(() => null);
-      lifeMaxLevel = Math.max(lifeMaxLevel, curLevel);
+      lifeMaxLevel = Math.max(lifeMaxLevel, trustLevel(curLevel));
       log({ event: 'death', n: deaths, lifeMs: life, cls: curClass, lvl: curLevel, screenshot: path.basename(shotPath), enemiesNear: lastState?.enemies?.slice(0, 3) ?? [] });
       console.log(`death #${deaths} after ${(life / 1000).toFixed(0)}s as ${curClass} L${curLevel}`);
       scoreLife();

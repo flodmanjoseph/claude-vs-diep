@@ -1,6 +1,6 @@
 {
  "gen": 7,
- "evalNo": 148,
+ "evalNo": 155,
  "population": [
   {
    "params": {
@@ -49,7 +49,9 @@
     "crowdRadius": 300
    },
    "fits": [
-    54.6796
+    54.6796,
+    2662.5512,
+    5406.2024
    ]
   },
   {
@@ -72,7 +74,11 @@
     "huntStandoff": 170,
     "crowdRadius": 300
    },
-   "fits": []
+   "fits": [
+    2348.9588,
+    1331.5768,
+    8247.0332
+   ]
   },
   {
    "params": {
@@ -94,7 +100,9 @@
     "huntStandoff": 140,
     "crowdRadius": 300
    },
-   "fits": []
+   "fits": [
+    7608.5692
+   ]
   },
   {
    "params": {
