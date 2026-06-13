@@ -1,2 +1,14 @@
 shift 2026-06-13T00-53-39-003Z | doctrine v13 | 28800s
 upgraded -> Sniper
+upgraded -> Overseer
+death #1 after 419s as Overseer L30
+  overlord life fitness 8068 (score 6700, L30) | gen 7 2/24
+upgraded -> Sniper
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+page.waitForTimeout: Target page, context or browser has been closed
+    at /Users/sipbuddyperplexitymachine/dev/claude-vs-diep/bot/runner.mjs:180:14
+
+Node.js v22.20.0

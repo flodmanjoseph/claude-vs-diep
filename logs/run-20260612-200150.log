@@ -1,0 +1,6 @@
+shift 2026-06-13T01-01-51-187Z | doctrine v13 | 28800s
+reboot: browser_closed
+death #1 after 1s as Tank L1
+  overlord life fitness 41 (score 0, L1) | gen 7 3/24
+death #2 after 12s as Tank L1
+  overlord life fitness 55 (score 10, L1) | gen 7 4/24

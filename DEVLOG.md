@@ -2,6 +2,19 @@
 
 Newest entries at the top.
 
+## 015 - 2026-06-12 - The "tab closes for no reason" cutoff: runner now self-heals
+
+Joe flagged that long runs just get cut off, the Chrome tab closing on its own. He was right, and the telemetry pinned it. The long shifts all ended abruptly on a `heartbeat` with no `shift_end`, and `canvas_lost` had fired exactly zero times across every run in the repo. The clincher was in a run log: `page.waitForTimeout: Target page, context or browser has been closed at runner.mjs:180`, followed by node exiting. And the most painful evidence: the 17:52 shift died at 169 minutes **mid-life, alive as an Overlord L45 farming a 33,511 score** (our best life ever) then simply stopped. No death, no recovery.
+
+Cause: the main loop's first statement was an unguarded `await page.waitForTimeout(400)`, there were no process-level error handlers, and nothing listened for the browser disconnecting. So when Chrome dropped (renderer crash after hours, or a diep disconnect), the next page call threw an uncaught rejection, node exited, and the browser it owned closed with it. The recovery branch lower in the loop (`canvas_lost` -> re-goto) never got reached, which is why it had never once fired.
+
+Fix: the runner now **self-heals**.
+- Bring-up factored into `bringUp()` with `let ctx, page` so a fresh browser can replace a dead one. `ctx`/`page` `close` and `crash` events set a `browserDead` flag.
+- A `reboot()` supervisor tears down the dead context and relaunches Chrome + re-injects perception/brain + rejoins FFA, retrying with capped backoff so a transient diep outage can't end the campaign.
+- The main loop body is wrapped: it checks `browserDead` up top and catches any mid-iteration throw; if the target is gone it reboots, otherwise it logs and continues. Process-level `unhandledRejection`/`uncaughtException` handlers are the last-resort net (log, never exit).
+
+Verified, not assumed: launched the hardened runner, let it spawn, then `kill -9`'d the Chrome process to simulate the crash. Within ~10s the runner logged `reboot` -> relaunched -> `reboot_ok` (attempt 1) and was farming again, node never dropping. The overnight grind can now survive Chrome dying, which is the difference between losing a 33k life at 169 minutes and grinding straight through it.
+
 ## 014 - 2026-06-12 - The new wall is being swarmed: crowd-aware flight (v13)
 
 The detached ES grind reliably beats the old Sniper wall now (it gets to Overseer most lives), but it plateaued at an Overseer ceiling around L32-35 / ~8.6k and never reproduced the champion's 26k Overlord life. Pulled the death telemetry to find what kills the Overseers, and the answer was blunt and consistent:

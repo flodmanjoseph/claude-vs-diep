@@ -54,17 +54,38 @@ const shiftId = new Date().toISOString().replace(/[:.]/g, '-');
 const logPath = path.join(TELEM, `shift-${shiftId}.jsonl`);
 const log = (obj) => fs.appendFileSync(logPath, JSON.stringify({ t: Date.now(), ...obj }) + '\n');
 
-const { ctx, page } = await launch();
-page.on('console', (m) => { if (m.type() === 'error') log({ event: 'pageerror', text: m.text().slice(0, 200) }); });
-
-await page.addInitScript(SCRAPE_INIT);
-await page.addInitScript(STATE_FN);
-if (RL) {
-  const seed = loadQTable();
-  await page.addInitScript(`window.__qtableSeed = ${JSON.stringify(seed.q || {})}; window.__rlMetaSeed = ${JSON.stringify(seed.meta || { decisions: 0 })};`);
-  console.log(`RL experiment: champion params frozen, Q-learning modes. seed ${Object.keys(seed.q || {}).length} states, ${seed.meta?.decisions || 0} prior decisions.`);
+// Browser bring-up: launch Chrome, attach handlers, inject perception + brain. Factored so the
+// supervisor can relaunch a fresh browser after a crash/disconnect (see reboot()). page/ctx are
+// mutable module bindings so the helpers below always act on the current browser.
+let ctx, page;
+let browserDead = false; // set by the close/crash handlers; the loop checks it to trigger a reboot
+async function bringUp() {
+  const l = await launch();
+  ctx = l.ctx; page = l.page;
+  browserDead = false;
+  page.on('console', (m) => { if (m.type() === 'error') log({ event: 'pageerror', text: m.text().slice(0, 200) }); });
+  // A Chrome renderer crash, a diep disconnect, or any context teardown fires these. Flag it so
+  // the main loop reboots instead of dying on the next page call. The old failure mode: an
+  // unguarded page.* threw "Target closed", node exited, and the tab closed for "no reason" -
+  // once killing a live 33k Overlord life mid-farm.
+  ctx.on('close', () => { browserDead = true; });
+  page.on('close', () => { browserDead = true; });
+  page.on('crash', () => { browserDead = true; try { log({ event: 'page_crash' }); } catch {} });
+  await page.addInitScript(SCRAPE_INIT);
+  await page.addInitScript(STATE_FN);
+  if (RL) {
+    const seed = loadQTable();
+    await page.addInitScript(`window.__qtableSeed = ${JSON.stringify(seed.q || {})}; window.__rlMetaSeed = ${JSON.stringify(seed.meta || { decisions: 0 })};`);
+    console.log(`RL experiment: champion params frozen, Q-learning modes. seed ${Object.keys(seed.q || {}).length} states, ${seed.meta?.decisions || 0} prior decisions.`);
+  }
+  await page.addInitScript(`(${BRAIN_FN})(${JSON.stringify(DOCTRINE)})`);
 }
-await page.addInitScript(`(${BRAIN_FN})(${JSON.stringify(DOCTRINE)})`);
+await bringUp();
+
+// Last-resort guards: never let a stray browser/page rejection kill the whole campaign. Log it and
+// let the supervisor loop notice (browserDead, or a failed page call) and reboot.
+process.on('unhandledRejection', (e) => { try { log({ event: 'unhandled_rejection', text: String(e).slice(0, 200) }); } catch {} });
+process.on('uncaughtException', (e) => { try { log({ event: 'uncaught_exception', text: String(e).slice(0, 200) }); } catch {} });
 
 log({ event: 'shift_start', shiftId, doctrine: DOCTRINE.version, shiftMs: SHIFT_MS });
 console.log(`shift ${shiftId} | doctrine v${DOCTRINE.version} | ${SHIFT_MS / 1000}s`);
@@ -107,6 +128,23 @@ async function spawnFresh() {
   await page.evaluate(() => window.__brain && window.__brain.start());
   log({ event: 'spawn', ok });
   return ok;
+}
+
+// Self-heal: tear down the dead browser and bring a fresh one back into FFA. Called when the
+// browser/page has closed or crashed (or a page call threw because the target is gone). Retries
+// with backoff so a transient diep outage doesn't end the campaign.
+async function reboot(reason) {
+  log({ event: 'reboot', reason });
+  console.log(`reboot: ${reason}`);
+  try { await ctx.close(); } catch {}
+  for (let attempt = 1; ; attempt++) {
+    try {
+      await bringUp();
+      const ok = await spawnFresh();
+      if (ok) { log({ event: 'reboot_ok', attempt }); resetUpgrades(); return true; }
+    } catch (e) { log({ event: 'reboot_fail', attempt, text: String(e).slice(0, 160) }); }
+    await new Promise((r) => setTimeout(r, Math.min(30_000, 3_000 * attempt))); // backoff, capped 30s
+  }
 }
 
 // Class-upgrade state for the current life. Gated by current class so the right tile is clicked.
@@ -177,6 +215,11 @@ let rank1Streak = 0;
 const HARD_CAP = SHIFT_MS * 4;
 
 while (true) {
+  // If the browser died (Chrome crash / diep disconnect), relaunch and rejoin rather than letting
+  // the next page call throw and kill the process. This is the self-heal for the "tab closed for no
+  // reason" cutoffs that silently ended long runs (once mid-way through a live 33k Overlord life).
+  if (browserDead) { await reboot('browser_closed'); lifeStart = Date.now(); continue; }
+  try {
   await page.waitForTimeout(400);
   const elapsed = Date.now() - t0;
 
@@ -264,6 +307,17 @@ while (true) {
     }
   } else {
     deadSince = 0;
+  }
+  } catch (e) {
+    // A page/browser call threw mid-iteration. If the target is gone, reboot and rejoin; otherwise
+    // log and pause briefly so a transient error doesn't spin. Never let it escape and kill node.
+    const msg = String(e);
+    if (browserDead || /Target.*closed|browser has been closed|crash|disconnect/i.test(msg)) {
+      await reboot('loop_error'); lifeStart = Date.now();
+    } else {
+      log({ event: 'loop_error', text: msg.slice(0, 180) });
+      await new Promise((r) => setTimeout(r, 500));
+    }
   }
 }
 

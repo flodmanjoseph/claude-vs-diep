@@ -1,6 +1,6 @@
 {
  "gen": 7,
- "evalNo": 145,
+ "evalNo": 148,
  "population": [
   {
    "params": {
@@ -19,10 +19,13 @@
     "shapeBodyMargin": 30,
     "huntSizeRatio": 0.689,
     "huntRange": 295,
-    "huntStandoff": 182
+    "huntStandoff": 182,
+    "crowdRadius": 300
    },
    "fits": [
-    4571.3016
+    4571.3016,
+    8067.768,
+    40.5184
    ]
   },
   {
@@ -42,9 +45,12 @@
     "shapeBodyMargin": 17,
     "huntSizeRatio": 0.853,
     "huntRange": 386,
-    "huntStandoff": 140
+    "huntStandoff": 140,
+    "crowdRadius": 300
    },
-   "fits": []
+   "fits": [
+    54.6796
+   ]
   },
   {
    "params": {
@@ -63,7 +69,8 @@
     "shapeBodyMargin": 34,
     "huntSizeRatio": 0.78,
     "huntRange": 340,
-    "huntStandoff": 170
+    "huntStandoff": 170,
+    "crowdRadius": 300
    },
    "fits": []
   },
@@ -84,7 +91,8 @@
     "shapeBodyMargin": 38,
     "huntSizeRatio": 0.818,
     "huntRange": 401,
-    "huntStandoff": 140
+    "huntStandoff": 140,
+    "crowdRadius": 300
    },
    "fits": []
   },
@@ -105,7 +113,8 @@
     "shapeBodyMargin": 36,
     "huntSizeRatio": 0.78,
     "huntRange": 294,
-    "huntStandoff": 187
+    "huntStandoff": 187,
+    "crowdRadius": 300
    },
    "fits": []
   },
@@ -126,7 +135,8 @@
     "shapeBodyMargin": 17,
     "huntSizeRatio": 0.853,
     "huntRange": 386,
-    "huntStandoff": 146
+    "huntStandoff": 146,
+    "crowdRadius": 300
    },
    "fits": []
   },
@@ -147,7 +157,8 @@
     "shapeBodyMargin": 45,
     "huntSizeRatio": 0.854,
     "huntRange": 269,
-    "huntStandoff": 161
+    "huntStandoff": 161,
+    "crowdRadius": 300
    },
    "fits": []
   },
@@ -168,7 +179,8 @@
     "shapeBodyMargin": 28,
     "huntSizeRatio": 0.78,
     "huntRange": 327,
-    "huntStandoff": 136
+    "huntStandoff": 136,
+    "crowdRadius": 300
    },
    "fits": []
   }
@@ -190,7 +202,8 @@
    "shapeBodyMargin": 34,
    "huntSizeRatio": 0.78,
    "huntRange": 340,
-   "huntStandoff": 170
+   "huntStandoff": 170,
+   "crowdRadius": 300
   },
   "fitness": 18895.095
  },
@@ -296,6 +309,10 @@
   "huntStandoff": [
    110,
    260
+  ],
+  "crowdRadius": [
+   180,
+   420
   ]
  },
  "updated": null
