@@ -2,6 +2,14 @@
 
 Newest entries at the top.
 
+## 020 - 2026-06-13 - Best life ever: 27,855 at Overlord L45, ~rank 3-4. Plus a level-read fix
+
+The drone-screen survival compounded into the best life the bot has ever had. Screenshot-verified on the death screen: **Score 27,855, Level 45, Overlord, 2m33s** (evidence death-2026-06-13T02-28-37-680Z-57.png). On that arena's board - leader `photon` 33.9k, `Frosty` 31.4k, `self destruct` 27.1k - our 27,855 sat around **rank 3-4, ~82% of the leader**, the closest to #1 yet. We were killed by `Self Destruct` (27.1k), a peer at our own score: the top tier is now even-matched PvP, not getting run down by something 8x our size. This beats the old hand-of-god champion life (26,190) and it was earned with hunter avoidance + the drone screen carrying us through Overlord.
+
+Verified, not assumed (the 24,971 lesson): the score climbed *gradually* 27.0k->27.9k over 37s and the class read Overlord, so the score is real - and the glitch-proof #1 detector correctly did NOT fire (the estRank=1 samples at the peak had board size 1-2, below the >=7 gate). No false victory.
+
+But it surfaced a real bug: the life logged **Level 24** for that L45 Overlord. The level scraper is noisy, and the old jump-guard locked onto a low read and rejected the true climb to 45, understating fitness (~3%) and corrupting the level records. Fixed by flooring level to the reliably-read **class**: you only become Sniper at 15, Overseer at 30, Overlord at 45, so the level is clamped into its class band and a wild misread collapses to the class floor (Overlord-reads-24 -> 45; a Sniper that misreads 45 -> rejected to 15). This is a measurement fix, not a behavior change, so the drone-screen A/B stays clean. The optimizer had already captured the life's fitness (28,877) in a candidate; it isn't champion yet only because that candidate's second life was weak - robust-mean correctly waiting for consistency rather than crowning a one-off.
+
 ## 019 - 2026-06-12 - Verdict: the drone screen works (and the bot reached L35/10.7k)
 
 Letting v15 run banked a real sample, and the drone screen (#2) confirms. The verdict 018 left pending, now with n=15 fled encounters instead of 4:

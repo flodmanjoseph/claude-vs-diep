@@ -51,10 +51,17 @@ function trustScore(s) {
   pendingScore = s;
   return lastGoodScore || null; // hold the last trusted value while this jump is unconfirmed
 }
-function trustLevel(l) {
-  if (l == null) return lastGoodLevel || 1;
-  if (lastGoodLevel > 0 && l > lastGoodLevel + 8) { log({ event: 'level_glitch_rejected', read: l, prev: lastGoodLevel }); return lastGoodLevel; }
-  lastGoodLevel = l; return l;
+// Class is a far more reliable read than the noisy level scraper, and it pins a level band: you only
+// become Sniper at 15, Overseer at 30, Overlord at 45. Clamp the level read into its class band so a
+// misread can't drag it out (the old jump-guard locked onto a low value and reported L24 for a real
+// L45 Overlord, understating fitness and corrupting the records). A read wildly outside the band
+// collapses to the class floor.
+const CLASS_FLOOR = { Tank: 1, Sniper: 15, Overseer: 30, Overlord: 45, Smasher: 30, Spike: 45 };
+const CLASS_CEIL = { Tank: 16, Sniper: 31, Overseer: 46, Overlord: 60, Smasher: 46, Spike: 60 };
+function trustLevel(l, cls) {
+  const floor = CLASS_FLOOR[cls] ?? 1, ceil = CLASS_CEIL[cls] ?? 60;
+  if (l == null || l < floor - 2 || l > ceil + 2) { lastGoodLevel = Math.max(floor, lastGoodLevel || floor); return lastGoodLevel; }
+  lastGoodLevel = Math.max(floor, Math.min(ceil, l)); return lastGoodLevel;
 }
 async function applyNextDoctrine() {
   lifeMaxScore = 0; lifeMaxLevel = 0;
@@ -174,7 +181,7 @@ async function reboot(reason) {
 let curClass = 'Tank';
 let curLevel = 1;
 const doneSteps = new Set();
-function resetUpgrades() { curClass = 'Tank'; curLevel = 1; doneSteps.clear(); }
+function resetUpgrades() { curClass = 'Tank'; curLevel = 1; doneSteps.clear(); lastGoodLevel = 0; lastGoodScore = 0; pendingScore = null; }
 
 async function takeUpgrades() {
   const lc = await readLevelClass(page);
@@ -274,7 +281,7 @@ while (true) {
     for (const h of hlog) log({ event: 'hunter_encounter', ...h, lvl: curLevel });
     const { leaderMax, myScore: rawScore, board, boardSize, estRank } = await readRank();
     const myScore = trustScore(rawScore); // null if this sample was a glitch
-    const trustedLevel = trustLevel(curLevel);
+    const trustedLevel = trustLevel(curLevel, curClass);
     if (myScore) lifeMaxScore = Math.max(lifeMaxScore, myScore);
     lifeMaxLevel = Math.max(lifeMaxLevel, trustedLevel);
     if (estRank != null) bestRank = Math.min(bestRank, estRank);
@@ -326,7 +333,7 @@ while (true) {
       const shotPath = evidence(`death-${shiftId}-${deaths}.png`);
       await page.screenshot({ path: shotPath }).catch(() => {});
       const lastState = await page.evaluate(() => window.__readState?.() ?? null).catch(() => null);
-      lifeMaxLevel = Math.max(lifeMaxLevel, trustLevel(curLevel));
+      lifeMaxLevel = Math.max(lifeMaxLevel, trustLevel(curLevel, curClass));
       log({ event: 'death', n: deaths, lifeMs: life, cls: curClass, lvl: curLevel, screenshot: path.basename(shotPath), enemiesNear: lastState?.enemies?.slice(0, 3) ?? [] });
       console.log(`death #${deaths} after ${(life / 1000).toFixed(0)}s as ${curClass} L${curLevel}`);
       scoreLife();
