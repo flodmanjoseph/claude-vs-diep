@@ -2,6 +2,23 @@
 
 Newest entries at the top.
 
+## 019 - 2026-06-12 - Verdict: the drone screen works (and the bot reached L35/10.7k)
+
+Letting v15 run banked a real sample, and the drone screen (#2) confirms. The verdict 018 left pending, now with n=15 fled encounters instead of 4:
+
+| metric | v14 screen OFF | v15 screen ON |
+|---|---|---|
+| L30+ deaths (all) | 85% (6/7) | 23% (9/38) |
+| fled-case deaths | 75% (3/4) | 33% (5/15) |
+| hunters held to (fled minDist median) | 186px | 294px |
+| best life | 6,843 @ L30 | 10,677 @ L35 |
+
+The effect held as the sample grew 4x: fled-case death roughly halved, overall L30+ death rate fell from 85% to 23%, and drones screening the hunter kept it ~108px farther off. Driving drones onto a faster ranged hunter, instead of aiming at the nearest threat, is the right counter. Better survival also translated into reach: the bot hit **Overseer L35 / 10,677**, its best in recent memory and briefly estRank 3 in a quieter arena (leader 67k) - verified a real climbing-score life, not a glitch.
+
+Caveat held honest: the v14 baseline was one 7-encounter shift, and arena variance is large, so this is "strong and consistent" rather than airtight. But the direction is unambiguous across every metric and two sample sizes. Keeping the drone screen on.
+
+Next lever in the bench: the edge-farming bias (built, still off) for the convergence geometry, once the drone-screen survival has banked into the ES champion over more lives. One change at a time.
+
 ## 018 - 2026-06-12 - The data spoke: hunters out-run our flight. Drone screen on (v15)
 
 v14's hunter-encounter instrumentation did exactly its job: it answered the question with numbers instead of a hunch, and the answer changed the plan.
