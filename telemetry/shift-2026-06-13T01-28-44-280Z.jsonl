@@ -28,3 +28,464 @@
 {"t":1781314235421,"event":"heartbeat","elapsed":105385,"alive":true,"life":106190,"deaths":0,"cls":"Sniper","lvl":20,"mode":"farm","myScore":1925,"leaderMax":107900,"estRank":4,"boardSize":3,"optGen":7}
 {"t":1781314240666,"event":"heartbeat","elapsed":110630,"alive":true,"life":111435,"deaths":0,"cls":"Sniper","lvl":21,"mode":"farm","myScore":2130,"leaderMax":54000,"estRank":5,"boardSize":4,"optGen":7}
 {"t":1781314245924,"event":"heartbeat","elapsed":115888,"alive":true,"life":116693,"deaths":0,"cls":"Sniper","lvl":21,"mode":"kite-farm+dodge","myScore":2300,"leaderMax":85700,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314251170,"event":"heartbeat","elapsed":121129,"alive":true,"life":121939,"deaths":0,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2365,"leaderMax":199700,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314256502,"event":"heartbeat","elapsed":126456,"alive":true,"life":127271,"deaths":0,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2430,"leaderMax":199900,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314261752,"event":"heartbeat","elapsed":131711,"alive":true,"life":132521,"deaths":0,"cls":"Sniper","lvl":22,"mode":"kite-farm","myScore":2535,"leaderMax":200100,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314266997,"event":"heartbeat","elapsed":136958,"alive":true,"life":137766,"deaths":0,"cls":"Sniper","lvl":22,"mode":"escape","myScore":2565,"leaderMax":200500,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314272247,"event":"heartbeat","elapsed":142205,"alive":true,"life":143016,"deaths":0,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2625,"leaderMax":75800,"estRank":5,"boardSize":12,"optGen":7}
+{"t":1781314277559,"event":"heartbeat","elapsed":147522,"alive":true,"life":148328,"deaths":0,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2805,"leaderMax":200800,"estRank":2,"boardSize":6,"optGen":7}
+{"t":1781314282808,"event":"heartbeat","elapsed":152768,"alive":true,"life":153577,"deaths":0,"cls":"Sniper","lvl":23,"mode":"farm","myScore":2845,"leaderMax":77100,"estRank":10,"boardSize":9,"optGen":7}
+{"t":1781314288064,"event":"heartbeat","elapsed":158017,"alive":true,"life":158833,"deaths":0,"cls":"Sniper","lvl":23,"mode":"farm","myScore":2905,"leaderMax":77600,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781314293302,"event":"heartbeat","elapsed":163267,"alive":true,"life":164071,"deaths":0,"cls":"Sniper","lvl":23,"mode":"farm","myScore":3015,"leaderMax":57500,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314298630,"event":"heartbeat","elapsed":168585,"alive":true,"life":169399,"deaths":0,"cls":"Sniper","lvl":24,"mode":"kite-farm","myScore":3090,"leaderMax":58300,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314303880,"event":"heartbeat","elapsed":173840,"alive":true,"life":174649,"deaths":0,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3157,"leaderMax":79700,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781314309142,"event":"heartbeat","elapsed":179092,"alive":true,"life":179911,"deaths":0,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3300,"leaderMax":201900,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314314392,"event":"heartbeat","elapsed":184355,"alive":true,"life":185161,"deaths":0,"cls":"Sniper","lvl":25,"mode":"kite-farm","myScore":3570,"leaderMax":81500,"estRank":7,"boardSize":6,"optGen":7}
+{"t":1781314319695,"event":"heartbeat","elapsed":189653,"alive":true,"life":190464,"deaths":0,"cls":"Sniper","lvl":25,"mode":"escape","myScore":3755,"leaderMax":61800,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314324947,"event":"heartbeat","elapsed":194906,"alive":true,"life":195716,"deaths":0,"cls":"Sniper","lvl":25,"mode":"escape+dodge","myScore":3795,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781314330208,"event":"heartbeat","elapsed":200166,"alive":true,"life":200977,"deaths":0,"cls":"Sniper","lvl":25,"mode":"kite-farm","myScore":3860,"leaderMax":82100,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314335458,"event":"heartbeat","elapsed":205423,"alive":true,"life":206227,"deaths":0,"cls":"Sniper","lvl":26,"mode":"farm","myScore":3935,"leaderMax":82500,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781314340758,"event":"heartbeat","elapsed":210719,"alive":true,"life":211527,"deaths":0,"cls":"Sniper","lvl":26,"mode":"spawn-escape","myScore":4065,"leaderMax":45600,"estRank":11,"boardSize":10,"optGen":7}
+{"t":1781314346025,"event":"heartbeat","elapsed":215975,"alive":true,"life":216794,"deaths":0,"cls":"Sniper","lvl":26,"mode":"farm","myScore":4075,"leaderMax":65800,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314351281,"event":"heartbeat","elapsed":221236,"alive":true,"life":222050,"deaths":0,"cls":"Sniper","lvl":26,"mode":"escape","myScore":4105,"leaderMax":83200,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314356525,"event":"heartbeat","elapsed":226487,"alive":true,"life":227294,"deaths":0,"cls":"Sniper","lvl":26,"mode":"farm","myScore":4180,"leaderMax":83900,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314361837,"event":"heartbeat","elapsed":231790,"alive":true,"life":232606,"deaths":0,"cls":"Sniper","lvl":26,"mode":"farm+dodge","myScore":4220,"leaderMax":204300,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314367090,"event":"heartbeat","elapsed":237047,"alive":true,"life":237859,"deaths":0,"cls":"Sniper","lvl":26,"mode":"spawn-escape","myScore":4240,"leaderMax":204900,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781314372344,"event":"heartbeat","elapsed":242300,"alive":true,"life":243113,"deaths":0,"cls":"Sniper","lvl":26,"mode":"escape","myScore":4250,"leaderMax":68200,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781314377597,"event":"heartbeat","elapsed":247559,"alive":true,"life":248366,"deaths":0,"cls":"Sniper","lvl":26,"mode":"farm","myScore":4320,"leaderMax":207000,"estRank":9,"boardSize":8,"optGen":7}
+{"t":1781314382914,"event":"heartbeat","elapsed":252869,"alive":true,"life":253683,"deaths":0,"cls":"Sniper","lvl":27,"mode":"farm","myScore":4440,"leaderMax":207300,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781314388164,"event":"heartbeat","elapsed":258127,"alive":true,"life":258933,"deaths":0,"cls":"Sniper","lvl":27,"mode":"kite-farm","myScore":4635,"leaderMax":55800,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781314393415,"event":"heartbeat","elapsed":263372,"alive":true,"life":264184,"deaths":0,"cls":"Sniper","lvl":27,"mode":"farm","myScore":4760,"leaderMax":212400,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314398669,"event":"heartbeat","elapsed":268624,"alive":true,"life":269438,"deaths":0,"cls":"Sniper","lvl":27,"mode":"farm","myScore":5005,"leaderMax":87700,"estRank":10,"boardSize":9,"optGen":7}
+{"t":1781314403974,"event":"heartbeat","elapsed":273936,"alive":true,"life":274743,"deaths":0,"cls":"Sniper","lvl":28,"mode":"escape+dodge","myScore":5085,"leaderMax":89100,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314409225,"event":"heartbeat","elapsed":279187,"alive":true,"life":279994,"deaths":0,"cls":"Sniper","lvl":28,"mode":"escape","myScore":5085,"leaderMax":89600,"estRank":5,"boardSize":5,"optGen":7}
+{"t":1781314414481,"event":"heartbeat","elapsed":284436,"alive":true,"life":285250,"deaths":0,"cls":"Sniper","lvl":28,"mode":"escape","myScore":5105,"leaderMax":129400,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781314419731,"event":"heartbeat","elapsed":289690,"alive":true,"life":290500,"deaths":0,"cls":"Sniper","lvl":28,"mode":"farm","myScore":5385,"leaderMax":221100,"estRank":4,"boardSize":4,"optGen":7}
+{"t":1781314425032,"event":"heartbeat","elapsed":294988,"alive":true,"life":295801,"deaths":0,"cls":"Sniper","lvl":29,"mode":"escape","myScore":5570,"leaderMax":73100,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314430281,"event":"heartbeat","elapsed":300244,"alive":true,"life":301050,"deaths":0,"cls":"Sniper","lvl":29,"mode":"escape+dodge","myScore":5570,"leaderMax":73700,"estRank":5,"boardSize":5,"optGen":7}
+{"t":1781314435539,"event":"heartbeat","elapsed":305494,"alive":true,"life":306308,"deaths":0,"cls":"Sniper","lvl":29,"mode":"spawn-escape+dodge","myScore":5570,"leaderMax":92000,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781314440801,"event":"heartbeat","elapsed":310759,"alive":true,"life":311570,"deaths":0,"cls":"Sniper","lvl":29,"mode":"spawn-escape+dodge","myScore":5572,"leaderMax":92700,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781314446113,"event":"heartbeat","elapsed":316072,"alive":true,"life":316882,"deaths":0,"cls":"Sniper","lvl":29,"mode":"spawn-escape+dodge","myScore":5580,"leaderMax":94300,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781314451384,"event":"heartbeat","elapsed":321326,"alive":false,"life":322153,"deaths":0,"cls":"Sniper","lvl":29,"mode":"crowd-escape","myScore":5582,"leaderMax":75600,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314451438,"event":"death","n":1,"lifeMs":322154,"cls":"Sniper","lvl":29,"screenshot":"death-2026-06-13T01-28-44-280Z-1.png","enemiesNear":[{"x":656,"y":360,"r":21,"dx":16,"dy":0,"dist":16,"self":false,"vx":0,"vy":0},{"x":656,"y":360,"r":19,"dx":16,"dy":0,"dist":16,"self":false,"vx":0,"vy":0}]}
+{"t":1781314451439,"event":"life_scored","mode":"es","build":"overlord","fitness":6871,"score":5582,"level":29,"lifeMs":322208,"gen":7,"champion":18895}
+{"t":1781314453559,"event":"respawned","alive":true}
+{"t":1781314453562,"event":"doctrine_assigned","version":"opt-g7-3","status":{"gen":7,"evalsThisGen":"11/24","totalEvals":156,"champion":18895}}
+{"t":1781314454216,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":17}
+{"t":1781314454772,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781314454891,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781314456392,"event":"heartbeat","elapsed":326346,"alive":true,"life":2828,"deaths":1,"cls":"Sniper","lvl":17,"mode":"spawn-escape","myScore":1109,"leaderMax":76300,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781314461649,"event":"heartbeat","elapsed":331608,"alive":true,"life":8085,"deaths":1,"cls":"Sniper","lvl":17,"mode":"farm","myScore":1129,"leaderMax":95300,"estRank":8,"boardSize":7,"optGen":7}
+{"t":1781314466971,"event":"heartbeat","elapsed":336931,"alive":true,"life":13407,"deaths":1,"cls":"Sniper","lvl":17,"mode":"crowd-escape","myScore":1174,"leaderMax":118800,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314472230,"event":"heartbeat","elapsed":342187,"alive":true,"life":18666,"deaths":1,"cls":"Sniper","lvl":17,"mode":"farm","myScore":1234,"leaderMax":38200,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314477483,"event":"heartbeat","elapsed":347446,"alive":true,"life":23919,"deaths":1,"cls":"Sniper","lvl":17,"mode":"farm","myScore":1399,"leaderMax":122100,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314482763,"event":"heartbeat","elapsed":352705,"alive":true,"life":29199,"deaths":1,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1549,"leaderMax":42100,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314488091,"event":"heartbeat","elapsed":358054,"alive":true,"life":34527,"deaths":1,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1709,"leaderMax":46100,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314493350,"event":"heartbeat","elapsed":363311,"alive":true,"life":39786,"deaths":1,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1774,"leaderMax":134200,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314498612,"event":"heartbeat","elapsed":368572,"alive":true,"life":45048,"deaths":1,"cls":"Sniper","lvl":20,"mode":"farm","myScore":1844,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781314503877,"event":"heartbeat","elapsed":373839,"alive":true,"life":50313,"deaths":1,"cls":"Sniper","lvl":20,"mode":"farm","myScore":1914,"leaderMax":52300,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314509199,"event":"heartbeat","elapsed":379160,"alive":true,"life":55635,"deaths":1,"cls":"Sniper","lvl":20,"mode":"farm","myScore":1954,"leaderMax":67500,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314514474,"event":"heartbeat","elapsed":384416,"alive":true,"life":60910,"deaths":1,"cls":"Sniper","lvl":20,"mode":"farm","myScore":2049,"leaderMax":68300,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314519725,"event":"heartbeat","elapsed":389688,"alive":true,"life":66161,"deaths":1,"cls":"Sniper","lvl":21,"mode":"spawn-escape+dodge","myScore":2079,"leaderMax":33800,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781314523446,"event":"death","n":2,"lifeMs":69795,"cls":"Sniper","lvl":21,"screenshot":"death-2026-06-13T01-28-44-280Z-2.png","enemiesNear":[{"x":637,"y":369,"r":22,"dx":-3,"dy":9,"dist":9.486832980505138,"self":false,"vx":0,"vy":0},{"x":637,"y":369,"r":20,"dx":-3,"dy":9,"dist":9.486832980505138,"self":false,"vx":0,"vy":0}]}
+{"t":1781314523447,"event":"life_scored","mode":"es","build":"overlord","fitness":2947,"score":2079,"level":21,"lifeMs":69883,"gen":7,"champion":18895}
+{"t":1781314525565,"event":"respawned","alive":true}
+{"t":1781314525567,"event":"doctrine_assigned","version":"opt-g7-4","status":{"gen":7,"evalsThisGen":"12/24","totalEvals":157,"champion":18895}}
+{"t":1781314526377,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":15}
+{"t":1781314526550,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781314526782,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781314527588,"event":"heartbeat","elapsed":396737,"alive":true,"life":2021,"deaths":2,"cls":"Sniper","lvl":15,"mode":"spawn-escape","myScore":787,"leaderMax":62500,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314532106,"event":"heartbeat","elapsed":402063,"alive":true,"life":6539,"deaths":2,"cls":"Sniper","lvl":15,"mode":"farm","myScore":817,"leaderMax":126900,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314537362,"event":"heartbeat","elapsed":407321,"alive":true,"life":11795,"deaths":2,"cls":"Sniper","lvl":15,"mode":"farm","myScore":887,"leaderMax":34200,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781314542618,"event":"heartbeat","elapsed":412579,"alive":true,"life":17051,"deaths":2,"cls":"Sniper","lvl":16,"mode":"farm","myScore":987,"leaderMax":64500,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314547956,"event":"heartbeat","elapsed":417918,"alive":true,"life":22389,"deaths":2,"cls":"Sniper","lvl":16,"mode":"farm","myScore":1102,"leaderMax":34500,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781314553216,"event":"heartbeat","elapsed":423177,"alive":true,"life":27649,"deaths":2,"cls":"Sniper","lvl":17,"mode":"crowd-escape","myScore":1207,"leaderMax":55300,"estRank":2,"boardSize":2,"optGen":7}
+{"t":1781314558480,"event":"heartbeat","elapsed":428435,"alive":true,"life":32913,"deaths":2,"cls":"Sniper","lvl":17,"mode":"farm","myScore":1247,"leaderMax":72800,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314563736,"event":"heartbeat","elapsed":433694,"alive":true,"life":38169,"deaths":2,"cls":"Sniper","lvl":17,"mode":"farm","myScore":1322,"leaderMax":131600,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314569063,"event":"heartbeat","elapsed":439020,"alive":true,"life":43496,"deaths":2,"cls":"Sniper","lvl":18,"mode":"farm","myScore":1392,"leaderMax":132300,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781314574327,"event":"heartbeat","elapsed":444288,"alive":true,"life":48760,"deaths":2,"cls":"Sniper","lvl":18,"mode":"escape+dodge","myScore":1432,"leaderMax":133400,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314579624,"event":"heartbeat","elapsed":449578,"alive":true,"life":54057,"deaths":2,"cls":"Sniper","lvl":18,"mode":"farm+dodge","myScore":1497,"leaderMax":133900,"estRank":8,"boardSize":7,"optGen":7}
+{"t":1781314584884,"event":"heartbeat","elapsed":454846,"alive":true,"life":59317,"deaths":2,"cls":"Sniper","lvl":19,"mode":"spawn-escape","myScore":1527,"leaderMax":134700,"estRank":8,"boardSize":7,"optGen":7}
+{"t":1781314590206,"event":"heartbeat","elapsed":460162,"alive":true,"life":64639,"deaths":2,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1582,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781314595472,"event":"heartbeat","elapsed":465428,"alive":true,"life":69905,"deaths":2,"cls":"Sniper","lvl":19,"mode":"escape+dodge","myScore":1877,"leaderMax":48200,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314600740,"event":"heartbeat","elapsed":470694,"alive":true,"life":75173,"deaths":2,"cls":"Sniper","lvl":27,"mode":"crowd-escape+dodge","myScore":4581,"leaderMax":139300,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314605995,"event":"heartbeat","elapsed":475953,"alive":false,"life":80428,"deaths":2,"cls":"Sniper","lvl":27,"mode":"crowd-escape","myScore":4581,"leaderMax":139900,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314606062,"event":"death","n":3,"lifeMs":80429,"cls":"Sniper","lvl":27,"screenshot":"death-2026-06-13T01-28-44-280Z-3.png","enemiesNear":[{"x":618,"y":376,"r":20,"dx":-22,"dy":16,"dist":27.202941017470888,"self":false,"vx":0,"vy":0},{"x":618,"y":376,"r":18,"dx":-22,"dy":16,"dist":27.202941017470888,"self":false,"vx":0,"vy":0}]}
+{"t":1781314606062,"event":"life_scored","mode":"es","build":"overlord","fitness":5693,"score":4581,"level":27,"lifeMs":80495,"gen":7,"champion":18895}
+{"t":1781314607479,"event":"respawned","alive":true}
+{"t":1781314607483,"event":"doctrine_assigned","version":"opt-g7-4","status":{"gen":7,"evalsThisGen":"13/24","totalEvals":158,"champion":18895}}
+{"t":1781314608136,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":17}
+{"t":1781314608539,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781314611031,"event":"heartbeat","elapsed":480990,"alive":true,"life":3547,"deaths":3,"cls":"Sniper","lvl":17,"mode":"spawn-escape","myScore":1109,"leaderMax":13900,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781314616287,"event":"heartbeat","elapsed":486244,"alive":true,"life":8803,"deaths":3,"cls":"Sniper","lvl":17,"mode":"farm","myScore":1229,"leaderMax":141500,"estRank":12,"boardSize":11,"optGen":7}
+{"t":1781314621555,"event":"heartbeat","elapsed":491514,"alive":true,"life":14071,"deaths":3,"cls":"Sniper","lvl":17,"mode":"farm","myScore":1314,"leaderMax":51000,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781314626812,"event":"heartbeat","elapsed":496773,"alive":true,"life":19328,"deaths":3,"cls":"Sniper","lvl":18,"mode":"escape+dodge","myScore":1474,"leaderMax":91900,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314632129,"event":"heartbeat","elapsed":502089,"alive":true,"life":24645,"deaths":3,"cls":"Sniper","lvl":18,"mode":"farm","myScore":1524,"leaderMax":93600,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781314637389,"event":"heartbeat","elapsed":507346,"alive":true,"life":29905,"deaths":3,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1574,"leaderMax":94800,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781314642735,"event":"heartbeat","elapsed":512693,"alive":true,"life":35251,"deaths":3,"cls":"Sniper","lvl":19,"mode":"kite-farm","myScore":1709,"leaderMax":82900,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314647995,"event":"heartbeat","elapsed":517947,"alive":true,"life":40511,"deaths":3,"cls":"Sniper","lvl":20,"mode":"escape+dodge","myScore":1904,"leaderMax":83400,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314653325,"event":"heartbeat","elapsed":523279,"alive":true,"life":45841,"deaths":3,"cls":"Sniper","lvl":20,"mode":"farm","myScore":2064,"leaderMax":52300,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781314658584,"event":"heartbeat","elapsed":528545,"alive":true,"life":51100,"deaths":3,"cls":"Sniper","lvl":21,"mode":"farm","myScore":2159,"leaderMax":144200,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781314663841,"event":"heartbeat","elapsed":533797,"alive":true,"life":56357,"deaths":3,"cls":"Sniper","lvl":21,"mode":"farm","myScore":2244,"leaderMax":145500,"estRank":3,"boardSize":3,"optGen":7}
+{"t":1781314669115,"event":"heartbeat","elapsed":539063,"alive":true,"life":61631,"deaths":3,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2419,"leaderMax":146600,"estRank":7,"boardSize":6,"optGen":7}
+{"t":1781314674445,"event":"heartbeat","elapsed":544404,"alive":true,"life":66961,"deaths":3,"cls":"Sniper","lvl":22,"mode":"kite-farm","myScore":2594,"leaderMax":149000,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314679714,"event":"heartbeat","elapsed":549665,"alive":true,"life":72230,"deaths":3,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2674,"leaderMax":151400,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781314684963,"event":"heartbeat","elapsed":554926,"alive":true,"life":77479,"deaths":3,"cls":"Sniper","lvl":23,"mode":"escape+dodge","myScore":2734,"leaderMax":151900,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781314690228,"event":"heartbeat","elapsed":560183,"alive":true,"life":82744,"deaths":3,"cls":"Sniper","lvl":23,"mode":"escape","myScore":2804,"leaderMax":101000,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781314695553,"event":"heartbeat","elapsed":565512,"alive":true,"life":88069,"deaths":3,"cls":"Sniper","lvl":23,"mode":"crowd-escape+dodge","myScore":2834,"leaderMax":47500,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781314700815,"event":"heartbeat","elapsed":570770,"alive":true,"life":93331,"deaths":3,"cls":"Sniper","lvl":23,"mode":"farm","myScore":2844,"leaderMax":153000,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314706085,"event":"heartbeat","elapsed":576039,"alive":true,"life":98601,"deaths":3,"cls":"Sniper","lvl":23,"mode":"kite-farm+dodge","myScore":2894,"leaderMax":153300,"estRank":9,"boardSize":8,"optGen":7}
+{"t":1781314711346,"event":"heartbeat","elapsed":581301,"alive":true,"life":103862,"deaths":3,"cls":"Sniper","lvl":23,"mode":"escape","myScore":2894,"leaderMax":153800,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781314716679,"event":"heartbeat","elapsed":586636,"alive":false,"life":109195,"deaths":3,"cls":"Sniper","lvl":23,"mode":"crowd-escape+dodge","myScore":2924,"leaderMax":103700,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314716766,"event":"death","n":4,"lifeMs":109195,"cls":"Sniper","lvl":23,"screenshot":"death-2026-06-13T01-28-44-280Z-4.png","enemiesNear":[{"x":636,"y":362,"r":22,"dx":-4,"dy":2,"dist":4.47213595499958,"self":false,"vx":0,"vy":0},{"x":636,"y":362,"r":20,"dx":-4,"dy":2,"dist":4.47213595499958,"self":false,"vx":0,"vy":0},{"x":683,"y":571,"r":19,"dx":43,"dy":211,"dist":215.33694527414474,"self":false,"vx":0,"vy":0}]}
+{"t":1781314716767,"event":"life_scored","mode":"es","build":"overlord","fitness":3888,"score":2924,"level":23,"lifeMs":109283,"gen":7,"champion":18895}
+{"t":1781314718800,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781314718884,"event":"respawned","alive":true}
+{"t":1781314718885,"event":"doctrine_assigned","version":"opt-g7-4","status":{"gen":7,"evalsThisGen":"14/24","totalEvals":159,"champion":18895}}
+{"t":1781314719526,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":15}
+{"t":1781314719930,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781314721955,"event":"heartbeat","elapsed":591910,"alive":true,"life":3070,"deaths":4,"cls":"Sniper","lvl":15,"mode":"spawn-escape","myScore":787,"leaderMax":154100,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314727209,"event":"heartbeat","elapsed":597173,"alive":true,"life":8324,"deaths":4,"cls":"Sniper","lvl":15,"mode":"farm","myScore":807,"leaderMax":157400,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781314732457,"event":"heartbeat","elapsed":602421,"alive":true,"life":13572,"deaths":4,"cls":"Sniper","lvl":15,"mode":"crowd-escape+dodge","myScore":857,"leaderMax":157600,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314737802,"event":"heartbeat","elapsed":607753,"alive":true,"life":18917,"deaths":4,"cls":"Sniper","lvl":15,"mode":"crowd-escape+dodge","myScore":857,"leaderMax":62600,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314743062,"event":"heartbeat","elapsed":613015,"alive":true,"life":24177,"deaths":4,"cls":"Sniper","lvl":15,"mode":"crowd-escape","myScore":857,"leaderMax":158500,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781314748310,"event":"heartbeat","elapsed":618274,"alive":true,"life":29425,"deaths":4,"cls":"Sniper","lvl":15,"mode":"farm","myScore":937,"leaderMax":159300,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314753582,"event":"heartbeat","elapsed":623536,"alive":true,"life":34697,"deaths":4,"cls":"Sniper","lvl":16,"mode":"escape+dodge","myScore":1022,"leaderMax":160300,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314755747,"event":"death","n":5,"lifeMs":36769,"cls":"Sniper","lvl":16,"screenshot":"death-2026-06-13T01-28-44-280Z-5.png","enemiesNear":[{"x":631,"y":366,"r":22,"dx":-9,"dy":6,"dist":10.816653826391969,"self":false,"vx":0,"vy":0},{"x":631,"y":366,"r":20,"dx":-9,"dy":6,"dist":10.816653826391969,"self":false,"vx":0,"vy":0},{"x":524,"y":41,"r":13,"dx":-116,"dy":-319,"dist":339.43629741086914,"self":false,"vx":0,"vy":0}]}
+{"t":1781314755748,"event":"life_scored","mode":"es","build":"overlord","fitness":1677,"score":1022,"level":16,"lifeMs":36863,"gen":7,"champion":18895}
+{"t":1781314757994,"event":"respawned","alive":true}
+{"t":1781314758003,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781314758004,"event":"doctrine_assigned","version":"opt-g7-5","status":{"gen":7,"evalsThisGen":"15/24","totalEvals":160,"champion":18895}}
+{"t":1781314759214,"event":"heartbeat","elapsed":629175,"alive":true,"life":1210,"deaths":5,"cls":"Tank","lvl":13,"mode":"spawn-escape","myScore":538,"leaderMax":160900,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781314764475,"event":"heartbeat","elapsed":634432,"alive":true,"life":6471,"deaths":5,"cls":"Tank","lvl":13,"mode":"farm","myScore":538,"leaderMax":161500,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314767520,"event":"pageerror","text":"[SushiLogger] Logger not initialized, performance not logged for: asinImageRender"}
+{"t":1781314769798,"event":"heartbeat","elapsed":639755,"alive":true,"life":11794,"deaths":5,"cls":"Tank","lvl":13,"mode":"kite-farm","myScore":598,"leaderMax":162300,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781314769917,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781314769918,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781314775055,"event":"heartbeat","elapsed":645011,"alive":true,"life":17051,"deaths":5,"cls":"Tank","lvl":13,"mode":"spawn-escape","myScore":638,"leaderMax":163000,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314780377,"event":"heartbeat","elapsed":650338,"alive":true,"life":22373,"deaths":5,"cls":"Tank","lvl":14,"mode":"farm","myScore":693,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781314785643,"event":"heartbeat","elapsed":655601,"alive":true,"life":27639,"deaths":5,"cls":"Tank","lvl":14,"mode":"escape","myScore":753,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781314789535,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":15}
+{"t":1781314789937,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781314791150,"event":"heartbeat","elapsed":661109,"alive":true,"life":33146,"deaths":5,"cls":"Sniper","lvl":15,"mode":"farm","myScore":816,"leaderMax":168400,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781314796478,"event":"heartbeat","elapsed":666435,"alive":true,"life":38474,"deaths":5,"cls":"Sniper","lvl":15,"mode":"farm","myScore":838,"leaderMax":169100,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314801750,"event":"heartbeat","elapsed":671710,"alive":true,"life":43746,"deaths":5,"cls":"Sniper","lvl":15,"mode":"farm","myScore":848,"leaderMax":169600,"estRank":7,"boardSize":6,"optGen":7}
+{"t":1781314807013,"event":"heartbeat","elapsed":676967,"alive":true,"life":49009,"deaths":5,"cls":"Sniper","lvl":16,"mode":"farm","myScore":1048,"leaderMax":169700,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314812274,"event":"heartbeat","elapsed":682233,"alive":true,"life":54270,"deaths":5,"cls":"Sniper","lvl":16,"mode":"farm","myScore":1133,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781314817585,"event":"heartbeat","elapsed":687542,"alive":true,"life":59581,"deaths":5,"cls":"Sniper","lvl":17,"mode":"farm","myScore":1198,"leaderMax":73600,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781314822844,"event":"heartbeat","elapsed":692805,"alive":true,"life":64840,"deaths":5,"cls":"Sniper","lvl":17,"mode":"crowd-escape","myScore":1218,"leaderMax":197300,"estRank":9,"boardSize":10,"optGen":7}
+{"t":1781314828102,"event":"heartbeat","elapsed":698061,"alive":true,"life":70098,"deaths":5,"cls":"Sniper","lvl":17,"mode":"farm","myScore":1258,"leaderMax":61600,"estRank":3,"boardSize":3,"optGen":7}
+{"t":1781314833464,"event":"heartbeat","elapsed":703421,"alive":true,"life":75460,"deaths":5,"cls":"Sniper","lvl":17,"mode":"kite-farm","myScore":1333,"leaderMax":74100,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781314838781,"event":"heartbeat","elapsed":708734,"alive":true,"life":80777,"deaths":5,"cls":"Sniper","lvl":18,"mode":"farm","myScore":1423,"leaderMax":199700,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314844053,"event":"heartbeat","elapsed":714010,"alive":true,"life":86049,"deaths":5,"cls":"Sniper","lvl":18,"mode":"escape","myScore":1473,"leaderMax":52700,"estRank":4,"boardSize":12,"optGen":7}
+{"t":1781314849302,"event":"heartbeat","elapsed":719261,"alive":true,"life":91298,"deaths":5,"cls":"Sniper","lvl":18,"mode":"kite-farm","myScore":1483,"leaderMax":201200,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314854554,"event":"heartbeat","elapsed":724511,"alive":true,"life":96550,"deaths":5,"cls":"Sniper","lvl":19,"mode":"crowd-escape+dodge","myScore":1518,"leaderMax":63200,"estRank":2,"boardSize":2,"optGen":7}
+{"t":1781314859894,"event":"heartbeat","elapsed":729852,"alive":true,"life":101890,"deaths":5,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1583,"leaderMax":202000,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314864963,"event":"heartbeat","elapsed":734918,"alive":true,"life":106959,"deaths":5,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1663,"leaderMax":202700,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781314870223,"event":"heartbeat","elapsed":740177,"alive":true,"life":112219,"deaths":5,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1753,"leaderMax":203400,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314875476,"event":"heartbeat","elapsed":745439,"alive":true,"life":117472,"deaths":5,"cls":"Sniper","lvl":20,"mode":"farm","myScore":1833,"leaderMax":204500,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781314880787,"event":"heartbeat","elapsed":750752,"alive":true,"life":122783,"deaths":5,"cls":"Sniper","lvl":20,"mode":"farm","myScore":1928,"leaderMax":204900,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314886049,"event":"heartbeat","elapsed":756004,"alive":true,"life":128045,"deaths":5,"cls":"Sniper","lvl":20,"mode":"farm","myScore":2013,"leaderMax":81700,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781314891310,"event":"heartbeat","elapsed":761263,"alive":true,"life":133306,"deaths":5,"cls":"Sniper","lvl":21,"mode":"kite-farm","myScore":2103,"leaderMax":64700,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781314896569,"event":"heartbeat","elapsed":766525,"alive":true,"life":138565,"deaths":5,"cls":"Sniper","lvl":21,"mode":"kite-farm","myScore":2143,"leaderMax":28500,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781314901886,"event":"heartbeat","elapsed":771847,"alive":true,"life":143882,"deaths":5,"cls":"Sniper","lvl":21,"mode":"farm","myScore":2243,"leaderMax":105600,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314907149,"event":"heartbeat","elapsed":777106,"alive":true,"life":149145,"deaths":5,"cls":"Sniper","lvl":21,"mode":"farm","myScore":2448,"leaderMax":105900,"estRank":3,"boardSize":3,"optGen":7}
+{"t":1781314912401,"event":"heartbeat","elapsed":782360,"alive":true,"life":154397,"deaths":5,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2598,"leaderMax":67100,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314917660,"event":"heartbeat","elapsed":787616,"alive":true,"life":159656,"deaths":5,"cls":"Sniper","lvl":22,"mode":"escape","myScore":2683,"leaderMax":67200,"estRank":3,"boardSize":8,"optGen":7}
+{"t":1781314922984,"event":"heartbeat","elapsed":792935,"alive":true,"life":164980,"deaths":5,"cls":"Sniper","lvl":23,"mode":"farm","myScore":2758,"leaderMax":106100,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314928243,"event":"heartbeat","elapsed":798196,"alive":true,"life":170239,"deaths":5,"cls":"Sniper","lvl":23,"mode":"farm","myScore":2828,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781314933504,"event":"heartbeat","elapsed":803464,"alive":true,"life":175500,"deaths":5,"cls":"Sniper","lvl":23,"mode":"farm","myScore":3033,"leaderMax":115500,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314938767,"event":"heartbeat","elapsed":808723,"alive":true,"life":180763,"deaths":5,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3108,"leaderMax":115600,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314944099,"event":"heartbeat","elapsed":814051,"alive":true,"life":186095,"deaths":5,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3193,"leaderMax":41800,"estRank":11,"boardSize":10,"optGen":7}
+{"t":1781314949354,"event":"heartbeat","elapsed":819310,"alive":true,"life":191350,"deaths":5,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3263,"leaderMax":56100,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314954609,"event":"heartbeat","elapsed":824574,"alive":true,"life":196605,"deaths":5,"cls":"Sniper","lvl":24,"mode":"crowd-escape","myScore":3283,"leaderMax":31000,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781314959932,"event":"heartbeat","elapsed":829893,"alive":true,"life":201928,"deaths":5,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3328,"leaderMax":115900,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781314965261,"event":"heartbeat","elapsed":835225,"alive":true,"life":207257,"deaths":5,"cls":"Sniper","lvl":24,"mode":"kite-farm","myScore":3406,"leaderMax":100100,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781314970531,"event":"heartbeat","elapsed":840484,"alive":true,"life":212527,"deaths":5,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3478,"leaderMax":100200,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781314975790,"event":"heartbeat","elapsed":845748,"alive":true,"life":217786,"deaths":5,"cls":"Sniper","lvl":25,"mode":"farm","myScore":3568,"leaderMax":69000,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781314981056,"event":"heartbeat","elapsed":851013,"alive":true,"life":223052,"deaths":5,"cls":"Sniper","lvl":25,"mode":"farm","myScore":3653,"leaderMax":101500,"estRank":3,"boardSize":3,"optGen":7}
+{"t":1781314986378,"event":"heartbeat","elapsed":856333,"alive":true,"life":228374,"deaths":5,"cls":"Sniper","lvl":25,"mode":"escape","myScore":3708,"leaderMax":116700,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781314990043,"event":"pageerror","text":"Refused to execute script from 'https://ipds.adrta.com/i?__x=GGNFPHEILGCGKG@GCLKEFJKLJJMOEKNPKHLHAFLPHHHLONNNMJ@PIIHGIHPGLOOJHJINJGCGMMFKHIPPOOJHCLNGQJKKIMHKMMMNEGOK@HONGHFLPMPQKI@ECG@G&clid=opx&paid="}
+{"t":1781314991632,"event":"heartbeat","elapsed":861589,"alive":true,"life":233628,"deaths":5,"cls":"Sniper","lvl":25,"mode":"escape","myScore":3728,"leaderMax":48500,"estRank":12,"boardSize":12,"optGen":7}
+{"t":1781314994953,"event":"death","n":6,"lifeMs":236860,"cls":"Sniper","lvl":25,"screenshot":"death-2026-06-13T01-28-44-280Z-6.png","enemiesNear":[{"x":631,"y":352,"r":22,"dx":-9,"dy":-8,"dist":12.041594578792296,"self":false,"vx":0,"vy":0},{"x":631,"y":352,"r":20,"dx":-9,"dy":-8,"dist":12.041594578792296,"self":false,"vx":0,"vy":0},{"x":550,"y":598,"r":21,"dx":-90,"dy":238,"dist":254.4484230644788,"self":false,"vx":0,"vy":0}]}
+{"t":1781314994953,"event":"life_scored","mode":"es","build":"overlord","fitness":4823,"score":3728,"level":25,"lifeMs":236949,"gen":7,"champion":18895}
+{"t":1781314997097,"event":"respawned","alive":true}
+{"t":1781314997100,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781314997105,"event":"doctrine_assigned","version":"opt-g7-5","status":{"gen":7,"evalsThisGen":"16/24","totalEvals":161,"champion":18895}}
+{"t":1781314997754,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":16}
+{"t":1781314998156,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781314998961,"event":"heartbeat","elapsed":868275,"alive":true,"life":1855,"deaths":6,"cls":"Sniper","lvl":16,"mode":"spawn-escape","myScore":938,"leaderMax":62100,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315003487,"event":"heartbeat","elapsed":873448,"alive":false,"life":6381,"deaths":6,"cls":"Sniper","lvl":16,"mode":"spawn-escape","myScore":948,"leaderMax":66800,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781315008745,"event":"heartbeat","elapsed":878699,"alive":true,"life":11639,"deaths":6,"cls":"Sniper","lvl":16,"mode":"farm","myScore":1073,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315013998,"event":"heartbeat","elapsed":883960,"alive":true,"life":16892,"deaths":6,"cls":"Sniper","lvl":16,"mode":"farm","myScore":1143,"leaderMax":42900,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315019261,"event":"heartbeat","elapsed":889222,"alive":true,"life":22155,"deaths":6,"cls":"Sniper","lvl":17,"mode":"farm","myScore":1253,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315021422,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1781315021522,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315021529,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315024399,"event":"heartbeat","elapsed":894360,"alive":true,"life":27293,"deaths":6,"cls":"Sniper","lvl":17,"mode":"farm","myScore":1303,"leaderMax":57800,"estRank":7,"boardSize":6,"optGen":7}
+{"t":1781315029654,"event":"heartbeat","elapsed":899618,"alive":true,"life":32548,"deaths":6,"cls":"Sniper","lvl":18,"mode":"farm","myScore":1363,"leaderMax":72100,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315034927,"event":"heartbeat","elapsed":904880,"alive":true,"life":37821,"deaths":6,"cls":"Sniper","lvl":18,"mode":"farm","myScore":1453,"leaderMax":72500,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315040182,"event":"heartbeat","elapsed":910143,"alive":true,"life":43076,"deaths":6,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1588,"leaderMax":74900,"estRank":8,"boardSize":7,"optGen":7}
+{"t":1781315045528,"event":"heartbeat","elapsed":915485,"alive":true,"life":48422,"deaths":6,"cls":"Sniper","lvl":19,"mode":"kite-farm","myScore":1688,"leaderMax":75100,"estRank":3,"boardSize":3,"optGen":7}
+{"t":1781315050791,"event":"heartbeat","elapsed":920746,"alive":true,"life":53685,"deaths":6,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1738,"leaderMax":53800,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315056137,"event":"heartbeat","elapsed":926099,"alive":true,"life":59031,"deaths":6,"cls":"Sniper","lvl":20,"mode":"farm","myScore":1923,"leaderMax":82200,"estRank":7,"boardSize":6,"optGen":7}
+{"t":1781315061406,"event":"heartbeat","elapsed":931365,"alive":true,"life":64300,"deaths":6,"cls":"Sniper","lvl":20,"mode":"farm","myScore":1973,"leaderMax":83000,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315066722,"event":"heartbeat","elapsed":936680,"alive":true,"life":69616,"deaths":6,"cls":"Sniper","lvl":20,"mode":"kite-farm","myScore":2023,"leaderMax":75900,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315071987,"event":"heartbeat","elapsed":941946,"alive":true,"life":74881,"deaths":6,"cls":"Sniper","lvl":21,"mode":"kite-farm","myScore":2208,"leaderMax":97600,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315077228,"event":"heartbeat","elapsed":947191,"alive":true,"life":80122,"deaths":6,"cls":"Sniper","lvl":21,"mode":"kite-farm","myScore":2288,"leaderMax":76200,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781315082488,"event":"heartbeat","elapsed":952441,"alive":true,"life":85382,"deaths":6,"cls":"Sniper","lvl":21,"mode":"crowd-escape","myScore":2328,"leaderMax":98400,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781315084648,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1781315084862,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315084863,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315084869,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315087698,"event":"heartbeat","elapsed":957652,"alive":true,"life":90592,"deaths":6,"cls":"Sniper","lvl":22,"mode":"kite-farm","myScore":2358,"leaderMax":104400,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315092951,"event":"heartbeat","elapsed":962916,"alive":true,"life":95845,"deaths":6,"cls":"Sniper","lvl":22,"mode":"spawn-escape","myScore":2368,"leaderMax":105500,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781315098210,"event":"heartbeat","elapsed":968167,"alive":true,"life":101103,"deaths":6,"cls":"Sniper","lvl":22,"mode":"crowd-escape","myScore":2378,"leaderMax":106500,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315103481,"event":"heartbeat","elapsed":973432,"alive":true,"life":106375,"deaths":6,"cls":"Sniper","lvl":22,"mode":"farm","myScore":3216,"leaderMax":19600,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315108817,"event":"heartbeat","elapsed":978774,"alive":true,"life":111711,"deaths":6,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3274,"leaderMax":108200,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315114087,"event":"heartbeat","elapsed":984039,"alive":true,"life":116981,"deaths":6,"cls":"Sniper","lvl":24,"mode":"crowd-escape","myScore":3411,"leaderMax":108700,"estRank":8,"boardSize":7,"optGen":7}
+{"t":1781315119337,"event":"heartbeat","elapsed":989296,"alive":true,"life":122231,"deaths":6,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3441,"leaderMax":110200,"estRank":8,"boardSize":12,"optGen":7}
+{"t":1781315124592,"event":"heartbeat","elapsed":994554,"alive":true,"life":127486,"deaths":6,"cls":"Sniper","lvl":25,"mode":"spawn-escape","myScore":3899,"leaderMax":111300,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781315129905,"event":"heartbeat","elapsed":999866,"alive":true,"life":132799,"deaths":6,"cls":"Sniper","lvl":26,"mode":"farm","myScore":3909,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315135167,"event":"heartbeat","elapsed":1005116,"alive":true,"life":138060,"deaths":6,"cls":"Sniper","lvl":26,"mode":"kite-farm","myScore":4074,"leaderMax":142500,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315140434,"event":"heartbeat","elapsed":1010392,"alive":true,"life":143328,"deaths":6,"cls":"Sniper","lvl":26,"mode":"farm","myScore":4164,"leaderMax":113600,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315145696,"event":"heartbeat","elapsed":1015655,"alive":true,"life":148590,"deaths":6,"cls":"Sniper","lvl":26,"mode":"farm","myScore":4374,"leaderMax":113700,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315148526,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315148526,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315148527,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315148529,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315150716,"event":"heartbeat","elapsed":1020671,"alive":true,"life":153610,"deaths":6,"cls":"Sniper","lvl":27,"mode":"farm","myScore":4484,"leaderMax":79300,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315155973,"event":"heartbeat","elapsed":1025933,"alive":true,"life":158867,"deaths":6,"cls":"Sniper","lvl":27,"mode":"kite-farm","myScore":4569,"leaderMax":114500,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315161233,"event":"heartbeat","elapsed":1031188,"alive":true,"life":164127,"deaths":6,"cls":"Sniper","lvl":27,"mode":"farm","myScore":4629,"leaderMax":79500,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315166495,"event":"heartbeat","elapsed":1036448,"alive":true,"life":169389,"deaths":6,"cls":"Sniper","lvl":27,"mode":"farm","myScore":4929,"leaderMax":143000,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315171814,"event":"heartbeat","elapsed":1041774,"alive":true,"life":174708,"deaths":6,"cls":"Sniper","lvl":28,"mode":"kite-farm","myScore":5089,"leaderMax":117800,"estRank":7,"boardSize":7,"optGen":7}
+{"t":1781315177078,"event":"heartbeat","elapsed":1047032,"alive":true,"life":179972,"deaths":6,"cls":"Sniper","lvl":28,"mode":"escape+dodge","myScore":5149,"leaderMax":53000,"estRank":9,"boardSize":8,"optGen":7}
+{"t":1781315182338,"event":"heartbeat","elapsed":1052297,"alive":true,"life":185232,"deaths":6,"cls":"Sniper","lvl":28,"mode":"farm","myScore":5159,"leaderMax":120200,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315187614,"event":"heartbeat","elapsed":1057564,"alive":true,"life":190508,"deaths":6,"cls":"Sniper","lvl":28,"mode":"escape","myScore":5204,"leaderMax":121100,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781315192946,"event":"heartbeat","elapsed":1062907,"alive":true,"life":195840,"deaths":6,"cls":"Sniper","lvl":28,"mode":"farm","myScore":5269,"leaderMax":122000,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315198213,"event":"heartbeat","elapsed":1068164,"alive":true,"life":201107,"deaths":6,"cls":"Sniper","lvl":28,"mode":"escape+dodge","myScore":5349,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315203468,"event":"heartbeat","elapsed":1073428,"alive":true,"life":206362,"deaths":6,"cls":"Sniper","lvl":28,"mode":"farm","myScore":5379,"leaderMax":144700,"estRank":4,"boardSize":4,"optGen":7}
+{"t":1781315208726,"event":"heartbeat","elapsed":1078689,"alive":true,"life":211620,"deaths":6,"cls":"Sniper","lvl":28,"mode":"crowd-escape","myScore":5484,"leaderMax":144900,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315210785,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315210785,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315210785,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315210786,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315210791,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315214043,"event":"heartbeat","elapsed":1084004,"alive":true,"life":216937,"deaths":6,"cls":"Sniper","lvl":29,"mode":"farm","myScore":5699,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315219302,"event":"heartbeat","elapsed":1089261,"alive":true,"life":222196,"deaths":6,"cls":"Sniper","lvl":29,"mode":"kite-farm","myScore":5779,"leaderMax":127000,"estRank":12,"boardSize":11,"optGen":7}
+{"t":1781315224567,"event":"heartbeat","elapsed":1094526,"alive":true,"life":227461,"deaths":6,"cls":"Sniper","lvl":29,"mode":"farm","myScore":5844,"leaderMax":145100,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315229830,"event":"heartbeat","elapsed":1099781,"alive":true,"life":232724,"deaths":6,"cls":"Sniper","lvl":29,"mode":"farm","myScore":5904,"leaderMax":12900,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315235163,"event":"heartbeat","elapsed":1105122,"alive":true,"life":238057,"deaths":6,"cls":"Sniper","lvl":29,"mode":"farm","myScore":6004,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315240415,"event":"heartbeat","elapsed":1110379,"alive":true,"life":243309,"deaths":6,"cls":"Sniper","lvl":29,"mode":"farm","myScore":6064,"leaderMax":129000,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315244382,"event":"upgrade_attempt","from":"Sniper","tile":1,"to":"Overseer","level":30}
+{"t":1781315244788,"event":"upgrade_ok","to":"Overseer"}
+{"t":1781315246002,"event":"heartbeat","elapsed":1115960,"alive":true,"life":248896,"deaths":6,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6254,"leaderMax":140300,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315251263,"event":"heartbeat","elapsed":1121227,"alive":true,"life":254157,"deaths":6,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6294,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315256580,"event":"heartbeat","elapsed":1126535,"alive":true,"life":259474,"deaths":6,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6358,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315261843,"event":"heartbeat","elapsed":1131802,"alive":true,"life":264737,"deaths":6,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6419,"leaderMax":88000,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315267102,"event":"heartbeat","elapsed":1137062,"alive":true,"life":269996,"deaths":6,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6449,"leaderMax":16300,"estRank":11,"boardSize":10,"optGen":7}
+{"t":1781315272418,"event":"heartbeat","elapsed":1142380,"alive":true,"life":275312,"deaths":6,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6479,"leaderMax":88800,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315277792,"event":"heartbeat","elapsed":1147754,"alive":true,"life":280686,"deaths":6,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6639,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315283058,"event":"heartbeat","elapsed":1153021,"alive":true,"life":285952,"deaths":6,"cls":"Overseer","lvl":30,"mode":"spawn-escape","myScore":6699,"leaderMax":146100,"estRank":2,"boardSize":2,"optGen":7}
+{"t":1781315288327,"event":"heartbeat","elapsed":1158291,"alive":true,"life":291221,"deaths":6,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6699,"leaderMax":32800,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781315293658,"event":"heartbeat","elapsed":1163614,"alive":true,"life":296552,"deaths":6,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6739,"leaderMax":33100,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781315298917,"event":"heartbeat","elapsed":1168875,"alive":true,"life":301811,"deaths":6,"cls":"Overseer","lvl":30,"mode":"crowd-escape","myScore":6774,"leaderMax":142400,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315304249,"event":"heartbeat","elapsed":1174142,"alive":true,"life":307143,"deaths":6,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6799,"leaderMax":99100,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315309513,"event":"heartbeat","elapsed":1179468,"alive":true,"life":312407,"deaths":6,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6844,"leaderMax":35000,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315314831,"event":"heartbeat","elapsed":1184787,"alive":true,"life":317725,"deaths":6,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6874,"leaderMax":100000,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781315320083,"event":"heartbeat","elapsed":1190037,"alive":true,"life":322977,"deaths":6,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6904,"leaderMax":17500,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781315325333,"event":"heartbeat","elapsed":1195292,"alive":true,"life":328227,"deaths":6,"cls":"Overseer","lvl":31,"mode":"farm","myScore":6939,"leaderMax":100500,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315330588,"event":"heartbeat","elapsed":1200550,"alive":true,"life":333482,"deaths":6,"cls":"Overseer","lvl":31,"mode":"spawn-escape","myScore":6949,"leaderMax":36300,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315335903,"event":"heartbeat","elapsed":1205866,"alive":true,"life":338797,"deaths":6,"cls":"Overseer","lvl":31,"mode":"spawn-escape+dodge","myScore":6974,"leaderMax":19500,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781315341161,"event":"heartbeat","elapsed":1211116,"alive":true,"life":344055,"deaths":6,"cls":"Overseer","lvl":31,"mode":"kite-farm","myScore":7019,"leaderMax":146700,"estRank":4,"boardSize":9,"optGen":7}
+{"t":1781315346425,"event":"heartbeat","elapsed":1216380,"alive":true,"life":349319,"deaths":6,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7149,"leaderMax":146800,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781315351684,"event":"heartbeat","elapsed":1221644,"alive":true,"life":354578,"deaths":6,"cls":"Overseer","lvl":31,"mode":"escape","myScore":7169,"leaderMax":25900,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781315357007,"event":"heartbeat","elapsed":1226964,"alive":true,"life":359901,"deaths":6,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7169,"leaderMax":170400,"estRank":8,"boardSize":7,"optGen":7}
+{"t":1781315362254,"event":"heartbeat","elapsed":1232219,"alive":true,"life":365148,"deaths":6,"cls":"Overseer","lvl":31,"mode":"escape","myScore":7179,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315367517,"event":"heartbeat","elapsed":1237466,"alive":true,"life":370411,"deaths":6,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7189,"leaderMax":127300,"estRank":3,"boardSize":3,"optGen":7}
+{"t":1781315372777,"event":"heartbeat","elapsed":1242731,"alive":true,"life":375671,"deaths":6,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7264,"leaderMax":39500,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315378113,"event":"heartbeat","elapsed":1248065,"alive":true,"life":381007,"deaths":6,"cls":"Overseer","lvl":31,"mode":"escape+dodge","myScore":7284,"leaderMax":119700,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315383378,"event":"heartbeat","elapsed":1253331,"alive":true,"life":386272,"deaths":6,"cls":"Overseer","lvl":31,"mode":"spawn-escape","myScore":7284,"leaderMax":40100,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315388630,"event":"heartbeat","elapsed":1258594,"alive":true,"life":391524,"deaths":6,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7284,"leaderMax":9000,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781315393890,"event":"heartbeat","elapsed":1263851,"alive":true,"life":396784,"deaths":6,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7309,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315399231,"event":"heartbeat","elapsed":1269184,"alive":true,"life":402125,"deaths":6,"cls":"Overseer","lvl":31,"mode":"kite-farm","myScore":7359,"leaderMax":42100,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315399974,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315399974,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315399974,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315399974,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315399975,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315399978,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315404426,"event":"heartbeat","elapsed":1274385,"alive":true,"life":407320,"deaths":6,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7424,"leaderMax":3700,"estRank":1,"boardSize":1,"optGen":7}
+{"t":1781315409685,"event":"heartbeat","elapsed":1279643,"alive":true,"life":412579,"deaths":6,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7444,"leaderMax":31200,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315414942,"event":"heartbeat","elapsed":1284906,"alive":true,"life":417836,"deaths":6,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7464,"leaderMax":73700,"estRank":8,"boardSize":7,"optGen":7}
+{"t":1781315420266,"event":"heartbeat","elapsed":1290214,"alive":true,"life":423160,"deaths":6,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7504,"leaderMax":8100,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781315425523,"event":"heartbeat","elapsed":1295481,"alive":true,"life":428417,"deaths":6,"cls":"Overseer","lvl":31,"mode":"kite-farm","myScore":7544,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315430783,"event":"heartbeat","elapsed":1300738,"alive":true,"life":433677,"deaths":6,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7589,"leaderMax":9300,"estRank":10,"boardSize":9,"optGen":7}
+{"t":1781315436034,"event":"heartbeat","elapsed":1305995,"alive":true,"life":438928,"deaths":6,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7609,"leaderMax":61800,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315441357,"event":"heartbeat","elapsed":1311315,"alive":true,"life":444251,"deaths":6,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7619,"leaderMax":9900,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315446606,"event":"heartbeat","elapsed":1316570,"alive":true,"life":449500,"deaths":6,"cls":"Overseer","lvl":31,"mode":"escape","myScore":7629,"leaderMax":35900,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315451864,"event":"heartbeat","elapsed":1321821,"alive":true,"life":454758,"deaths":6,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7639,"leaderMax":189800,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781315457123,"event":"heartbeat","elapsed":1327078,"alive":true,"life":460017,"deaths":6,"cls":"Overseer","lvl":31,"mode":"escape+dodge","myScore":7684,"leaderMax":190000,"estRank":7,"boardSize":6,"optGen":7}
+{"t":1781315462446,"event":"heartbeat","elapsed":1332401,"alive":true,"life":465340,"deaths":6,"cls":"Overseer","lvl":31,"mode":"spawn-escape+dodge","myScore":7684,"leaderMax":11000,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315464087,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315464087,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315464088,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315464088,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315464088,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315464088,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315464089,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315464617,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315464617,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315464617,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315464617,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315464618,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315464619,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315464619,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315464621,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315467733,"event":"heartbeat","elapsed":1337689,"alive":true,"life":470627,"deaths":6,"cls":"Overseer","lvl":31,"mode":"spawn-escape","myScore":7694,"leaderMax":190100,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781315472983,"event":"heartbeat","elapsed":1342944,"alive":true,"life":475877,"deaths":6,"cls":"Overseer","lvl":32,"mode":"escape","myScore":7704,"leaderMax":4000,"estRank":1,"boardSize":2,"optGen":7}
+{"t":1781315478250,"event":"heartbeat","elapsed":1348203,"alive":true,"life":481144,"deaths":6,"cls":"Overseer","lvl":32,"mode":"farm","myScore":7739,"leaderMax":193400,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315483575,"event":"heartbeat","elapsed":1353530,"alive":true,"life":486469,"deaths":6,"cls":"Overseer","lvl":32,"mode":"farm","myScore":7749,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315488840,"event":"heartbeat","elapsed":1358801,"alive":true,"life":491734,"deaths":6,"cls":"Overseer","lvl":32,"mode":"crowd-escape+dodge","myScore":7749,"leaderMax":69000,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315494093,"event":"heartbeat","elapsed":1364054,"alive":true,"life":496987,"deaths":6,"cls":"Overseer","lvl":32,"mode":"escape+dodge","myScore":7749,"leaderMax":99000,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781315499444,"event":"heartbeat","elapsed":1369400,"alive":true,"life":502338,"deaths":6,"cls":"Overseer","lvl":32,"mode":"farm","myScore":7749,"leaderMax":99400,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781315504775,"event":"heartbeat","elapsed":1374730,"alive":true,"life":507669,"deaths":6,"cls":"Overseer","lvl":32,"mode":"farm","myScore":7774,"leaderMax":100100,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315510039,"event":"heartbeat","elapsed":1379993,"alive":true,"life":512933,"deaths":6,"cls":"Overseer","lvl":32,"mode":"farm","myScore":7954,"leaderMax":14600,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315515300,"event":"heartbeat","elapsed":1385255,"alive":true,"life":518194,"deaths":6,"cls":"Overseer","lvl":32,"mode":"farm","myScore":7964,"leaderMax":101400,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781315520562,"event":"heartbeat","elapsed":1390524,"alive":true,"life":523456,"deaths":6,"cls":"Overseer","lvl":32,"mode":"farm","myScore":7984,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315525896,"event":"heartbeat","elapsed":1395855,"alive":true,"life":528790,"deaths":6,"cls":"Overseer","lvl":32,"mode":"farm","myScore":8044,"leaderMax":17400,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315531153,"event":"heartbeat","elapsed":1401111,"alive":true,"life":534047,"deaths":6,"cls":"Overseer","lvl":32,"mode":"crowd-escape","myScore":8089,"leaderMax":37400,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781315536416,"event":"heartbeat","elapsed":1406370,"alive":true,"life":539310,"deaths":6,"cls":"Overseer","lvl":32,"mode":"escape+dodge","myScore":8099,"leaderMax":36200,"estRank":7,"boardSize":6,"optGen":7}
+{"t":1781315541674,"event":"heartbeat","elapsed":1411631,"alive":true,"life":544567,"deaths":6,"cls":"Overseer","lvl":32,"mode":"spawn-escape","myScore":8124,"leaderMax":12700,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781315546988,"event":"heartbeat","elapsed":1416952,"alive":false,"life":549882,"deaths":6,"cls":"Overseer","lvl":32,"mode":"kite-farm","myScore":8174,"leaderMax":233000,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781315552250,"event":"heartbeat","elapsed":1422208,"alive":true,"life":555144,"deaths":6,"cls":"Overseer","lvl":32,"mode":"escape","myScore":8184,"leaderMax":11300,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781315557508,"event":"heartbeat","elapsed":1427469,"alive":true,"life":560402,"deaths":6,"cls":"Overseer","lvl":32,"mode":"kite-farm","myScore":8204,"leaderMax":25200,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315562766,"event":"heartbeat","elapsed":1432723,"alive":true,"life":565660,"deaths":6,"cls":"Overseer","lvl":32,"mode":"spawn-escape","myScore":8224,"leaderMax":21900,"estRank":7,"boardSize":6,"optGen":7}
+{"t":1781315568088,"event":"heartbeat","elapsed":1438048,"alive":true,"life":570982,"deaths":6,"cls":"Overseer","lvl":32,"mode":"crowd-escape+dodge","myScore":8234,"leaderMax":126500,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315573350,"event":"heartbeat","elapsed":1443310,"alive":false,"life":576244,"deaths":6,"cls":"Overseer","lvl":32,"mode":"kite-farm","myScore":8264,"leaderMax":26000,"estRank":7,"boardSize":6,"optGen":7}
+{"t":1781315578605,"event":"heartbeat","elapsed":1448569,"alive":true,"life":581499,"deaths":6,"cls":"Overseer","lvl":32,"mode":"escape+dodge","myScore":8284,"leaderMax":233800,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781315583875,"event":"heartbeat","elapsed":1453838,"alive":true,"life":586769,"deaths":6,"cls":"Overseer","lvl":32,"mode":"spawn-escape","myScore":8294,"leaderMax":234100,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315586044,"event":"death","n":7,"lifeMs":588845,"cls":"Overseer","lvl":32,"screenshot":"death-2026-06-13T01-28-44-280Z-7.png","enemiesNear":[{"x":648,"y":350,"r":21,"dx":8,"dy":-10,"dist":12.806248474865697,"self":false,"vx":0,"vy":0},{"x":648,"y":350,"r":19,"dx":8,"dy":-10,"dist":12.806248474865697,"self":false,"vx":0,"vy":0}]}
+{"t":1781315586044,"event":"life_scored","mode":"es","build":"overlord","fitness":9810,"score":8294,"level":32,"lifeMs":588938,"gen":7,"champion":18895}
+{"t":1781315588166,"event":"respawned","alive":true}
+{"t":1781315588170,"event":"doctrine_assigned","version":"opt-g7-5","status":{"gen":7,"evalsThisGen":"17/24","totalEvals":162,"champion":18895}}
+{"t":1781315588817,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":18}
+{"t":1781315589221,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781315590031,"event":"heartbeat","elapsed":1459341,"alive":true,"life":1860,"deaths":7,"cls":"Sniper","lvl":18,"mode":"spawn-escape","myScore":1301,"leaderMax":234700,"estRank":8,"boardSize":7,"optGen":7}
+{"t":1781315594480,"event":"heartbeat","elapsed":1464438,"alive":true,"life":6309,"deaths":7,"cls":"Sniper","lvl":18,"mode":"spawn-escape","myScore":1301,"leaderMax":128900,"estRank":10,"boardSize":9,"optGen":7}
+{"t":1781315599733,"event":"heartbeat","elapsed":1469694,"alive":true,"life":11562,"deaths":7,"cls":"Sniper","lvl":18,"mode":"kite-farm","myScore":1311,"leaderMax":31800,"estRank":12,"boardSize":11,"optGen":7}
+{"t":1781315604999,"event":"heartbeat","elapsed":1474949,"alive":true,"life":16828,"deaths":7,"cls":"Sniper","lvl":18,"mode":"escape","myScore":1371,"leaderMax":32600,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781315610341,"event":"heartbeat","elapsed":1480299,"alive":true,"life":22170,"deaths":7,"cls":"Sniper","lvl":18,"mode":"farm","myScore":1506,"leaderMax":45100,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315615606,"event":"heartbeat","elapsed":1485563,"alive":true,"life":27435,"deaths":7,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1571,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315620861,"event":"heartbeat","elapsed":1490824,"alive":true,"life":32690,"deaths":7,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1691,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315626154,"event":"heartbeat","elapsed":1496111,"alive":true,"life":37983,"deaths":7,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1796,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315631469,"event":"heartbeat","elapsed":1501429,"alive":true,"life":43298,"deaths":7,"cls":"Sniper","lvl":20,"mode":"farm","myScore":1903,"leaderMax":23300,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315636719,"event":"heartbeat","elapsed":1506680,"alive":true,"life":48548,"deaths":7,"cls":"Sniper","lvl":20,"mode":"farm","myScore":1961,"leaderMax":131900,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315641970,"event":"heartbeat","elapsed":1511929,"alive":true,"life":53799,"deaths":7,"cls":"Sniper","lvl":21,"mode":"farm","myScore":2176,"leaderMax":29100,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781315647219,"event":"heartbeat","elapsed":1517184,"alive":true,"life":59048,"deaths":7,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2406,"leaderMax":34700,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315652533,"event":"heartbeat","elapsed":1522494,"alive":true,"life":64362,"deaths":7,"cls":"Sniper","lvl":22,"mode":"escape+dodge","myScore":2476,"leaderMax":43400,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315657778,"event":"heartbeat","elapsed":1527740,"alive":true,"life":69607,"deaths":7,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2506,"leaderMax":132600,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315663038,"event":"heartbeat","elapsed":1532999,"alive":true,"life":74867,"deaths":7,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2556,"leaderMax":132900,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781315668296,"event":"heartbeat","elapsed":1538256,"alive":true,"life":80125,"deaths":7,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2596,"leaderMax":133600,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315673624,"event":"heartbeat","elapsed":1543584,"alive":true,"life":85453,"deaths":7,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2691,"leaderMax":135200,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781315678880,"event":"heartbeat","elapsed":1548838,"alive":true,"life":90709,"deaths":7,"cls":"Sniper","lvl":23,"mode":"farm","myScore":2761,"leaderMax":69800,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781315684132,"event":"heartbeat","elapsed":1554091,"alive":true,"life":95961,"deaths":7,"cls":"Sniper","lvl":23,"mode":"farm","myScore":2831,"leaderMax":70300,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315689392,"event":"heartbeat","elapsed":1559348,"alive":true,"life":101221,"deaths":7,"cls":"Sniper","lvl":23,"mode":"farm","myScore":3036,"leaderMax":137000,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781315694715,"event":"heartbeat","elapsed":1564672,"alive":true,"life":106544,"deaths":7,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3131,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315699984,"event":"heartbeat","elapsed":1569938,"alive":true,"life":111813,"deaths":7,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3306,"leaderMax":161700,"estRank":11,"boardSize":10,"optGen":7}
+{"t":1781315705259,"event":"heartbeat","elapsed":1575212,"alive":true,"life":117088,"deaths":7,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3436,"leaderMax":162200,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315710515,"event":"heartbeat","elapsed":1580473,"alive":true,"life":122344,"deaths":7,"cls":"Sniper","lvl":25,"mode":"farm","myScore":3576,"leaderMax":81600,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315715848,"event":"heartbeat","elapsed":1585799,"alive":true,"life":127677,"deaths":7,"cls":"Sniper","lvl":25,"mode":"farm","myScore":3691,"leaderMax":162300,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781315719969,"event":"pageerror","text":"Error decoding tpids in b-15x: SyntaxError: Expected ':' after property name in JSON at position 5 (line 1 column 6)\n    at JSON.parse (<anonymous>)\n    at https://pxdrop.lijit.com/a/t_.htm?ver=1.2063"}
+{"t":1781315719970,"event":"pageerror","text":"Error decoding tpids in b15-y: SyntaxError: Expected ':' after property name in JSON at position 5 (line 1 column 6)\n    at JSON.parse (<anonymous>)\n    at https://pxdrop.lijit.com/a/t_.htm?ver=1.2063"}
+{"t":1781315719970,"event":"pageerror","text":"Error decoding tpids in b-15z: SyntaxError: Expected ':' after property name in JSON at position 5 (line 1 column 6)\n    at JSON.parse (<anonymous>)\n    at https://pxdrop.lijit.com/a/t_.htm?ver=1.2063"}
+{"t":1781315719970,"event":"pageerror","text":"Error decoding tpids in b-160: SyntaxError: Expected ':' after property name in JSON at position 5 (line 1 column 6)\n    at JSON.parse (<anonymous>)\n    at https://pxdrop.lijit.com/a/t_.htm?ver=1.2063"}
+{"t":1781315721223,"event":"heartbeat","elapsed":1591186,"alive":true,"life":133052,"deaths":7,"cls":"Sniper","lvl":25,"mode":"farm","myScore":3831,"leaderMax":83300,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781315726477,"event":"heartbeat","elapsed":1596431,"alive":true,"life":138306,"deaths":7,"cls":"Sniper","lvl":25,"mode":"farm","myScore":4026,"leaderMax":162400,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781315729883,"event":"pageerror","text":"Error decoding tpids in b-161: SyntaxError: Expected ':' after property name in JSON at position 5 (line 1 column 6)\n    at JSON.parse (<anonymous>)\n    at https://pxdrop.lijit.com/a/t_.htm?ver=1.2063"}
+{"t":1781315729883,"event":"pageerror","text":"Error decoding tpids in b-162: SyntaxError: Expected ':' after property name in JSON at position 5 (line 1 column 6)\n    at JSON.parse (<anonymous>)\n    at https://pxdrop.lijit.com/a/t_.htm?ver=1.2063"}
+{"t":1781315729883,"event":"pageerror","text":"Error decoding tpids in b-163: SyntaxError: Expected ':' after property name in JSON at position 5 (line 1 column 6)\n    at JSON.parse (<anonymous>)\n    at https://pxdrop.lijit.com/a/t_.htm?ver=1.2063"}
+{"t":1781315729884,"event":"pageerror","text":"Error decoding tpids in b-164: SyntaxError: Expected ':' after property name in JSON at position 5 (line 1 column 6)\n    at JSON.parse (<anonymous>)\n    at https://pxdrop.lijit.com/a/t_.htm?ver=1.2063"}
+{"t":1781315729884,"event":"pageerror","text":"Error decoding tpids in b-165: SyntaxError: Expected ':' after property name in JSON at position 5 (line 1 column 6)\n    at JSON.parse (<anonymous>)\n    at https://pxdrop.lijit.com/a/t_.htm?ver=1.2063"}
+{"t":1781315729884,"event":"pageerror","text":"Error decoding tpids in b-166: SyntaxError: Expected ':' after property name in JSON at position 5 (line 1 column 6)\n    at JSON.parse (<anonymous>)\n    at https://pxdrop.lijit.com/a/t_.htm?ver=1.2063"}
+{"t":1781315729884,"event":"pageerror","text":"Error decoding tpids in b-167: SyntaxError: Expected ':' after property name in JSON at position 5 (line 1 column 6)\n    at JSON.parse (<anonymous>)\n    at https://pxdrop.lijit.com/a/t_.htm?ver=1.2063"}
+{"t":1781315729884,"event":"pageerror","text":"Error decoding tpids in b-168: SyntaxError: Expected ':' after property name in JSON at position 5 (line 1 column 6)\n    at JSON.parse (<anonymous>)\n    at https://pxdrop.lijit.com/a/t_.htm?ver=1.2063"}
+{"t":1781315731750,"event":"heartbeat","elapsed":1601703,"alive":true,"life":143579,"deaths":7,"cls":"Sniper","lvl":26,"mode":"farm","myScore":4241,"leaderMax":83900,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315737083,"event":"heartbeat","elapsed":1607035,"alive":true,"life":148912,"deaths":7,"cls":"Sniper","lvl":26,"mode":"farm","myScore":4291,"leaderMax":84300,"estRank":9,"boardSize":8,"optGen":7}
+{"t":1781315739895,"event":"pageerror","text":"Error decoding tpids in b-15j: SyntaxError: Expected ':' after property name in JSON at position 5 (line 1 column 6)\n    at JSON.parse (<anonymous>)\n    at https://pxdrop.lijit.com/a/t_.htm?ver=1.2063"}
+{"t":1781315739896,"event":"pageerror","text":"Error decoding tpids in b-15x: SyntaxError: Expected ':' after property name in JSON at position 5 (line 1 column 6)\n    at JSON.parse (<anonymous>)\n    at https://pxdrop.lijit.com/a/t_.htm?ver=1.2063"}
+{"t":1781315742344,"event":"heartbeat","elapsed":1612302,"alive":true,"life":154173,"deaths":7,"cls":"Sniper","lvl":26,"mode":"farm","myScore":4426,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315747601,"event":"heartbeat","elapsed":1617557,"alive":true,"life":159430,"deaths":7,"cls":"Sniper","lvl":27,"mode":"kite-farm","myScore":4536,"leaderMax":163600,"estRank":7,"boardSize":6,"optGen":7}
+{"t":1781315749913,"event":"pageerror","text":"Error decoding tpids in b-144: SyntaxError: Expected ':' after property name in JSON at position 5 (line 1 column 6)\n    at JSON.parse (<anonymous>)\n    at https://pxdrop.lijit.com/a/t_.htm?ver=1.2063"}
+{"t":1781315749914,"event":"pageerror","text":"Error decoding tpids in b-13b: SyntaxError: Expected ':' after property name in JSON at position 5 (line 1 column 6)\n    at JSON.parse (<anonymous>)\n    at https://pxdrop.lijit.com/a/t_.htm?ver=1.2063"}
+{"t":1781315752923,"event":"heartbeat","elapsed":1622879,"alive":true,"life":164752,"deaths":7,"cls":"Sniper","lvl":27,"mode":"farm","myScore":4641,"leaderMax":18800,"estRank":6,"boardSize":8,"optGen":7}
+{"t":1781315758187,"event":"heartbeat","elapsed":1628147,"alive":true,"life":170016,"deaths":7,"cls":"Sniper","lvl":27,"mode":"farm","myScore":4716,"leaderMax":21100,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315763451,"event":"heartbeat","elapsed":1633409,"alive":true,"life":175280,"deaths":7,"cls":"Sniper","lvl":27,"mode":"farm","myScore":4771,"leaderMax":24100,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315768709,"event":"heartbeat","elapsed":1638673,"alive":true,"life":180538,"deaths":7,"cls":"Sniper","lvl":27,"mode":"spawn-escape","myScore":4826,"leaderMax":56800,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315774036,"event":"heartbeat","elapsed":1643990,"alive":true,"life":185865,"deaths":7,"cls":"Sniper","lvl":27,"mode":"farm","myScore":4996,"leaderMax":166600,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315779288,"event":"heartbeat","elapsed":1649251,"alive":true,"life":191117,"deaths":7,"cls":"Sniper","lvl":28,"mode":"kite-farm","myScore":5205,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315784546,"event":"heartbeat","elapsed":1654498,"alive":true,"life":196375,"deaths":7,"cls":"Sniper","lvl":28,"mode":"farm+dodge","myScore":5366,"leaderMax":69500,"estRank":7,"boardSize":6,"optGen":7}
+{"t":1781315789807,"event":"heartbeat","elapsed":1659762,"alive":true,"life":201636,"deaths":7,"cls":"Sniper","lvl":28,"mode":"escape","myScore":5731,"leaderMax":57400,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781315795130,"event":"heartbeat","elapsed":1665092,"alive":true,"life":206959,"deaths":7,"cls":"Sniper","lvl":29,"mode":"spawn-escape","myScore":5776,"leaderMax":182900,"estRank":9,"boardSize":8,"optGen":7}
+{"t":1781315800383,"event":"heartbeat","elapsed":1670340,"alive":true,"life":212212,"deaths":7,"cls":"Sniper","lvl":29,"mode":"kite-farm","myScore":6086,"leaderMax":12600,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781315805640,"event":"heartbeat","elapsed":1675596,"alive":true,"life":217469,"deaths":7,"cls":"Sniper","lvl":29,"mode":"farm","myScore":6251,"leaderMax":24100,"estRank":12,"boardSize":11,"optGen":7}
+{"t":1781315806295,"event":"upgrade_attempt","from":"Sniper","tile":1,"to":"Overseer","level":30}
+{"t":1781315806699,"event":"upgrade_ok","to":"Overseer"}
+{"t":1781315810741,"event":"heartbeat","elapsed":1680700,"alive":true,"life":222570,"deaths":7,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6316,"leaderMax":184600,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315816062,"event":"heartbeat","elapsed":1686019,"alive":true,"life":227891,"deaths":7,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6336,"leaderMax":24400,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315821319,"event":"heartbeat","elapsed":1691274,"alive":true,"life":233148,"deaths":7,"cls":"Overseer","lvl":30,"mode":"escape+dodge","myScore":6356,"leaderMax":24500,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781315826578,"event":"heartbeat","elapsed":1696532,"alive":true,"life":238407,"deaths":7,"cls":"Overseer","lvl":30,"mode":"crowd-escape","myScore":6381,"leaderMax":58400,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315831839,"event":"heartbeat","elapsed":1701798,"alive":true,"life":243668,"deaths":7,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6411,"leaderMax":35800,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315837161,"event":"heartbeat","elapsed":1707119,"alive":true,"life":248990,"deaths":7,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6451,"leaderMax":187200,"estRank":9,"boardSize":8,"optGen":7}
+{"t":1781315842427,"event":"heartbeat","elapsed":1712380,"alive":true,"life":254256,"deaths":7,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6506,"leaderMax":15200,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315847694,"event":"heartbeat","elapsed":1717655,"alive":true,"life":259523,"deaths":7,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6561,"leaderMax":70100,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781315852954,"event":"heartbeat","elapsed":1722908,"alive":true,"life":264783,"deaths":7,"cls":"Overseer","lvl":30,"mode":"kite-farm","myScore":6583,"leaderMax":61000,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315858273,"event":"heartbeat","elapsed":1728235,"alive":true,"life":270102,"deaths":7,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6626,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315863542,"event":"heartbeat","elapsed":1733494,"alive":true,"life":275371,"deaths":7,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6661,"leaderMax":38500,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315868801,"event":"heartbeat","elapsed":1738765,"alive":true,"life":280630,"deaths":7,"cls":"Overseer","lvl":30,"mode":"kite-farm","myScore":6716,"leaderMax":208900,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781315874065,"event":"heartbeat","elapsed":1744024,"alive":true,"life":285894,"deaths":7,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6791,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315879382,"event":"heartbeat","elapsed":1749343,"alive":true,"life":291211,"deaths":7,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6871,"leaderMax":20200,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781315884649,"event":"heartbeat","elapsed":1754608,"alive":true,"life":296478,"deaths":7,"cls":"Overseer","lvl":30,"mode":"farm","myScore":6911,"leaderMax":63000,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315889899,"event":"heartbeat","elapsed":1759860,"alive":true,"life":301728,"deaths":7,"cls":"Overseer","lvl":31,"mode":"farm","myScore":6961,"leaderMax":71500,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315895157,"event":"heartbeat","elapsed":1765112,"alive":true,"life":306986,"deaths":7,"cls":"Overseer","lvl":31,"mode":"farm","myScore":6971,"leaderMax":19500,"estRank":2,"boardSize":2,"optGen":7}
+{"t":1781315900472,"event":"heartbeat","elapsed":1770428,"alive":true,"life":312301,"deaths":7,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7036,"leaderMax":39200,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315905732,"event":"heartbeat","elapsed":1775692,"alive":true,"life":317561,"deaths":7,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7076,"leaderMax":39400,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315911000,"event":"heartbeat","elapsed":1780955,"alive":true,"life":322829,"deaths":7,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7096,"leaderMax":21100,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781315916266,"event":"heartbeat","elapsed":1786213,"alive":true,"life":328095,"deaths":7,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7151,"leaderMax":72700,"estRank":6,"boardSize":6,"optGen":7}
+{"t":1781315921578,"event":"heartbeat","elapsed":1791541,"alive":false,"life":333407,"deaths":7,"cls":"Overseer","lvl":31,"mode":"crowd-escape+dodge","myScore":7181,"leaderMax":50000,"estRank":5,"boardSize":12,"optGen":7}
+{"t":1781315926832,"event":"heartbeat","elapsed":1796793,"alive":true,"life":338661,"deaths":7,"cls":"Overseer","lvl":31,"mode":"kite-farm","myScore":7191,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781315932096,"event":"heartbeat","elapsed":1802047,"alive":true,"life":343925,"deaths":7,"cls":"Overseer","lvl":31,"mode":"kite-farm","myScore":7201,"leaderMax":73200,"estRank":11,"boardSize":10,"optGen":7}
+{"t":1781315937353,"event":"heartbeat","elapsed":1807306,"alive":true,"life":349182,"deaths":7,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7246,"leaderMax":23100,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781315942661,"event":"heartbeat","elapsed":1812625,"alive":true,"life":354490,"deaths":7,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7276,"leaderMax":210600,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781315947919,"event":"heartbeat","elapsed":1817875,"alive":true,"life":359748,"deaths":7,"cls":"Overseer","lvl":31,"mode":"kite-farm","myScore":7426,"leaderMax":18900,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315953176,"event":"heartbeat","elapsed":1823140,"alive":true,"life":365005,"deaths":7,"cls":"Overseer","lvl":31,"mode":"spawn-escape","myScore":7426,"leaderMax":3100,"estRank":1,"boardSize":1,"optGen":7}
+{"t":1781315958444,"event":"heartbeat","elapsed":1828398,"alive":true,"life":370273,"deaths":7,"cls":"Overseer","lvl":31,"mode":"farm","myScore":7466,"leaderMax":41500,"estRank":7,"boardSize":6,"optGen":7}
+{"t":1781315963761,"event":"heartbeat","elapsed":1833720,"alive":true,"life":375590,"deaths":7,"cls":"Overseer","lvl":31,"mode":"escape+dodge","myScore":7476,"leaderMax":234400,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781315967503,"event":"death","n":8,"lifeMs":379230,"cls":"Overseer","lvl":31,"screenshot":"death-2026-06-13T01-28-44-280Z-8.png","enemiesNear":[]}
+{"t":1781315967504,"event":"life_scored","mode":"es","build":"overlord","fitness":8868,"score":7476,"level":31,"lifeMs":379333,"gen":7,"champion":18895}
+{"t":1781315969624,"event":"respawned","alive":true}
+{"t":1781315969627,"event":"doctrine_assigned","version":"opt-g7-6","status":{"gen":7,"evalsThisGen":"18/24","totalEvals":163,"champion":18895}}
+{"t":1781315970488,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":18}
+{"t":1781315970769,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781315970891,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781315971700,"event":"heartbeat","elapsed":1840798,"alive":true,"life":2072,"deaths":8,"cls":"Sniper","lvl":18,"mode":"spawn-escape","myScore":1301,"leaderMax":24600,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781315976146,"event":"heartbeat","elapsed":1846107,"alive":true,"life":6518,"deaths":8,"cls":"Sniper","lvl":18,"mode":"farm","myScore":1311,"leaderMax":42500,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781315981462,"event":"heartbeat","elapsed":1851421,"alive":true,"life":11834,"deaths":8,"cls":"Sniper","lvl":18,"mode":"farm","myScore":1418,"leaderMax":16600,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781315986716,"event":"heartbeat","elapsed":1856677,"alive":true,"life":17088,"deaths":8,"cls":"Sniper","lvl":18,"mode":"spawn-escape","myScore":1461,"leaderMax":242200,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315991979,"event":"heartbeat","elapsed":1861935,"alive":true,"life":22351,"deaths":8,"cls":"Sniper","lvl":18,"mode":"farm","myScore":1496,"leaderMax":84300,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781315997232,"event":"heartbeat","elapsed":1867193,"alive":true,"life":27604,"deaths":8,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1811,"leaderMax":43900,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781316002552,"event":"heartbeat","elapsed":1872514,"alive":true,"life":32924,"deaths":8,"cls":"Sniper","lvl":20,"mode":"farm","myScore":2092,"leaderMax":96200,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781316007811,"event":"heartbeat","elapsed":1877764,"alive":true,"life":38183,"deaths":8,"cls":"Sniper","lvl":21,"mode":"farm","myScore":2206,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781316013064,"event":"heartbeat","elapsed":1883024,"alive":true,"life":43436,"deaths":8,"cls":"Sniper","lvl":21,"mode":"farm","myScore":2296,"leaderMax":89000,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781316018322,"event":"heartbeat","elapsed":1888281,"alive":true,"life":48694,"deaths":8,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2406,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781316023646,"event":"heartbeat","elapsed":1893609,"alive":true,"life":54018,"deaths":8,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2566,"leaderMax":243000,"estRank":6,"boardSize":5,"optGen":7}
+{"t":1781316028899,"event":"heartbeat","elapsed":1898859,"alive":true,"life":59271,"deaths":8,"cls":"Sniper","lvl":22,"mode":"escape","myScore":2726,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781316034156,"event":"heartbeat","elapsed":1904113,"alive":true,"life":64528,"deaths":8,"cls":"Sniper","lvl":23,"mode":"spawn-escape+dodge","myScore":2746,"leaderMax":46000,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781316037521,"event":"death","n":9,"lifeMs":67787,"cls":"Sniper","lvl":23,"screenshot":"death-2026-06-13T01-28-44-280Z-9.png","enemiesNear":[{"x":1095,"y":729,"r":17,"dx":455,"dy":369,"dist":585.8207917102294,"self":false,"vx":0,"vy":0},{"x":1095,"y":729,"r":15,"dx":455,"dy":369,"dist":585.8207917102294,"self":false,"vx":0,"vy":0}]}
+{"t":1781316037522,"event":"life_scored","mode":"es","build":"overlord","fitness":3693,"score":2746,"level":23,"lifeMs":67894,"gen":7,"champion":18895}
+{"t":1781316039641,"event":"respawned","alive":true}
+{"t":1781316039643,"event":"doctrine_assigned","version":"opt-g7-6","status":{"gen":7,"evalsThisGen":"19/24","totalEvals":164,"champion":18895}}
+{"t":1781316040299,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":15}
+{"t":1781316040703,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781316041509,"event":"heartbeat","elapsed":1910815,"alive":true,"life":1865,"deaths":9,"cls":"Sniper","lvl":15,"mode":"spawn-escape","myScore":787,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781316046020,"event":"heartbeat","elapsed":1915978,"alive":true,"life":6376,"deaths":9,"cls":"Sniper","lvl":15,"mode":"farm","myScore":827,"leaderMax":16400,"estRank":13,"boardSize":12,"optGen":7}

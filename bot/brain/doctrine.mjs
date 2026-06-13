@@ -2,7 +2,7 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 13,
+  version: 14,
 
   // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
   // by the current class, so the right tile index is clicked even if level reads lag. Tile indices
@@ -25,6 +25,21 @@ export const DOCTRINE = {
   // and don't hunt, so a converging swarm breaks farming before the pocket closes to body contact.
   crowdRadius: 300,
   crowdCount: 2,
+  // Predator (leaderboard-hunter) avoidance. 85% of Overseer L30-45 deaths are top-10 players at
+  // 2-8x our score running us down, usually in pairs. Flee any tank clearly bigger than us, earlier
+  // and harder than a normal enemy. Detection is MULTI-FRAME (predatorConfirmFrames consecutive
+  // frames) so a single-frame size misread can never trigger flight - same lesson as the score glitch.
+  predatorRatio: 1.15, // enemy with radius > myR * this is a candidate hunter (clearly bigger)
+  predatorDetectRadius: 460, // only consider big tanks within this as hunters
+  predatorConfirmFrames: 16, // ~0.27s of persistent presence before we trust it (anti-phantom)
+  predatorFleeRadius: 320, // flee a confirmed hunter within this (vs escapeRadius ~210 for normals)
+  // Drone screen (#2): GATED OFF this shift. When true, a fleeing drone class drives its drones onto
+  // the predator as a body-block/screen instead of at the nearest threat. Enable next shift only if
+  // the hunter-encounter data shows predators still closing the gap (they are faster than us).
+  droneScreen: false,
+  // Edge-farming bias: GATED OFF (0). When > 0, farming drifts toward the nearest single arena edge so
+  // converging foes have fewer approach angles. ES-tunable when enabled; built now, off this shift.
+  edgeBiasWeight: 0,
 
   // Bullet dodging (velocity-based): a bullet aimed at us (cos angle > aimedCos) inside dodgeRadius
   // whose predicted miss distance is under missMargin triggers a perpendicular sidestep.

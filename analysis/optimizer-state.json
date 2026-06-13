@@ -1,6 +1,6 @@
 {
  "gen": 7,
- "evalNo": 155,
+ "evalNo": 165,
  "population": [
   {
    "params": {
@@ -20,7 +20,9 @@
     "huntSizeRatio": 0.689,
     "huntRange": 295,
     "huntStandoff": 182,
-    "crowdRadius": 300
+    "crowdRadius": 300,
+    "predatorRatio": 1.15,
+    "predatorFleeRadius": 320
    },
    "fits": [
     4571.3016,
@@ -46,7 +48,9 @@
     "huntSizeRatio": 0.853,
     "huntRange": 386,
     "huntStandoff": 140,
-    "crowdRadius": 300
+    "crowdRadius": 300,
+    "predatorRatio": 1.15,
+    "predatorFleeRadius": 320
    },
    "fits": [
     54.6796,
@@ -72,7 +76,9 @@
     "huntSizeRatio": 0.78,
     "huntRange": 340,
     "huntStandoff": 170,
-    "crowdRadius": 300
+    "crowdRadius": 300,
+    "predatorRatio": 1.15,
+    "predatorFleeRadius": 320
    },
    "fits": [
     2348.9588,
@@ -98,10 +104,14 @@
     "huntSizeRatio": 0.818,
     "huntRange": 401,
     "huntStandoff": 140,
-    "crowdRadius": 300
+    "crowdRadius": 300,
+    "predatorRatio": 1.15,
+    "predatorFleeRadius": 320
    },
    "fits": [
-    7608.5692
+    7608.5692,
+    6870.8828,
+    2946.9532
    ]
   },
   {
@@ -122,9 +132,15 @@
     "huntSizeRatio": 0.78,
     "huntRange": 294,
     "huntStandoff": 187,
-    "crowdRadius": 300
+    "crowdRadius": 300,
+    "predatorRatio": 1.15,
+    "predatorFleeRadius": 320
    },
-   "fits": []
+   "fits": [
+    5693.198,
+    3887.7128,
+    1676.7452
+   ]
   },
   {
    "params": {
@@ -144,9 +160,15 @@
     "huntSizeRatio": 0.853,
     "huntRange": 386,
     "huntStandoff": 146,
-    "crowdRadius": 300
+    "crowdRadius": 300,
+    "predatorRatio": 1.15,
+    "predatorFleeRadius": 320
    },
-   "fits": []
+   "fits": [
+    4822.7796,
+    9809.5752,
+    8867.7328
+   ]
   },
   {
    "params": {
@@ -166,9 +188,14 @@
     "huntSizeRatio": 0.854,
     "huntRange": 269,
     "huntStandoff": 161,
-    "crowdRadius": 300
+    "crowdRadius": 300,
+    "predatorRatio": 1.15,
+    "predatorFleeRadius": 320
    },
-   "fits": []
+   "fits": [
+    3693.1576,
+    598.13
+   ]
   },
   {
    "params": {
@@ -188,7 +215,9 @@
     "huntSizeRatio": 0.78,
     "huntRange": 327,
     "huntStandoff": 136,
-    "crowdRadius": 300
+    "crowdRadius": 300,
+    "predatorRatio": 1.15,
+    "predatorFleeRadius": 320
    },
    "fits": []
   }
@@ -211,7 +240,9 @@
    "huntSizeRatio": 0.78,
    "huntRange": 340,
    "huntStandoff": 170,
-   "crowdRadius": 300
+   "crowdRadius": 300,
+   "predatorRatio": 1.15,
+   "predatorFleeRadius": 320
   },
   "fitness": 18895.095
  },
@@ -320,6 +351,14 @@
   ],
   "crowdRadius": [
    180,
+   420
+  ],
+  "predatorRatio": [
+   1.05,
+   1.5
+  ],
+  "predatorFleeRadius": [
+   220,
    420
   ]
  },

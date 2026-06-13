@@ -2,6 +2,18 @@
 
 Newest entries at the top.
 
+## 017 - 2026-06-12 - Death forensics: the killer is leaderboard hunters. Hunter avoidance (v14)
+
+Categorized all 40 Overseer L30-45 deaths across every shift, telemetry plus the actual death screenshots. Telemetry alone said 85% "point-blank + 2-3 foes converging." The screenshots said *who*: leaderboard hunters. The L45 / 26k champion life - killed by `subpingaso`, rank 5, 54.0k (~2x us). The 14-minute L39 life - `Rokan`, rank 10, 31.7k, a second drone tank beside us. An L31 - `MY NAME`, rank 5, 56.6k (~8x us), with a 36k tank also adjacent. The "swarm" is usually *two hunters at once*. These tanks are faster than us (movement investment), so a stock straight-line flee doesn't shake them.
+
+Shipped #1, hunter avoidance, this shift (one live behavior change at a time, per the plan):
+- **Flee tanks clearly bigger than us** (`predatorRatio`, default 1.15x our radius) at a larger radius than normal enemies (`predatorFleeRadius` 320 vs escapeRadius ~210), and never hunt toward one. A confirmed predator dominates the escape-direction sampler so we put real distance between us, not just drift off the average threat vector.
+- **Detection is multi-frame, by hard requirement** (the same anti-phantom lesson as the 24,971 score glitch). A big tank must persist `predatorConfirmFrames` (16, ~0.27s) consecutive frames before it can trigger flight; the confirmation streak decays twice as fast as it builds so flicker can't accumulate. Unit-checked: a single-frame big read never flees; a real hunter flees at frame 16; a 2-frame mid-chase dropout doesn't drop the lock.
+- **Instrumented per-encounter**, so the fix is measured directly, not inferred from the overall death rate. Every confirmed-hunter episode logs `hunter_encounter { fled, outcome: escaped|died, startDist, minDist, hunterR, myR, frames, lvl }`. We'll read straight off this whether avoidance turns deaths into escapes, and whether predators still close `minDist` to point-blank despite early flight.
+- `predatorRatio` and `predatorFleeRadius` are in the ES search space so evolution tunes them (caught a rounding bug first: `predatorRatio` is fractional and was being integer-floored to 1.0, which would have fled every equal-sized tank).
+
+Built but **gated OFF** this shift (flip next shift only if the data warrants): the **drone screen** (`droneScreen`) - a fleeing drone class drives its drones onto the predator as a body-block instead of at the nearest threat; and an **edge-farming bias** (`edgeBiasWeight`) - farm drifting toward the nearest single arena edge (one axis, never a corner) so converging foes have fewer approach angles. The plan: if v14's encounter data shows predators still closing the gap because they out-run us, the drone screen comes on; the edge bias is the follow-up for the convergence geometry.
+
 ## 016 - 2026-06-12 - A perception glitch was faking a 25k life and poisoning the optimizer
 
 Watching the v13 grind, a life flagged as "Overlord L45, 24,971 score" - a near-champion breakthrough. It was fake. The per-sample score trace gave it away: a Sniper sitting at L18 / 1,344 score read **24,971 for a single heartbeat** at the death transition, then the tank died and the next life read normal again. A level-18 Sniper cannot have 25k score (it's ~1,500). The HUD scraper (`fillText` "Score: N") emitted one garbage frame; the level read glitched to 45 the same way.

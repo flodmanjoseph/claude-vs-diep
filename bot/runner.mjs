@@ -268,6 +268,10 @@ while (true) {
   if (elapsed - lastHeartbeat > 5000) {
     lastHeartbeat = elapsed;
     const snap = await page.evaluate(() => window.__brain?.snapshot?.() ?? null).catch(() => null);
+    // Drain closed hunter encounters into telemetry so the avoidance fix is measured directly:
+    // each is { fled, outcome: 'escaped'|'died', startDist, minDist, hunterR, myR, frames, cls }.
+    const hlog = await page.evaluate(() => { const l = window.__hunterLog || []; window.__hunterLog = []; return l; }).catch(() => []);
+    for (const h of hlog) log({ event: 'hunter_encounter', ...h, lvl: curLevel });
     const { leaderMax, myScore: rawScore, board, boardSize, estRank } = await readRank();
     const myScore = trustScore(rawScore); // null if this sample was a glitch
     const trustedLevel = trustLevel(curLevel);

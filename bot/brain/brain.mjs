@@ -65,8 +65,17 @@ export const BRAIN_FN = function (initialDoctrine) {
     deaths: 0,
     lastAliveFrame: 0,
     mode: 'init',
+    // Predator (hunter) avoidance: a tank clearly bigger than us is a likely leaderboard hunter.
+    // hunterStreak counts consecutive frames a big tank has persisted (multi-frame confirmation so a
+    // single-frame size misread can't trigger flight); hunterLast is its latest position to flee.
+    // activeEncounter records the current confirmed-hunter episode for instrumentation.
+    hunterStreak: 0,
+    hunterLast: null,
+    activeEncounter: null,
     _raf: null,
   });
+  // Closed hunter encounters wait here for the runner to drain into telemetry (detected/fled/outcome).
+  window.__hunterLog = window.__hunterLog || [];
 
   const now = () => performance.now();
 
@@ -101,7 +110,7 @@ export const BRAIN_FN = function (initialDoctrine) {
   // space). Bigger/closer enemies and incoming bullets weigh more. Beats a raw repulsion sum,
   // which can point straight through a third enemy.
   const DIRS = [[0, -1], [0.71, -0.71], [1, 0], [0.71, 0.71], [0, 1], [-0.71, 0.71], [-1, 0], [-0.71, -0.71]];
-  function bestEscapeDir(state) {
+  function bestEscapeDir(state, priority) {
     let best = [0, 1], bestScore = -Infinity;
     const foes = enemiesOf(state);
     const pos = state.map; // normalized map position or null
@@ -112,6 +121,13 @@ export const BRAIN_FN = function (initialDoctrine) {
         const m = DOCTRINE.wallMargin;
         if ((pos.x < m && dx < 0) || (pos.x > 1 - m && dx > 0)) score -= 5;
         if ((pos.y < m && dy < 0) || (pos.y > 1 - m && dy > 0)) score -= 5;
+      }
+      // A confirmed predator dominates the choice: heading toward it is heavily penalized so we put
+      // real distance between us and the hunter, not just drift off the average threat vector.
+      if (priority) {
+        const m = Math.hypot(priority.dx, priority.dy) || 1;
+        const toward = (dx * priority.dx + dy * priority.dy) / m;
+        score -= toward * 600;
       }
       for (const e of foes) {
         const m = Math.hypot(e.dx, e.dy) || 1;
@@ -226,6 +242,9 @@ export const BRAIN_FN = function (initialDoctrine) {
       B.lastAliveFrame = B.frames;
     } else {
       rlTerminal(); // death: charge the terminal penalty to the last RL decision, reset the episode
+      // If a predator encounter was open when we died, it killed us: close it as 'died' for the data.
+      if (B.activeEncounter) { B.activeEncounter.outcome = 'died'; B.activeEncounter.frames = B.frames - B.activeEncounter.t0; window.__hunterLog.push(B.activeEncounter); B.activeEncounter = null; }
+      B.hunterStreak = 0; B.hunterLast = null;
     }
     const sinceSpawn = B.frames - (B.lifeStartFrame || 0);
     const grace = sinceSpawn < DOCTRINE.spawnGraceFrames;
@@ -254,6 +273,33 @@ export const BRAIN_FN = function (initialDoctrine) {
     // regardless of the chosen policy, and refuse to hunt into a crowd.
     const crowdN = foes.filter((e) => e.dist < (DOCTRINE.crowdRadius || 300)).length;
     const crowded = crowdN >= (DOCTRINE.crowdCount || 2);
+
+    // --- Predator (leaderboard-hunter) detection, MULTI-FRAME confirmed ---
+    // 85% of Overseer L30-45 deaths are top-10 players (2-8x our score) running us down. Any tank
+    // clearly bigger than us within detect range is a candidate hunter. It must persist for
+    // predatorConfirmFrames CONSECUTIVE frames before we trust it, so a single-frame size misread
+    // (the 24,971-style phantom) can never make us flee a ghost. The streak decays x2 as fast as it
+    // builds, so flicker can't accumulate into a false trigger. A confirmed predator is fled at
+    // predatorFleeRadius, well beyond the normal escapeRadius (flee big tanks early, they're faster).
+    const predConfirm = DOCTRINE.predatorConfirmFrames || 16;
+    let predCand = null, pcd = Infinity;
+    for (const e of foes) {
+      if (e.r >= myR * (DOCTRINE.predatorRatio || 1.15) && e.dist < (DOCTRINE.predatorDetectRadius || 460) && e.dist < pcd) { pcd = e.dist; predCand = e; }
+    }
+    if (predCand) { B.hunterStreak = Math.min(predConfirm + 4, B.hunterStreak + 1); B.hunterLast = predCand; }
+    else { B.hunterStreak = Math.max(0, B.hunterStreak - 2); if (B.hunterStreak === 0) B.hunterLast = null; }
+    const predatorConfirmed = B.hunterStreak >= predConfirm && !!B.hunterLast && state.me.alive;
+    const predatorClose = predatorConfirmed && B.hunterLast.dist < (DOCTRINE.predatorFleeRadius || 320);
+    // Instrument the encounter: open on first confirmation, track closest approach, mark fled when we
+    // actually enter predator-flight. Closed on escape (here) or death (the death branch above).
+    if (predatorConfirmed) {
+      if (!B.activeEncounter) B.activeEncounter = { startDist: Math.round(B.hunterLast.dist), minDist: Math.round(B.hunterLast.dist), hunterR: B.hunterLast.r, myR: Math.round(myR), fled: false, cls, t0: B.frames };
+      else B.activeEncounter.minDist = Math.min(B.activeEncounter.minDist, Math.round(B.hunterLast.dist));
+    } else if (B.activeEncounter) {
+      B.activeEncounter.outcome = 'escaped'; B.activeEncounter.frames = B.frames - B.activeEncounter.t0;
+      window.__hunterLog.push(B.activeEncounter); B.activeEncounter = null;
+    }
+
     // Ram behavior is active only once we are an actual ram class (a tanky Smasher); the base-Tank
     // phase farms at range. ramNow flips contact distances on and lets us chase+ram.
     const ramNow = DOCTRINE.ramStyle && DOCTRINE.ramClasses && DOCTRINE.ramClasses.includes(cls);
@@ -261,11 +307,25 @@ export const BRAIN_FN = function (initialDoctrine) {
     const bodyMargin = ramNow ? -999 : DOCTRINE.shapeBodyMargin;
     const standoff = ramNow ? 0 : DOCTRINE.huntStandoff;
     // Hunting applies to drone classes (drones do the work) and to ram classes (kill by colliding).
-    const huntable = DOCTRINE.huntEnabled && (isDrone || ramNow) && nearest && !grace && !bulletThreat && !crowded
+    const huntable = DOCTRINE.huntEnabled && (isDrone || ramNow) && nearest && !grace && !bulletThreat && !crowded && !predatorClose
       && nearest.r < myR * DOCTRINE.huntSizeRatio && nearest.dist < DOCTRINE.huntRange && foes.length <= DOCTRINE.huntMaxFoes;
 
     // Each tactical mode is an action: it returns the movement keys + aim and labels B.mode.
     const actEscape = () => {
+      // Predator flight takes priority: flee the confirmed hunter specifically (it dominates the
+      // direction sampler), not just the average threat vector.
+      if (predatorClose && B.hunterLast) {
+        B.mode = 'predator-flee';
+        if (B.activeEncounter) B.activeEncounter.fled = true;
+        const [dx, dy] = bestEscapeDir(state, B.hunterLast);
+        // Drone screen (#2): GATED OFF by default. When droneScreen is enabled, a drone class aims its
+        // drones straight AT the predator (mouse follows aim) to body-block and chip it while we run;
+        // otherwise we behave like normal escape and aim at the nearest threat.
+        const aim = (DOCTRINE.droneScreen && isDrone)
+          ? { x: B.hunterLast.x, y: B.hunterLast.y }
+          : (nearest ? { x: nearest.x, y: nearest.y } : { x: B.hunterLast.x, y: B.hunterLast.y });
+        return { moveKeys: vectorToKeys(dx, dy), aim };
+      }
       B.mode = grace ? 'spawn-escape' : 'escape';
       const [dx, dy] = bestEscapeDir(state);
       return { moveKeys: vectorToKeys(dx, dy), aim: nearest ? { x: nearest.x, y: nearest.y } : (window.__lastAim || { x: 900, y: 360 }) };
@@ -289,6 +349,15 @@ export const BRAIN_FN = function (initialDoctrine) {
       if (nearest && nd < DOCTRINE.waryRadius) {
         const m = nd || 1; const wb = (DOCTRINE.waryRadius - nd) / DOCTRINE.waryRadius;
         mvx -= (nearest.dx / m) * wb * 1.8; mvy -= (nearest.dy / m) * wb * 1.8;
+      }
+      // Edge-farming bias (GATED; edgeBiasWeight 0 = off). Drift toward the NEAREST single arena edge
+      // (one axis only, never both -> no corner trap) so foes can converge from fewer angles. ES-tunable
+      // when enabled. Built now, off this shift to keep one live behavior change at a time.
+      const ew = DOCTRINE.edgeBiasWeight || 0;
+      if (ew > 0 && state.map) {
+        const p = state.map;
+        if (Math.min(p.x, 1 - p.x) <= Math.min(p.y, 1 - p.y)) { const ex = p.x < 0.5 ? 0.12 : 0.88; mvx += (ex - p.x) * ew; }
+        else { const ey = p.y < 0.5 ? 0.12 : 0.88; mvy += (ey - p.y) * ew; }
       }
       const a = (nearest && nd < escapeR * 1.3) ? { x: nearest.x, y: nearest.y } : { x: target.x, y: target.y };
       return { moveKeys: (mvx || mvy) ? vectorToKeys(mvx, mvy) : new Set(), aim: a };
@@ -320,12 +389,13 @@ export const BRAIN_FN = function (initialDoctrine) {
       else if (state.shapes.length) chosen = 'farm';
       else chosen = 'patrol';
     }
-    // Crowd override: being collapsed on by multiple foes is the dominant death; flee no matter what
-    // the policy (rules or RL) picked, so a swarm always breaks farming/hunting immediately.
-    if (!grace && crowded) chosen = 'escape';
+    // Forced-flight overrides (highest priority first): a confirmed predator closing on us, then a
+    // converging crowd. Either breaks farming/hunting immediately, regardless of the chosen policy.
+    if (!grace && (predatorClose || crowded)) chosen = 'escape';
     const out = (ACT[chosen] || actFarm)();
     moveKeys = out.moveKeys; aim = out.aim;
-    if (!grace && crowded) B.mode = 'crowd-' + B.mode; // visible in telemetry to confirm the trigger fires
+    // Tag the trigger in telemetry (predator-flee labels itself inside actEscape; crowd prefixes here).
+    if (!grace && crowded && !predatorClose) B.mode = 'crowd-' + B.mode;
 
     // Bullet dodge overrides movement in any mode: sidestepping an incoming shot beats whatever
     // else we were doing for these few frames. Aim is unaffected.
@@ -345,5 +415,5 @@ export const BRAIN_FN = function (initialDoctrine) {
   // autofire state, so resuming does not toggle E and turn our guns off mid-life.
   B.pause = () => { B.running = false; releaseAll(); };
   B.resume = () => { if (B.running) return; B.running = true; B._raf = requestAnimationFrame(step); };
-  B.snapshot = () => ({ frames: B.frames, mode: B.mode, statIdx: B.statIdx, autofireOn: B.autofireOn });
+  B.snapshot = () => ({ frames: B.frames, mode: B.mode, statIdx: B.statIdx, autofireOn: B.autofireOn, hunterStreak: B.hunterStreak, predator: !!B.hunterLast });
 };

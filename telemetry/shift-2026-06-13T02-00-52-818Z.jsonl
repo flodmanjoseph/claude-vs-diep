@@ -1,0 +1,66 @@
+{"t":1781316053424,"event":"shift_start","shiftId":"2026-06-13T02-00-52-818Z","doctrine":14,"shiftMs":28800000}
+{"t":1781316054888,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 401 ()"}
+{"t":1781316054925,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781316054925,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781316058081,"event":"doctrine_assigned","version":"opt-g7-6","status":{"gen":7,"evalsThisGen":"19/24","totalEvals":164,"champion":18895}}
+{"t":1781316058082,"event":"spawn","ok":true}
+{"t":1781316058588,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781316058588,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781316064087,"event":"heartbeat","elapsed":5198,"alive":true,"life":6004,"deaths":0,"cls":"Tank","lvl":5,"mode":"farm","myScore":75,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781316069337,"event":"heartbeat","elapsed":10448,"alive":true,"life":11254,"deaths":0,"cls":"Tank","lvl":6,"mode":"farm","myScore":165,"leaderMax":22000,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781316074592,"event":"heartbeat","elapsed":15698,"alive":true,"life":16509,"deaths":0,"cls":"Tank","lvl":8,"mode":"crowd-escape+dodge","myScore":230,"leaderMax":256500,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781316078408,"event":"death","n":1,"lifeMs":20238,"cls":"Tank","lvl":9,"screenshot":"death-2026-06-13T02-00-52-818Z-1.png","enemiesNear":[]}
+{"t":1781316078409,"event":"life_scored","mode":"es","build":"overlord","fitness":598,"score":230,"level":9,"lifeMs":20326,"gen":7,"champion":18895}
+{"t":1781316080531,"event":"respawned","alive":true}
+{"t":1781316080535,"event":"doctrine_assigned","version":"opt-g7-6","status":{"gen":7,"evalsThisGen":"20/24","totalEvals":165,"champion":18895}}
+{"t":1781316081748,"event":"heartbeat","elapsed":22854,"alive":true,"life":1212,"deaths":1,"cls":"Tank","lvl":8,"mode":"spawn-escape","myScore":157,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781316086992,"event":"heartbeat","elapsed":28103,"alive":true,"life":6456,"deaths":1,"cls":"Tank","lvl":8,"mode":"kite-farm","myScore":182,"leaderMax":257000,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781316092247,"event":"heartbeat","elapsed":33356,"alive":true,"life":11711,"deaths":1,"cls":"Tank","lvl":8,"mode":"farm","myScore":202,"leaderMax":257100,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781316097510,"event":"heartbeat","elapsed":38609,"alive":true,"life":16974,"deaths":1,"cls":"Tank","lvl":8,"mode":"farm","myScore":212,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781316102026,"event":"hunter_encounter","startDist":396,"minDist":342,"hunterR":26,"myR":20,"fled":false,"cls":"Tank","t0":2349,"outcome":"escaped","frames":48,"lvl":9}
+{"t":1781316102027,"event":"hunter_encounter","startDist":377,"minDist":377,"hunterR":26,"myR":20,"fled":false,"cls":"Tank","t0":2421,"outcome":"escaped","frames":61,"lvl":9}
+{"t":1781316102830,"event":"heartbeat","elapsed":43939,"alive":true,"life":22294,"deaths":1,"cls":"Tank","lvl":9,"mode":"kite-farm","myScore":222,"leaderMax":257300,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781316107276,"event":"hunter_encounter","startDist":451,"minDist":451,"hunterR":27,"myR":20,"fled":false,"cls":"Tank","t0":2592,"outcome":"escaped","frames":9,"lvl":9}
+{"t":1781316108108,"event":"heartbeat","elapsed":49189,"alive":true,"life":27572,"deaths":1,"cls":"Tank","lvl":9,"mode":"farm","myScore":252,"leaderMax":98600,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781316113360,"event":"heartbeat","elapsed":54471,"alive":true,"life":32824,"deaths":1,"cls":"Tank","lvl":9,"mode":"farm","myScore":272,"leaderMax":33700,"estRank":7,"boardSize":6,"optGen":7}
+{"t":1781316117812,"event":"hunter_encounter","startDist":459,"minDist":434,"hunterR":23,"myR":20,"fled":false,"cls":"Tank","t0":3361,"outcome":"died","frames":50,"lvl":9}
+{"t":1781316117812,"event":"hunter_encounter","startDist":432,"minDist":432,"hunterR":23,"myR":20,"fled":false,"cls":"Tank","t0":3432,"outcome":"escaped","frames":14,"lvl":9}
+{"t":1781316118620,"event":"heartbeat","elapsed":59726,"alive":true,"life":38084,"deaths":1,"cls":"Tank","lvl":9,"mode":"farm","myScore":272,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781316123948,"event":"heartbeat","elapsed":65055,"alive":true,"life":43412,"deaths":1,"cls":"Tank","lvl":10,"mode":"farm","myScore":322,"leaderMax":28600,"estRank":11,"boardSize":10,"optGen":7}
+{"t":1781316129198,"event":"heartbeat","elapsed":70308,"alive":true,"life":48662,"deaths":1,"cls":"Tank","lvl":10,"mode":"farm","myScore":372,"leaderMax":67200,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781316134458,"event":"heartbeat","elapsed":75557,"alive":true,"life":53922,"deaths":1,"cls":"Tank","lvl":11,"mode":"farm","myScore":382,"leaderMax":30600,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781316139703,"event":"heartbeat","elapsed":80815,"alive":true,"life":59167,"deaths":1,"cls":"Tank","lvl":11,"mode":"farm","myScore":446,"leaderMax":33800,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781316141695,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781316142856,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781316142857,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781316145020,"event":"heartbeat","elapsed":86126,"alive":true,"life":64484,"deaths":1,"cls":"Tank","lvl":12,"mode":"farm","myScore":597,"leaderMax":100900,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781316150277,"event":"heartbeat","elapsed":91376,"alive":true,"life":69741,"deaths":1,"cls":"Tank","lvl":13,"mode":"crowd-escape","myScore":687,"leaderMax":73000,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781316155535,"event":"heartbeat","elapsed":96639,"alive":true,"life":74999,"deaths":1,"cls":"Tank","lvl":14,"mode":"farm","myScore":772,"leaderMax":34900,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781316157797,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":15}
+{"t":1781316158199,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781316160620,"event":"heartbeat","elapsed":101728,"alive":true,"life":80084,"deaths":1,"cls":"Sniper","lvl":15,"mode":"farm","myScore":858,"leaderMax":34200,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781316165942,"event":"heartbeat","elapsed":107052,"alive":true,"life":85406,"deaths":1,"cls":"Sniper","lvl":15,"mode":"farm","myScore":962,"leaderMax":73800,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781316171192,"event":"heartbeat","elapsed":112303,"alive":true,"life":90656,"deaths":1,"cls":"Sniper","lvl":16,"mode":"escape+dodge","myScore":1032,"leaderMax":34700,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781316173820,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781316173821,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781316174979,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781316174980,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781316176544,"event":"heartbeat","elapsed":117654,"alive":true,"life":96008,"deaths":1,"cls":"Sniper","lvl":16,"mode":"farm+dodge","myScore":1072,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781316181793,"event":"heartbeat","elapsed":122902,"alive":true,"life":101257,"deaths":1,"cls":"Sniper","lvl":16,"mode":"farm+dodge","myScore":1212,"leaderMax":36500,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781316187120,"event":"heartbeat","elapsed":128225,"alive":true,"life":106584,"deaths":1,"cls":"Sniper","lvl":17,"mode":"escape","myScore":1307,"leaderMax":61700,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781316191565,"event":"hunter_encounter","startDist":423,"minDist":415,"hunterR":24,"myR":19,"fled":false,"cls":"Sniper","t0":7617,"outcome":"escaped","frames":42,"lvl":18}
+{"t":1781316192369,"event":"heartbeat","elapsed":133477,"alive":true,"life":111833,"deaths":1,"cls":"Sniper","lvl":18,"mode":"escape","myScore":1367,"leaderMax":36700,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781316196811,"event":"hunter_encounter","startDist":425,"minDist":397,"hunterR":24,"myR":19,"fled":false,"cls":"Sniper","t0":7841,"outcome":"escaped","frames":78,"lvl":18}
+{"t":1781316196811,"event":"hunter_encounter","startDist":431,"minDist":431,"hunterR":24,"myR":19,"fled":false,"cls":"Sniper","t0":7933,"outcome":"escaped","frames":1,"lvl":18}
+{"t":1781316196811,"event":"hunter_encounter","startDist":425,"minDist":415,"hunterR":24,"myR":19,"fled":false,"cls":"Sniper","t0":7954,"outcome":"escaped","frames":23,"lvl":18}
+{"t":1781316196811,"event":"hunter_encounter","startDist":416,"minDist":415,"hunterR":24,"myR":19,"fled":false,"cls":"Sniper","t0":7991,"outcome":"escaped","frames":22,"lvl":18}
+{"t":1781316196811,"event":"hunter_encounter","startDist":441,"minDist":441,"hunterR":24,"myR":19,"fled":false,"cls":"Sniper","t0":8045,"outcome":"escaped","frames":19,"lvl":18}
+{"t":1781316197620,"event":"heartbeat","elapsed":138723,"alive":true,"life":117084,"deaths":1,"cls":"Sniper","lvl":18,"mode":"escape","myScore":1407,"leaderMax":48100,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781316202068,"event":"hunter_encounter","startDist":418,"minDist":296,"hunterR":24,"myR":19,"fled":true,"cls":"Sniper","t0":8289,"outcome":"escaped","frames":109,"lvl":18}
+{"t":1781316202876,"event":"heartbeat","elapsed":143977,"alive":true,"life":122340,"deaths":1,"cls":"Sniper","lvl":18,"mode":"farm","myScore":1457,"leaderMax":36800,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781316206245,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781316206245,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781316206246,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781316207637,"event":"pageerror","text":"Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781316207637,"event":"pageerror","text":"Attestation check for Shared Storage on https://ara.paa-reporting-advertising.amazon failed."}
+{"t":1781316208186,"event":"heartbeat","elapsed":149294,"alive":true,"life":127650,"deaths":1,"cls":"Sniper","lvl":19,"mode":"kite-farm","myScore":1682,"leaderMax":126500,"estRank":4,"boardSize":4,"optGen":7}
