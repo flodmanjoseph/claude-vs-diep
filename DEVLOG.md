@@ -2,6 +2,18 @@
 
 Newest entries at the top.
 
+## 014 - 2026-06-12 - The new wall is being swarmed: crowd-aware flight (v13)
+
+The detached ES grind reliably beats the old Sniper wall now (it gets to Overseer most lives), but it plateaued at an Overseer ceiling around L32-35 / ~8.6k and never reproduced the champion's 26k Overlord life. Pulled the death telemetry to find what kills the Overseers, and the answer was blunt and consistent:
+
+**54 of 62 deaths (87%) were point-blank — nearest enemy inside 40px — and every single Overseer death was 6-16px away with 2-3 foes converging.** Restricted to L25+ deaths: 25 of 28 point-blank. The bot is not getting out-dueled at range; it is getting *collapsed on*. Several enemies close in from different angles, each sitting just outside the single-enemy escape radius, and the pocket shrinks to body contact before flight ever triggers. Even the best life of the shift (Overseer L35, 11.5 minutes) ended exactly this way: point-blank, three foes.
+
+Root cause was structural, not a parameter value: escape only fired when the *nearest* enemy crossed `escapeRadius`. With a converging group, no individual crosses it until it is already on top of us. There was no notion of "I am being surrounded."
+
+Fix (doctrine v13): **crowd-aware flight.** Count foes inside `crowdRadius` (default 300px); if `>= crowdCount` (default 2), force escape regardless of what the policy (rules or RL) chose, and refuse to hunt into a crowd. It is a hard override layered next to the existing bullet-dodge override, so a swarm always breaks farming/hunting immediately rather than waiting for one enemy to get close. The forced flight tags its mode `crowd-escape` in telemetry so the trigger is auditable. `crowdRadius` was added to the ES search space (180-420), so the optimizer tunes how early to bail; `crowdCount` stays fixed at 2. The optimizer state carried over cleanly (the constructor backfills the new dimension into the champion and all candidates from base).
+
+Shipped and relaunched the grind on v13 (gen 7). Validation pending: the test is whether point-blank-with-a-crowd deaths drop and lives push past L35 toward the actual Overlord tier (L45). Numbers next session.
+
 ## 013 - 2026-06-12 - RL was a regression; back on the ES champion, grinding detached
 
 Picked the campaign back up and found two problems with where it had been left.

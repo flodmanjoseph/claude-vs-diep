@@ -1,0 +1,26 @@
+{"t":1781312019660,"event":"shift_start","shiftId":"2026-06-13T00-53-39-003Z","doctrine":13,"shiftMs":28800000}
+{"t":1781312021043,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781312021043,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781312022607,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 401 ()"}
+{"t":1781312023892,"event":"doctrine_assigned","version":"opt-g7-0","status":{"gen":7,"evalsThisGen":"1/24","totalEvals":145,"champion":18895}}
+{"t":1781312023892,"event":"spawn","ok":true}
+{"t":1781312029911,"event":"heartbeat","elapsed":5212,"alive":true,"life":6018,"deaths":0,"cls":"Tank","lvl":1,"mode":"escape","myScore":0,"leaderMax":56800,"estRank":null,"boardSize":12,"optGen":7}
+{"t":1781312035156,"event":"heartbeat","elapsed":10457,"alive":true,"life":11263,"deaths":0,"cls":"Tank","lvl":4,"mode":"farm","myScore":60,"leaderMax":83800,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781312040410,"event":"heartbeat","elapsed":15701,"alive":true,"life":16517,"deaths":0,"cls":"Tank","lvl":6,"mode":"farm","myScore":90,"leaderMax":null,"estRank":null,"boardSize":0,"optGen":7}
+{"t":1781312045750,"event":"heartbeat","elapsed":21043,"alive":true,"life":21857,"deaths":0,"cls":"Tank","lvl":6,"mode":"farm","myScore":110,"leaderMax":311400,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781312051005,"event":"heartbeat","elapsed":26306,"alive":true,"life":27112,"deaths":0,"cls":"Tank","lvl":6,"mode":"farm","myScore":110,"leaderMax":280500,"estRank":10,"boardSize":9,"optGen":7}
+{"t":1781312056255,"event":"heartbeat","elapsed":31558,"alive":true,"life":32362,"deaths":0,"cls":"Tank","lvl":7,"mode":"kite-farm","myScore":155,"leaderMax":22100,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781312061510,"event":"heartbeat","elapsed":36808,"alive":true,"life":37617,"deaths":0,"cls":"Tank","lvl":8,"mode":"farm","myScore":200,"leaderMax":327100,"estRank":13,"boardSize":12,"optGen":7}
+{"t":1781312066839,"event":"heartbeat","elapsed":42140,"alive":true,"life":42945,"deaths":0,"cls":"Tank","lvl":9,"mode":"farm","myScore":270,"leaderMax":12100,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781312072088,"event":"heartbeat","elapsed":47386,"alive":true,"life":48195,"deaths":0,"cls":"Tank","lvl":10,"mode":"farm","myScore":300,"leaderMax":281300,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781312077349,"event":"heartbeat","elapsed":52642,"alive":true,"life":53456,"deaths":0,"cls":"Tank","lvl":10,"mode":"farm","myScore":360,"leaderMax":24200,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781312082605,"event":"heartbeat","elapsed":57898,"alive":true,"life":58712,"deaths":0,"cls":"Tank","lvl":11,"mode":"farm","myScore":430,"leaderMax":83700,"estRank":5,"boardSize":4,"optGen":7}
+{"t":1781312087926,"event":"heartbeat","elapsed":63228,"alive":true,"life":64033,"deaths":0,"cls":"Tank","lvl":12,"mode":"farm","myScore":475,"leaderMax":27400,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781312093178,"event":"heartbeat","elapsed":68479,"alive":true,"life":69285,"deaths":0,"cls":"Tank","lvl":12,"mode":"farm","myScore":585,"leaderMax":20000,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781312098429,"event":"heartbeat","elapsed":73727,"alive":true,"life":74536,"deaths":0,"cls":"Tank","lvl":13,"mode":"kite-farm","myScore":655,"leaderMax":84000,"estRank":11,"boardSize":10,"optGen":7}
+{"t":1781312103678,"event":"heartbeat","elapsed":78977,"alive":true,"life":79785,"deaths":0,"cls":"Tank","lvl":14,"mode":"farm","myScore":805,"leaderMax":25600,"estRank":3,"boardSize":2,"optGen":7}
+{"t":1781312104334,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":15}
+{"t":1781312104736,"event":"upgrade_ok","to":"Sniper"}
+{"t":1781312108828,"event":"heartbeat","elapsed":84129,"alive":true,"life":84935,"deaths":0,"cls":"Sniper","lvl":15,"mode":"spawn-escape+dodge","myScore":855,"leaderMax":84100,"estRank":4,"boardSize":3,"optGen":7}
+{"t":1781312114070,"event":"heartbeat","elapsed":89373,"alive":true,"life":90177,"deaths":0,"cls":"Sniper","lvl":15,"mode":"crowd-escape","myScore":875,"leaderMax":21200,"estRank":2,"boardSize":1,"optGen":7}
+{"t":1781312119323,"event":"heartbeat","elapsed":94618,"alive":true,"life":95429,"deaths":0,"cls":"Sniper","lvl":15,"mode":"farm","myScore":985,"leaderMax":21900,"estRank":8,"boardSize":7,"optGen":7}

@@ -29,6 +29,7 @@ export const SPACE = {
   huntSizeRatio: [0.5, 1.0],
   huntRange: [200, 460],
   huntStandoff: [110, 260],
+  crowdRadius: [180, 420], // how far out a converging swarm triggers forced flight
 };
 const KEYS = Object.keys(SPACE);
 

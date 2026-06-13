@@ -248,6 +248,12 @@ export const BRAIN_FN = function (initialDoctrine) {
     const bulletThreat = state.bullets.some((b) => b.enemy && b.dist < DOCTRINE.bulletDangerRadius);
     const escapeR = grace ? DOCTRINE.spawnEscapeRadius : DOCTRINE.escapeRadius;
     const myR = state.me.r || 17;
+    // Crowd pressure: ~87% of deaths are point-blank (<40px) with 2-3 foes converging, i.e. the
+    // pocket gets collapsed because escape only fires on the single nearest enemy crossing escapeR
+    // while the others sit just outside it. Count foes inside crowdRadius; if too many, force flight
+    // regardless of the chosen policy, and refuse to hunt into a crowd.
+    const crowdN = foes.filter((e) => e.dist < (DOCTRINE.crowdRadius || 300)).length;
+    const crowded = crowdN >= (DOCTRINE.crowdCount || 2);
     // Ram behavior is active only once we are an actual ram class (a tanky Smasher); the base-Tank
     // phase farms at range. ramNow flips contact distances on and lets us chase+ram.
     const ramNow = DOCTRINE.ramStyle && DOCTRINE.ramClasses && DOCTRINE.ramClasses.includes(cls);
@@ -255,7 +261,7 @@ export const BRAIN_FN = function (initialDoctrine) {
     const bodyMargin = ramNow ? -999 : DOCTRINE.shapeBodyMargin;
     const standoff = ramNow ? 0 : DOCTRINE.huntStandoff;
     // Hunting applies to drone classes (drones do the work) and to ram classes (kill by colliding).
-    const huntable = DOCTRINE.huntEnabled && (isDrone || ramNow) && nearest && !grace && !bulletThreat
+    const huntable = DOCTRINE.huntEnabled && (isDrone || ramNow) && nearest && !grace && !bulletThreat && !crowded
       && nearest.r < myR * DOCTRINE.huntSizeRatio && nearest.dist < DOCTRINE.huntRange && foes.length <= DOCTRINE.huntMaxFoes;
 
     // Each tactical mode is an action: it returns the movement keys + aim and labels B.mode.
@@ -314,8 +320,12 @@ export const BRAIN_FN = function (initialDoctrine) {
       else if (state.shapes.length) chosen = 'farm';
       else chosen = 'patrol';
     }
+    // Crowd override: being collapsed on by multiple foes is the dominant death; flee no matter what
+    // the policy (rules or RL) picked, so a swarm always breaks farming/hunting immediately.
+    if (!grace && crowded) chosen = 'escape';
     const out = (ACT[chosen] || actFarm)();
     moveKeys = out.moveKeys; aim = out.aim;
+    if (!grace && crowded) B.mode = 'crowd-' + B.mode; // visible in telemetry to confirm the trigger fires
 
     // Bullet dodge overrides movement in any mode: sidestepping an incoming shot beats whatever
     // else we were doing for these few frames. Aim is unaffected.

@@ -2,7 +2,7 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 12,
+  version: 13,
 
   // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
   // by the current class, so the right tile index is clicked even if level reads lag. Tile indices
@@ -20,6 +20,11 @@ export const DOCTRINE = {
   bulletDangerRadius: 160, // enemy bullet within this and approaching => escape trigger
   enemySizeWeight: 0.05, // extra threat per pixel of enemy radius (bigger tanks are deadlier)
   anticipationFrames: 22, // shrink an enemy's effective distance by closingSpeed * this (~0.37s lookahead)
+  // Crowd flight: being collapsed on by several foes at once is the dominant death (87% of deaths
+  // are point-blank with 2-3 foes near). If >= crowdCount foes sit within crowdRadius, force escape
+  // and don't hunt, so a converging swarm breaks farming before the pocket closes to body contact.
+  crowdRadius: 300,
+  crowdCount: 2,
 
   // Bullet dodging (velocity-based): a bullet aimed at us (cos angle > aimedCos) inside dodgeRadius
   // whose predicted miss distance is under missMargin triggers a perpendicular sidestep.
