@@ -1,0 +1,24 @@
+{"t":1781317718274,"event":"shift_start","shiftId":"2026-06-13T02-28-37-680Z","doctrine":15,"shiftMs":28800000}
+{"t":1781317719694,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781317719694,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781317720599,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 401 ()"}
+{"t":1781317722147,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781317722336,"event":"doctrine_assigned","version":"opt-g8-2","status":{"gen":8,"evalsThisGen":"7/24","totalEvals":176,"champion":18895}}
+{"t":1781317722337,"event":"spawn","ok":true}
+{"t":1781317724439,"event":"death","n":1,"lifeMs":2014,"cls":"Tank","lvl":1,"screenshot":"death-2026-06-13T02-28-37-680Z-1.png","enemiesNear":[{"x":555,"y":372,"r":16,"dx":-85,"dy":12,"dist":85.84287972802403,"self":false,"vx":0,"vy":0},{"x":555,"y":372,"r":14,"dx":-85,"dy":12,"dist":85.84287972802403,"self":false,"vx":0,"vy":0},{"x":355,"y":333,"r":17,"dx":-285,"dy":-27,"dist":286.2760905140351,"self":false,"vx":0,"vy":0}]}
+{"t":1781317724440,"event":"life_scored","mode":"es","build":"overlord","fitness":41,"score":0,"level":1,"lifeMs":2103,"gen":8,"champion":18895}
+{"t":1781317725146,"event":"respawned","alive":true}
+{"t":1781317725147,"event":"doctrine_assigned","version":"opt-g8-2","status":{"gen":8,"evalsThisGen":"8/24","totalEvals":177,"champion":18895}}
+{"t":1781317728387,"event":"heartbeat","elapsed":5232,"alive":true,"life":3240,"deaths":1,"cls":"Tank","lvl":1,"mode":"spawn-escape","myScore":0,"leaderMax":106700,"estRank":null,"boardSize":3,"optGen":8}
+{"t":1781317733641,"event":"heartbeat","elapsed":10492,"alive":true,"life":8494,"deaths":1,"cls":"Tank","lvl":2,"mode":"farm","myScore":35,"leaderMax":154700,"estRank":8,"boardSize":7,"optGen":8}
+{"t":1781317738901,"event":"heartbeat","elapsed":15749,"alive":true,"life":13754,"deaths":1,"cls":"Tank","lvl":5,"mode":"farm","myScore":65,"leaderMax":360300,"estRank":3,"boardSize":2,"optGen":8}
+{"t":1781317744247,"event":"heartbeat","elapsed":21095,"alive":true,"life":19100,"deaths":1,"cls":"Tank","lvl":5,"mode":"farm","myScore":114,"leaderMax":362000,"estRank":7,"boardSize":6,"optGen":8}
+{"t":1781317749501,"event":"heartbeat","elapsed":26353,"alive":true,"life":24354,"deaths":1,"cls":"Tank","lvl":7,"mode":"farm","myScore":165,"leaderMax":107700,"estRank":4,"boardSize":3,"optGen":8}
+{"t":1781317753948,"event":"hunter_encounter","startDist":392,"minDist":306,"hunterR":23,"myR":20,"fled":true,"cls":"Tank","t0":1454,"outcome":"escaped","frames":98,"lvl":8}
+{"t":1781317754762,"event":"heartbeat","elapsed":31604,"alive":true,"life":29615,"deaths":1,"cls":"Tank","lvl":8,"mode":"farm","myScore":212,"leaderMax":154800,"estRank":3,"boardSize":2,"optGen":8}
+{"t":1781317760009,"event":"heartbeat","elapsed":36865,"alive":true,"life":34862,"deaths":1,"cls":"Tank","lvl":9,"mode":"farm","myScore":265,"leaderMax":30700,"estRank":4,"boardSize":3,"optGen":8}
+{"t":1781317765349,"event":"heartbeat","elapsed":42197,"alive":true,"life":40202,"deaths":1,"cls":"Tank","lvl":10,"mode":"escape","myScore":330,"leaderMax":74600,"estRank":3,"boardSize":2,"optGen":8}
+{"t":1781317770604,"event":"heartbeat","elapsed":47456,"alive":true,"life":45457,"deaths":1,"cls":"Tank","lvl":11,"mode":"escape+dodge","myScore":355,"leaderMax":77800,"estRank":2,"boardSize":1,"optGen":8}
+{"t":1781317775860,"event":"heartbeat","elapsed":52712,"alive":true,"life":50713,"deaths":1,"cls":"Tank","lvl":11,"mode":"kite-farm","myScore":375,"leaderMax":284000,"estRank":5,"boardSize":4,"optGen":8}
+{"t":1781317781116,"event":"heartbeat","elapsed":57968,"alive":true,"life":55969,"deaths":1,"cls":"Tank","lvl":11,"mode":"kite-farm","myScore":395,"leaderMax":387100,"estRank":3,"boardSize":2,"optGen":8}
+{"t":1781317786438,"event":"heartbeat","elapsed":63286,"alive":true,"life":61291,"deaths":1,"cls":"Tank","lvl":12,"mode":"farm","myScore":460,"leaderMax":78500,"estRank":3,"boardSize":2,"optGen":8}

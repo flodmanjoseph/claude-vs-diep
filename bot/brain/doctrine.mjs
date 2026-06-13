@@ -2,7 +2,7 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 14,
+  version: 15,
 
   // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
   // by the current class, so the right tile index is clicked even if level reads lag. Tile indices
@@ -33,10 +33,12 @@ export const DOCTRINE = {
   predatorDetectRadius: 460, // only consider big tanks within this as hunters
   predatorConfirmFrames: 16, // ~0.27s of persistent presence before we trust it (anti-phantom)
   predatorFleeRadius: 320, // flee a confirmed hunter within this (vs escapeRadius ~210 for normals)
-  // Drone screen (#2): GATED OFF this shift. When true, a fleeing drone class drives its drones onto
-  // the predator as a body-block/screen instead of at the nearest threat. Enable next shift only if
-  // the hunter-encounter data shows predators still closing the gap (they are faster than us).
-  droneScreen: false,
+  // Drone screen (#2): ENABLED v15. v14 hunter-encounter data (7 Overseer L30+ encounters) confirmed
+  // predators are faster and kill from RANGE (166-403px): straight-line flight LOST ~88px/encounter
+  // and 3 of 4 fled cases died, none escaped. So while fleeing a confirmed predator, a drone class
+  // now drives its drones straight ONTO the hunter to pressure/chip it instead of at the nearest
+  // threat - the right counter to a faster ranged poker. Measured vs v14 via the same encounter log.
+  droneScreen: true,
   // Edge-farming bias: GATED OFF (0). When > 0, farming drifts toward the nearest single arena edge so
   // converging foes have fewer approach angles. ES-tunable when enabled; built now, off this shift.
   edgeBiasWeight: 0,

@@ -2,6 +2,20 @@
 
 Newest entries at the top.
 
+## 018 - 2026-06-12 - The data spoke: hunters out-run our flight. Drone screen on (v15)
+
+v14's hunter-encounter instrumentation did exactly its job: it answered the question with numbers instead of a hunch, and the answer changed the plan.
+
+The L25-28 encounters were a red herring: bigger tanks there mostly loiter at 340-460px and wander off (we escaped most, flight rarely even triggered). But the **L30+ Overseer tier** - the real leaderboard band - told the opposite story, and it's decisive:
+
+- **7 L30+ encounters, 6 died.** Meeting a hunter at L30 is almost always fatal.
+- **None closed inside 60px.** They killed us from **166-403px** - these are *ranged* attackers (a faster tank poking us with bullets/drones), not body-rammers. That reframes the whole problem: it was never about body contact at the top tier.
+- **Flight loses ground.** Fleeing a confirmed predator we *lost* ~88px on average (it closed 375->181, 427->270); not-fleeing cases lost only 29px (those hunters never committed). **0 of 4 fled encounters reached safety; 3 of 4 died.**
+
+That is exactly the pre-registered condition for #2: hunters still close the gap because they out-run us, so straight-line flight only buys time. Flipped the **drone screen** on (v15, the single live change this shift). While fleeing a confirmed predator, a drone class now drives its drones straight onto the hunter to pressure and chip it, rather than aiming at the nearest threat. Against a *ranged* hunter that's faster than us, offense-as-defense is the right shape: make it dodge/retreat instead of free-casting on us while we kite. Measured head-to-head against v14 through the same `hunter_encounter` log (does it cut the died rate, and does `minDist`/distance-lost improve when fled).
+
+Caveat kept honest: the L30+ sample is small (n=7, 4 fled) and the bot only grazed L30 this shift - the deeper problem is still that it often dies in the Sniper phase before reaching Overseer at all. Edge-farming bias stays built-but-off as the next lever if the drone screen isn't enough. One change at a time; let the encounter log judge v15.
+
 ## 017 - 2026-06-12 - Death forensics: the killer is leaderboard hunters. Hunter avoidance (v14)
 
 Categorized all 40 Overseer L30-45 deaths across every shift, telemetry plus the actual death screenshots. Telemetry alone said 85% "point-blank + 2-3 foes converging." The screenshots said *who*: leaderboard hunters. The L45 / 26k champion life - killed by `subpingaso`, rank 5, 54.0k (~2x us). The 14-minute L39 life - `Rokan`, rank 10, 31.7k, a second drone tank beside us. An L31 - `MY NAME`, rank 5, 56.6k (~8x us), with a 36k tank also adjacent. The "swarm" is usually *two hunters at once*. These tanks are faster than us (movement investment), so a stock straight-line flee doesn't shake them.
