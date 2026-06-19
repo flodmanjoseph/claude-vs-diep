@@ -2,7 +2,7 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 26,
+  version: 27,
 
   // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
   // by the current class, so the right tile index is clicked even if level reads lag. Tile indices
@@ -152,6 +152,11 @@ export const DOCTRINE = {
   huntRange: 360, // only hunt prey within this distance
   huntMaxFoes: 1, // (legacy, unused by v24; danger-aware crowd handles swarms of dangerous tanks)
   huntStandoff: 166, // close to this distance, then hold (drones do the work; don't body-ram a tank)
+  // v27 target lock + pursuit: commit to a prey and chase it to finish the kill instead of dropping it
+  // when it leaves the frame. We dead-reckon its last-known position by velocity and pursue for this
+  // many frames before giving up; a visible enemy within preyMatchRadius of that spot is the same prey.
+  pursuitFrames: 90, // ~1.5s of pursuit after losing sight (ES-tunable)
+  preyMatchRadius: 90, // px: re-acquire the locked prey among visible enemies within this of its predicted pos
 
   // Aim / fire
   autofire: true,

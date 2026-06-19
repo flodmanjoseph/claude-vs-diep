@@ -2,6 +2,16 @@
 
 Newest entries at the top.
 
+## 035 - 2026-06-19 - v27: target lock + pursuit (finish the kill); and THE PIVOT TO RL
+
+Joe: "you are letting players with low health run right around you, if they get out of sight you just keep going back to hunting blocks. this is precisely why i thought a reinforcement model would've been superior - it would actually be learning." Then, decisively: "pivot to RL. figure it out that way. there is more than enough data for pre-training."
+
+Two responses:
+
+**v27 (pursuit fix, shipped):** `bestPrey` only looked at on-screen enemies and re-picked every frame, so a wounded tank that slipped out of the frame was instantly abandoned for blocks. Added a TARGET LOCK: commit to a prey, dead-reckon its last-known position by velocity, re-acquire it among visible enemies by proximity, and PURSUE the predicted spot for `pursuitFrames` (~1.5s) to finish the kill before giving up. Drops on real danger or expiry. Unit-checked (acquire -> lock -> pursue ghost -> give up). This is now the best rules policy - and it matters beyond the rules: it becomes the **warm-start teacher** and **safety fallback** for the RL agent.
+
+**THE PIVOT (decided by Joe): the bot becomes a reinforcement-learning agent.** The rules approach has been effective but it is whack-a-mole - every behavior (hunt, perks, return-fire, pursuit) is hand-coded, and Joe is right that a learner should acquire these itself. The earlier RL attempt (DEVLOG 012-013) stalled on two things: lethal random exploration (a random mode-flip kills a fragile mid-game tank) and a thin online sample budget. Joe's key insight removes the second: **there is enough logged data to PRE-TRAIN** (754 lives / 30h / 52k telemetry lines + the rules bot as a competent behavior policy to clone). The plan, then: pre-train offline (behavior-clone the rules + value-learn from outcomes) so the agent starts competent, keep the hard survival reflexes as non-learnable safety rails so exploration is never suicidal, then fine-tune online. Launching a rigorous design pass (research + data audit + architecture + adversarial feasibility) before building, because the earlier attempt proved this is easy to get wrong. The rules bot keeps running and generating data meanwhile.
+
 ## 034 - 2026-06-19 - v26: return fire - shoot the tank attacking you, not the blocks
 
 Joe: "if someone starts shooting at you and they are chasing you, why would you ever continue shooting at blocks. shooting at the enemy should be the main priority until they are dead or you are out of their presence." Exactly right - and the gap was real: while in farm mode the aim only switched to a nearby enemy inside escapeR*1.3 (~280px), so a tank chasing/shooting from a bit farther got ignored while we kept plinking shapes.

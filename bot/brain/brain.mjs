@@ -332,7 +332,7 @@ export const BRAIN_FN = function (initialDoctrine) {
       rlTerminal(); // death: charge the terminal penalty to the last RL decision, reset the episode
       // If a predator encounter was open when we died, it killed us: close it as 'died' for the data.
       if (B.activeEncounter) { B.activeEncounter.outcome = 'died'; B.activeEncounter.frames = B.frames - B.activeEncounter.t0; window.__hunterLog.push(B.activeEncounter); B.activeEncounter = null; }
-      B.hunterStreak = 0; B.hunterLast = null;
+      B.hunterStreak = 0; B.hunterLast = null; B.lockedPrey = null;
     }
     const sinceSpawn = B.frames - (B.lifeStartFrame || 0);
     const grace = sinceSpawn < DOCTRINE.spawnGraceFrames;
@@ -432,7 +432,35 @@ export const BRAIN_FN = function (initialDoctrine) {
     // lead) - NOT by raw foe count, because a swarm of weaklings is prey, not a threat. The old
     // huntSizeRatio/huntMaxFoes "only if the nearest happens to be small and alone" gating made the
     // bot a passive farmer; bestPrey + danger-aware crowd replace it.
-    const prey = (isDrone || ramNow) && !grace ? bestPrey(foes, myR) : null;
+    // v27 TARGET LOCK + PURSUIT: commit to a prey and chase it to FINISH the kill, instead of
+    // re-picking from scratch every frame and abandoning a wounded tank the moment it leaves the
+    // frame. We lock onto a prey, advance its last-known position by its velocity, re-acquire it among
+    // visible enemies by proximity, and if it briefly leaves sight we PURSUE the predicted position for
+    // pursuitFrames before giving up. Lock drops on real danger or expiry (it's gated below).
+    let prey = null;
+    if ((isDrone || ramNow) && !grace) {
+      const PURSUIT = DOCTRINE.pursuitFrames || 90;
+      const MATCH = DOCTRINE.preyMatchRadius || 90;
+      if (B.lockedPrey) { B.lockedPrey.x += B.lockedPrey.vx || 0; B.lockedPrey.y += B.lockedPrey.vy || 0; } // dead-reckon
+      let matched = null;
+      if (B.lockedPrey) {
+        let bestD = MATCH;
+        for (const e of foes) { if (e.r >= myR * (DOCTRINE.preyRatio || 0.85)) continue; const d = Math.hypot(e.x - B.lockedPrey.x, e.y - B.lockedPrey.y); if (d < bestD) { bestD = d; matched = e; } }
+      }
+      const canPursue = !crowded && !predatorClose && !surrounded && !overPressure;
+      if (matched) {
+        prey = matched;
+        B.lockedPrey = { x: matched.x, y: matched.y, vx: matched.vx || 0, vy: matched.vy || 0, r: matched.r, seen: B.frames };
+      } else if (B.lockedPrey && canPursue && (B.frames - B.lockedPrey.seen) < PURSUIT) {
+        // lost sight of the locked prey but recently committed -> chase its predicted spot to finish it
+        const lp = B.lockedPrey;
+        prey = { x: lp.x, y: lp.y, dx: lp.x - CENTER.x, dy: lp.y - CENTER.y, dist: Math.hypot(lp.x - CENTER.x, lp.y - CENTER.y), r: lp.r, vx: 0, vy: 0, ghost: true };
+      } else {
+        B.lockedPrey = null; // no lock or it expired/we're in danger -> acquire fresh
+        const fresh = bestPrey(foes, myR);
+        if (fresh && canPursue) { prey = fresh; B.lockedPrey = { x: fresh.x, y: fresh.y, vx: fresh.vx || 0, vy: fresh.vy || 0, r: fresh.r, seen: B.frames }; }
+      }
+    } else { B.lockedPrey = null; }
     const huntable = DOCTRINE.huntEnabled && prey && !crowded && !predatorClose && !surrounded && !overPressure && !leading;
 
     // Each tactical mode is an action: it returns the movement keys + aim and labels B.mode.
@@ -458,10 +486,10 @@ export const BRAIN_FN = function (initialDoctrine) {
     const actHunt = () => {
       const t = prey || nearest; // chase the chosen prey, not just whoever is nearest
       if (!t) return actFarm();
-      B.mode = 'hunt';
-      // Close to standoff so drones reach the target, then hold the distance (don't body-ram a tank);
-      // aim the drones/guns straight AT the prey to chip it down for the kill.
-      const mk = t.dist > standoff ? vectorToKeys(t.dx, t.dy) : vectorToKeys(-t.dx, -t.dy);
+      B.mode = t.ghost ? 'hunt-chase' : 'hunt'; // hunt-chase = pursuing a prey that left the frame
+      // Close to standoff so drones reach the target, then hold (don't body-ram a tank). When pursuing
+      // a prey that slipped out of sight, always push toward its predicted spot to catch and finish it.
+      const mk = (t.ghost || t.dist > standoff) ? vectorToKeys(t.dx, t.dy) : vectorToKeys(-t.dx, -t.dy);
       return { moveKeys: mk, aim: { x: t.x, y: t.y } };
     };
     function actFarm() {

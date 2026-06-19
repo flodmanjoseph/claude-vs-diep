@@ -2,3 +2,17 @@ shift 2026-06-19T14-04-43-008Z | doctrine v26 | 28800s
 death #1 after 24s as Tank L9
   overlord life fitness 1324 (score 253, L9) | gen 1 7/32
 upgraded -> Sniper
+upgraded -> Overseer
+death #2 after 186s as Overseer L30
+  overlord life fitness 10803 (score 6502, L30) | gen 1 8/32
+upgraded -> Sniper
+upgraded -> Overseer
+death #3 after 339s as Overseer L30
+  overlord life fitness 11888 (score 6517, L30) | gen 1 9/32
+upgraded -> Sniper
+death #4 after 27s as Sniper L18
+  overlord life fitness 3441 (score 1449, L18) | gen 1 10/32
+upgraded -> Sniper
+death #5 after 53s as Sniper L19
+  overlord life fitness 3881 (score 1613, L19) | gen 1 11/32
+upgraded -> Sniper
