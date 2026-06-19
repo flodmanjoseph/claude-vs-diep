@@ -2,6 +2,12 @@
 
 Newest entries at the top.
 
+## 043 - 2026-06-19 - A/B bug fixed; BC imitation runs ~worse than rules (honest RL read)
+
+The first BC A/B shift exposed a bug AND a finding. Bug: the per-life BC/rules flag was set only in spawnFresh (the INITIAL spawn), not on respawn, so every life ran BC (33/33 bc:1, 0 rules) - no paired baseline. Fixed by moving the alternation into applyNextDoctrine, which runs on every life (spawn + respawn). Finding: that all-BC shift had median life 74s vs v34 rules' ~105s - i.e. the behavior-cloned policy plays somewhat WORSE than the rules it imitates. Expected: BC matches the rules' macro-mode 95-99% per decision, but the disagreements compound over a life, and BC caps at (here, below) the demonstrator. So the mode-residual BC is not a win - it's a validated pipeline, not a performance gain, exactly as the design critique predicted (the residual only re-ranks 4 macro-modes; the real ceiling is in aim/control/build).
+
+Re-ran one clean paired A/B shift (fixed alternation) to get the definitive BC-vs-rules numbers, but the honest conclusion is already clear: imitation RL doesn't beat the well-tuned rules. The only RL path that COULD beat them is Phase-3 (offline reward-optimized policy, e.g. IQL/advantage-weighted) - but per the original critique its ceiling is still just better mode-arbitration (marginal), not the #1-deciding aim/control/build layer. So the strategic read: the SNIPER BUILD is the real lever toward #1, the RL pipeline is built+validated and ready if Phase-3 is ever worth it, and I won't sink more effort into the marginal mode-residual autonomously - that's a call to flag for Joe. After this clean A/B reads out, default back to pure rules (the better policy) and keep banking sniper shots at #1.
+
 ## 042 - 2026-06-19 - v35: RL Phase-1 deployed in-page (BC policy runs live, A/B vs rules)
 
 v34 held over a fuller sample (56 deaths/2h): median life 105s, reach-Assassin 18%, reach-Ranger 4%, maxScore 30k - a sustained improvement over the v32 baseline (94s/13%). Banking it, not thrashing.

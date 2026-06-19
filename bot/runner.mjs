@@ -72,6 +72,11 @@ function trustLevel(l, cls) {
 }
 async function applyNextDoctrine() {
   lifeMaxScore = 0; lifeMaxLevel = 0;
+  // RL Phase-1 A/B: alternate the learned policy vs rules EACH life (runs on both spawn and respawn,
+  // unlike before where it only fired on the initial spawn so every life ran BC). Push the policy on a
+  // BC life, null on a rules life, so life_scored bc:0/1 gives a clean paired comparison.
+  bcThisLife = BC_AB && bcPolicy != null && (bcLifeCounter++ % 2 === 0);
+  await page.evaluate((p) => window.__setPolicy && window.__setPolicy(p), bcThisLife ? bcPolicy : null).catch(() => {});
   if (RL) { await page.evaluate((doc) => window.__setDoctrine && window.__setDoctrine(doc), rlDoctrine).catch(() => {}); return; }
   if (!opt) return;
   const d = opt.nextDoctrine();
@@ -165,10 +170,7 @@ let bcLifeCounter = 0;
 async function spawnFresh() {
   const ok = await spawn(page, { name: NAME, gamemode: GAMEMODE });
   await enableTrustedCanvasClicks(page); // let trusted upgrade clicks reach the canvas
-  await applyNextDoctrine();
-  // RL Phase-1 A/B: alternate the learned policy vs the rules each life so fitness is comparable.
-  bcThisLife = BC_AB && bcPolicy != null && (bcLifeCounter++ % 2 === 0);
-  await page.evaluate((p) => window.__setPolicy && window.__setPolicy(p), bcThisLife ? bcPolicy : null).catch(() => {});
+  await applyNextDoctrine(); // sets the per-life BC/rules A/B + pushes the policy
   await page.evaluate(() => window.__brain && window.__brain.start());
   log({ event: 'spawn', ok, bc: bcThisLife ? 1 : 0 });
   return ok;
