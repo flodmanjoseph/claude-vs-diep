@@ -124,6 +124,24 @@ export const BRAIN_FN = function (initialDoctrine) {
 
   const enemiesOf = (state) => state.enemies.filter((e) => !e.self);
 
+  // v24: the best KILL target. You don't reach #1 by eating shapes - leaders get there by killing
+  // tanks (you absorb a chunk of their score). Once we're a drone class, HUNT the weakest reachable
+  // tank (smaller radius = lower level), preferring near + isolated ones (fewer of its own allies
+  // around it to retaliate). Radius is our only power proxy (no level/health read), so we only commit
+  // to a tank clearly smaller than us - a fight we win - and leave bigger/equal ones to the flee logic.
+  function bestPrey(foes, myR) {
+    let best = null, bestScore = Infinity;
+    for (const e of foes) {
+      if (e.r >= myR * (DOCTRINE.preyRatio || 0.85)) continue; // not clearly weaker -> not prey
+      if (e.dist > (DOCTRINE.huntRange || 340)) continue;
+      let allies = 0;
+      for (const o of foes) if (o !== e && Math.hypot(o.x - e.x, o.y - e.y) < (DOCTRINE.preyCrowdRadius || 220)) allies++;
+      const score = e.dist + allies * (DOCTRINE.preyCrowdPenalty || 200);
+      if (score < bestScore) { bestScore = score; best = e; }
+    }
+    return best;
+  }
+
   // Pick the 8-direction heading that moves most away from all weighted threats (toward open
   // space). Bigger/closer enemies and incoming bullets weigh more. Beats a raw repulsion sum,
   // which can point straight through a third enemy.
@@ -354,7 +372,12 @@ export const BRAIN_FN = function (initialDoctrine) {
     // pocket gets collapsed because escape only fires on the single nearest enemy crossing escapeR
     // while the others sit just outside it. Count foes inside crowdRadius; if too many, force flight
     // regardless of the chosen policy, and refuse to hunt into a crowd.
-    const crowdN = foes.filter((e) => e.dist < (DOCTRINE.crowdRadius || 300) * fScale).length;
+    // v24: crowd-flee keys on DANGEROUS foes, not weaklings. A pre-drone tank treats every nearby
+    // tank as dangerous (can't fight back well); a drone class only fears tanks that aren't clearly
+    // weaker than it (a swarm of small tanks is a hunting opportunity, not a reason to flee).
+    const preyR = myR * (DOCTRINE.preyRatio || 0.85);
+    const dangerFoes = foes.filter((e) => !isDrone || e.r >= preyR);
+    const crowdN = dangerFoes.filter((e) => e.dist < (DOCTRINE.crowdRadius || 300) * fScale).length;
     const crowded = crowdN >= (DOCTRINE.crowdCount || 2);
 
     // v17 threat field: continuous pressure + the open-lane heading. Drives graded spacing while
@@ -397,9 +420,14 @@ export const BRAIN_FN = function (initialDoctrine) {
     const stopDist = ramNow ? 0 : DOCTRINE.approachStopDist;
     const bodyMargin = ramNow ? -999 : DOCTRINE.shapeBodyMargin;
     const standoff = ramNow ? 0 : DOCTRINE.huntStandoff;
-    // Hunting applies to drone classes (drones do the work) and to ram classes (kill by colliding).
-    const huntable = DOCTRINE.huntEnabled && (isDrone || ramNow) && nearest && !grace && !bulletThreat && !crowded && !predatorClose && !surrounded && !overPressure && !leading
-      && nearest.r < myR * DOCTRINE.huntSizeRatio && nearest.dist < DOCTRINE.huntRange && foes.length <= DOCTRINE.huntMaxFoes;
+    // v24 PREDATOR MODE: once we're a drone class, killing tanks - not eating shapes - is the route
+    // to #1, so we actively pick the best weaker tank (prey) and hunt it. Gated only by genuine danger
+    // (a bigger-tank crowd, a confirmed predator, being surrounded, over-pressure, or holding the #1
+    // lead) - NOT by raw foe count, because a swarm of weaklings is prey, not a threat. The old
+    // huntSizeRatio/huntMaxFoes "only if the nearest happens to be small and alone" gating made the
+    // bot a passive farmer; bestPrey + danger-aware crowd replace it.
+    const prey = (isDrone || ramNow) && !grace ? bestPrey(foes, myR) : null;
+    const huntable = DOCTRINE.huntEnabled && prey && !crowded && !predatorClose && !surrounded && !overPressure && !leading;
 
     // Each tactical mode is an action: it returns the movement keys + aim and labels B.mode.
     const actEscape = () => {
@@ -422,10 +450,13 @@ export const BRAIN_FN = function (initialDoctrine) {
       return { moveKeys: vectorToKeys(dx, dy), aim: nearest ? { x: nearest.x, y: nearest.y } : (window.__lastAim || { x: 900, y: 360 }) };
     };
     const actHunt = () => {
-      if (!nearest) return actFarm();
+      const t = prey || nearest; // chase the chosen prey, not just whoever is nearest
+      if (!t) return actFarm();
       B.mode = 'hunt';
-      const mk = nearest.dist > standoff ? vectorToKeys(nearest.dx, nearest.dy) : vectorToKeys(-nearest.dx, -nearest.dy);
-      return { moveKeys: mk, aim: { x: nearest.x, y: nearest.y } };
+      // Close to standoff so drones reach the target, then hold the distance (don't body-ram a tank);
+      // aim the drones/guns straight AT the prey to chip it down for the kill.
+      const mk = t.dist > standoff ? vectorToKeys(t.dx, t.dy) : vectorToKeys(-t.dx, -t.dy);
+      return { moveKeys: mk, aim: { x: t.x, y: t.y } };
     };
     function actFarm() {
       // v20 economy: only chase high-XP pentagons as a drone class when it's genuinely calm

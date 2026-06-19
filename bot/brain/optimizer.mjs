@@ -51,6 +51,8 @@ export const SPACE = {
   // v22 post-upgrade caution:
   upgradeGraceFrames: [60, 360], // frames of caution after a class upgrade
   upgradeScale: [1.0, 1.7], // flee-radius multiplier during the post-upgrade window (1.0 = off)
+  // v24 predator mode:
+  preyRatio: [0.6, 1.0], // a tank smaller than myR*this is prey (lower = pickier, higher = more aggressive)
 };
 const KEYS = Object.keys(SPACE);
 
@@ -60,7 +62,7 @@ const EVALS = 4; // lives per candidate to fight arena variance (median needs a 
 const SIGMA = 0.16; // mutation stddev as a fraction of each parameter's range
 
 const clamp = (v, [lo, hi]) => Math.max(lo, Math.min(hi, v));
-const FRACTIONAL = new Set(['bulletAimedCos', 'enemySizeWeight', 'huntSizeRatio', 'predatorRatio', 'edgeBiasWeight', 'spacingGain', 'pressureCap', 'pressureEscape', 'spacingFloor', 'fragilePhaseScale', 'leadScale', 'upgradeScale']);
+const FRACTIONAL = new Set(['bulletAimedCos', 'enemySizeWeight', 'huntSizeRatio', 'predatorRatio', 'edgeBiasWeight', 'spacingGain', 'pressureCap', 'pressureEscape', 'spacingFloor', 'fragilePhaseScale', 'leadScale', 'upgradeScale', 'preyRatio']);
 const round = (k, v) => FRACTIONAL.has(k) ? +v.toFixed(3) : Math.round(v);
 
 function gauss() { // Box-Muller

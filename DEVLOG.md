@@ -2,6 +2,18 @@
 
 Newest entries at the top.
 
+## 032 - 2026-06-19 - v24 PREDATOR MODE: Joe's call - stop eating blocks, destroy the other tanks
+
+Joe watched the live gameplay and made the call, and he's right: "it just keeps running into the blue blocks in the middle at L30... you're never going to get to first place by just eating blocks. eating blocks is good at the beginning but you're picking the hardest route. destroy the other tanks." This is the strategic truth the whole campaign had been dancing around: we peak at ~34k by passively farming shapes while leaders sit at 60k-690k because they KILL tanks (you absorb a chunk of a victim's score per kill - worth far more than any shape). And v20's pentagon economy was literally steering the Overseer into the dangerous central nest (the "blue blocks").
+
+v24 reframes the bot around a phase model that matches Joe's framing:
+- **Tank/Sniper (pre-drone): farm shapes to level up** - "eating blocks is good at the beginning." Unchanged, with the v18-v23 survival system.
+- **Overseer/Overlord (drone class): PREDATOR MODE - hunt and kill weaker tanks.** A new `bestPrey()` picks the best kill target: a tank clearly weaker than us (smaller radius = lower level; radius is our only power proxy, no level/health read), in range, preferring near + isolated ones (fewer of its allies around to retaliate). We drive drones onto it to chip it down. Hunting is now PRIMARY for a drone class whenever prey exists and we're not in genuine danger - replacing the old timid gate ("only if the single nearest enemy happens to be small and we're otherwise alone") that made the bot a passive farmer.
+
+Survival is preserved, not abandoned: the crowd-flee/danger logic is now **size-aware** - a drone class only counts tanks that aren't clearly weaker than it as a "crowd" to flee, so a swarm of weaklings reads as a hunting opportunity, not a threat, while a pack of comparable/bigger tanks (or a confirmed predator, or being surrounded) still triggers flight. Pre-drone tanks still treat everyone as dangerous (they can't fight back). And v20's `dronePentagonBonus` is set to 0 - the nest-ramming Joe saw is gone (shapes are still farmed nearest-first early-game to level up, just no suicidal pull into the central nest).
+
+`preyRatio` (0.85), `preyCrowdRadius`/`preyCrowdPenalty` added; `preyRatio` is ES-tunable [0.6,1.0] so evolution dials the aggression. Reset the optimizer fresh from the v24 baseline - the strategy pivot (passive farmer -> active predator) makes the old farming-tuned population stale, and it cleanly zeroes the lingering pentagon-seeking; the hard-won radii are baked into the doctrine base so nothing real is lost. bestPrey unit-checked (picks weak/isolated/in-range, ignores bigger tanks). v24 live, 0 errors, farming up the early game correctly; predator mode engages at Overseer.
+
 ## 031 - 2026-06-19 - v23 confirmed (spawn-escape bug gone); the L30 deaths are the slow climb, not a moment - letting it grind
 
 Validating v23: the spawn-escape bug is **gone** - 0 spurious spawn-escape heartbeats (life>10s) in 538, down from 39/shift. Survival holds (median life 145s, max 645s), Overseer reach ~33%. Pure win, no regression.

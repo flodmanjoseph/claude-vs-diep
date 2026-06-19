@@ -2,7 +2,7 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 23,
+  version: 24,
 
   // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
   // by the current class, so the right tile index is clicked even if level reads lag. Tile indices
@@ -131,22 +131,27 @@ export const DOCTRINE = {
   // higher-value kinds, so we don't trek across the map (slow + risky) chasing a far pentagon.
   preferKinds: ['pentagon', 'square', 'triangle'], // value order; pentagons worth most
   kindDistancePenalty: 48, // pixels of "extra distance" each value rank costs in target scoring
-  // v20 economy: a pentagon is worth far more XP than a square/triangle (and alpha pentagons hugely
-  // more), so when a drone class farms SAFELY (pressure below the spacing floor), pentagons get this
-  // px-equivalent distance discount in target scoring - a conservative score-ceiling boost to outscore
-  // real leaders, pressure-vetoed so it never trades survival for score. ES-tunable [0, 300]; 0 = off.
-  dronePentagonBonus: 120,
+  // v20 economy (pentagon-seeking): DISABLED in v24 (set to 0). Watching the bot, Joe saw it ram the
+  // blue pentagons in the middle at L30 - this bonus was pulling Overseers into the dangerous central
+  // nest. Eating shapes is the early-game route to level up, but it does NOT reach #1; killing tanks
+  // does (v24 predator mode). Kept in SPACE so the ES could revive a mild version, but off by default.
+  dronePentagonBonus: 0,
   approachStopDist: 154, // stop closing on a shape inside this; shoot it from range
   shapeBodyMargin: 59, // if a shape is within me.r+shape.r+this, back off (avoid lethal body contact)
   wanderWhenEmpty: true,
 
-  // Drone-class hunting: chase weaker tanks for kill XP (worth far more than shapes). Thresholds
-  // are tunable so the optimizer decides how aggressive to be.
+  // Drone-class hunting (v24 PREDATOR MODE): once we have drones, killing weaker tanks is the route
+  // to #1 (you absorb a chunk of a tank's score on a kill - far more than shapes). bestPrey picks the
+  // best target; we hunt unless genuinely endangered. Joe's strategy: farm shapes to level up early,
+  // then "destroy the other tanks".
   huntEnabled: true,
-  huntSizeRatio: 0.832, // hunt only enemies whose radius is < this fraction of ours (clearly smaller)
-  huntRange: 303, // only hunt within this distance
-  huntMaxFoes: 1, // never hunt when more than this many enemies are near (don't get swarmed)
-  huntStandoff: 166, // close to this distance, then hold (drones do the work; don't ram)
+  preyRatio: 0.85, // a tank with radius < myR * this is clearly weaker = prey we can kill (ES-tunable)
+  preyCrowdRadius: 220, // count a prey's nearby allies within this when ranking targets
+  preyCrowdPenalty: 200, // px-equivalent penalty per ally near a prey (prefer isolated kills)
+  huntSizeRatio: 0.832, // (legacy, unused by v24 predator mode; bestPrey uses preyRatio)
+  huntRange: 360, // only hunt prey within this distance
+  huntMaxFoes: 1, // (legacy, unused by v24; danger-aware crowd handles swarms of dangerous tanks)
+  huntStandoff: 166, // close to this distance, then hold (drones do the work; don't body-ram a tank)
 
   // Aim / fire
   autofire: true,
