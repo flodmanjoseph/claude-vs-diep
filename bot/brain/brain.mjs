@@ -158,9 +158,10 @@ export const BRAIN_FN = function (initialDoctrine) {
   // foes, i.e. the most-open lane out. gapDir is geometry-correct where 8-way sampling is crude: one
   // foe -> straight opposite it; two foes pincering us -> perpendicular to their axis (the only way
   // out). maxGapDeg small => we are surrounded with no clean lane (force a hard breakout early).
-  function threatGeometry(foes) {
-    const R = DOCTRINE.spacingRadius || 400;
-    const SR = DOCTRINE.surroundRadius || 300;
+  function threatGeometry(foes, fovMul) {
+    const fm = fovMul || 1; // v32: shrink the spacing/surround radii at wide FOV (world-consistent)
+    const R = (DOCTRINE.spacingRadius || 400) * fm;
+    const SR = (DOCTRINE.surroundRadius || 300) * fm;
     let pressure = 0, cx = 0, cy = 0;
     const bearings = [];
     for (const e of foes) {
@@ -360,7 +361,15 @@ export const BRAIN_FN = function (initialDoctrine) {
     const foes = enemiesOf(state);
     let nearest = null, nd = Infinity;
     for (const e of foes) { const ed = effectiveDist(e); if (ed < nd) { nd = ed; nearest = e; } }
-    const bulletThreat = state.bullets.some((b) => b.enemy && b.dist < DOCTRINE.bulletDangerRadius);
+    // v32 FOV scaling: the sniper line zooms the camera OUT (measured: a square renders 22px as a Tank
+    // but only 15px as an Assassin = ~0.68), so a fixed-pixel flee threshold covers ~1.5x more WORLD
+    // distance at the wide FOV and the bot flees too early. fovMul rescales the DEFENSIVE distance
+    // thresholds to preserve consistent WORLD behavior across zoom (square-px is a clean zoom proxy -
+    // squares are fixed world-size). No-op at the Tank baseline (mul=1); shrinks the radii as FOV
+    // widens so the Assassin/Ranger isn't over-timid. Offensive ranges (huntRange/combatRange) are left
+    // unscaled so the sniper still exploits its longer reach. Clamped so a noisy read can't do harm.
+    const fovMul = Math.max(0.55, Math.min(1.1, (state.fov || (DOCTRINE.fovBaselinePx || 22)) / (DOCTRINE.fovBaselinePx || 22)));
+    const bulletThreat = state.bullets.some((b) => b.enemy && b.dist < DOCTRINE.bulletDangerRadius * fovMul);
     // v18 fragile-phase gating: a pre-drone Tank/Sniper (the "Sniper valley", 68% of all deaths) has
     // no drone screen, so flee earlier and from farther. v19 lead-protection: when a coherent populated
     // board says we're at/near #1, also play defensively (kills aren't worth the exposure; hunters home
@@ -372,7 +381,7 @@ export const BRAIN_FN = function (initialDoctrine) {
       && (meta.myScore || 0) > (DOCTRINE.leadMinScore || 5000)
       && meta.leaderMax > 0 && (meta.myScore || 0) >= meta.leaderMax * (DOCTRINE.leadScoreFrac || 0.45); // v21: reject sparse-board false leads
     const fScale = (fragile ? (DOCTRINE.fragilePhaseScale || 1) : 1) * (leading ? (DOCTRINE.leadScale || 1) : 1) * (postUpgrade ? (DOCTRINE.upgradeScale || 1) : 1);
-    const escapeR = grace ? DOCTRINE.spawnEscapeRadius : DOCTRINE.escapeRadius * fScale;
+    const escapeR = (grace ? DOCTRINE.spawnEscapeRadius : DOCTRINE.escapeRadius * fScale) * fovMul;
     const myR = state.me.r || 17;
     // Crowd pressure: ~87% of deaths are point-blank (<40px) with 2-3 foes converging, i.e. the
     // pocket gets collapsed because escape only fires on the single nearest enemy crossing escapeR
@@ -383,13 +392,13 @@ export const BRAIN_FN = function (initialDoctrine) {
     // weaker than it (a swarm of small tanks is a hunting opportunity, not a reason to flee).
     const preyR = myR * (DOCTRINE.preyRatio || 0.85);
     const dangerFoes = foes.filter((e) => !isDrone || e.r >= preyR);
-    const crowdN = dangerFoes.filter((e) => e.dist < (DOCTRINE.crowdRadius || 300) * fScale).length;
+    const crowdN = dangerFoes.filter((e) => e.dist < (DOCTRINE.crowdRadius || 300) * fScale * fovMul).length;
     const crowded = crowdN >= (DOCTRINE.crowdCount || 2);
 
     // v17 threat field: continuous pressure + the open-lane heading. Drives graded spacing while
     // farming and an EARLY forced breakout when pressure is high or we are being surrounded (no clean
     // lane), so the pocket never collapses to the point-blank death the corpus shows 84% of the time.
-    const tg = threatGeometry(foes);
+    const tg = threatGeometry(foes, fovMul);
     const surrounded = !grace && tg.nThreat >= 2 && tg.maxGapDeg < (DOCTRINE.safeLaneMinDeg || 110);
     const overPressure = !grace && tg.pressure > (DOCTRINE.pressureEscape || 0.075) / fScale;
     const gapEsc = tg.gapDir ? [tg.gapDir] : null;
@@ -404,12 +413,12 @@ export const BRAIN_FN = function (initialDoctrine) {
     const predConfirm = DOCTRINE.predatorConfirmFrames || 16;
     let predCand = null, pcd = Infinity;
     for (const e of foes) {
-      if (e.r >= myR * (DOCTRINE.predatorRatio || 1.15) && e.dist < (DOCTRINE.predatorDetectRadius || 460) && e.dist < pcd) { pcd = e.dist; predCand = e; }
+      if (e.r >= myR * (DOCTRINE.predatorRatio || 1.15) && e.dist < (DOCTRINE.predatorDetectRadius || 460) * fovMul && e.dist < pcd) { pcd = e.dist; predCand = e; }
     }
     if (predCand) { B.hunterStreak = Math.min(predConfirm + 4, B.hunterStreak + 1); B.hunterLast = predCand; }
     else { B.hunterStreak = Math.max(0, B.hunterStreak - 2); if (B.hunterStreak === 0) B.hunterLast = null; }
     const predatorConfirmed = B.hunterStreak >= predConfirm && !!B.hunterLast && state.me.alive;
-    const predatorClose = predatorConfirmed && B.hunterLast.dist < (DOCTRINE.predatorFleeRadius || 320) * fScale;
+    const predatorClose = predatorConfirmed && B.hunterLast.dist < (DOCTRINE.predatorFleeRadius || 320) * fScale * fovMul;
     // Instrument the encounter: open on first confirmation, track closest approach, mark fled when we
     // actually enter predator-flight. Closed on escape (here) or death (the death branch above).
     if (predatorConfirmed) {

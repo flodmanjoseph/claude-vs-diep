@@ -2,6 +2,16 @@
 
 Newest entries at the top.
 
+## 039 - 2026-06-19 - v31/v32: auto-Assassin confirmed + FOV-scaled thresholds (the wide view, measured)
+
+Two resolutions:
+
+**v31 tile-map upgrade CONFIRMED.** `Sniper -> Assassin (wanted Assassin, tile 0)` fired in-game (twice) - so tile0 = Assassin, the auto-build now climbs Tank->Sniper->Assassin without manual help, hunting with pursuit (hunt-chase mode), 0 errors. The label-read approach is fully abandoned (panel text isn't capturable); the verified tile map is the path, and it never touches tile1 (the banned Overlord line). Assassin->Ranger (tile0 at L45) will confirm when a life reaches 45.
+
+**v32 FOV-scaled thresholds - measured the zoom.** Per-class median square-px (squares are fixed world-size = a clean zoom proxy): Tank 22, Sniper 19, Assassin 15. So the Assassin FOV is ~0.68 of baseline (camera ~1.5x zoomed out) - a fixed-pixel flee radius there covers ~1.5x more WORLD distance, making the Assassin over-timid. Added `fovMul = clamp(squarePx/22, 0.55, 1.1)` and rescaled the DEFENSIVE distance thresholds by it (escapeRadius, crowdRadius, bulletDangerRadius, predator detect/flee, spacing/surround radii) to keep world-consistent behavior. Verified: no-op at the Tank baseline (mul=1.0); at Assassin FOV escapeRadius drops 216->147px screen = the same WORLD distance, so it stops fleeing too early. Offensive ranges (huntRange/combatRange/preyRatio) left unscaled so the sniper still exploits its longer reach. Clamped so a noisy square read can't misbehave.
+
+Honest perf note: the sniper line reaches Assassin and hunts (hunt-chase + return-fire active), but survival is lower than the drone era (~94-160s median vs 145-200s) - expected for a glass-cannon sniper, and most deaths are still in the L15-30 Sniper valley (only ~7-22% reach Assassin). The FOV fix mainly helps the Assassin/Ranger phase (rare); the squishy-Sniper-valley survival is the next thing to watch. RL Phase-0 logging continues (now also carrying the FOV signal that drove this fix).
+
 ## 038 - 2026-06-19 - v30: FOV-aware perception (exploit the wider sniper view) + zoom instrumentation
 
 Joe noticed the Assassin's much wider camera ("look how much wider that view is, that looks great") - snipers zoom OUT, which is a real edge for a vision-based bot (it sees more of the arena per frame = spots threats and prey earlier). But it has a catch: the perception's size cutoffs were fixed pixels tuned at the narrow Tank/Sniper FOV, and at the wider FOV every entity renders smaller - a distant tank can drop under the 12px tank/bullet cutoff and become invisible to the threat/prey logic, and small shapes under the 4px floor get dropped.
