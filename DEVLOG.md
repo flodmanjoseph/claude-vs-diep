@@ -2,6 +2,14 @@
 
 Newest entries at the top.
 
+## 031 - 2026-06-19 - v23 confirmed (spawn-escape bug gone); the L30 deaths are the slow climb, not a moment - letting it grind
+
+Validating v23: the spawn-escape bug is **gone** - 0 spurious spawn-escape heartbeats (life>10s) in 538, down from 39/shift. Survival holds (median life 145s, max 645s), Overseer reach ~33%. Pure win, no regression.
+
+Overseers still cluster at L30-33 deaths though, so I checked whether that's an upgrade-moment problem (the ~0.25s brain-pause during the trusted upgrade click). It is NOT: **0 of 36 Overseer/late-Sniper deaths happened within 3s of an upgrade** - they died 15-265s after, scattered across L30-33. So "median death level 31" just reflects where Overseers spend their time: the L30->L45 climb is long (XP requirements balloon), and they get killed by ordinary crowds/hunters somewhere in the low-30s before maturing to Overlord. There's no single death-moment bug to fix - it's the general "survive longer as an Overseer AND/OR level faster," which the existing levers already target (the defensive fScale system for survival, v20 economy for XP rate), all ES-tuned by a fitness that rewards level+survival+score.
+
+Decision: no v24. I've shipped 7 versions in rapid succession (v17-v23); the per-shift samples are thin (15-23 lives) and v23 - likely the biggest fix since v18 - JUST landed. The disciplined move is to let it grind a full shift (or several) so the ES can optimize cleanly now that lives no longer randomly go defenseless, and bank real shots at #1. Shipping another change now would outpace validation. Watching for #1 and regressions; will revisit a targeted lever (e.g. Overseer stat-build, or readRank detection robustness) only if a full shift of v23 data demands it.
+
 ## 030 - 2026-06-19 - v23: found the real Overseer-killer - a perception flicker re-triggering spawn grace MID-LIFE
 
 v22's post-upgrade caution didn't fix the L30 wall - Overseers still died at levels [30,30,30,30,31,33] (median 30), i.e. AT the upgrade, not in the seconds after. Digging into the telemetry exposed the actual bug, and it's a good one: **39 heartbeats this shift were in `spawn-escape` mode at life > 10s** (a Sniper at 76s, 113s, 166s into a life). spawn-escape should only happen in the first ~4s of a life. During it the bot does NOT fire and just flees (to preserve diep's spawn protection). So the bot was going defenseless - no guns, running - for ~4 seconds at a time, repeatedly, mid-life.
