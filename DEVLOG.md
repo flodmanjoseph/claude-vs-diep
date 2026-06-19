@@ -2,6 +2,24 @@
 
 Newest entries at the top.
 
+## 022 - 2026-06-19 - Edge-bias verdict: not a clear win, and the champion is a frozen high-variance peak
+
+The v16 edge-bias shift completed cleanly (8.05h, 203 deaths, optimizer gen 18->26). Topline vs the v15 shift, edge-bias did NOT do what it was meant to:
+
+| metric | v15 (edge off) | v16 (edge on) |
+|---|---|---|
+| deaths/hr | 22.8 | 25.2 |
+| point-blank deaths | 80% | 86% |
+| Sniper-phase deaths | 62% | 78% |
+| avg life | 155s | 141s |
+| best life / score | 627s / 34,368 | 592s / 30,311 |
+
+Point-blank collapse - the exact thing edge-farming was supposed to reduce - went *up*, and the Sniper valley got worse (114 -> 159 Sniper deaths). But this is NOT a clean read: OPTIMIZE was on, so all params evolved across both shifts and `edgeBiasWeight` itself was mutated across [0, 2.2] per life, plus arena variance is large. So "v16 shift" != "edge-bias on" uniformly.
+
+The cleaner signal is which way ES drove the parameter, and it's ambivalent-to-mildly-positive: in the current generation the leading candidates cluster at `edgeBiasWeight` ~0.8-0.85 (fit ~8-9.6k) while edge-OFF (ebw=0) sits mid-pack (~6.5k). So evolution is not rejecting edge-bias; it's mildly keeping it near the 0.8 default. Verdict: keep it in the search space, let ES settle it; it is not the breakthrough lever.
+
+The more important thing this surfaced: **the gen-16 champion (fitness 23,754) has stood unbeaten for 10 generations** - recent gens only reach 8-19k bestMean. Because the fitness robust-mean only trims the *low* sample, a lucky high-variance pair crowned a champion the population now can't reproduce, and it's carried forever as an elite parent. That frozen peak, not edge-bias, is the next thing to fix: the campaign needs a fitness/championing scheme that rewards *consistency* (e.g. require more evals, or median over robust-mean) so the elite reflects a repeatable life, not a one-off. Next shift's candidate lever.
+
 ## 021 - 2026-06-13 - New record (34,368 @ rank 2, 88% of leader) and edge-farming bias goes live (v16)
 
 The overnight v15 shift (8h, OPTIMIZE on, gen 18) set a new record and the death screen verifies it: **Score 34,368, Level 45, Overlord** (evidence death-2026-06-13T05-14-58-607Z-132.png). At that moment the board read estRank 2 of 12 with the leader at 39,100 - so **~88% of the leader, rank 2, the closest sustained approach to #1 yet** (beats 020's 82%). The final +4.4k came in one heartbeat right before death, which is exactly the 24,971 glitch shape - but here it is real: the death screen (post-kill final score, the ground truth) shows 34,368, the class/level are a genuine L45 Overlord, and the score sat legitimately at 29,988 for ~26s before a last Overlord kill closed it out. Killed by "an unnamed tank", not a named hunter - at the top tier it is now even-matched scrums, not getting run down. No #1, so no notification (reserved for the real thing).

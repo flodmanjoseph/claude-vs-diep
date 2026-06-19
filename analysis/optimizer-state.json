@@ -1,61 +1,63 @@
 {
- "gen": 18,
- "evalNo": 418,
+ "gen": 26,
+ "evalNo": 621,
  "population": [
   {
    "params": {
-    "escapeRadius": 209,
-    "waryRadius": 430,
-    "bulletDangerRadius": 212,
-    "enemySizeWeight": 0.103,
-    "anticipationFrames": 45,
-    "bulletDodgeRadius": 299,
-    "bulletAimedCos": 0.832,
-    "bulletMissMargin": 60,
-    "spawnGraceFrames": 220,
-    "spawnEscapeRadius": 348,
-    "kindDistancePenalty": 65,
-    "approachStopDist": 181,
-    "shapeBodyMargin": 27,
-    "huntSizeRatio": 0.68,
-    "huntRange": 374,
-    "huntStandoff": 200,
-    "crowdRadius": 293,
-    "predatorRatio": 1.201,
-    "predatorFleeRadius": 285
+    "escapeRadius": 242,
+    "waryRadius": 367,
+    "bulletDangerRadius": 190,
+    "enemySizeWeight": 0.085,
+    "anticipationFrames": 36,
+    "bulletDodgeRadius": 343,
+    "bulletAimedCos": 0.958,
+    "bulletMissMargin": 62,
+    "spawnGraceFrames": 269,
+    "spawnEscapeRadius": 305,
+    "kindDistancePenalty": 8,
+    "approachStopDist": 120,
+    "shapeBodyMargin": 56,
+    "huntSizeRatio": 0.759,
+    "huntRange": 313,
+    "huntStandoff": 138,
+    "crowdRadius": 257,
+    "predatorRatio": 1.309,
+    "predatorFleeRadius": 324,
+    "edgeBiasWeight": 1.089
    },
    "fits": [
-    828.1792,
-    2102.166,
-    1942.5272
+    5866.3652,
+    3552.8588,
+    3418.568
    ]
   },
   {
    "params": {
-    "escapeRadius": 243,
-    "waryRadius": 480,
-    "bulletDangerRadius": 180,
-    "enemySizeWeight": 0.076,
-    "anticipationFrames": 41,
-    "bulletDodgeRadius": 296,
-    "bulletAimedCos": 0.794,
-    "bulletMissMargin": 60,
-    "spawnGraceFrames": 247,
-    "spawnEscapeRadius": 379,
-    "kindDistancePenalty": 43,
-    "approachStopDist": 99,
-    "shapeBodyMargin": 59,
-    "huntSizeRatio": 0.773,
-    "huntRange": 350,
-    "huntStandoff": 202,
-    "crowdRadius": 229,
-    "predatorRatio": 1.168,
-    "predatorFleeRadius": 293
+    "escapeRadius": 222,
+    "waryRadius": 370,
+    "bulletDangerRadius": 162,
+    "enemySizeWeight": 0.084,
+    "anticipationFrames": 15,
+    "bulletDodgeRadius": 329,
+    "bulletAimedCos": 0.685,
+    "bulletMissMargin": 72,
+    "spawnGraceFrames": 134,
+    "spawnEscapeRadius": 428,
+    "kindDistancePenalty": 0,
+    "approachStopDist": 205,
+    "shapeBodyMargin": 56,
+    "huntSizeRatio": 0.657,
+    "huntRange": 353,
+    "huntStandoff": 189,
+    "crowdRadius": 230,
+    "predatorRatio": 1.392,
+    "predatorFleeRadius": 256,
+    "edgeBiasWeight": 0
    },
    "fits": [
-    3177.4784,
-    8052.3836,
-    3084.6264
+    4291.8864,
+    1988.4752,
+    8670.0452
    ]
   },
   {
@@ -78,131 +80,152 @@
     "huntStandoff": 166,
     "crowdRadius": 248,
     "predatorRatio": 1.309,
-    "predatorFleeRadius": 293
+    "predatorFleeRadius": 293,
+    "edgeBiasWeight": 0.8
    },
    "fits": [
-    4394.1944,
-    8719.4356,
-    9218.0444
+    15330.7116,
+    3886.2796,
+    2094.3028
    ]
   },
   {
    "params": {
-    "escapeRadius": 185,
-    "waryRadius": 427,
-    "bulletDangerRadius": 165,
-    "enemySizeWeight": 0.082,
-    "anticipationFrames": 32,
-    "bulletDodgeRadius": 295,
-    "bulletAimedCos": 0.874,
-    "bulletMissMargin": 66,
-    "spawnGraceFrames": 297,
-    "spawnEscapeRadius": 200,
-    "kindDistancePenalty": 22,
-    "approachStopDist": 154,
+    "escapeRadius": 161,
+    "waryRadius": 368,
+    "bulletDangerRadius": 158,
+    "enemySizeWeight": 0.13,
+    "anticipationFrames": 31,
+    "bulletDodgeRadius": 317,
+    "bulletAimedCos": 0.652,
+    "bulletMissMargin": 77,
+    "spawnGraceFrames": 223,
+    "spawnEscapeRadius": 305,
+    "kindDistancePenalty": 48,
+    "approachStopDist": 142,
     "shapeBodyMargin": 60,
-    "huntSizeRatio": 0.681,
-    "huntRange": 303,
-    "huntStandoff": 142,
-    "crowdRadius": 248,
-    "predatorRatio": 1.309,
-    "predatorFleeRadius": 337
+    "huntSizeRatio": 0.833,
+    "huntRange": 364,
+    "huntStandoff": 168,
+    "crowdRadius": 262,
+    "predatorRatio": 1.297,
+    "predatorFleeRadius": 309,
+    "edgeBiasWeight": 0.851
    },
-   "fits": []
+   "fits": [
+    1462.0536,
+    5833.4452,
+    10172.5096
+   ]
   },
   {
    "params": {
-    "escapeRadius": 225,
-    "waryRadius": 456,
-    "bulletDangerRadius": 154,
-    "enemySizeWeight": 0.076,
-    "anticipationFrames": 45,
-    "bulletDodgeRadius": 307,
-    "bulletAimedCos": 0.794,
-    "bulletMissMargin": 72,
-    "spawnGraceFrames": 247,
-    "spawnEscapeRadius": 379,
-    "kindDistancePenalty": 64,
-    "approachStopDist": 125,
-    "shapeBodyMargin": 59,
-    "huntSizeRatio": 0.773,
-    "huntRange": 350,
-    "huntStandoff": 197,
-    "crowdRadius": 220,
-    "predatorRatio": 1.245,
-    "predatorFleeRadius": 342
+    "escapeRadius": 242,
+    "waryRadius": 364,
+    "bulletDangerRadius": 190,
+    "enemySizeWeight": 0.094,
+    "anticipationFrames": 36,
+    "bulletDodgeRadius": 294,
+    "bulletAimedCos": 0.891,
+    "bulletMissMargin": 73,
+    "spawnGraceFrames": 320,
+    "spawnEscapeRadius": 294,
+    "kindDistancePenalty": 0,
+    "approachStopDist": 115,
+    "shapeBodyMargin": 37,
+    "huntSizeRatio": 0.68,
+    "huntRange": 393,
+    "huntStandoff": 151,
+    "crowdRadius": 259,
+    "predatorRatio": 1.291,
+    "predatorFleeRadius": 334,
+    "edgeBiasWeight": 0.99
    },
-   "fits": []
+   "fits": [
+    4179.4648,
+    2121.6996,
+    1126.392
+   ]
   },
   {
    "params": {
-    "escapeRadius": 186,
-    "waryRadius": 480,
-    "bulletDangerRadius": 206,
-    "enemySizeWeight": 0.104,
-    "anticipationFrames": 26,
-    "bulletDodgeRadius": 238,
-    "bulletAimedCos": 0.807,
+    "escapeRadius": 252,
+    "waryRadius": 409,
+    "bulletDangerRadius": 172,
+    "enemySizeWeight": 0.088,
+    "anticipationFrames": 31,
+    "bulletDodgeRadius": 370,
+    "bulletAimedCos": 0.824,
+    "bulletMissMargin": 74,
+    "spawnGraceFrames": 243,
+    "spawnEscapeRadius": 321,
+    "kindDistancePenalty": 63,
+    "approachStopDist": 180,
+    "shapeBodyMargin": 52,
+    "huntSizeRatio": 0.859,
+    "huntRange": 245,
+    "huntStandoff": 173,
+    "crowdRadius": 265,
+    "predatorRatio": 1.357,
+    "predatorFleeRadius": 315,
+    "edgeBiasWeight": 1.942
+   },
+   "fits": [
+    2874.0824,
+    3892.4852,
+    9613.5232
+   ]
+  },
+  {
+   "params": {
+    "escapeRadius": 208,
+    "waryRadius": 427,
+    "bulletDangerRadius": 160,
+    "enemySizeWeight": 0.122,
+    "anticipationFrames": 28,
+    "bulletDodgeRadius": 325,
+    "bulletAimedCos": 0.866,
     "bulletMissMargin": 67,
-    "spawnGraceFrames": 263,
-    "spawnEscapeRadius": 277,
-    "kindDistancePenalty": 48,
-    "approachStopDist": 163,
+    "spawnGraceFrames": 256,
+    "spawnEscapeRadius": 305,
+    "kindDistancePenalty": 23,
+    "approachStopDist": 126,
     "shapeBodyMargin": 59,
-    "huntSizeRatio": 0.947,
-    "huntRange": 240,
+    "huntSizeRatio": 0.991,
+    "huntRange": 233,
     "huntStandoff": 166,
-    "crowdRadius": 249,
-    "predatorRatio": 1.309,
-    "predatorFleeRadius": 293
-   },
-   "fits": []
-  },
-  {
-   "params": {
-    "escapeRadius": 288,
-    "waryRadius": 418,
-    "bulletDangerRadius": 222,
-    "enemySizeWeight": 0.058,
-    "anticipationFrames": 41,
-    "bulletDodgeRadius": 296,
-    "bulletAimedCos": 0.834,
-    "bulletMissMargin": 54,
-    "spawnGraceFrames": 201,
-    "spawnEscapeRadius": 391,
-    "kindDistancePenalty": 43,
-    "approachStopDist": 99,
-    "shapeBodyMargin": 49,
-    "huntSizeRatio": 0.799,
-    "huntRange": 350,
-    "huntStandoff": 218,
-    "crowdRadius": 229,
-    "predatorRatio": 1.206,
-    "predatorFleeRadius": 344
-   },
-   "fits": []
-  },
-  {
-   "params": {
-    "escapeRadius": 157,
-    "waryRadius": 427,
-    "bulletDangerRadius": 196,
-    "enemySizeWeight": 0.091,
-    "anticipationFrames": 29,
-    "bulletDodgeRadius": 291,
-    "bulletAimedCos": 0.805,
-    "bulletMissMargin": 70,
-    "spawnGraceFrames": 146,
-    "spawnEscapeRadius": 307,
-    "kindDistancePenalty": 48,
-    "approachStopDist": 223,
-    "shapeBodyMargin": 60,
-    "huntSizeRatio": 0.766,
-    "huntRange": 286,
-    "huntStandoff": 182,
     "crowdRadius": 248,
-    "predatorRatio": 1.309,
-    "predatorFleeRadius": 261
+    "predatorRatio": 1.361,
+    "predatorFleeRadius": 296,
+    "edgeBiasWeight": 1.334
+   },
+   "fits": [
+    6146.1756,
+    7429.1916
+   ]
+  },
+  {
+   "params": {
+    "escapeRadius": 216,
+    "waryRadius": 409,
+    "bulletDangerRadius": 196,
+    "enemySizeWeight": 0.082,
+    "anticipationFrames": 26,
+    "bulletDodgeRadius": 300,
+    "bulletAimedCos": 0.844,
+    "bulletMissMargin": 61,
+    "spawnGraceFrames": 255,
+    "spawnEscapeRadius": 253,
+    "kindDistancePenalty": 18,
+    "approachStopDist": 126,
+    "shapeBodyMargin": 59,
+    "huntSizeRatio": 0.832,
+    "huntRange": 303,
+    "huntStandoff": 166,
+    "crowdRadius": 190,
+    "predatorRatio": 1.307,
+    "predatorFleeRadius": 255,
+    "edgeBiasWeight": 0.8
    },
    "fits": []
   }
@@ -227,7 +250,8 @@
    "huntStandoff": 166,
    "crowdRadius": 248,
    "predatorRatio": 1.309,
-   "predatorFleeRadius": 293
+   "predatorFleeRadius": 293,
+   "edgeBiasWeight": 0.8
   },
   "fitness": 23753.8532
  },
@@ -333,6 +357,54 @@
    "bestMean": 17506,
    "championFitness": 23754,
    "evals": 409
+  },
+  {
+   "gen": 18,
+   "bestMean": 12358,
+   "championFitness": 23754,
+   "evals": 433
+  },
+  {
+   "gen": 19,
+   "bestMean": 9228,
+   "championFitness": 23754,
+   "evals": 457
+  },
+  {
+   "gen": 20,
+   "bestMean": 8595,
+   "championFitness": 23754,
+   "evals": 481
+  },
+  {
+   "gen": 21,
+   "bestMean": 7940,
+   "championFitness": 23754,
+   "evals": 505
+  },
+  {
+   "gen": 22,
+   "bestMean": 8246,
+   "championFitness": 23754,
+   "evals": 529
+  },
+  {
+   "gen": 23,
+   "bestMean": 19662,
+   "championFitness": 23754,
+   "evals": 553
+  },
+  {
+   "gen": 24,
+   "bestMean": 8556,
+   "championFitness": 23754,
+   "evals": 577
+  },
+  {
+   "gen": 25,
+   "bestMean": 8811,
+   "championFitness": 23754,
+   "evals": 601
   }
  ],
  "space": {
@@ -411,6 +483,10 @@
   "predatorFleeRadius": [
    220,
    420
+  ],
+  "edgeBiasWeight": [
+   0,
+   2.2
   ]
  },
  "updated": null
