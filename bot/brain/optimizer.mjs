@@ -48,6 +48,9 @@ export const SPACE = {
   leadScale: [1.0, 1.8], // how much more defensively we play when at/near #1 (1.0 = off)
   // v20 economy:
   dronePentagonBonus: [0, 300], // px discount steering a safe drone toward high-XP pentagons (0 = off)
+  // v22 post-upgrade caution:
+  upgradeGraceFrames: [60, 360], // frames of caution after a class upgrade
+  upgradeScale: [1.0, 1.7], // flee-radius multiplier during the post-upgrade window (1.0 = off)
 };
 const KEYS = Object.keys(SPACE);
 
@@ -57,7 +60,7 @@ const EVALS = 4; // lives per candidate to fight arena variance (median needs a 
 const SIGMA = 0.16; // mutation stddev as a fraction of each parameter's range
 
 const clamp = (v, [lo, hi]) => Math.max(lo, Math.min(hi, v));
-const FRACTIONAL = new Set(['bulletAimedCos', 'enemySizeWeight', 'huntSizeRatio', 'predatorRatio', 'edgeBiasWeight', 'spacingGain', 'pressureCap', 'pressureEscape', 'spacingFloor', 'fragilePhaseScale', 'leadScale']);
+const FRACTIONAL = new Set(['bulletAimedCos', 'enemySizeWeight', 'huntSizeRatio', 'predatorRatio', 'edgeBiasWeight', 'spacingGain', 'pressureCap', 'pressureEscape', 'spacingFloor', 'fragilePhaseScale', 'leadScale', 'upgradeScale']);
 const round = (k, v) => FRACTIONAL.has(k) ? +v.toFixed(3) : Math.round(v);
 
 function gauss() { // Box-Muller

@@ -2,6 +2,16 @@
 
 Newest entries at the top.
 
+## 029 - 2026-06-19 - v22: post-upgrade caution - the fresh-Overseer fragile point that was the L30->45 wall
+
+v21 didn't move the Overseer->Overlord transition (still 6%, 2/36 across v18-v21; Overseers still die at a median level of 31). Root-caused it, and it's structural: v18's `fragilePhaseScale` makes a Tank/Sniper play cautiously, but it keys on `!isDrone` - so the instant a Sniper upgrades to Overseer at L30, that protection switches **OFF**, and a fresh Overseer whose drones haven't deployed yet suddenly plays full-aggressive at its most vulnerable moment. That's the L31 death cluster.
+
+v22 = **post-upgrade caution window.** On any class upgrade (to a non-Tank class; a respawn-to-Tank is excluded - spawn grace handles that), apply the defensive flee-radius scaling for `upgradeGraceFrames` (180, ~3s) via `upgradeScale` (1.3) - the same machinery as fragile/lead, folded into the one `fScale`. So a fresh Sniper/Overseer/Overlord flees earlier while its kit matures, bridging L15/L30/L45. Tagged `up-` in telemetry to measure. Unit-checked the class-change detector: spawn-Tank no, upgrade-to-Sniper yes, decays after the window, upgrade-to-Overseer yes (the wall), respawn-to-Tank no. Both knobs in the ES space. Optimizer continued from the v21 state.
+
+Also noted (deferred, not blocking): the leaderboard read is noisy - only 31% of heartbeats capture board>=7 (the sampler often catches a sparse subset, missing the dense middle), which is why lead-protection saw phantom near-leads and why a brief #1 could be missed. The victory detector's coherence gate + 3-sample streak still make a FALSE victory very unlikely, and a genuinely SUSTAINED #1 (the actual win condition) would accumulate coherent reads, so it's acceptable for now; improving readRank robustness is a candidate once the funnel delivers more top-band lives.
+
+v22 verified, live, 0 brain errors.
+
 ## 028 - 2026-06-19 - v21: fixed lead-protection firing on phantom leads; the funnel wall is now Overseer->Overlord
 
 Consolidation tick (no shipping unless data demands - and it did). Two findings from validating v19/v20:

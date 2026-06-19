@@ -2,7 +2,7 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 21,
+  version: 22,
 
   // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
   // by the current class, so the right tile index is clicked even if level reads lag. Tile indices
@@ -57,6 +57,15 @@ export const DOCTRINE = {
   // lead-protection made us play defensively while mid-pack, wasting farm time) while keeping real
   // near-#1 (e.g. 30k vs a 34k leader). Mirrors the #1 detector's coherence discipline.
   leadScoreFrac: 0.45,
+
+  // === v22 POST-UPGRADE CAUTION (fix the Overseer->Overlord wall) ===
+  // Overseers die at a median level of 31 - right after the L30 upgrade - because fragilePhaseScale
+  // protects Tank/Sniper then switches OFF the instant they become a drone Overseer, so a fresh
+  // Overseer (drones not yet deployed) plays full-aggressive at its weakest moment. For a brief
+  // window after ANY upgrade, scale up the flee triggers (same machinery as fragile/lead) so the new
+  // class survives while its drones mature. Bridges L15->Sniper, L30->Overseer, L45->Overlord.
+  upgradeGraceFrames: 180, // ~3s of caution after a class upgrade (ES-tunable [60,360])
+  upgradeScale: 1.3, // flee-radius multiplier during the post-upgrade window (ES-tunable [1.0,1.7])
 
   // === v17 PROACTIVE SPACING / ANTI-SURROUND (the headline redesign) ===
   // Corpus of 754 lives: 67% of deaths are in farm mode, 84% point-blank, 89% with >=2 foes within

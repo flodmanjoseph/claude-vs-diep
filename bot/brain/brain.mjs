@@ -309,6 +309,14 @@ export const BRAIN_FN = function (initialDoctrine) {
     // unshielded only after we've used the protection window to flee to open space.
     const cls = (window.__diep && window.__diep.hud && window.__diep.hud.cls) || 'Tank';
     const isDrone = DOCTRINE.droneClasses.includes(cls);
+    // v22 post-upgrade caution: Overseers die at a median level of 31 - right after the L30 upgrade -
+    // because fragilePhaseScale protects the Tank/Sniper then switches OFF the instant they become a
+    // (drone) Overseer, so a fresh Overseer with no mature drones suddenly plays full-aggressive at
+    // its most vulnerable moment. Detect a class UPGRADE (to a non-Tank class; a respawn-to-Tank is
+    // handled by spawn grace) and apply a brief caution window so the fresh class flees while its
+    // drones deploy. Bridges the L30->45 and L45 transitions.
+    if (cls !== B.lastClass) { if (B.lastClass != null && cls !== 'Tank') B.upgradeFrame = B.frames; B.lastClass = cls; }
+    const postUpgrade = !grace && B.upgradeFrame != null && (B.frames - B.upgradeFrame) < (DOCTRINE.upgradeGraceFrames || 180);
     if (!grace) { ensureAutofire(); setMouseHold(isDrone); } else { setMouseHold(false); }
     allocStats();
 
@@ -331,7 +339,7 @@ export const BRAIN_FN = function (initialDoctrine) {
     const leading = !grace && meta.boardSize >= 7 && meta.estRank != null && meta.estRank <= (DOCTRINE.leadRankMax || 2)
       && (meta.myScore || 0) > (DOCTRINE.leadMinScore || 5000)
       && meta.leaderMax > 0 && (meta.myScore || 0) >= meta.leaderMax * (DOCTRINE.leadScoreFrac || 0.45); // v21: reject sparse-board false leads
-    const fScale = (fragile ? (DOCTRINE.fragilePhaseScale || 1) : 1) * (leading ? (DOCTRINE.leadScale || 1) : 1);
+    const fScale = (fragile ? (DOCTRINE.fragilePhaseScale || 1) : 1) * (leading ? (DOCTRINE.leadScale || 1) : 1) * (postUpgrade ? (DOCTRINE.upgradeScale || 1) : 1);
     const escapeR = grace ? DOCTRINE.spawnEscapeRadius : DOCTRINE.escapeRadius * fScale;
     const myR = state.me.r || 17;
     // Crowd pressure: ~87% of deaths are point-blank (<40px) with 2-3 foes converging, i.e. the
@@ -483,6 +491,7 @@ export const BRAIN_FN = function (initialDoctrine) {
     // Tag the trigger in telemetry (predator-flee labels itself inside actEscape; crowd prefixes here).
     if (!grace && crowded && !predatorClose) B.mode = 'crowd-' + B.mode;
     if (leading) B.mode = 'lead-' + B.mode; // tag so the corpus can A/B time-survived-while-leading
+    if (postUpgrade) B.mode = 'up-' + B.mode; // tag the post-upgrade caution window
 
     // Bullet dodge overrides movement in any mode: sidestepping an incoming shot beats whatever
     // else we were doing for these few frames. Aim is unaffected.

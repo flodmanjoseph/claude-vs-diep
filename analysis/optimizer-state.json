@@ -1,6 +1,6 @@
 {
  "gen": 3,
- "evalNo": 75,
+ "evalNo": 93,
  "population": [
   {
    "params": {
@@ -34,7 +34,9 @@
     "safeShapeBias": 109,
     "fragilePhaseScale": 1.215,
     "leadScale": 1.3,
-    "dronePentagonBonus": 120
+    "dronePentagonBonus": 120,
+    "upgradeGraceFrames": 180,
+    "upgradeScale": 1.3
    },
    "fits": [
     11584.88,
@@ -75,7 +77,9 @@
     "safeShapeBias": 0,
     "fragilePhaseScale": 1.378,
     "leadScale": 1.3,
-    "dronePentagonBonus": 120
+    "dronePentagonBonus": 120,
+    "upgradeGraceFrames": 180,
+    "upgradeScale": 1.3
    },
    "fits": [
     14716.927,
@@ -116,12 +120,15 @@
     "safeShapeBias": 70,
     "fragilePhaseScale": 1.25,
     "leadScale": 1.3,
-    "dronePentagonBonus": 120
+    "dronePentagonBonus": 120,
+    "upgradeGraceFrames": 180,
+    "upgradeScale": 1.3
    },
    "fits": [
     5562.428,
     10409.086,
-    4672.013
+    4672.013,
+    4463.437
    ]
   },
   {
@@ -156,9 +163,16 @@
     "safeShapeBias": 70,
     "fragilePhaseScale": 1.25,
     "leadScale": 1.3,
-    "dronePentagonBonus": 93
+    "dronePentagonBonus": 93,
+    "upgradeGraceFrames": 180,
+    "upgradeScale": 1.3
    },
-   "fits": []
+   "fits": [
+    3725.475,
+    2837.783,
+    2736.23,
+    1830.462
+   ]
   },
   {
    "params": {
@@ -192,9 +206,16 @@
     "safeShapeBias": 28,
     "fragilePhaseScale": 1.347,
     "leadScale": 1.3,
-    "dronePentagonBonus": 178
+    "dronePentagonBonus": 178,
+    "upgradeGraceFrames": 180,
+    "upgradeScale": 1.3
    },
-   "fits": []
+   "fits": [
+    38960.167,
+    24099.546,
+    6691.159,
+    19160.338
+   ]
   },
   {
    "params": {
@@ -228,9 +249,16 @@
     "safeShapeBias": 142,
     "fragilePhaseScale": 1.377,
     "leadScale": 1.328,
-    "dronePentagonBonus": 191
+    "dronePentagonBonus": 191,
+    "upgradeGraceFrames": 180,
+    "upgradeScale": 1.3
    },
-   "fits": []
+   "fits": [
+    3697.263,
+    2779.72,
+    4107.509,
+    16359.099
+   ]
   },
   {
    "params": {
@@ -264,9 +292,16 @@
     "safeShapeBias": 0,
     "fragilePhaseScale": 1.378,
     "leadScale": 1.411,
-    "dronePentagonBonus": 89
+    "dronePentagonBonus": 89,
+    "upgradeGraceFrames": 180,
+    "upgradeScale": 1.3
    },
-   "fits": []
+   "fits": [
+    14164.097,
+    6923.7119999999995,
+    12776.012999999999,
+    16321.405
+   ]
   },
   {
    "params": {
@@ -300,46 +335,52 @@
     "safeShapeBias": 70,
     "fragilePhaseScale": 1.117,
     "leadScale": 1.333,
-    "dronePentagonBonus": 119
+    "dronePentagonBonus": 119,
+    "upgradeGraceFrames": 180,
+    "upgradeScale": 1.3
    },
-   "fits": []
+   "fits": [
+    1504.101
+   ]
   }
  ],
  "champion": {
   "params": {
-   "escapeRadius": 216,
-   "waryRadius": 427,
-   "bulletDangerRadius": 161,
-   "enemySizeWeight": 0.082,
-   "anticipationFrames": 31,
-   "bulletDodgeRadius": 257,
-   "bulletAimedCos": 0.844,
-   "bulletMissMargin": 67,
-   "spawnGraceFrames": 256,
-   "spawnEscapeRadius": 305,
-   "kindDistancePenalty": 48,
-   "approachStopDist": 154,
-   "shapeBodyMargin": 59,
-   "huntSizeRatio": 0.832,
-   "huntRange": 303,
-   "huntStandoff": 166,
-   "crowdRadius": 248,
-   "predatorRatio": 1.309,
-   "predatorFleeRadius": 293,
-   "edgeBiasWeight": 0,
-   "spacingRadius": 400,
-   "surroundRadius": 300,
-   "spacingFloor": 0.02,
-   "spacingGain": 1.3,
-   "pressureCap": 0.06,
-   "pressureEscape": 0.075,
+   "escapeRadius": 196,
+   "waryRadius": 480,
+   "bulletDangerRadius": 177,
+   "enemySizeWeight": 0.09,
+   "anticipationFrames": 36,
+   "bulletDodgeRadius": 294,
+   "bulletAimedCos": 0.94,
+   "bulletMissMargin": 83,
+   "spawnGraceFrames": 272,
+   "spawnEscapeRadius": 460,
+   "kindDistancePenalty": 57,
+   "approachStopDist": 80,
+   "shapeBodyMargin": 15,
+   "huntSizeRatio": 0.686,
+   "huntRange": 270,
+   "huntStandoff": 222,
+   "crowdRadius": 369,
+   "predatorRatio": 1.103,
+   "predatorFleeRadius": 312,
+   "edgeBiasWeight": 1.184,
+   "spacingRadius": 314,
+   "surroundRadius": 371,
+   "spacingFloor": 0.05,
+   "spacingGain": 2.734,
+   "pressureCap": 0.077,
+   "pressureEscape": 0.069,
    "safeLaneMinDeg": 130,
-   "safeShapeBias": 70,
-   "fragilePhaseScale": 1.25,
+   "safeShapeBias": 28,
+   "fragilePhaseScale": 1.347,
    "leadScale": 1.3,
-   "dronePentagonBonus": 120
+   "dronePentagonBonus": 178,
+   "upgradeGraceFrames": 180,
+   "upgradeScale": 1.3
   },
-  "fitness": 13886.9295
+  "fitness": 21629.942
  },
  "history": [
   {
@@ -479,6 +520,14 @@
   "dronePentagonBonus": [
    0,
    300
+  ],
+  "upgradeGraceFrames": [
+   60,
+   360
+  ],
+  "upgradeScale": [
+   1,
+   1.7
   ]
  },
  "updated": null
