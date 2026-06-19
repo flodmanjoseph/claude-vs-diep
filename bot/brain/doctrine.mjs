@@ -2,7 +2,7 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 30,
+  version: 31,
   // RL Phase 0: log a per-decision transition every N frames (~5/sec at 60fps) so the rules bot banks
   // a real (state,action,reward,next-state) corpus to pre-train the residual policy on. Logging only.
   transitionLogEvery: 12,
@@ -15,9 +15,16 @@ export const DOCTRINE = {
   // Stalker/Streamliner variants are backups. If none of these is visible, the runner SKIPS the upgrade
   // (stays current) rather than risk an irreversible wrong pick. 'Sniper' must be listed so L15 takes it.
   preferUpgrades: ['Ranger', 'Predator', 'Stalker', 'Streamliner', 'Assassin', 'Hunter', 'Trapper', 'Sniper'],
-  // Legacy tile-based path (no longer used by takeUpgrades; kept for reference).
-  buildPath: [
-    { from: 'Tank', tile: 1, to: 'Sniper', minLevel: 15 },
+  // v31 TILE MAP (the panel labels aren't capturable, so we click mapped tiles, verified by result).
+  // Sniper panel order is [Assassin, Overseer, Hunter, Trapper] -> tiles [0,1,2,3]; the old drone build
+  // proved tile1=Overseer, so tile0=Assassin. We NEVER click tile1 from a Sniper (the banned Overlord
+  // line). The Hunter step is a backup in case tile0 turns out to be Hunter (still a fine sniper class).
+  upgradeTiles: [
+    { from: 'Tank', minLevel: 15, tile: 1, to: 'Sniper' },     // proven
+    { from: 'Sniper', minLevel: 30, tile: 0, to: 'Assassin' },  // tile0 = Assassin (tile1 = banned Overseer)
+    { from: 'Assassin', minLevel: 45, tile: 0, to: 'Ranger' },  // Ranger first in Assassin's options
+    { from: 'Hunter', minLevel: 45, tile: 0, to: 'Predator' },  // if L30 gave Hunter instead
+    { from: 'Trapper', minLevel: 45, tile: 0, to: 'OverTrapper' }, // if L30 gave Trapper
   ],
   droneClasses: ['Overseer', 'Overlord', 'Necromancer', 'Manager', 'Battleship', 'Factory', 'Hybrid'],
 
