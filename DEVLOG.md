@@ -2,6 +2,16 @@
 
 Newest entries at the top.
 
+## 037 - 2026-06-19 - v29: pivot the BUILD to the Sniper line (Joe's call) - no more Overlord, and the Sniper hunts
+
+Joe, watching: "you have good aim, just keep upgrading the sniper, no more overlord or whatever that tank sucks." Right - the drone (Overseer/Overlord) line wastes our precise synthetic aim, and the bot kept getting collapsed on in the central nest. Pivoted the build to the bullet-sniper line:
+
+1. **Label-based class upgrades.** Replaced the hardcoded tile indices with picking by CLASS NAME from a priority list `preferUpgrades = [Ranger, Predator, Stalker, Streamliner, Assassin, Hunter, Trapper, Sniper]` - the runner reads the upgrade-panel labels and clicks the highest-priority class present. Produces Tank ->(L15) Sniper ->(L30) Assassin ->(L45) Ranger; NEVER a drone class. If no preferred class is visible it SKIPS (stays current) rather than risk an irreversible wrong pick.
+2. **Hunting ungated from drone-only.** A Sniper/Assassin/Ranger (any non-Tank class) now hunts and snipes weaker tanks with bestPrey + the target-lock pursuit (v24/v27) - the whole point of a high-aim sniper. Base Tank still farms shapes to level up first.
+3. **Sniper stat build.** statSequence now leads Bullet Damage(6) + Penetration(5) + Bullet Speed(4, = range/accuracy) + Reload(7), woven with Movement(8) + Health(2) to kite as the glass cannon it is.
+
+Status: verified live - Tank->Sniper works (currently via the known-good tile-1 SAFETY FALLBACK, because the panel labels were NOT captured in a single frame: the read returned empty), and the Sniper is hunting (hunt heartbeats, 0 errors), never a drone. OPEN ITEM: the label read for L30/L45 (Assassin->Ranger) isn't confirmed yet - the panel text wasn't in a single frame, so I switched the panel read to a WINDOWED sample (~280ms, like readRank) + a full upgrade_scan dump, to either capture the labels or confirm they're not fillText (then I'll map the Sniper-panel tiles instead). Until then the safe outcome is a pure Sniper that hunts - which already satisfies the literal directive (keep the sniper, no overlord). RL Phase-0 transition logging continues underneath (now banking sniper-build data, which is the build we actually want to learn).
+
 ## 036 - 2026-06-19 - RL Phase 0 LIVE: the bot is now a transition data factory (v28)
 
 A 10-agent design pass (research + data audit + 3 candidate architectures + adversarial feasibility + plan) settled the RL pivot. Two hard truths it surfaced, both honest:

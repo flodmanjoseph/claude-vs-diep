@@ -437,8 +437,12 @@ export const BRAIN_FN = function (initialDoctrine) {
     // frame. We lock onto a prey, advance its last-known position by its velocity, re-acquire it among
     // visible enemies by proximity, and if it briefly leaves sight we PURSUE the predicted position for
     // pursuitFrames before giving up. Lock drops on real danger or expiry (it's gated below).
+    // v29: hunting is no longer drone-only. Joe's call - the bot has good aim, so the Sniper line
+    // (Sniper/Assassin/Ranger, bullet classes) hunts and snipes weaker tanks too. Any non-Tank class
+    // can hunt (the base Tank still farms shapes to level up first); danger gates keep it cautious.
+    const canHunt = (cls !== 'Tank' || ramNow) && !grace;
     let prey = null;
-    if ((isDrone || ramNow) && !grace) {
+    if (canHunt) {
       const PURSUIT = DOCTRINE.pursuitFrames || 90;
       const MATCH = DOCTRINE.preyMatchRadius || 90;
       if (B.lockedPrey) { B.lockedPrey.x += B.lockedPrey.vx || 0; B.lockedPrey.y += B.lockedPrey.vy || 0; } // dead-reckon

@@ -189,23 +189,55 @@ function resetUpgrades() { curClass = 'Tank'; curLevel = 1; doneSteps.clear(); l
 async function takeUpgrades() {
   const lc = await readLevelClass(page);
   if (lc) { curClass = lc.cls; curLevel = lc.level; }
-  // Mark steps whose target class we've reached as done.
-  DOCTRINE.buildPath.forEach((s, i) => { if (curClass === s.to) doneSteps.add(i); });
-  // Find the next step to take: matches current class, not done, level threshold met.
-  const idx = DOCTRINE.buildPath.findIndex((s, i) => !doneSteps.has(i) && s.from === curClass && curLevel >= (s.minLevel || 0));
-  if (idx < 0) return;
-  const step = DOCTRINE.buildPath[idx];
-  // Pause the brain so its per-frame synthetic aim (mousemove) does not drag diep's tracked
-  // pointer off the tile between our move and mousedown. Trusted UI clicks need a stable pointer.
+  // v29 LABEL-BASED upgrades: pick the class by NAME, not a hardcoded canvas tile. The scraper
+  // captures every fillText with its screen position, and the upgrade panel renders each option's
+  // class name, so we read the panel labels (top-left region) and click the highest-priority class in
+  // DOCTRINE.preferUpgrades (the Sniper line - never drones). Layout-independent, and if no preferred
+  // class is visible we SKIP (stay current class) rather than risk an irreversible wrong upgrade.
+  // Sample the upgrade panel over a short window (the panel may redraw intermittently across frames,
+  // like the leaderboard), collecting distinct text labels in the upper-left region where the class
+  // evolution buttons live. Windowed + wide so we don't miss intermittently-rendered labels.
+  const panel = await page.evaluate(() => new Promise((resolve) => {
+    const seen = new Map(); const t0 = performance.now();
+    const tick = () => {
+      const f = window.__diep && window.__diep.frame;
+      if (f) for (const t of f.texts) { const s = (t.t || '').trim(); if (s.length >= 3 && s.length <= 18 && t.x > 0 && t.x < 360 && t.y > 40 && t.y < 520) seen.set(s, { s, x: t.x, y: t.y }); }
+      if (performance.now() - t0 < 280) setTimeout(tick, 16); else resolve([...seen.values()]);
+    };
+    tick();
+  })).catch(() => []);
+  const prefer = DOCTRINE.preferUpgrades || [];
+  let pick = null;
+  for (const cls of prefer) { const hit = panel.find((p) => p.s === cls); if (hit) { pick = { cls, x: hit.x, y: hit.y }; break; } }
+  // SAFETY FALLBACK for the critical first upgrade: if label-reading found nothing but we're a Tank at
+  // L15+, take the known-good Tank->Sniper tile (tile 1, proven) so we never get stuck as a base Tank
+  // if the panel text isn't capturable. Beyond Sniper the label path handles the sniper-line choices
+  // (and safely skips if uncertain - staying a Sniper is exactly what Joe asked for).
+  if (!pick && curClass === 'Tank' && curLevel >= 15) {
+    if (panel.length) log({ event: 'upgrade_scan', level: curLevel, cls: curClass, panel: panel.map((p) => p.s) });
+    await page.evaluate(() => window.__brain && window.__brain.pause()).catch(() => {});
+    await enableTrustedCanvasClicks(page);
+    await clickTile(page, 1);
+    await page.evaluate(() => window.__brain && window.__brain.resume()).catch(() => {});
+    log({ event: 'upgrade_attempt', from: 'Tank', to: 'Sniper', tile: 1, fallback: true, level: curLevel, panel: panel.map((p) => p.s) });
+    await page.waitForTimeout(400);
+    const lcs = await readLevelClass(page);
+    if (lcs && lcs.cls === 'Sniper') { curClass = 'Sniper'; log({ event: 'upgrade_ok', to: 'Sniper' }); console.log('upgraded -> Sniper (tile fallback)'); }
+    return;
+  }
+  // Diagnostic: panel had text but no preferred class matched -> log it; never auto-take a non-preferred class.
+  if (!pick) { if (panel.length && curLevel >= 15) log({ event: 'upgrade_scan', level: curLevel, cls: curClass, panel: panel.map((p) => p.s) }); return; }
+  if (pick.cls === curClass) return; // already there
+  // Pause the brain so its per-frame aim mousemove doesn't drag the pointer off the target.
   await page.evaluate(() => window.__brain && window.__brain.pause()).catch(() => {});
   await enableTrustedCanvasClicks(page);
-  await clickTile(page, step.tile);
+  await page.mouse.move(pick.x, pick.y, { steps: 5 }).catch(() => {});
+  await page.waitForTimeout(90); await page.mouse.down().catch(() => {}); await page.waitForTimeout(70); await page.mouse.up().catch(() => {});
   await page.evaluate(() => window.__brain && window.__brain.resume()).catch(() => {});
-  log({ event: 'upgrade_attempt', from: step.from, tile: step.tile, to: step.to, level: curLevel });
-  // Re-read shortly to confirm.
+  log({ event: 'upgrade_attempt', from: curClass, to: pick.cls, at: [pick.x, pick.y], level: curLevel, panel: panel.map((p) => p.s) });
   await page.waitForTimeout(400);
   const lc2 = await readLevelClass(page);
-  if (lc2 && lc2.cls === step.to) { doneSteps.add(idx); curClass = lc2.cls; log({ event: 'upgrade_ok', to: step.to }); console.log(`upgraded -> ${step.to}`); }
+  if (lc2 && lc2.cls === pick.cls) { curClass = lc2.cls; log({ event: 'upgrade_ok', to: pick.cls }); console.log(`upgraded -> ${pick.cls}`); }
 }
 
 // Get from the death screen back into the arena. The death screen -> menu transition takes a

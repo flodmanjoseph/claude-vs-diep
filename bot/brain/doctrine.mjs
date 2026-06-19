@@ -2,18 +2,22 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 28,
+  version: 29,
   // RL Phase 0: log a per-decision transition every N frames (~5/sec at 60fps) so the rules bot banks
   // a real (state,action,reward,next-state) corpus to pre-train the residual policy on. Logging only.
   transitionLogEvery: 12,
 
-  // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
-  // by the current class, so the right tile index is clicked even if level reads lag. Tile indices
-  // map to the canvas upgrade grid (2 columns; index 0=TL,1=TR,2=ML,3=MR,4=BL,5=BR).
+  // v29 BUILD: the SNIPER line (Joe's call - "you have good aim, keep upgrading the sniper, no more
+  // overlord, that tank sucks"). Upgrades are picked by CLASS NAME from this priority list (the runner
+  // reads the upgrade panel's labels and clicks the highest-priority class present), so it's layout-
+  // independent and NEVER takes a drone class. Path it produces: Tank ->(L15) Sniper ->(L30) Assassin
+  // ->(L45) Ranger (max range/damage bullet sniper, ideal for an aimbot). Hunter->Predator and the
+  // Stalker/Streamliner variants are backups. If none of these is visible, the runner SKIPS the upgrade
+  // (stays current) rather than risk an irreversible wrong pick. 'Sniper' must be listed so L15 takes it.
+  preferUpgrades: ['Ranger', 'Predator', 'Stalker', 'Streamliner', 'Assassin', 'Hunter', 'Trapper', 'Sniper'],
+  // Legacy tile-based path (no longer used by takeUpgrades; kept for reference).
   buildPath: [
     { from: 'Tank', tile: 1, to: 'Sniper', minLevel: 15 },
-    { from: 'Sniper', tile: 1, to: 'Overseer', minLevel: 30 },
-    { from: 'Overseer', tile: 0, to: 'Overlord', minLevel: 45 },
   ],
   droneClasses: ['Overseer', 'Overlord', 'Necromancer', 'Manager', 'Battleship', 'Factory', 'Hybrid'],
 
@@ -167,12 +171,13 @@ export const DOCTRINE = {
   // fire/drones AT it instead of at a shape, until it's dead or out of range. ES-tunable.
   combatRange: 400,
 
-  // v25 strategic, PHASE-AWARE perk allocation (stat keys: 1 Regen 2 MaxHealth 3 BodyDmg
-  // 4 Bullet/DroneSpeed 5 BulletPen/DroneHealth 6 BulletDmg/DroneDmg 7 Reload 8 MoveSpeed).
-  // Early (Tank/Sniper, farming to level up): lead with Penetration(5)+Damage(6) - they kill shapes
-  // fast AND, because keys 5/6 double as Drone Health/Damage, they pre-build the eventual drone tank -
-  // plus Movement(8) and Health(2) to survive the fragile climb.
-  statSequence: [5, 6, 8, 5, 6, 2, 8, 5, 6, 2, 7, 8, 5, 6, 2, 1, 4, 3],
+  // v29 SNIPER perk build (stat keys: 1 Regen 2 MaxHealth 3 BodyDmg 4 BulletSpeed 5 BulletPen
+  // 6 BulletDmg 7 Reload 8 MoveSpeed). The whole game is now a bullet sniper (Sniper->Assassin->Ranger,
+  // never a drone class), so build for it: lead Bullet Damage(6) + Penetration(5) + Bullet Speed(4,
+  // = range & accuracy, a sniper's edge) + Reload(7) for kill power, woven with Movement(8) + MaxHealth(2)
+  // to kite as the squishy glass-cannon it is, then Regen(1). First 8 points: Dmg/Pen/Spd/Dmg/Pen/Reload/
+  // Move/HP - hits hard and far while staying mobile.
+  statSequence: [6, 5, 4, 6, 5, 7, 8, 2, 6, 5, 4, 7, 8, 2, 1, 5, 3, 2],
   // Drone class (Overseer/Overlord, PREDATOR MODE): the killing build. Drone Damage(6) + Drone
   // Health/Penetration(5) to win tank fights, woven with Max Health(2) and Reload(7) so we survive
   // and sustain the fights we pick (Joe: "adjust for health"), then Movement(8) to chase, Regen(1),
