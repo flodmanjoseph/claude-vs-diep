@@ -20,6 +20,13 @@ const GAMEMODE = process.env.GAMEMODE || 'FFA';
 const OPTIMIZE = process.env.OPTIMIZE === '1';
 const RL = process.env.RL === '1'; // controlled RL experiment: freeze champion params, Q-learn modes
 const opt = (OPTIMIZE && !RL) ? new Optimizer() : null;
+// RL Phase-1 A/B: BC_AB=1 alternates the learned bc-policy.json vs the rules per life (default OFF, so
+// the proven rules run unchanged). On a BC life the runner pushes the policy into the brain; on a rules
+// life it pushes null. Per-life fitness in life_scored (tagged bc:0/1) gives the A/B comparison.
+const BC_AB = process.env.BC_AB === '1';
+let bcPolicy = null;
+if (BC_AB) { try { bcPolicy = JSON.parse(fs.readFileSync(path.join(ROOT, 'analysis', 'bc-policy.json'), 'utf8')); console.log(`BC A/B on: loaded bc-policy (testAcc ${bcPolicy.testAcc})`); } catch { console.log('BC_AB set but bc-policy.json missing'); } }
+let bcThisLife = false;
 const QPATH = path.join(ROOT, 'analysis', 'qtable.json');
 
 // For the RL experiment we freeze the best-known parameters (the ES champion) so the only thing
@@ -78,7 +85,7 @@ function scoreLife() {
   const tag = opt ? 'es' : RL ? 'rl' : 'rules';
   if (opt) opt.record(fit);
   // Always log per-life fitness so any build/policy can be A/B compared from telemetry.
-  log({ event: 'life_scored', mode: tag, build: BUILD, fitness: Math.round(fit), score: lifeMaxScore, level: lifeMaxLevel, lifeMs: Date.now() - lifeStart, ...(opt ? { gen: opt.status().gen, champion: opt.status().champion } : {}) });
+  log({ event: 'life_scored', mode: tag, build: BUILD, bc: bcThisLife ? 1 : 0, fitness: Math.round(fit), score: lifeMaxScore, level: lifeMaxLevel, lifeMs: Date.now() - lifeStart, ...(opt ? { gen: opt.status().gen, champion: opt.status().champion } : {}) });
   console.log(`  ${BUILD} life fitness ${Math.round(fit)} (score ${lifeMaxScore}, L${lifeMaxLevel})${opt ? ` | gen ${opt.status().gen} ${opt.status().evalsThisGen}` : ''}`);
 }
 const TELEM = path.join(ROOT, 'telemetry');
@@ -154,12 +161,16 @@ async function readRank() {
   return { leaderMax, myScore, board, boardSize: board.length, estRank };
 }
 
+let bcLifeCounter = 0;
 async function spawnFresh() {
   const ok = await spawn(page, { name: NAME, gamemode: GAMEMODE });
   await enableTrustedCanvasClicks(page); // let trusted upgrade clicks reach the canvas
   await applyNextDoctrine();
+  // RL Phase-1 A/B: alternate the learned policy vs the rules each life so fitness is comparable.
+  bcThisLife = BC_AB && bcPolicy != null && (bcLifeCounter++ % 2 === 0);
+  await page.evaluate((p) => window.__setPolicy && window.__setPolicy(p), bcThisLife ? bcPolicy : null).catch(() => {});
   await page.evaluate(() => window.__brain && window.__brain.start());
-  log({ event: 'spawn', ok });
+  log({ event: 'spawn', ok, bc: bcThisLife ? 1 : 0 });
   return ok;
 }
 

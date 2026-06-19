@@ -2,7 +2,12 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 33,
+  version: 35,
+  // v34: a squishy sniper must not chase weak prey while a clearly-bigger tank is near (it gets run
+  // down to point-blank). Suppress hunting when a tank r >= myR*snipeAvoidRatio sits within
+  // snipeAvoidRadius. Direct (not ES-tuned), narrow (only gates hunting; no blanket fleeing).
+  snipeAvoidRatio: 1.1,
+  snipeAvoidRadius: 300,
   // v32 FOV scaling: median on-screen square radius (px) at the baseline Tank FOV. Measured ~22 (Tank),
   // 19 (Sniper), 15 (Assassin) - so the sniper line zooms out and defensive distance thresholds are
   // rescaled by (currentSquarePx / this) to stay world-consistent. 1.0 multiplier at the Tank baseline.
@@ -182,15 +187,14 @@ export const DOCTRINE = {
   // fire/drones AT it instead of at a shape, until it's dead or out of range. ES-tunable.
   combatRange: 400,
 
-  // v33 SNIPER perk build - MOVEMENT-FORWARD (stat keys: 1 Regen 2 MaxHealth 3 BodyDmg 4 BulletSpeed
-  // 5 BulletPen 6 BulletDmg 7 Reload 8 MoveSpeed). Data: 25/30 deaths are Snipers dying ~L20, 80%
-  // point-blank, and 21/25 had a BIGGER tank (r>=18) at body contact - the squishy slow Sniper can't
-  // keep the gap and loses point-blank fights it should never be in. A sniper's #1 survival tool is
-  // MOVEMENT (kite, never let anything close), but the old build had Move as the 7th stat. Front-load
-  // Move(8) + weave MaxHealth(2) so the early Sniper can actually escape the bigger tanks killing it,
-  // while still building Dmg(6)/Pen(5)/BulletSpeed(4) to farm+kill. First 8: Move/Dmg/Pen/Move/HP/Spd/
-  // Dmg/Pen, with a 3rd Move at point 9 - fast enough to survive the valley to Assassin/Ranger.
-  statSequence: [8, 6, 5, 8, 2, 4, 6, 5, 8, 2, 7, 1, 6, 5, 4, 2, 7, 3],
+  // v34 SNIPER perk build - DAMAGE-FORWARD (stat keys: 1 Regen 2 MaxHealth 3 BodyDmg 4 BulletSpeed
+  // 5 BulletPen 6 BulletDmg 7 Reload 8 MoveSpeed). v33 tried movement-forward (Move x3 early) to fix
+  // the point-blank-to-bigger-tank deaths, but it REGRESSED (median life 94->75s, reach-Assassin
+  // 13->3%): trading early damage cost more than the mobility gained - the Sniper killed/farmed slower,
+  // stayed exposed longer, and couldn't deter approaching tanks. Reverted to the damage-forward build:
+  // lead Dmg(6)+Pen(5)+BulletSpeed(4) for kill power, Reload(7), Move(8)+MaxHealth(2) woven in. The
+  // squishy-valley survival is a BEHAVIORAL problem (keep bigger tanks at distance), not a stat one.
+  statSequence: [6, 5, 4, 6, 5, 7, 8, 2, 6, 5, 4, 7, 8, 2, 1, 5, 3, 2],
   // Drone class (Overseer/Overlord, PREDATOR MODE): the killing build. Drone Damage(6) + Drone
   // Health/Penetration(5) to win tank fights, woven with Max Health(2) and Reload(7) so we survive
   // and sustain the fights we pick (Joe: "adjust for health"), then Movement(8) to chase, Regen(1),

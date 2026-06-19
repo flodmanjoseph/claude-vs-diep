@@ -79,6 +79,23 @@ export const BRAIN_FN = function (initialDoctrine) {
   // Live rank/board push channel from the runner (mirrors __setDoctrine). Pure additive; only step()
   // reads B.meta, so a stale/missing push just means we don't apply lead-protection that frame.
   window.__setMeta = (m) => { if (m) B.meta = m; };
+  // RL Phase-1: an optional learned policy (bc-policy.json {W,b,mean,std,actions}) the runner pushes
+  // for an A/B vs the rules (set on BC lives, null on rules lives). When set, it RE-RANKS the macro-mode
+  // among the currently-valid actions; the hard forced-flight shields still override it afterward.
+  B.policy = null;
+  window.__setPolicy = (p) => { B.policy = (p && p.W) ? p : null; };
+  // Linear-softmax forward pass -> best valid action (argmax of W*standardized(feat)+b over `valid`).
+  function bcPick(feat, pol, valid) {
+    if (!pol) return null;
+    let best = null, bv = -Infinity;
+    for (let k = 0; k < pol.actions.length; k++) {
+      if (valid && valid.indexOf(pol.actions[k]) < 0) continue;
+      let z = pol.b[k]; const Wk = pol.W[k];
+      for (let j = 0; j < feat.length; j++) z += Wk[j] * ((feat[j] - pol.mean[j]) / (pol.std[j] || 1));
+      if (z > bv) { bv = z; best = pol.actions[k]; }
+    }
+    return best;
+  }
   // Closed hunter encounters wait here for the runner to drain into telemetry (detected/fled/outcome).
   window.__hunterLog = window.__hunterLog || [];
 
@@ -474,7 +491,13 @@ export const BRAIN_FN = function (initialDoctrine) {
         if (fresh && canPursue) { prey = fresh; B.lockedPrey = { x: fresh.x, y: fresh.y, vx: fresh.vx || 0, vy: fresh.vy || 0, r: fresh.r, seen: B.frames }; }
       }
     } else { B.lockedPrey = null; }
-    const huntable = DOCTRINE.huntEnabled && prey && !crowded && !predatorClose && !surrounded && !overPressure && !leading;
+    // v34: don't chase prey while a clearly-bigger tank is near. 8/25 Sniper deaths were hunt-chase:
+    // the squishy Sniper tunnel-visioned on weak prey while a bigger tank (r>=18 vs our ~16) closed to
+    // point-blank and killed it. Deal with the bigger threat first (farm/escape), THEN hunt. This is a
+    // safe, narrow fix - it only suppresses hunting near a bigger tank, it does NOT add blanket fleeing
+    // (no over-timidity risk). snipeAvoidRatio/Radius are direct (not ES-tuned).
+    const biggerNear = foes.some((e) => e.r >= myR * (DOCTRINE.snipeAvoidRatio || 1.1) && e.dist < (DOCTRINE.snipeAvoidRadius || 300));
+    const huntable = DOCTRINE.huntEnabled && prey && !crowded && !predatorClose && !surrounded && !overPressure && !leading && !biggerNear;
 
     // Each tactical mode is an action: it returns the movement keys + aim and labels B.mode.
     const actEscape = () => {
@@ -555,7 +578,29 @@ export const BRAIN_FN = function (initialDoctrine) {
     }
     const ACT = { escape: actEscape, hunt: actHunt, farm: actFarm, patrol: actPatrol };
 
-    // --- Mode selection: spawn-grace forces escape; otherwise Q-learning (if enabled) or rules. ---
+    // The 16-dim tactical feature vector (built once here so both the BC policy and the Phase-0
+    // transition log use the exact same features). Mirrors the bc-policy.json training inputs.
+    const hud = (window.__diep && window.__diep.hud) || {};
+    const feat = [
+      isDrone ? 1 : 0,
+      grace ? 1 : 0,
+      Math.min(3, nd / (escapeR || 1)),
+      nearest ? Math.min(3, nearest.r / myR) : 0,
+      Math.min(6, crowdN),
+      Math.min(0.3, tg.pressure),
+      tg.maxGapDeg / 180,
+      Math.min(8, tg.nThreat),
+      bulletThreat ? 1 : 0,
+      predatorConfirmed ? 1 : 0,
+      Math.min(8, foes.length),
+      Math.min(12, state.shapes.length),
+      state.map ? state.map.x : 0.5,
+      state.map ? state.map.y : 0.5,
+      Math.min(1, ((hud.level || 1) / 60)),
+      prey ? 1 : 0,
+    ];
+
+    // --- Mode selection: spawn-grace forces escape; otherwise Q-learning, the BC policy (A/B), or rules. ---
     const rl = DOCTRINE.rl;
     let chosen;
     if (grace) {
@@ -568,6 +613,15 @@ export const BRAIN_FN = function (initialDoctrine) {
       else if (state.shapes.length) chosen = 'farm';
       else chosen = 'patrol';
     }
+    // RL Phase-1 A/B: on a BC life (runner set B.policy), the learned policy re-ranks the macro-mode
+    // among the currently-valid actions. The hard shields below still override it, so it can't suicide.
+    if (B.policy && !grace) {
+      const valid = ['escape', 'patrol'];
+      if (huntable) valid.push('hunt');
+      if (state.shapes.length) valid.push('farm');
+      const ba = bcPick(feat, B.policy, valid);
+      if (ba) { chosen = ba; B.bcActive = true; }
+    } else B.bcActive = false;
     // Forced-flight overrides (highest priority first): a confirmed predator closing on us, a
     // converging crowd, being surrounded (no clean lane), or threat pressure over the escape budget.
     // Any breaks farming/hunting immediately so the pocket never closes to the point-blank collapse.
@@ -584,28 +638,9 @@ export const BRAIN_FN = function (initialDoctrine) {
     if (!grace || (B.frames % (RL_LOG_EVERY * 2) === 0)) { // log fewer during spawn grace
       if (B.frames - (B._lastTxFrame || -999) >= RL_LOG_EVERY) {
         B._lastTxFrame = B.frames;
-        const hud = (window.__diep && window.__diep.hud) || {};
-        const feat = [
-          isDrone ? 1 : 0,
-          grace ? 1 : 0,
-          Math.min(3, nd / (escapeR || 1)),              // nearest effective dist / escape radius
-          nearest ? Math.min(3, nearest.r / myR) : 0,    // nearest size ratio (prey<1<predator)
-          Math.min(6, crowdN),                            // dangerous foes near
-          Math.min(0.3, tg.pressure),                     // threat pressure
-          tg.maxGapDeg / 180,                             // openness of the best escape lane
-          Math.min(8, tg.nThreat),                        // foes in surround analysis
-          bulletThreat ? 1 : 0,
-          predatorConfirmed ? 1 : 0,
-          Math.min(8, foes.length),
-          Math.min(12, state.shapes.length),
-          state.map ? state.map.x : 0.5,
-          state.map ? state.map.y : 0.5,
-          Math.min(1, ((hud.level || 1) / 60)),
-          prey ? 1 : 0,
-        ];
         (window.__transitionLog = window.__transitionLog || []).push({
           f: B.frames, life: B.lifeStartFrame || 0, sKey: qStateKey(state, { isDrone, nearest, nd, foes, bulletThreat, escapeR, myR }),
-          x: feat.map((v) => +v.toFixed(3)), a: chosen,
+          x: feat.map((v) => +v.toFixed(3)), a: chosen, bc: B.bcActive ? 1 : 0,
           forced: predatorClose ? 'pred' : crowded ? 'crowd' : surrounded ? 'surr' : overPressure ? 'press' : null,
           prey: prey ? 1 : 0, lead: leading ? 1 : 0, cls, lvl: hud.level || null, score: hud.score || 0,
           mr: Math.round(myR), sq: state.fov || 0, // v30: our tank px-radius + median-square px (FOV/zoom proxies)

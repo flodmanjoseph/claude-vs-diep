@@ -2,6 +2,12 @@
 
 Newest entries at the top.
 
+## 042 - 2026-06-19 - v35: RL Phase-1 deployed in-page (BC policy runs live, A/B vs rules)
+
+v34 held over a fuller sample (56 deaths/2h): median life 105s, reach-Assassin 18%, reach-Ranger 4%, maxScore 30k - a sustained improvement over the v32 baseline (94s/13%). Banking it, not thrashing.
+
+Advanced the RL pivot: the trained BC policy (analysis/bc-policy.json) now runs IN-PAGE behind an A/B. brain.mjs gained `window.__setPolicy` (mirrors __setDoctrine) + a pure-JS linear-softmax forward pass `bcPick(feat, pol, valid)` that, on a BC life, RE-RANKS the macro-mode among the currently-valid actions; the hard forced-flight shields still override it (so the learned policy can never suicide). The 16-dim feature vector is now built once before mode selection and shared by both the policy and the transition log. runner.mjs loads the policy and, gated by `BC_AB=1` (default OFF so the proven rules are untouched), alternates BC vs rules each life and tags `bc:0/1` in spawn + life_scored for a clean fitness A/B. Validated: the in-page bcPick reproduces the trained policy's action 99% on recent transitions, and live the A/B alternates with 0 errors. Honest: BC imitates the rules (~parity expected), so this is the deployment-pipeline milestone - the in-page inference + A/B harness that Phase-3 (offline IQL, the part that can EXCEED the rules) will plug an improved policy into. The sniper rules remain the bigger near-term lever; this RL track runs alongside, gated and safe.
+
 ## 041 - 2026-06-19 - v34 is a real win; RL Phase-1 behavior cloning trained (95% clone of the rules)
 
 v34 confirmed a clear improvement over the v33 regression and the v32 baseline:
