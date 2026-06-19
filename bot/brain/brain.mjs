@@ -328,7 +328,9 @@ export const BRAIN_FN = function (initialDoctrine) {
     // (escape/crowd/predator radii up, pressure-escape threshold down); a relaxed mid-tier tank uses 1.
     const fragile = !isDrone && !grace;
     const meta = B.meta || {};
-    const leading = !grace && meta.boardSize >= 7 && meta.estRank != null && meta.estRank <= (DOCTRINE.leadRankMax || 2) && (meta.myScore || 0) > (DOCTRINE.leadMinScore || 5000);
+    const leading = !grace && meta.boardSize >= 7 && meta.estRank != null && meta.estRank <= (DOCTRINE.leadRankMax || 2)
+      && (meta.myScore || 0) > (DOCTRINE.leadMinScore || 5000)
+      && meta.leaderMax > 0 && (meta.myScore || 0) >= meta.leaderMax * (DOCTRINE.leadScoreFrac || 0.45); // v21: reject sparse-board false leads
     const fScale = (fragile ? (DOCTRINE.fragilePhaseScale || 1) : 1) * (leading ? (DOCTRINE.leadScale || 1) : 1);
     const escapeR = grace ? DOCTRINE.spawnEscapeRadius : DOCTRINE.escapeRadius * fScale;
     const myR = state.me.r || 17;

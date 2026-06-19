@@ -2,6 +2,16 @@
 
 Newest entries at the top.
 
+## 028 - 2026-06-19 - v21: fixed lead-protection firing on phantom leads; the funnel wall is now Overseer->Overlord
+
+Consolidation tick (no shipping unless data demands - and it did). Two findings from validating v19/v20:
+
+**Lead-protection was triggering on sparse-board phantoms.** The first 3 `lead-` heartbeats appeared - but two were bogus: score 5,484 / 7,378 while the real leader was 74,600 / 333,300, i.e. we were at 2-7% of the leader, nowhere near rank 2. The board sample is sparse and sometimes captures the leader plus a few low scores while missing the dense middle of the field, computing a falsely-low estRank. So the bot adopted the defensive lead posture (flee earlier, stop hunting) while actually mid-pack - wasting farm time, and notably 2 of the 3 were Overseers stuck at L31/33. (The 3rd, 8,651 vs a 10,800 leader = 80%, looked like a legit quiet-arena near-lead.) Fixed with the same coherence discipline the #1 detector got: `leading` now also requires myScore >= leaderMax * leadScoreFrac (0.45). Unit-checked - the 7%-of-leader phantoms reject, a real 30k-vs-34k and the 80% quiet-arena lead both still trigger.
+
+**The funnel wall has moved to Overseer->Overlord.** Across the v18-v20 shifts (75 lives): reach is now Sniper 93% / Overseer 35% / Overlord 1%, and of the lives that reach Overseer only **4% (1/26) reach Overlord** - Overseers die at a median level of 31, i.e. right after the L30 upgrade. The fragile-phase gating fixed the Sniper valley (Tank/Sniper), but a fresh Overseer at L30-33 is the new fragile point: it just upgraded, its drones are few/just deploying, and it dies before maturing toward Overlord at 45. This is the next lever (candidate v22: a post-upgrade caution window, analogous to spawn grace, for a freshly-upgraded drone class) - but holding it one tick to see whether fixing the phantom lead-protection (which was making mid-pack Overseers defensive) already helps the transition.
+
+v21 verified (parses, coherence gate correct on all cases) and live, 0 brain errors; optimizer continued from the v20 state.
+
 ## 027 - 2026-06-19 - v19 held survival in tough arenas; shipped v20 economy (raise the score ceiling)
 
 v19 check: survival HELD - median life 204s over the shift (vs v18's 161s, vs ~100-130s baseline), no regression. Lead-protection stayed dormant (0 `lead-` heartbeats) because the arenas turned competitive (median leaderMax 59,700, up to 691,600 - a world apart from the sub-77k quiet arenas earlier), so the bot never reached rank<=2 to trigger it. That's correct and safe: when not leading, leadScale folds to 1, so v19 can't regress the common case - confirmed by the held survival. Lead-protection remains an armed, dormant safety feature awaiting its moment at the top.

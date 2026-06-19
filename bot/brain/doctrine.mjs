@@ -2,7 +2,7 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 20,
+  version: 21,
 
   // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
   // by the current class, so the right tile index is clicked even if level reads lag. Tile indices
@@ -50,6 +50,13 @@ export const DOCTRINE = {
   leadScale: 1.3,
   leadRankMax: 2, // we count as "leading" at estRank <= this (fixed; not in ES space)
   leadMinScore: 5000, // ...and only above this score (anti-noise, matches the #1 detector)
+  // v21 COHERENCE GATE for "leading": the board sample is sparse and can capture the leader plus a
+  // few low scores while missing the dense middle, computing a falsely-low estRank (we read rank<=2
+  // while actually at 2-7% of the leader). A genuine rank<=2 means our score is a real fraction of
+  // the leader's, so also require myScore >= leaderMax * this. Rejects the artifact triggers (where
+  // lead-protection made us play defensively while mid-pack, wasting farm time) while keeping real
+  // near-#1 (e.g. 30k vs a 34k leader). Mirrors the #1 detector's coherence discipline.
+  leadScoreFrac: 0.45,
 
   // === v17 PROACTIVE SPACING / ANTI-SURROUND (the headline redesign) ===
   // Corpus of 754 lives: 67% of deaths are in farm mode, 84% point-blank, 89% with >=2 foes within
