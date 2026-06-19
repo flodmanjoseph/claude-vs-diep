@@ -294,7 +294,15 @@ export const BRAIN_FN = function (initialDoctrine) {
 
     // Track life boundaries: a gap in alive frames means we just (re)spawned.
     if (state.me.alive) {
-      if (B.frames - B.lastAliveFrame > 10) { B.lifeStartFrame = B.frames; B.lastScore = 0; }
+      // New-life detection must tell a REAL respawn (long alive-gap AND we return at a low level) from
+      // a brief perception flicker mid-life (the tank momentarily undetected, e.g. during the upgrade
+      // pause or heavy drone/effect frames). The old ">10 frame gap" alone re-triggered spawn grace
+      // MID-LIFE, so the bot went defenseless (no fire + flee) for ~4s, 39x/shift, and kept dying at
+      // the L30 upgrade. Now also require a low level, with a large-gap fallback in case the HUD level
+      // read is briefly stale on a genuine respawn.
+      const lvl = (window.__diep && window.__diep.hud && window.__diep.hud.level) || 99;
+      const gap = B.frames - B.lastAliveFrame;
+      if (gap > 10 && (lvl <= 3 || gap > 120)) { B.lifeStartFrame = B.frames; B.lastScore = 0; }
       B.lastAliveFrame = B.frames;
     } else {
       rlTerminal(); // death: charge the terminal penalty to the last RL decision, reset the episode

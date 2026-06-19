@@ -2,6 +2,16 @@
 
 Newest entries at the top.
 
+## 030 - 2026-06-19 - v23: found the real Overseer-killer - a perception flicker re-triggering spawn grace MID-LIFE
+
+v22's post-upgrade caution didn't fix the L30 wall - Overseers still died at levels [30,30,30,30,31,33] (median 30), i.e. AT the upgrade, not in the seconds after. Digging into the telemetry exposed the actual bug, and it's a good one: **39 heartbeats this shift were in `spawn-escape` mode at life > 10s** (a Sniper at 76s, 113s, 166s into a life). spawn-escape should only happen in the first ~4s of a life. During it the bot does NOT fire and just flees (to preserve diep's spawn protection). So the bot was going defenseless - no guns, running - for ~4 seconds at a time, repeatedly, mid-life.
+
+Cause (brain.mjs life-boundary): a new life was detected by "alive-frame gap > 10". But `state.me.alive` (our blue tank detected at screen center) flickers false for a stretch when the tank is momentarily undetected - notably during the ~0.25s upgrade pause and heavy drone/effect frames. A >10-frame flicker reset `lifeStartFrame`, which re-triggered spawn grace mid-life. So right at the L30 upgrade (perception most disrupted), the fresh Overseer dropped into a phantom spawn-grace: defenseless, fleeing, and killed - and v22's post-upgrade caution never even applied because it requires `!grace`. The phantom grace was masking the real class-upgrade behavior entirely.
+
+v23 fix: distinguish a real respawn from a flicker. A real respawn has a long alive-gap AND returns at a low level; a mid-life flicker has a short-ish gap at high level. New-life now requires `gap > 10 && (level <= 3 || gap > 120)` - the level gate rejects flickers, the large-gap fallback still catches a genuine respawn if the HUD level read is briefly stale. Unit-checked: a gap-15/L20 flicker no longer resets (the bug), a gap-200/L1 respawn still does, a stale-level respawn resets via the fallback. This should let the bot keep firing through the L30 upgrade, and finally let v22's post-upgrade caution do its job on a fresh Overseer.
+
+This is likely the most impactful fix since v18: 39 defenseless-windows per shift were silently capping farming, survival, and the Overseer->Overlord transition. Verified, live, 0 spurious spawn-escapes so far (confirming over a full shift next). Pure correctness fix - no tunable, optimizer continued from v22.
+
 ## 029 - 2026-06-19 - v22: post-upgrade caution - the fresh-Overseer fragile point that was the L30->45 wall
 
 v21 didn't move the Overseer->Overlord transition (still 6%, 2/36 across v18-v21; Overseers still die at a median level of 31). Root-caused it, and it's structural: v18's `fragilePhaseScale` makes a Tank/Sniper play cautiously, but it keys on `!isDrone` - so the instant a Sniper upgrades to Overseer at L30, that protection switches **OFF**, and a fresh Overseer whose drones haven't deployed yet suddenly plays full-aggressive at its most vulnerable moment. That's the L31 death cluster.
