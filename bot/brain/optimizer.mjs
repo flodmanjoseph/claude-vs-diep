@@ -32,17 +32,24 @@ export const SPACE = {
   crowdRadius: [180, 420], // how far out a converging swarm triggers forced flight
   predatorRatio: [1.05, 1.5], // size ratio at which a bigger tank counts as a hunter to flee
   predatorFleeRadius: [220, 420], // how early to flee a confirmed hunter
-  edgeBiasWeight: [0, 2.2], // strength of the farm-toward-nearest-edge drift (0 = off); v16's live lever
+  edgeBiasWeight: [0, 2.2], // strength of the farm-toward-nearest-edge drift (0 = off); v16's lever
+  // v17 proactive-spacing tunables (the headline redesign):
+  spacingRadius: [300, 480], // foes within this build threat pressure
+  spacingGain: [0.4, 3.0], // strength of the along-lane spacing push while farming
+  pressureCap: [0.03, 0.12], // pressure at which the spacing push saturates
+  pressureEscape: [0.04, 0.14], // pressure that forces a full escape
+  safeLaneMinDeg: [90, 170], // surround threshold: smallest "open lane" before a forced breakout
+  safeShapeBias: [0, 220], // penalty steering farm targets away from the threat centroid
 };
 const KEYS = Object.keys(SPACE);
 
 const POP = 8; // candidates per generation
 const ELITES = 3; // top carried/used as parents
-const EVALS = 3; // lives per candidate (averaged) to fight arena variance
+const EVALS = 4; // lives per candidate to fight arena variance (median needs a few)
 const SIGMA = 0.16; // mutation stddev as a fraction of each parameter's range
 
 const clamp = (v, [lo, hi]) => Math.max(lo, Math.min(hi, v));
-const FRACTIONAL = new Set(['bulletAimedCos', 'enemySizeWeight', 'huntSizeRatio', 'predatorRatio', 'edgeBiasWeight']);
+const FRACTIONAL = new Set(['bulletAimedCos', 'enemySizeWeight', 'huntSizeRatio', 'predatorRatio', 'edgeBiasWeight', 'spacingGain', 'pressureCap', 'pressureEscape']);
 const round = (k, v) => FRACTIONAL.has(k) ? +v.toFixed(3) : Math.round(v);
 
 function gauss() { // Box-Muller
@@ -73,13 +80,15 @@ function randomParams() {
   return p;
 }
 
-// Fitness of a single life. Score is the goal; level and survival give signal even in short lives.
+// Fitness of a single life. v17 reweight: the path to #1 is a CONSISTENT long life that reaches
+// Overlord (then score follows), but the old score-dominated fitness chased rare high-score spikes
+// the population couldn't reproduce. Survival seconds and class/level now carry real weight so a
+// reliable long Overlord life out-scores a lucky short spike, and the optimizer optimizes the skill
+// that actually precedes a #1 run. Score still counts fully - it is the ultimate goal.
 export function lifeFitness({ score = 0, level = 0, lifeMs = 0 }) {
-  return score + 40 * level + 0.4 * (lifeMs / 1000);
+  return score + 55 * level + 7 * (lifeMs / 1000);
 }
-const mean = (a) => (a.length ? a.reduce((s, v) => s + v, 0) / a.length : 0);
-// Trimmed mean: drop the worst sample (often a spawn-camp fluke) once we have enough.
-const robustMean = (a) => (a.length >= 3 ? mean([...a].sort((x, y) => x - y).slice(1)) : mean(a));
+const median = (a) => { if (!a.length) return 0; const s = [...a].sort((x, y) => x - y); const n = s.length; return n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2; };
 
 export class Optimizer {
   constructor() {
@@ -115,22 +124,27 @@ export class Optimizer {
     return { ...BASE, ...cand.params, version };
   }
 
-  // Record the just-finished life's fitness against the active candidate.
+  // Record the just-finished life's fitness against the active candidate. Champion is crowned ONLY
+  // from a FULLY evaluated candidate (all EVALS lives) scored by its MEDIAN, so a single lucky life
+  // can't freeze an unbeatable benchmark the way the gen-16 champion did. Median rewards a repeatable
+  // life over a one-off spike.
   record(fitness) {
     if (!this._active) return;
     this._active.fits.push(fitness);
     this.evalNo++;
-    const m = robustMean(this._active.fits);
-    if (!this.champion || m > this.champion.fitness) {
-      if (this._active.fits.length >= 2) this.champion = { params: { ...this._active.params }, fitness: m };
+    if (this._active.fits.length >= EVALS) {
+      const m = median(this._active.fits);
+      if (!this.champion || m > this.champion.fitness) this.champion = { params: { ...this._active.params }, fitness: m };
     }
     this.save();
   }
+  // The active candidate's params, for per-life telemetry (so the corpus becomes minable).
+  activeParams() { return this._active ? this._active.params : null; }
 
   evolve() {
-    // Rank by robust mean fitness; carry elites, breed the rest from them, keep the champion.
-    const ranked = [...this.population].sort((a, b) => robustMean(b.fits) - robustMean(a.fits));
-    const bestMean = robustMean(ranked[0]?.fits || []);
+    // Rank by median fitness; carry elites, breed the rest from them, keep the champion.
+    const ranked = [...this.population].sort((a, b) => median(b.fits) - median(a.fits));
+    const bestMean = median(ranked[0]?.fits || []);
     this.history.push({ gen: this.gen, bestMean: +bestMean.toFixed(0), championFitness: +(this.champion?.fitness || 0).toFixed(0), evals: this.evalNo });
 
     const elites = ranked.slice(0, ELITES).map((c) => c.params);

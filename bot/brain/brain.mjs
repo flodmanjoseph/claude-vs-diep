@@ -92,13 +92,21 @@ export const BRAIN_FN = function (initialDoctrine) {
     tapKey(String(stat));
   }
 
-  function bestShape(shapes) {
+  // bestShape picks the farm target. v17: when threatened, a shape in the direction of the threats
+  // costs extra "distance" (safeShapeBias * how-much-toward-threats it is), so farming naturally pulls
+  // us into open space instead of toward the foes closing on us - farming itself becomes defensive.
+  function bestShape(shapes, toward, pressure) {
     if (!shapes.length) return null;
-    // Distance-dominant: nearest shape wins, higher-value kinds get a small distance discount.
     const rank = (k) => { const i = DOCTRINE.preferKinds.indexOf(k); return i < 0 ? 5 : i; };
+    const bias = (DOCTRINE.safeShapeBias || 0) * Math.min(1, (pressure || 0) / (DOCTRINE.pressureCap || 0.06));
     let best = null, bestScore = Infinity;
     for (const s of shapes) {
-      const score = s.dist + rank(s.kind) * DOCTRINE.kindDistancePenalty;
+      let score = s.dist + rank(s.kind) * DOCTRINE.kindDistancePenalty;
+      if (bias > 0 && toward) {
+        const m = s.dist || 1;
+        const dot = (s.dx / m) * toward[0] + (s.dy / m) * toward[1]; // >0 => toward the threats
+        if (dot > 0) score += dot * bias;
+      }
       if (score < bestScore) { bestScore = score; best = s; }
     }
     return best;
@@ -109,12 +117,50 @@ export const BRAIN_FN = function (initialDoctrine) {
   // Pick the 8-direction heading that moves most away from all weighted threats (toward open
   // space). Bigger/closer enemies and incoming bullets weigh more. Beats a raw repulsion sum,
   // which can point straight through a third enemy.
+  // Threat geometry (v17): the corpus says 84% of deaths are point-blank with >=2 foes converging,
+  // i.e. we get COLLAPSED on while farming. Reactive escape-radius triggers too late. Instead we read
+  // the whole threat field every frame: a continuous `pressure` scalar, the direction `away` from the
+  // weighted threat centroid, and `gapDir` - the bisector of the LARGEST angular gap between nearby
+  // foes, i.e. the most-open lane out. gapDir is geometry-correct where 8-way sampling is crude: one
+  // foe -> straight opposite it; two foes pincering us -> perpendicular to their axis (the only way
+  // out). maxGapDeg small => we are surrounded with no clean lane (force a hard breakout early).
+  function threatGeometry(foes) {
+    const R = DOCTRINE.spacingRadius || 400;
+    const SR = DOCTRINE.surroundRadius || 300;
+    let pressure = 0, cx = 0, cy = 0;
+    const bearings = [];
+    for (const e of foes) {
+      if (e.dist > R) continue;
+      const w = (1 + e.r * DOCTRINE.enemySizeWeight) / Math.max(40, e.dist);
+      pressure += w;
+      cx += (e.dx / (e.dist || 1)) * w;
+      cy += (e.dy / (e.dist || 1)) * w;
+      if (e.dist < SR) bearings.push(Math.atan2(e.dy, e.dx));
+    }
+    let gapDir = null, maxGap = Math.PI * 2;
+    if (bearings.length) {
+      bearings.sort((a, b) => a - b);
+      maxGap = 0; let gapMid = bearings[0] + Math.PI;
+      for (let i = 0; i < bearings.length; i++) {
+        const a = bearings[i], b = (i + 1 < bearings.length) ? bearings[i + 1] : bearings[0] + Math.PI * 2;
+        const g = b - a;
+        if (g > maxGap) { maxGap = g; gapMid = a + g / 2; }
+      }
+      gapDir = [Math.cos(gapMid), Math.sin(gapMid)];
+    }
+    const cmag = Math.hypot(cx, cy) || 1;
+    return { pressure, toward: [cx / cmag, cy / cmag], away: [-cx / cmag, -cy / cmag], gapDir, maxGapDeg: (maxGap * 180) / Math.PI, nThreat: bearings.length };
+  }
+
   const DIRS = [[0, -1], [0.71, -0.71], [1, 0], [0.71, 0.71], [0, 1], [-0.71, 0.71], [-1, 0], [-0.71, -0.71]];
-  function bestEscapeDir(state, priority) {
+  function bestEscapeDir(state, priority, extraDirs) {
     let best = [0, 1], bestScore = -Infinity;
     const foes = enemiesOf(state);
     const pos = state.map; // normalized map position or null
-    for (const [dx, dy] of DIRS) {
+    // The open-lane heading(s) from threatGeometry are evaluated alongside the 8 compass dirs, so the
+    // geometry-correct escape still gets the wall/bullet penalties below before being chosen.
+    const dirs = extraDirs && extraDirs.length ? DIRS.concat(extraDirs.filter(Boolean)) : DIRS;
+    for (const [dx, dy] of dirs) {
       let score = 0;
       // Never flee into an arena wall: penalize headings that push past an edge we're already near.
       if (pos) {
@@ -274,6 +320,14 @@ export const BRAIN_FN = function (initialDoctrine) {
     const crowdN = foes.filter((e) => e.dist < (DOCTRINE.crowdRadius || 300)).length;
     const crowded = crowdN >= (DOCTRINE.crowdCount || 2);
 
+    // v17 threat field: continuous pressure + the open-lane heading. Drives graded spacing while
+    // farming and an EARLY forced breakout when pressure is high or we are being surrounded (no clean
+    // lane), so the pocket never collapses to the point-blank death the corpus shows 84% of the time.
+    const tg = threatGeometry(foes);
+    const surrounded = !grace && tg.nThreat >= 2 && tg.maxGapDeg < (DOCTRINE.safeLaneMinDeg || 110);
+    const overPressure = !grace && tg.pressure > (DOCTRINE.pressureEscape || 0.075);
+    const gapEsc = tg.gapDir ? [tg.gapDir] : null;
+
     // --- Predator (leaderboard-hunter) detection, MULTI-FRAME confirmed ---
     // 85% of Overseer L30-45 deaths are top-10 players (2-8x our score) running us down. Any tank
     // clearly bigger than us within detect range is a candidate hunter. It must persist for
@@ -307,7 +361,7 @@ export const BRAIN_FN = function (initialDoctrine) {
     const bodyMargin = ramNow ? -999 : DOCTRINE.shapeBodyMargin;
     const standoff = ramNow ? 0 : DOCTRINE.huntStandoff;
     // Hunting applies to drone classes (drones do the work) and to ram classes (kill by colliding).
-    const huntable = DOCTRINE.huntEnabled && (isDrone || ramNow) && nearest && !grace && !bulletThreat && !crowded && !predatorClose
+    const huntable = DOCTRINE.huntEnabled && (isDrone || ramNow) && nearest && !grace && !bulletThreat && !crowded && !predatorClose && !surrounded && !overPressure
       && nearest.r < myR * DOCTRINE.huntSizeRatio && nearest.dist < DOCTRINE.huntRange && foes.length <= DOCTRINE.huntMaxFoes;
 
     // Each tactical mode is an action: it returns the movement keys + aim and labels B.mode.
@@ -317,17 +371,17 @@ export const BRAIN_FN = function (initialDoctrine) {
       if (predatorClose && B.hunterLast) {
         B.mode = 'predator-flee';
         if (B.activeEncounter) B.activeEncounter.fled = true;
-        const [dx, dy] = bestEscapeDir(state, B.hunterLast);
-        // Drone screen (#2): GATED OFF by default. When droneScreen is enabled, a drone class aims its
-        // drones straight AT the predator (mouse follows aim) to body-block and chip it while we run;
-        // otherwise we behave like normal escape and aim at the nearest threat.
+        // Flee along the open lane (gapDir), not just away from the one hunter - the corpus shows
+        // straight-line flight from a hunter loses ground (fled died 43% vs not-fled 25%) because we
+        // run into the rest of the field. The lane keeps the whole threat field behind us.
+        const [dx, dy] = bestEscapeDir(state, B.hunterLast, gapEsc);
         const aim = (DOCTRINE.droneScreen && isDrone)
           ? { x: B.hunterLast.x, y: B.hunterLast.y }
           : (nearest ? { x: nearest.x, y: nearest.y } : { x: B.hunterLast.x, y: B.hunterLast.y });
         return { moveKeys: vectorToKeys(dx, dy), aim };
       }
-      B.mode = grace ? 'spawn-escape' : 'escape';
-      const [dx, dy] = bestEscapeDir(state);
+      B.mode = grace ? 'spawn-escape' : (surrounded ? 'breakout' : 'escape');
+      const [dx, dy] = bestEscapeDir(state, null, gapEsc);
       return { moveKeys: vectorToKeys(dx, dy), aim: nearest ? { x: nearest.x, y: nearest.y } : (window.__lastAim || { x: 900, y: 360 }) };
     };
     const actHunt = () => {
@@ -337,18 +391,25 @@ export const BRAIN_FN = function (initialDoctrine) {
       return { moveKeys: mk, aim: { x: nearest.x, y: nearest.y } };
     };
     function actFarm() {
-      const target = bestShape(state.shapes);
+      const target = bestShape(state.shapes, tg.toward, tg.pressure);
       if (!target) return actPatrol();
-      B.mode = (nearest && nd < DOCTRINE.waryRadius) ? 'kite-farm' : 'farm';
+      const spaced = tg.pressure > (DOCTRINE.spacingFloor || 0.02);
+      B.mode = spaced ? 'space-farm' : 'farm';
       let mvx = 0, mvy = 0;
       if (target.dist > stopDist) { const m = target.dist || 1; mvx += target.dx / m; mvy += target.dy / m; }
       for (const s of state.shapes) {
         const contact = (state.me.r || 17) + s.r + bodyMargin;
         if (s.dist < contact) { const m = s.dist || 1; mvx -= (s.dx / m) * 1.5; mvy -= (s.dy / m) * 1.5; }
       }
-      if (nearest && nd < DOCTRINE.waryRadius) {
-        const m = nd || 1; const wb = (DOCTRINE.waryRadius - nd) / DOCTRINE.waryRadius;
-        mvx -= (nearest.dx / m) * wb * 1.8; mvy -= (nearest.dy / m) * wb * 1.8;
+      // v17 graded spacing bubble: a continuous push along the open lane (gapDir) that scales with
+      // threat pressure, replacing the old binary wary-radius nudge. This bleeds pressure off *while*
+      // farming so it never builds to the collapse - the bot keeps a personal bubble instead of
+      // waiting for one enemy to cross escapeRadius. gapDir keeps the push out of the field, not just
+      // off the single nearest foe.
+      if (spaced) {
+        const lane = tg.gapDir || tg.away;
+        const g = (DOCTRINE.spacingGain || 1.6) * Math.min(1, tg.pressure / (DOCTRINE.pressureCap || 0.06));
+        mvx += lane[0] * g; mvy += lane[1] * g;
       }
       // Edge-farming bias (GATED; edgeBiasWeight 0 = off). Drift toward the NEAREST single arena edge
       // (one axis only, never both -> no corner trap) so foes can converge from fewer angles. ES-tunable
@@ -389,9 +450,10 @@ export const BRAIN_FN = function (initialDoctrine) {
       else if (state.shapes.length) chosen = 'farm';
       else chosen = 'patrol';
     }
-    // Forced-flight overrides (highest priority first): a confirmed predator closing on us, then a
-    // converging crowd. Either breaks farming/hunting immediately, regardless of the chosen policy.
-    if (!grace && (predatorClose || crowded)) chosen = 'escape';
+    // Forced-flight overrides (highest priority first): a confirmed predator closing on us, a
+    // converging crowd, being surrounded (no clean lane), or threat pressure over the escape budget.
+    // Any breaks farming/hunting immediately so the pocket never closes to the point-blank collapse.
+    if (!grace && (predatorClose || crowded || surrounded || overPressure)) chosen = 'escape';
     const out = (ACT[chosen] || actFarm)();
     moveKeys = out.moveKeys; aim = out.aim;
     // Tag the trigger in telemetry (predator-flee labels itself inside actEscape; crowd prefixes here).

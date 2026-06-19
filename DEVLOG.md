@@ -2,6 +2,26 @@
 
 Newest entries at the top.
 
+## 023 - 2026-06-19 - v17: the corpus spoke, so I stopped nudging and redesigned. Proactive spacing + a fixed optimizer.
+
+Mined the whole campaign at once (new `analysis/corpus.mjs`): **34 shifts, 754 lives, 30h of alive-time, 1,690 hunter encounters.** Single-shift summaries had been hiding the real story; the corpus made it unambiguous.
+
+What 754 lives say:
+- **We die while farming, surrounded.** Correctly attributing each death to the mode of the *dying* life (matched on the heartbeat's life-age, not wall-clock - the death event is stamped after respawn, which had me briefly believing "39% spawn deaths"; it's an artifact): **67% of deaths are in farm/space mode**, only 32% while fleeing. **84% are point-blank (<40px), 89% have >=2 foes within 300px**, median 2 foes converging. The bot farms greedily and gets collapsed on; reactive escape-radius fires too late to open space.
+- **The Sniper valley is the wall.** 90% of lives reach Sniper (L15), but only **22% reach Overseer (L30)** and **1% reach Overlord (L45)**. 68% of all deaths are Snipers.
+- **Fleeing hunters is robustly counterproductive** (n=1,690): fled died 43% vs not-fled 25%, flight nets only +16px. Straight-line flight runs us into the rest of the field.
+- **The incremental loop had plateaued.** Median life is flat at ~100-130s across all 16 doctrine versions; only the rare lucky Overlord score improved. The optimizer's gen-16 champion (fitness 23,754) stood unbeaten 10 generations because its score-dominated fitness + trim-the-low-sample robust-mean crowned a high-variance fluke it couldn't reproduce.
+
+So per Joe's call (highest-value, time-no-object), v17 is a redesign, not a nudge - three coordinated changes:
+
+**1. Proactive spacing / anti-surround (the headline).** The brain now reads the whole threat field every frame (`threatGeometry`): a continuous `pressure` scalar and `gapDir`, the bisector of the largest angular gap between nearby foes = the open lane out. gapDir is geometry-correct where 8-way sampling was crude (unit-tested: one foe -> flee straight opposite; two foes pincering -> escape *perpendicular* to their axis; three ringing -> "surrounded", hard breakout). Three behaviors flow from it: (a) while farming, a graded push along gapDir scaled by pressure keeps a *personal bubble* so pressure bleeds off continuously instead of building to the collapse (new mode `space-farm`); (b) farm-target choice is biased away from the threat centroid so farming itself retreats (`safeShapeBias`); (c) a forced early breakout when pressure crosses a budget (`pressureEscape`) or we're surrounded (`safeLaneMinDeg`), instead of waiting for one enemy to cross escapeRadius. Escape and predator-flight now also route along gapDir, directly answering the "flight loses ground" finding.
+
+**2. Fixed the optimizer (foundational).** Champion is now crowned ONLY from a fully-evaluated candidate (4 lives) scored by its **median**, so a single lucky life can't freeze an unbeatable benchmark again (verified: a lone 40k life no longer crowns; the champion becomes the median, not the spike). Fitness reweighted from score-dominated to reward consistent survival + reach (`score + 55*level + 7*sec`), because the path to #1 is a repeatable long Overlord life, not a one-off. Seeded fresh from the gen-16 champion's proven radii (baked into the doctrine baseline) plus the new spacing params; old state archived.
+
+**3. Closed the instrumentation hole.** `doctrine_assigned` now logs the full per-life parameter vector (was just a version string), so params->outcome is minable from here on - the corpus becomes a real dataset, not just behavioral traces.
+
+Verified end-to-end before relaunch: all modules parse, the geometry math checks out on the pincer/ring cases, the fresh optimizer seeds correctly and the median-championing holds, and v17 is live on an 8h grind - `space-farm` is firing, params are logging, zero brain errors. Now it runs.
+
 ## 022 - 2026-06-19 - Edge-bias verdict: not a clear win, and the champion is a frozen high-variance peak
 
 The v16 edge-bias shift completed cleanly (8.05h, 203 deaths, optimizer gen 18->26). Topline vs the v15 shift, edge-bias did NOT do what it was meant to:

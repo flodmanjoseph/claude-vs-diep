@@ -2,7 +2,7 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 16,
+  version: 17,
 
   // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
   // by the current class, so the right tile index is clicked even if level reads lag. Tile indices
@@ -14,25 +14,46 @@ export const DOCTRINE = {
   ],
   droneClasses: ['Overseer', 'Overlord', 'Necromancer', 'Manager', 'Battleship', 'Factory', 'Hybrid'],
 
-  // Threat handling (tiered, screen-pixel distances; own tank is screen-center)
-  escapeRadius: 210, // enemy within this (effective dist) => drop everything and flee
-  waryRadius: 360, // enemy within this => keep farming but bias movement away from it
-  bulletDangerRadius: 160, // enemy bullet within this and approaching => escape trigger
-  enemySizeWeight: 0.05, // extra threat per pixel of enemy radius (bigger tanks are deadlier)
-  anticipationFrames: 22, // shrink an enemy's effective distance by closingSpeed * this (~0.37s lookahead)
+  // Threat handling (tiered, screen-pixel distances; own tank is screen-center). v17 bakes the
+  // gen-16 ES champion's evolved radii in as the baseline (proven over 400+ lives), then layers the
+  // proactive-spacing redesign on top.
+  escapeRadius: 216, // enemy within this (effective dist) => drop everything and flee
+  waryRadius: 427, // enemy within this => keep farming but bias movement away from it
+  bulletDangerRadius: 161, // enemy bullet within this and approaching => escape trigger
+  enemySizeWeight: 0.082, // extra threat per pixel of enemy radius (bigger tanks are deadlier)
+  anticipationFrames: 31, // shrink an enemy's effective distance by closingSpeed * this (~0.52s lookahead)
   // Crowd flight: being collapsed on by several foes at once is the dominant death (87% of deaths
   // are point-blank with 2-3 foes near). If >= crowdCount foes sit within crowdRadius, force escape
   // and don't hunt, so a converging swarm breaks farming before the pocket closes to body contact.
-  crowdRadius: 300,
+  crowdRadius: 248,
   crowdCount: 2,
+
+  // === v17 PROACTIVE SPACING / ANTI-SURROUND (the headline redesign) ===
+  // Corpus of 754 lives: 67% of deaths are in farm mode, 84% point-blank, 89% with >=2 foes within
+  // 300px - the bot farms greedily and gets COLLAPSED on, and reactive escape-radius fires too late
+  // to open space. The fix reads the whole threat field every frame (threatGeometry): a continuous
+  // `pressure` scalar and `gapDir`, the bisector of the largest angular gap = the open lane out.
+  // - While farming, a graded push along gapDir scaled by pressure keeps a "personal bubble" so
+  //   pressure bleeds off continuously instead of building to the collapse (mode "space-farm").
+  // - Bias farm-target choice AWAY from the threat centroid so farming itself retreats (safeShapeBias).
+  // - Force an EARLY breakout when pressure crosses the budget (pressureEscape) or we are surrounded
+  //   with no clean lane (maxGap < safeLaneMinDeg), instead of waiting for one enemy to cross escapeRadius.
+  spacingRadius: 400, // foes within this contribute to threat pressure / centroid
+  surroundRadius: 300, // foes within this count toward the open-lane / surround analysis
+  spacingFloor: 0.02, // pressure above which farming switches to spaced movement (space-farm)
+  spacingGain: 1.6, // strength of the along-lane spacing push during farming
+  pressureCap: 0.06, // pressure at which the spacing push (and safe-shape bias) saturates
+  pressureEscape: 0.075, // pressure that forces a full escape, dropping farming entirely
+  safeLaneMinDeg: 130, // if the largest angular gap between nearby foes is under this, we're surrounded -> breakout
+  safeShapeBias: 100, // px-equivalent penalty for a farm target that lies toward the threat centroid
   // Predator (leaderboard-hunter) avoidance. 85% of Overseer L30-45 deaths are top-10 players at
   // 2-8x our score running us down, usually in pairs. Flee any tank clearly bigger than us, earlier
   // and harder than a normal enemy. Detection is MULTI-FRAME (predatorConfirmFrames consecutive
   // frames) so a single-frame size misread can never trigger flight - same lesson as the score glitch.
-  predatorRatio: 1.15, // enemy with radius > myR * this is a candidate hunter (clearly bigger)
+  predatorRatio: 1.309, // enemy with radius > myR * this is a candidate hunter (clearly bigger)
   predatorDetectRadius: 460, // only consider big tanks within this as hunters
   predatorConfirmFrames: 16, // ~0.27s of persistent presence before we trust it (anti-phantom)
-  predatorFleeRadius: 320, // flee a confirmed hunter within this (vs escapeRadius ~210 for normals)
+  predatorFleeRadius: 293, // flee a confirmed hunter within this (vs escapeRadius ~216 for normals)
   // Drone screen (#2): ENABLED v15. v14 hunter-encounter data (7 Overseer L30+ encounters) confirmed
   // predators are faster and kill from RANGE (166-403px): straight-line flight LOST ~88px/encounter
   // and 3 of 4 fled cases died, none escaped. So while fleeing a confirmed predator, a drone class
@@ -50,14 +71,14 @@ export const DOCTRINE = {
 
   // Bullet dodging (velocity-based): a bullet aimed at us (cos angle > aimedCos) inside dodgeRadius
   // whose predicted miss distance is under missMargin triggers a perpendicular sidestep.
-  bulletDodgeRadius: 280,
-  bulletAimedCos: 0.8,
-  bulletMissMargin: 60,
+  bulletDodgeRadius: 257,
+  bulletAimedCos: 0.844,
+  bulletMissMargin: 67,
 
   // Spawn safety: fresh respawns drop us at ~level 2 next to the killer. For the first few seconds
   // of a life, flee from any enemy within an enlarged radius and do not farm.
-  spawnGraceFrames: 210, // ~3.5s at 60fps
-  spawnEscapeRadius: 330,
+  spawnGraceFrames: 256, // ~4.3s at 60fps
+  spawnEscapeRadius: 305,
 
   // Map awareness (positions normalized 0..1 from the minimap arrow).
   wallMargin: 0.06, // treat being within this of an edge as "at the wall" for escape penalties
@@ -67,18 +88,18 @@ export const DOCTRINE = {
   // Farming. Target selection is distance-dominant: grab the nearest shape, only mildly preferring
   // higher-value kinds, so we don't trek across the map (slow + risky) chasing a far pentagon.
   preferKinds: ['pentagon', 'square', 'triangle'], // value order; pentagons worth most
-  kindDistancePenalty: 70, // pixels of "extra distance" each value rank costs in target scoring
-  approachStopDist: 150, // stop closing on a shape inside this; shoot it from range
-  shapeBodyMargin: 28, // if a shape is within me.r+shape.r+this, back off (avoid lethal body contact)
+  kindDistancePenalty: 48, // pixels of "extra distance" each value rank costs in target scoring
+  approachStopDist: 154, // stop closing on a shape inside this; shoot it from range
+  shapeBodyMargin: 59, // if a shape is within me.r+shape.r+this, back off (avoid lethal body contact)
   wanderWhenEmpty: true,
 
   // Drone-class hunting: chase weaker tanks for kill XP (worth far more than shapes). Thresholds
   // are tunable so the optimizer decides how aggressive to be.
   huntEnabled: true,
-  huntSizeRatio: 0.78, // hunt only enemies whose radius is < this fraction of ours (clearly smaller)
-  huntRange: 340, // only hunt within this distance
+  huntSizeRatio: 0.832, // hunt only enemies whose radius is < this fraction of ours (clearly smaller)
+  huntRange: 303, // only hunt within this distance
   huntMaxFoes: 1, // never hunt when more than this many enemies are near (don't get swarmed)
-  huntStandoff: 170, // close to this distance, then hold (drones do the work; don't ram)
+  huntStandoff: 166, // close to this distance, then hold (drones do the work; don't ram)
 
   // Aim / fire
   autofire: true,

@@ -69,7 +69,9 @@ async function applyNextDoctrine() {
   if (!opt) return;
   const d = opt.nextDoctrine();
   await page.evaluate((doc) => window.__setDoctrine && window.__setDoctrine(doc), d).catch(() => {});
-  log({ event: 'doctrine_assigned', version: d.version, status: opt.status() });
+  // Log the candidate's actual params, not just the version string, so params->outcome is minable
+  // from telemetry later (the old logs only kept "opt-gN-i", so past generations' params were lost).
+  log({ event: 'doctrine_assigned', version: d.version, params: opt.activeParams(), status: opt.status() });
 }
 function scoreLife() {
   const fit = lifeFitness({ score: lifeMaxScore, level: lifeMaxLevel, lifeMs: Date.now() - lifeStart });
