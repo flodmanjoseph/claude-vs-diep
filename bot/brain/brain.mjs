@@ -100,13 +100,18 @@ export const BRAIN_FN = function (initialDoctrine) {
   // bestShape picks the farm target. v17: when threatened, a shape in the direction of the threats
   // costs extra "distance" (safeShapeBias * how-much-toward-threats it is), so farming naturally pulls
   // us into open space instead of toward the foes closing on us - farming itself becomes defensive.
-  function bestShape(shapes, toward, pressure) {
+  // v20 economy: pentagonBonus gives pentagons a distance discount (they're worth far more XP than
+  // squares/triangles, and alpha pentagons hugely more) so a drone class farming SAFELY prioritizes
+  // them - a conservative score-ceiling boost (a discount, not a cross-map nest trek). The caller
+  // only passes it >0 when isDrone AND pressure is low (pressure-veto), so it never overrides safety.
+  function bestShape(shapes, toward, pressure, pentagonBonus) {
     if (!shapes.length) return null;
     const rank = (k) => { const i = DOCTRINE.preferKinds.indexOf(k); return i < 0 ? 5 : i; };
     const bias = (DOCTRINE.safeShapeBias || 0) * Math.min(1, (pressure || 0) / (DOCTRINE.pressureCap || 0.06));
     let best = null, bestScore = Infinity;
     for (const s of shapes) {
       let score = s.dist + rank(s.kind) * DOCTRINE.kindDistancePenalty;
+      if (pentagonBonus && s.kind === 'pentagon') score -= pentagonBonus;
       if (bias > 0 && toward && (toward[0] * toward[0] + toward[1] * toward[1] > 0.001)) {
         const m = s.dist || 1;
         const dot = (s.dx / m) * toward[0] + (s.dy / m) * toward[1]; // >0 => toward the threats
@@ -405,7 +410,10 @@ export const BRAIN_FN = function (initialDoctrine) {
       return { moveKeys: mk, aim: { x: nearest.x, y: nearest.y } };
     };
     function actFarm() {
-      const target = bestShape(state.shapes, tg.toward, tg.pressure);
+      // v20 economy: only chase high-XP pentagons as a drone class when it's genuinely calm
+      // (pressure below the spacing floor) - a pressure veto so the score push never trades away survival.
+      const econ = (isDrone && tg.pressure < (DOCTRINE.spacingFloor || 0.02)) ? (DOCTRINE.dronePentagonBonus || 0) : 0;
+      const target = bestShape(state.shapes, tg.toward, tg.pressure, econ);
       if (!target) return actPatrol();
       const spaced = tg.pressure > (DOCTRINE.spacingFloor || 0.02);
       B.mode = spaced ? 'space-farm' : 'farm';

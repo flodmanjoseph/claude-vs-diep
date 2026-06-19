@@ -1,6 +1,6 @@
 {
  "gen": 2,
- "evalNo": 38,
+ "evalNo": 58,
  "population": [
   {
    "params": {
@@ -33,7 +33,8 @@
     "safeLaneMinDeg": 130,
     "safeShapeBias": 70,
     "fragilePhaseScale": 1.25,
-    "leadScale": 1.3
+    "leadScale": 1.3,
+    "dronePentagonBonus": 120
    },
    "fits": [
     6802.1630000000005,
@@ -73,11 +74,14 @@
     "safeLaneMinDeg": 146,
     "safeShapeBias": 109,
     "fragilePhaseScale": 1.215,
-    "leadScale": 1.3
+    "leadScale": 1.3,
+    "dronePentagonBonus": 120
    },
    "fits": [
     16797.289,
-    2496.534
+    2496.534,
+    2379.508,
+    5649.378
    ]
   },
   {
@@ -111,9 +115,15 @@
     "safeLaneMinDeg": 142,
     "safeShapeBias": 20,
     "fragilePhaseScale": 1.378,
-    "leadScale": 1.3
+    "leadScale": 1.3,
+    "dronePentagonBonus": 120
    },
-   "fits": []
+   "fits": [
+    3455.728,
+    8276.491,
+    2655.226,
+    12712.114
+   ]
   },
   {
    "params": {
@@ -146,9 +156,15 @@
     "safeLaneMinDeg": 145,
     "safeShapeBias": 155,
     "fragilePhaseScale": 1.18,
-    "leadScale": 1.3
+    "leadScale": 1.3,
+    "dronePentagonBonus": 120
    },
-   "fits": []
+   "fits": [
+    4253.855,
+    11710.523000000001,
+    3064.687,
+    11968.004
+   ]
   },
   {
    "params": {
@@ -181,9 +197,15 @@
     "safeLaneMinDeg": 142,
     "safeShapeBias": 0,
     "fragilePhaseScale": 1.353,
-    "leadScale": 1.3
+    "leadScale": 1.3,
+    "dronePentagonBonus": 120
    },
-   "fits": []
+   "fits": [
+    6453.847,
+    11052.822,
+    8158.758,
+    10073.482
+   ]
   },
   {
    "params": {
@@ -216,9 +238,15 @@
     "safeLaneMinDeg": 126,
     "safeShapeBias": 109,
     "fragilePhaseScale": 1.215,
-    "leadScale": 1.3
+    "leadScale": 1.3,
+    "dronePentagonBonus": 120
    },
-   "fits": []
+   "fits": [
+    10670.897,
+    5629.811,
+    15151.847,
+    14642.83
+   ]
   },
   {
    "params": {
@@ -251,9 +279,13 @@
     "safeLaneMinDeg": 130,
     "safeShapeBias": 0,
     "fragilePhaseScale": 1.378,
-    "leadScale": 1.3
+    "leadScale": 1.3,
+    "dronePentagonBonus": 120
    },
-   "fits": []
+   "fits": [
+    9543.279,
+    2513.948
+   ]
   },
   {
    "params": {
@@ -286,7 +318,8 @@
     "safeLaneMinDeg": 142,
     "safeShapeBias": 62,
     "fragilePhaseScale": 1.304,
-    "leadScale": 1.3
+    "leadScale": 1.3,
+    "dronePentagonBonus": 120
    },
    "fits": []
   }
@@ -322,7 +355,8 @@
    "safeLaneMinDeg": 130,
    "safeShapeBias": 70,
    "fragilePhaseScale": 1.25,
-   "leadScale": 1.3
+   "leadScale": 1.3,
+   "dronePentagonBonus": 120
   },
   "fitness": 13886.9295
  },
@@ -454,6 +488,10 @@
   "leadScale": [
    1,
    1.8
+  ],
+  "dronePentagonBonus": [
+   0,
+   300
   ]
  },
  "updated": null

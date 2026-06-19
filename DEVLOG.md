@@ -2,6 +2,16 @@
 
 Newest entries at the top.
 
+## 027 - 2026-06-19 - v19 held survival in tough arenas; shipped v20 economy (raise the score ceiling)
+
+v19 check: survival HELD - median life 204s over the shift (vs v18's 161s, vs ~100-130s baseline), no regression. Lead-protection stayed dormant (0 `lead-` heartbeats) because the arenas turned competitive (median leaderMax 59,700, up to 691,600 - a world apart from the sub-77k quiet arenas earlier), so the bot never reached rank<=2 to trigger it. That's correct and safe: when not leading, leadScale folds to 1, so v19 can't regress the common case - confirmed by the held survival. Lead-protection remains an armed, dormant safety feature awaiting its moment at the top.
+
+Those competitive arenas reframed the goal: surviving to Overlord isn't enough when the leader is 60k+ and our ceiling is ~34k. We need a higher SCORE CEILING. So shipped **v20 economy**: a drone class farming SAFELY now prefers high-XP pentagons (a pentagon dwarfs a square/triangle in XP, and alpha pentagons hugely so) via a `dronePentagonBonus` (120px, ES-tunable [0,300]) distance discount in target selection. Deliberately conservative - a discount, not a cross-map nest trek (the nest is a death trap), and double-gated: only when `isDrone` AND pressure is below the spacing floor (a hard pressure-veto), so it never trades survival for score. When threatened it reverts to the safe distance-dominant + safe-shape-bias logic. This targets the exact lives that matter - the rare Overlord lives where we're competing for #1 - and makes each score more, to outscore real leaders.
+
+Verified: modules parse, optimizer continues from the v19 state (same fitness; dronePentagonBonus backfilled at 120), economy gating correct (active only drone+calm, vetoed on pressure or non-drone). v20 live, 0 brain errors.
+
+(Operational: the relaunch fought me - the old runner survived SIGTERM, and a self-matching grep made it look like duplicate runners persisted after pkill -9. Real cause: my own shell command contained the literal "node bot/runner.mjs" pattern, inflating the count by 1. Resolved by killing by explicit PID and verifying against the specific new PID + log, not a grep-count. Single clean v20 runner now, caffeinate attached.)
+
 ## 026 - 2026-06-19 - v18 confirmed (the funnel widened); shipped v19 lead-protection to sustain #1
 
 v18 fragile-phase gating is confirmed over **36 lives across two shifts and varied arenas** - every funnel metric moved the right way vs the long-flat baseline:

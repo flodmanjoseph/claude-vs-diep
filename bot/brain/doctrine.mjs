@@ -2,7 +2,7 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 19,
+  version: 20,
 
   // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
   // by the current class, so the right tile index is clicked even if level reads lag. Tile indices
@@ -115,6 +115,11 @@ export const DOCTRINE = {
   // higher-value kinds, so we don't trek across the map (slow + risky) chasing a far pentagon.
   preferKinds: ['pentagon', 'square', 'triangle'], // value order; pentagons worth most
   kindDistancePenalty: 48, // pixels of "extra distance" each value rank costs in target scoring
+  // v20 economy: a pentagon is worth far more XP than a square/triangle (and alpha pentagons hugely
+  // more), so when a drone class farms SAFELY (pressure below the spacing floor), pentagons get this
+  // px-equivalent distance discount in target scoring - a conservative score-ceiling boost to outscore
+  // real leaders, pressure-vetoed so it never trades survival for score. ES-tunable [0, 300]; 0 = off.
+  dronePentagonBonus: 120,
   approachStopDist: 154, // stop closing on a shape inside this; shoot it from range
   shapeBodyMargin: 59, // if a shape is within me.r+shape.r+this, back off (avoid lethal body contact)
   wanderWhenEmpty: true,

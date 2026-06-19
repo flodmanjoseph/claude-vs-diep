@@ -46,6 +46,8 @@ export const SPACE = {
   fragilePhaseScale: [1.0, 1.6], // how much more cautious a pre-drone Tank/Sniper plays (1.0 = off)
   // v19 lead-protection:
   leadScale: [1.0, 1.8], // how much more defensively we play when at/near #1 (1.0 = off)
+  // v20 economy:
+  dronePentagonBonus: [0, 300], // px discount steering a safe drone toward high-XP pentagons (0 = off)
 };
 const KEYS = Object.keys(SPACE);
 
