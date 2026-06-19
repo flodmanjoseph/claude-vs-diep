@@ -2,6 +2,14 @@
 
 Newest entries at the top.
 
+## 040 - 2026-06-19 - Full sniper line auto-climbs (Ranger confirmed); v33 movement-forward build for the Sniper valley
+
+`Assassin -> Ranger (tile 0)` confirmed in-game - the bot now auto-climbs the WHOLE line Tank->Sniper->Assassin->Ranger with no manual help, reaching L45 Ranger, maxScore 24,879, 0 errors. Joe's build is fully realized and self-driving.
+
+Then diagnosed the survival bottleneck precisely. v33 shift: 25/30 deaths are Snipers dying at a median level of ~20, 80% point-blank, and - the key - **21/25 had a BIGGER tank (radius>=18) at body contact** (dist 1-19px). Split farm 12 / hunt-chase 8 / escape 4. So the squishy Sniper is being run down to point-blank by comparable/bigger tanks and losing fights it should never be in - it's a glass cannon that can't keep the gap. A sniper's #1 survival tool is MOVEMENT (kite, exploit range, never let anything close), but the build had Move as only the 7th stat (front-loaded pure damage), so the early/mid Sniper was too SLOW to escape.
+
+v33: MOVEMENT-FORWARD sniper stat build. First 10 points now Move x3 + MaxHealth x2 + Dmg x2 + Pen x2 + BulletSpeed (was Move x1, damage-heavy). So the early Sniper can actually kite the bigger tanks killing it, while still building enough Dmg/Pen/BulletSpeed to farm and snipe. The bet: trading a little early damage for movement raises the reach-to-Assassin rate (only 13% now) by surviving the L15-30 valley. statSequence is a fixed array (not ES-tuned), so this is a hand call; measure next: does median life rise, point-blank-death share fall, and reach-Assassin climb? If hunt-chase deaths persist, raise huntStandoff next (snipe prey from range instead of closing to 166px). RL Phase-0 logging continues.
+
 ## 039 - 2026-06-19 - v31/v32: auto-Assassin confirmed + FOV-scaled thresholds (the wide view, measured)
 
 Two resolutions:

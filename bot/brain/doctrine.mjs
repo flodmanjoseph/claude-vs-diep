@@ -2,7 +2,7 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 32,
+  version: 33,
   // v32 FOV scaling: median on-screen square radius (px) at the baseline Tank FOV. Measured ~22 (Tank),
   // 19 (Sniper), 15 (Assassin) - so the sniper line zooms out and defensive distance thresholds are
   // rescaled by (currentSquarePx / this) to stay world-consistent. 1.0 multiplier at the Tank baseline.
@@ -182,13 +182,15 @@ export const DOCTRINE = {
   // fire/drones AT it instead of at a shape, until it's dead or out of range. ES-tunable.
   combatRange: 400,
 
-  // v29 SNIPER perk build (stat keys: 1 Regen 2 MaxHealth 3 BodyDmg 4 BulletSpeed 5 BulletPen
-  // 6 BulletDmg 7 Reload 8 MoveSpeed). The whole game is now a bullet sniper (Sniper->Assassin->Ranger,
-  // never a drone class), so build for it: lead Bullet Damage(6) + Penetration(5) + Bullet Speed(4,
-  // = range & accuracy, a sniper's edge) + Reload(7) for kill power, woven with Movement(8) + MaxHealth(2)
-  // to kite as the squishy glass-cannon it is, then Regen(1). First 8 points: Dmg/Pen/Spd/Dmg/Pen/Reload/
-  // Move/HP - hits hard and far while staying mobile.
-  statSequence: [6, 5, 4, 6, 5, 7, 8, 2, 6, 5, 4, 7, 8, 2, 1, 5, 3, 2],
+  // v33 SNIPER perk build - MOVEMENT-FORWARD (stat keys: 1 Regen 2 MaxHealth 3 BodyDmg 4 BulletSpeed
+  // 5 BulletPen 6 BulletDmg 7 Reload 8 MoveSpeed). Data: 25/30 deaths are Snipers dying ~L20, 80%
+  // point-blank, and 21/25 had a BIGGER tank (r>=18) at body contact - the squishy slow Sniper can't
+  // keep the gap and loses point-blank fights it should never be in. A sniper's #1 survival tool is
+  // MOVEMENT (kite, never let anything close), but the old build had Move as the 7th stat. Front-load
+  // Move(8) + weave MaxHealth(2) so the early Sniper can actually escape the bigger tanks killing it,
+  // while still building Dmg(6)/Pen(5)/BulletSpeed(4) to farm+kill. First 8: Move/Dmg/Pen/Move/HP/Spd/
+  // Dmg/Pen, with a 3rd Move at point 9 - fast enough to survive the valley to Assassin/Ranger.
+  statSequence: [8, 6, 5, 8, 2, 4, 6, 5, 8, 2, 7, 1, 6, 5, 4, 2, 7, 3],
   // Drone class (Overseer/Overlord, PREDATOR MODE): the killing build. Drone Damage(6) + Drone
   // Health/Penetration(5) to win tank fights, woven with Max Health(2) and Reload(7) so we survive
   // and sustain the fights we pick (Joe: "adjust for health"), then Movement(8) to chase, Regen(1),
