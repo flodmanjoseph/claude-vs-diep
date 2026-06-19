@@ -72,8 +72,13 @@ export const BRAIN_FN = function (initialDoctrine) {
     hunterStreak: 0,
     hunterLast: null,
     activeEncounter: null,
+    // v19 lead-protection: the runner pushes live leaderboard rank here each heartbeat via __setMeta.
+    meta: { estRank: null, leaderMax: null, myScore: null, boardSize: 0 },
     _raf: null,
   });
+  // Live rank/board push channel from the runner (mirrors __setDoctrine). Pure additive; only step()
+  // reads B.meta, so a stale/missing push just means we don't apply lead-protection that frame.
+  window.__setMeta = (m) => { if (m) B.meta = m; };
   // Closed hunter encounters wait here for the runner to drain into telemetry (detected/fled/outcome).
   window.__hunterLog = window.__hunterLog || [];
 
@@ -312,10 +317,14 @@ export const BRAIN_FN = function (initialDoctrine) {
     for (const e of foes) { const ed = effectiveDist(e); if (ed < nd) { nd = ed; nearest = e; } }
     const bulletThreat = state.bullets.some((b) => b.enemy && b.dist < DOCTRINE.bulletDangerRadius);
     // v18 fragile-phase gating: a pre-drone Tank/Sniper (the "Sniper valley", 68% of all deaths) has
-    // no drone screen, so flee earlier and from farther. The multiplier scales the flee triggers up
-    // (and the pressure-escape threshold down) only while pre-drone; a drone class plays at base radii.
+    // no drone screen, so flee earlier and from farther. v19 lead-protection: when a coherent populated
+    // board says we're at/near #1, also play defensively (kills aren't worth the exposure; hunters home
+    // on the leader). Both fold into one defensive multiplier `fScale` applied to the flee triggers
+    // (escape/crowd/predator radii up, pressure-escape threshold down); a relaxed mid-tier tank uses 1.
     const fragile = !isDrone && !grace;
-    const fScale = fragile ? (DOCTRINE.fragilePhaseScale || 1) : 1;
+    const meta = B.meta || {};
+    const leading = !grace && meta.boardSize >= 7 && meta.estRank != null && meta.estRank <= (DOCTRINE.leadRankMax || 2) && (meta.myScore || 0) > (DOCTRINE.leadMinScore || 5000);
+    const fScale = (fragile ? (DOCTRINE.fragilePhaseScale || 1) : 1) * (leading ? (DOCTRINE.leadScale || 1) : 1);
     const escapeR = grace ? DOCTRINE.spawnEscapeRadius : DOCTRINE.escapeRadius * fScale;
     const myR = state.me.r || 17;
     // Crowd pressure: ~87% of deaths are point-blank (<40px) with 2-3 foes converging, i.e. the
@@ -366,7 +375,7 @@ export const BRAIN_FN = function (initialDoctrine) {
     const bodyMargin = ramNow ? -999 : DOCTRINE.shapeBodyMargin;
     const standoff = ramNow ? 0 : DOCTRINE.huntStandoff;
     // Hunting applies to drone classes (drones do the work) and to ram classes (kill by colliding).
-    const huntable = DOCTRINE.huntEnabled && (isDrone || ramNow) && nearest && !grace && !bulletThreat && !crowded && !predatorClose && !surrounded && !overPressure
+    const huntable = DOCTRINE.huntEnabled && (isDrone || ramNow) && nearest && !grace && !bulletThreat && !crowded && !predatorClose && !surrounded && !overPressure && !leading
       && nearest.r < myR * DOCTRINE.huntSizeRatio && nearest.dist < DOCTRINE.huntRange && foes.length <= DOCTRINE.huntMaxFoes;
 
     // Each tactical mode is an action: it returns the movement keys + aim and labels B.mode.
@@ -463,6 +472,7 @@ export const BRAIN_FN = function (initialDoctrine) {
     moveKeys = out.moveKeys; aim = out.aim;
     // Tag the trigger in telemetry (predator-flee labels itself inside actEscape; crowd prefixes here).
     if (!grace && crowded && !predatorClose) B.mode = 'crowd-' + B.mode;
+    if (leading) B.mode = 'lead-' + B.mode; // tag so the corpus can A/B time-survived-while-leading
 
     // Bullet dodge overrides movement in any mode: sidestepping an incoming shot beats whatever
     // else we were doing for these few frames. Aim is unaffected.

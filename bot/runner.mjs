@@ -288,6 +288,10 @@ while (true) {
     lifeMaxLevel = Math.max(lifeMaxLevel, trustedLevel);
     if (estRank != null) bestRank = Math.min(bestRank, estRank);
     log({ event: 'heartbeat', elapsed, alive, life: Date.now() - lifeStart, deaths, cls: curClass, lvl: trustedLevel, mode: snap?.mode, myScore, leaderMax, estRank, boardSize, optGen: opt?.status().gen });
+    // v19: push live rank into the in-page brain so it can adopt a lead-protection posture near #1.
+    // Uses the glitch-filtered myScore so a spurious spike can't fake "leading". One evaluate per
+    // heartbeat (slow cadence), off the hot path.
+    await page.evaluate((mt) => window.__setMeta && window.__setMeta(mt), { estRank, leaderMax, myScore, boardSize }).catch(() => {});
 
     // True #1 detection: estimated rank 1 on a well-populated board, sustained across samples, so
     // a fluke sample can't false-trigger. Gated on a glitch-filtered score so a spurious spike can

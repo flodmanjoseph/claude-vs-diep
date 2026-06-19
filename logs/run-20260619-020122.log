@@ -1,2 +1,65 @@
 shift 2026-06-19T07-01-22-852Z | doctrine v18 | 28800s
 upgraded -> Sniper
+death #1 after 135s as Sniper L21
+  overlord life fitness 5191 (score 2147, L21) | gen 1 19/32
+upgraded -> Sniper
+death #2 after 59s as Sniper L18
+  overlord life fitness 3609 (score 1392, L18) | gen 1 20/32
+death #3 after 52s as Tank L14
+  overlord life fitness 2522 (score 758, L14) | gen 1 21/32
+death #4 after 35s as Tank L13
+  overlord life fitness 2149 (score 602, L13) | gen 1 22/32
+upgraded -> Sniper
+death #5 after 144s as Sniper L19
+  overlord life fitness 4591 (score 1685, L19) | gen 1 23/32
+upgraded -> Sniper
+upgraded -> Overseer
+death #6 after 275s as Overseer L30
+  overlord life fitness 11459 (score 6535, L30) | gen 1 24/32
+upgraded -> Sniper
+death #7 after 86s as Sniper L22
+  overlord life fitness 5303 (score 2504, L22) | gen 1 25/32
+upgraded -> Sniper
+upgraded -> Overseer
+death #8 after 431s as Overseer L34
+  overlord life fitness 16154 (score 9736, L34) | gen 1 26/32
+upgraded -> Sniper
+death #9 after 104s as Sniper L25
+  overlord life fitness 6818 (score 3591, L25) | gen 1 27/32
+upgraded -> Sniper
+death #10 after 152s as Sniper L26
+  overlord life fitness 7895 (score 4227, L26) | gen 1 28/32
+upgraded -> Sniper
+death #11 after 128s as Sniper L23
+  overlord life fitness 6077 (score 2878, L23) | gen 1 29/32
+upgraded -> Sniper
+upgraded -> Overseer
+upgraded -> Overlord
+death #12 after 516s as Overlord L45
+  overlord life fitness 40965 (score 32849, L45) | gen 1 30/32
+upgraded -> Sniper
+upgraded -> Overseer
+death #13 after 193s as Overseer L30
+  overlord life fitness 10548 (score 6199, L30) | gen 1 31/32
+upgraded -> Sniper
+death #14 after 99s as Sniper L27
+  overlord life fitness 7803 (score 4412, L27) | gen 1 32/32
+upgraded -> Sniper
+death #15 after 143s as Sniper L24
+  overlord life fitness 6802 (score 3399, L24) | gen 2 1/32
+upgraded -> Sniper
+death #16 after 47s as Sniper L19
+  overlord life fitness 3795 (score 1568, L19) | gen 2 2/32
+upgraded -> Sniper
+upgraded -> Overseer
+death #17 after 289s as Overseer L30
+  overlord life fitness 11405 (score 6380, L30) | gen 2 3/32
+upgraded -> Overseer
+death #18 after 421s as Overseer L31
+  overlord life fitness 13528 (score 7482, L31) | gen 2 4/32
+upgraded -> Sniper
+upgraded -> Overseer
+death #19 after 647s as Overseer L33
+  overlord life fitness 16797 (score 8966, L33) | gen 2 5/32
+upgraded -> Sniper
+reboot: loop_error

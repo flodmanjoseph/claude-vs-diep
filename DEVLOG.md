@@ -2,6 +2,23 @@
 
 Newest entries at the top.
 
+## 026 - 2026-06-19 - v18 confirmed (the funnel widened); shipped v19 lead-protection to sustain #1
+
+v18 fragile-phase gating is confirmed over **36 lives across two shifts and varied arenas** - every funnel metric moved the right way vs the long-flat baseline:
+
+| metric | baseline (754 lives, 16 versions) | v18 (36 lives) |
+|---|---|---|
+| median life | ~100-130s (flat across ALL versions) | 161s |
+| Overseer reach | 22% | 36% |
+| Overlord reach | 1% | 3% |
+| Sniper death-share | 68% | 58% |
+
+This is the first time anything has moved median survival off its plateau, and it moved reach UP not down, so it's not the over-timidity failure - a pre-drone tank fleeing earlier but still kite-farming at range gets more lives through the L15-30 valley to where drones come online. v18 also hit L45 / 32,849 this shift (near the 34,368 record). Locking it in.
+
+With survival landing, shipped the next pre-registered lever: **v19 lead-protection**. The bot's signature failure is reaching the top band (rank 2 / 88% of leader) then dying right after the peak; kills aren't worth the exposure on top, and hunters home in on #1. The runner already computed live rank every heartbeat but never told the brain - now it pushes {estRank, leaderMax, myScore, boardSize} into the page via a `__setMeta` hook (mirroring `__setDoctrine`, using the glitch-filtered score so a spike can't fake "leading"). The brain computes `leading = board>=7 && estRank<=2 && score>5000` (same anti-noise discipline as the #1 detector) and, when leading, folds a `leadScale` (1.3, ES-tunable [1.0,1.8]) into the SAME defensive-scaling machinery v18 introduced - flee earlier/farther (escape/crowd/predator radii up, pressure-escape down) and stop hunting. Modes tagged `lead-` so the corpus can A/B time-survived-while-leading. No new movement state machine; pure reuse. Optimizer state carried over (v19 keeps v18's fitness, so evolution continues; leadScale backfilled at 1.3).
+
+Verified: all modules parse, optimizer continues from the v18 state, the `leading` gate is correct on all cases, v19 live with `__setMeta` pushing cleanly (0 errors). Deferred to v20: economy (pentagon-nest / alpha-pentagon farming with a pressure veto), once lead-protection shows it can hold the top.
+
 ## 025 - 2026-06-19 - v18 early signal is strong (life ~doubled); hardened #1 detection against board-sample artifacts
 
 First loop checkpoint, ~1h into v18 (17 lives - thin, and tonight's arenas are quiet, so read with caution): the fragile-phase gating looks like a real win. Median life **205s vs the ~100-130s that was flat across all 16 prior versions**, mean 219s, best 632s; Overseer reach **35% vs 22% baseline**; no Tank deaths (every life clears to Sniper) and it still reached L42 - so NOT the over-timidity failure (it survives longer AND climbs higher, exactly the intent). Letting it bank 30+ across varied arenas before trusting it and shipping v19.

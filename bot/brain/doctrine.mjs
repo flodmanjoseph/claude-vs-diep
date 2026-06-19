@@ -2,7 +2,7 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 18,
+  version: 19,
 
   // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
   // by the current class, so the right tile index is clicked even if level reads lag. Tile indices
@@ -37,6 +37,19 @@ export const DOCTRINE = {
   // predator radii up, pressure-escape threshold down) ONLY while pre-drone; a drone class plays at
   // base radii because its drones screen for it. ES-tunable [1.0, 1.6]; 1.0 = off.
   fragilePhaseScale: 1.25,
+
+  // === v19 LEAD-PROTECTION (sustain #1, not just touch it) ===
+  // The bot reaches the top band (rank 2 / 88% of leader) then dies right after the peak - the
+  // documented failure. When we're at/near #1 (a coherent, populated board says rank<=2 with a real
+  // score), kills are not worth the exposure and hunters home in on the leader. So adopt a defensive
+  // posture: flee earlier/farther and stop hunting. Reuses the fragile-phase scaling machinery -
+  // leadScale multiplies the flee radii (escape/crowd/predator up, pressure-escape down) on top of
+  // any fragile scaling. The runner pushes live rank into the brain each heartbeat via __setMeta.
+  // Gates mirror the #1 detector's discipline (board>=7, estRank<=2, score>5000) so a noisy board
+  // can't fake "leading". ES-tunable [1.0, 1.8]; 1.0 = off.
+  leadScale: 1.3,
+  leadRankMax: 2, // we count as "leading" at estRank <= this (fixed; not in ES space)
+  leadMinScore: 5000, // ...and only above this score (anti-noise, matches the #1 detector)
 
   // === v17 PROACTIVE SPACING / ANTI-SURROUND (the headline redesign) ===
   // Corpus of 754 lives: 67% of deaths are in farm mode, 84% point-blank, 89% with >=2 foes within

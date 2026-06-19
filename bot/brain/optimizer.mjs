@@ -44,6 +44,8 @@ export const SPACE = {
   safeShapeBias: [0, 220], // penalty steering farm targets away from the threat centroid
   // v18 fragile-phase survival gating:
   fragilePhaseScale: [1.0, 1.6], // how much more cautious a pre-drone Tank/Sniper plays (1.0 = off)
+  // v19 lead-protection:
+  leadScale: [1.0, 1.8], // how much more defensively we play when at/near #1 (1.0 = off)
 };
 const KEYS = Object.keys(SPACE);
 
@@ -53,7 +55,7 @@ const EVALS = 4; // lives per candidate to fight arena variance (median needs a 
 const SIGMA = 0.16; // mutation stddev as a fraction of each parameter's range
 
 const clamp = (v, [lo, hi]) => Math.max(lo, Math.min(hi, v));
-const FRACTIONAL = new Set(['bulletAimedCos', 'enemySizeWeight', 'huntSizeRatio', 'predatorRatio', 'edgeBiasWeight', 'spacingGain', 'pressureCap', 'pressureEscape', 'spacingFloor', 'fragilePhaseScale']);
+const FRACTIONAL = new Set(['bulletAimedCos', 'enemySizeWeight', 'huntSizeRatio', 'predatorRatio', 'edgeBiasWeight', 'spacingGain', 'pressureCap', 'pressureEscape', 'spacingFloor', 'fragilePhaseScale', 'leadScale']);
 const round = (k, v) => FRACTIONAL.has(k) ? +v.toFixed(3) : Math.round(v);
 
 function gauss() { // Box-Muller
