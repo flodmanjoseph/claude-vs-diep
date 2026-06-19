@@ -7,3 +7,6 @@ logs/*.pid
 
 # routine per-death screenshots are large and numerous; keep locally, commit only notable ones (git add -f)
 evidence/death-*.png
+
+# RL training corpus - high-volume per-decision transitions; kept locally, not committed
+telemetry/transitions-*.jsonl

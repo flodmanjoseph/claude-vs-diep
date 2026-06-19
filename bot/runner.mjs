@@ -84,6 +84,7 @@ function scoreLife() {
 const TELEM = path.join(ROOT, 'telemetry');
 const shiftId = new Date().toISOString().replace(/[:.]/g, '-');
 const logPath = path.join(TELEM, `shift-${shiftId}.jsonl`);
+const txPath = path.join(TELEM, `transitions-${shiftId}.jsonl`); // RL Phase 0: per-decision (s,a,r) stream
 const log = (obj) => fs.appendFileSync(logPath, JSON.stringify({ t: Date.now(), ...obj }) + '\n');
 
 // Browser bring-up: launch Chrome, attach handlers, inject perception + brain. Factored so the
@@ -281,6 +282,11 @@ while (true) {
     // each is { fled, outcome: 'escaped'|'died', startDist, minDist, hunterR, myR, frames, cls }.
     const hlog = await page.evaluate(() => { const l = window.__hunterLog || []; window.__hunterLog = []; return l; }).catch(() => []);
     for (const h of hlog) log({ event: 'hunter_encounter', ...h, lvl: curLevel });
+    // RL Phase 0: drain the per-decision transition ring buffer to a SEPARATE high-volume file
+    // (keeps the strategic shift log readable). These are the (state, action, score) records that
+    // become the offline (s,a,r,s') corpus for pre-training the residual policy.
+    const txlog = await page.evaluate(() => { const l = window.__transitionLog || []; window.__transitionLog = []; return l; }).catch(() => []);
+    if (txlog.length) fs.appendFileSync(txPath, txlog.map((t) => JSON.stringify(t)).join('\n') + '\n');
     const { leaderMax, myScore: rawScore, board, boardSize, estRank } = await readRank();
     const myScore = trustScore(rawScore); // null if this sample was a glitch
     const trustedLevel = trustLevel(curLevel, curClass);

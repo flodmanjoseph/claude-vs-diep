@@ -2,7 +2,10 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 27,
+  version: 28,
+  // RL Phase 0: log a per-decision transition every N frames (~5/sec at 60fps) so the rules bot banks
+  // a real (state,action,reward,next-state) corpus to pre-train the residual policy on. Logging only.
+  transitionLogEvery: 12,
 
   // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
   // by the current class, so the right tile index is clicked even if level reads lag. Tile indices

@@ -559,6 +559,47 @@ export const BRAIN_FN = function (initialDoctrine) {
     // converging crowd, being surrounded (no clean lane), or threat pressure over the escape budget.
     // Any breaks farming/hunting immediately so the pocket never closes to the point-blank collapse.
     if (!grace && (predatorClose || crowded || surrounded || overPressure)) chosen = 'escape';
+
+    // === RL Phase 0: per-decision transition logging ===
+    // The brain decides at frame rate but telemetry only logged ~5s heartbeats, so no (state,action,
+    // reward,next-state) data existed to pre-train on. Here we capture the REAL tactical state + the
+    // chosen macro-action at the RL decision cadence, into an in-page ring buffer the runner drains to
+    // telemetry/transitions-*.jsonl. The rules bot thus becomes a behavior-policy data factory: the
+    // 16-dim feature vector (values already computed above) + the action + score (for offline reward =
+    // next.score - score) + the qStateKey + forced-override + life id. Pure logging - no behavior change.
+    const RL_LOG_EVERY = DOCTRINE.transitionLogEvery || 12; // ~5 decisions/sec at 60fps
+    if (!grace || (B.frames % (RL_LOG_EVERY * 2) === 0)) { // log fewer during spawn grace
+      if (B.frames - (B._lastTxFrame || -999) >= RL_LOG_EVERY) {
+        B._lastTxFrame = B.frames;
+        const hud = (window.__diep && window.__diep.hud) || {};
+        const feat = [
+          isDrone ? 1 : 0,
+          grace ? 1 : 0,
+          Math.min(3, nd / (escapeR || 1)),              // nearest effective dist / escape radius
+          nearest ? Math.min(3, nearest.r / myR) : 0,    // nearest size ratio (prey<1<predator)
+          Math.min(6, crowdN),                            // dangerous foes near
+          Math.min(0.3, tg.pressure),                     // threat pressure
+          tg.maxGapDeg / 180,                             // openness of the best escape lane
+          Math.min(8, tg.nThreat),                        // foes in surround analysis
+          bulletThreat ? 1 : 0,
+          predatorConfirmed ? 1 : 0,
+          Math.min(8, foes.length),
+          Math.min(12, state.shapes.length),
+          state.map ? state.map.x : 0.5,
+          state.map ? state.map.y : 0.5,
+          Math.min(1, ((hud.level || 1) / 60)),
+          prey ? 1 : 0,
+        ];
+        (window.__transitionLog = window.__transitionLog || []).push({
+          f: B.frames, life: B.lifeStartFrame || 0, sKey: qStateKey(state, { isDrone, nearest, nd, foes, bulletThreat, escapeR, myR }),
+          x: feat.map((v) => +v.toFixed(3)), a: chosen,
+          forced: predatorClose ? 'pred' : crowded ? 'crowd' : surrounded ? 'surr' : overPressure ? 'press' : null,
+          prey: prey ? 1 : 0, lead: leading ? 1 : 0, cls, lvl: hud.level || null, score: hud.score || 0,
+        });
+        if (window.__transitionLog.length > 6000) window.__transitionLog.splice(0, window.__transitionLog.length - 6000);
+      }
+    }
+
     const out = (ACT[chosen] || actFarm)();
     moveKeys = out.moveKeys; aim = out.aim;
     // v26 RETURN FIRE: if a tank is engaging us - chasing/within combat range, or actively shooting

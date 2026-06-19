@@ -2,6 +2,17 @@
 
 Newest entries at the top.
 
+## 036 - 2026-06-19 - RL Phase 0 LIVE: the bot is now a transition data factory (v28)
+
+A 10-agent design pass (research + data audit + 3 candidate architectures + adversarial feasibility + plan) settled the RL pivot. Two hard truths it surfaced, both honest:
+
+1. **The existing 30h telemetry is NOT enough to pre-train the tactical control policy.** It's 5s-blurred episodic data with ZERO logged (tactical-state, action) pairs - the rich per-frame state that decides life-and-death is computed at 60fps and discarded. It supports coarse strategic critics, not a frame-rate policy. So Joe's "enough data for pre-training" was right in spirit (volume) but the *resolution* was missing. Fix: log it. The bot makes ~60 decisions/sec, so proper logging banks ~144k transitions per 8h shift.
+2. **A SAFE RL residual won't reach #1 by itself.** The chosen architecture (a bounded residual that re-ranks the 4 macro-modes escape/hunt/farm/patrol, BC-warm-started over frozen v27, with hard reflex shields kept non-learnable) can't regress below the rules and fixes the prior attempt's lethal-exploration death - but it only moves *mode selection*. The score gap to a real #1 lives in the aim/control/build layer it doesn't touch. The critique also caught that our "rank 2 / 88% of leader" was a board-read artifact: at estRank==2 the median pctOfLeader is ~7.5%, and the best-ever life ranks ~10th on a full board. So RL here is honestly a SURVIVAL/decision improver; reaching #1 needs a parallel control/aim/build track.
+
+Shipped **Phase 0 (v28): per-decision transition logging.** brain.mjs step() now pushes, at the RL decision cadence (~5/sec), a record {16-dim tactical feature vector, qStateKey, chosen macro-action, forced-override, score, life id} to an in-page ring buffer; runner.mjs drains it each heartbeat to a separate telemetry/transitions-*.jsonl (gitignored - high volume). Pure logging, no behavior change, optimizer untouched. Verified live: 361 clean records in 75s, correct schema, 0 errors. The v27 rules bot is now simultaneously the baseline, the behavior-cloning teacher, the safety rails, AND the data generator.
+
+Next: bank a few clean shifts -> pure-JS behavior-clone the residual (analysis/train-bc.mjs) -> FQE offline gate -> deploy behind a flag and A/B vs the rules -> offline IQL improvement. Online exploration stays OFF (the parked epsilon-greedy is what killed the fragile tank). And separately: the real ceiling-raiser toward #1 is the control/aim/build track.
+
 ## 035 - 2026-06-19 - v27: target lock + pursuit (finish the kill); and THE PIVOT TO RL
 
 Joe: "you are letting players with low health run right around you, if they get out of sight you just keep going back to hunting blocks. this is precisely why i thought a reinforcement model would've been superior - it would actually be learning." Then, decisively: "pivot to RL. figure it out that way. there is more than enough data for pre-training."
