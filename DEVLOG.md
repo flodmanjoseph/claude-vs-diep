@@ -2,6 +2,22 @@
 
 Newest entries at the top.
 
+## 041 - 2026-06-19 - v34 is a real win; RL Phase-1 behavior cloning trained (95% clone of the rules)
+
+v34 confirmed a clear improvement over the v33 regression and the v32 baseline:
+
+| metric | v32 | v33 | v34 |
+|---|---|---|---|
+| median life | 94s | 75s | 128s |
+| reach Assassin | 13% | 3% | 24% |
+| reach Ranger | 3% | - | 8% |
+| hunt-chase deaths | 8/25 | - | 3/25 |
+| maxScore | 24.9k | 8.5k | 30.4k |
+
+So reverting the v33 movement build + the anti-tunnel-vision hunt-gate (don't chase prey while a bigger tank is near) nearly DOUBLED reach-Assassin and cut hunt-chase deaths from 8 to 3. Letting it bank rather than thrashing the stats further.
+
+With the rules stabilized, advanced the RL pivot: **Phase 1 (behavior cloning) is trained.** The transition corpus is now 114k logged (state, action) pairs (farm 44% / hunt 30% / escape 26%), enough to fit the small model. analysis/train-bc.mjs (pure JS, no deps) standardizes the 16-dim features and trains a linear softmax over the 4 macro-actions by class-weighted cross-entropy GD, excluding the old drone-era rows so it clones the CURRENT sniper policy. Result: **95.0% test accuracy** (recall escape 90 / hunt 99 / farm 95 / patrol 100), saved to analysis/bc-policy.json {W,b,mean,std}. This is the warm-start spine of the ResFiT design - a learned policy that ~= the proven rules (so it can't regress below them), and the base that Phase 3 (offline IQL) improves on. Honest: BC caps at the demonstrator (it imitates the rules), so it's a pipeline/foundation milestone, not a performance win yet; the in-page forward-pass deployment + A/B and the offline-RL improvement are the next RL steps. Meanwhile the sniper rules keep being the bigger near-term lever.
+
 ## 040 - 2026-06-19 - Full sniper line auto-climbs (Ranger confirmed); v33 movement-forward build for the Sniper valley
 
 `Assassin -> Ranger (tile 0)` confirmed in-game - the bot now auto-climbs the WHOLE line Tank->Sniper->Assassin->Ranger with no manual help, reaching L45 Ranger, maxScore 24,879, 0 errors. Joe's build is fully realized and self-driving.
