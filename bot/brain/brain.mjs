@@ -599,6 +599,7 @@ export const BRAIN_FN = function (initialDoctrine) {
           x: feat.map((v) => +v.toFixed(3)), a: chosen,
           forced: predatorClose ? 'pred' : crowded ? 'crowd' : surrounded ? 'surr' : overPressure ? 'press' : null,
           prey: prey ? 1 : 0, lead: leading ? 1 : 0, cls, lvl: hud.level || null, score: hud.score || 0,
+          mr: Math.round(myR), sq: state.fov || 0, // v30: our tank px-radius + median-square px (FOV/zoom proxies)
         });
         if (window.__transitionLog.length > 6000) window.__transitionLog.splice(0, window.__transitionLog.length - 6000);
       }

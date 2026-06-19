@@ -2,6 +2,14 @@
 
 Newest entries at the top.
 
+## 038 - 2026-06-19 - v30: FOV-aware perception (exploit the wider sniper view) + zoom instrumentation
+
+Joe noticed the Assassin's much wider camera ("look how much wider that view is, that looks great") - snipers zoom OUT, which is a real edge for a vision-based bot (it sees more of the arena per frame = spots threats and prey earlier). But it has a catch: the perception's size cutoffs were fixed pixels tuned at the narrow Tank/Sniper FOV, and at the wider FOV every entity renders smaller - a distant tank can drop under the 12px tank/bullet cutoff and become invisible to the threat/prey logic, and small shapes under the 4px floor get dropped.
+
+v30 (safe, monotonic): lowered the tank/bullet cutoff 12->10 and the shape floor 4->3 - these strictly catch MORE entities at the wide FOV and never fewer (bullets are mostly <8px and fast, so the 10-12 band is almost all small tanks). No-regression by construction. Verified: classification still sane (no phantom-enemy flood), 0 errors. The size-RATIO logic that drives prey/predator selection was already FOV-invariant (enemy.r/myR scales with zoom), so that needed nothing.
+
+Also instrumented the zoom for a PRECISE follow-up: squares are a fixed WORLD size and don't grow with our level, so the median on-screen square radius is a clean camera-zoom proxy (unlike our own tank radius, which is confounded by leveling). Exposed as state.fov and logged per-decision. Baseline measured: a square renders ~20-22px at the Tank/Sniper FOV. Once a life reaches the Assassin/Ranger FOV I'll have the wide-FOV square size, compute the exact zoom ratio, and add zoom-scaled cutoffs/thresholds (v31) if the simple cutoff-lowering isn't enough. RL Phase-0 transition logging continues (now also carrying the me.r + square-px FOV signals).
+
 ## 037 - 2026-06-19 - v29: pivot the BUILD to the Sniper line (Joe's call) - no more Overlord, and the Sniper hunts
 
 Joe, watching: "you have good aim, just keep upgrading the sniper, no more overlord or whatever that tank sucks." Right - the drone (Overseer/Overlord) line wastes our precise synthetic aim, and the bot kept getting collapsed on in the central nest. Pivoted the build to the bullet-sniper line:

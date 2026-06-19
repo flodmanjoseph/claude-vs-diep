@@ -28,7 +28,13 @@ export const STATE_FN = function () {
     const bullets = [];
     const shapes = [];
 
-    // Circles: tanks (large), bullets/drones (small). Color → side.
+    // Circles: tanks (large), bullets/drones (small). Color → side. v30: the tank/bullet size cutoff
+    // was a fixed 12px tuned at the narrow Tank/Sniper FOV. The sniper line (Assassin/Ranger) zooms the
+    // camera OUT, so every entity renders smaller - a distant tank could drop under 12px and be mis-read
+    // as a bullet (invisible to threat/prey logic). Lowered to 10 (strictly catches MORE tanks, never
+    // fewer; bullets are mostly <8px & fast, so the 10-12 band is almost all small tanks). A precise
+    // zoom-scaled cutoff comes next once the exposed `fov` signal (median square px) is measured per class.
+    const TANK_MIN = 10;
     for (const c of f.circles) {
       const isSelf = near(c.c, SELF);
       const isEnemy = near(c.c, ENEMY);
@@ -38,8 +44,7 @@ export const STATE_FN = function () {
         continue;
       }
       if (isEnemy || isSelf) {
-        // Tank body vs bullet by radius (tanks ~14-60+, bullets smaller & fast).
-        if (c.r >= 12) enemies.push({ x: c.x, y: c.y, r: c.r, dx: c.x - cx, dy: c.y - cy, dist, self: isSelf });
+        if (c.r >= TANK_MIN) enemies.push({ x: c.x, y: c.y, r: c.r, dx: c.x - cx, dy: c.y - cy, dist, self: isSelf });
         else bullets.push({ x: c.x, y: c.y, r: c.r, dx: c.x - cx, dy: c.y - cy, dist, enemy: isEnemy });
       }
     }
@@ -61,7 +66,7 @@ export const STATE_FN = function () {
       else if (near(p.c, TRIANGLE)) kind = 'triangle';
       else if (near(p.c, PENTAGON)) kind = 'pentagon';
       if (!kind) continue;
-      if (p.r < 4 || p.r > 120) continue;
+      if (p.r < 3 || p.r > 120) continue; // v30: 4->3 so smaller-rendered shapes at the wide sniper FOV aren't dropped
       const dist = Math.hypot(p.x - cx, p.y - cy);
       shapes.push({ x: p.x, y: p.y, r: p.r, kind, dx: p.x - cx, dy: p.y - cy, dist });
     }
@@ -93,6 +98,11 @@ export const STATE_FN = function () {
 
     // The minimap may redraw intermittently (cached layers), so persist the last-known position.
     if (map) window.__lastMap = map;
-    return { ok: true, t: f.t, W, H, me, enemies, bullets, shapes, map: map || window.__lastMap || null };
+    // FOV/zoom proxy (v30): squares are a fixed WORLD size and don't grow with our level, so the median
+    // on-screen square radius tracks the camera zoom (smaller = wider FOV). Exposed for measurement and
+    // future zoom-scaled thresholds. Persist last-known so it's stable when no squares are in view.
+    const sq = shapes.filter((s) => s.kind === 'square').map((s) => s.r).sort((a, b) => a - b);
+    if (sq.length) window.__sqMed = sq[sq.length >> 1];
+    return { ok: true, t: f.t, W, H, me, enemies, bullets, shapes, map: map || window.__lastMap || null, fov: window.__sqMed || null };
   };
 };
