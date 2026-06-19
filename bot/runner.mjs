@@ -292,7 +292,11 @@ while (true) {
     // True #1 detection: estimated rank 1 on a well-populated board, sustained across samples, so
     // a fluke sample can't false-trigger. Gated on a glitch-filtered score so a spurious spike can
     // neither fake a win nor inflate our apparent rank.
-    if (alive && estRank === 1 && boardSize >= 7 && myScore && myScore > 5000) {
+    // COHERENCE GATE (added after a board-sample artifact read estRank=1 with leaderMax 958 while our
+    // score was 2235): a genuine #1 means the leaderboard's TOP entry is us, so leaderMax must be
+    // ~= myScore. If leaderMax < myScore*0.85 the sample failed to capture the real leaders (or even
+    // our own top entry) - it's an unreliable read, not a win, so reject it.
+    if (alive && estRank === 1 && boardSize >= 7 && myScore && myScore > 5000 && leaderMax >= myScore * 0.85) {
       rank1Streak++;
       if (rank1Streak >= 3) {
         const shot = evidence(`NUMBER-ONE-${shiftId}-${Math.round(myScore)}.png`);

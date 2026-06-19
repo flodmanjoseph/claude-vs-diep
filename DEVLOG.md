@@ -2,6 +2,14 @@
 
 Newest entries at the top.
 
+## 025 - 2026-06-19 - v18 early signal is strong (life ~doubled); hardened #1 detection against board-sample artifacts
+
+First loop checkpoint, ~1h into v18 (17 lives - thin, and tonight's arenas are quiet, so read with caution): the fragile-phase gating looks like a real win. Median life **205s vs the ~100-130s that was flat across all 16 prior versions**, mean 219s, best 632s; Overseer reach **35% vs 22% baseline**; no Tank deaths (every life clears to Sniper) and it still reached L42 - so NOT the over-timidity failure (it survives longer AND climbs higher, exactly the intent). Letting it bank 30+ across varied arenas before trusting it and shipping v19.
+
+Hardened the #1 detector. A heartbeat read estRank=1 on an 11-entry board while our score was 2,235 and the board's max was 958 - incoherent: the leaderboard sample had captured wrong/low numbers and missed the real leaders, computing rank 1 as an artifact. The existing gates (myScore>5000 + 3-sample streak) already blocked it, but a more dangerous variant (a real >5000 score while the sample misses the leaders) could false-fire a victory. Added a COHERENCE GATE: a genuine #1 means the leaderboard's top entry is us, so leaderMax must be >= myScore*0.85; an incoherent read where the captured top is far below our score is rejected. Unit-checked: the 2235/958 artifact and a 20k/5k near-miss both reject; a true 250k #1 and a real 34k quiet-arena #1 both still fire. This matters tonight specifically - the arenas are quiet (leaders 17k-77k) and our Overlord peaks ~34k, so a real #1 is genuinely in reach and the detector needs to be both sensitive to a real win and immune to a fake one.
+
+(Operational note: applying the runner fix needed a relaunch; the SIGKILL'd old runner orphaned its Chrome, which held the .profile lock and stalled the new runner. Cleared the orphaned bot-profile Chrome - scoped to the .profile path so Joe's own Chrome was untouched - and relaunched clean. The optimizer continued from its saved state across the restart, so no tuning was lost.)
+
 ## 024 - 2026-06-19 - v18: a 38-agent hardening pass on v17, then fix the survival funnel (the Sniper valley)
 
 While v17 ground overnight I ran a multi-agent workflow (38 agents): adversarially review the fresh v17 code for bugs (4 dimensions, every finding verified against the actual source), research the diep.io path-to-#1, and design strategy upgrades. Two payoffs.
