@@ -53,6 +53,8 @@ export const SPACE = {
   upgradeScale: [1.0, 1.7], // flee-radius multiplier during the post-upgrade window (1.0 = off)
   // v24 predator mode:
   preyRatio: [0.6, 1.0], // a tank smaller than myR*this is prey (lower = pickier, higher = more aggressive)
+  // v26 return fire:
+  combatRange: [250, 520], // how far an engaging enemy pulls our fire off shapes onto it
 };
 const KEYS = Object.keys(SPACE);
 

@@ -1,0 +1,38 @@
+{"t":1781877883583,"event":"shift_start","shiftId":"2026-06-19T14-04-43-008Z","doctrine":26,"shiftMs":28800000}
+{"t":1781877884460,"event":"pageerror","text":"Access to XMLHttpRequest at 'https://fundingchoicesmessages.google.com/el/AGSKWxVfjEK51J5fQtPoIty5XMaKN0KgAzrSWQb-0USyX5d7W2m_uFkDH9MQuhqfebcpYvDLUBa3G7bKx8fzNEmjJCTCGRrXmTT017ovnkKvggu8G12FOg4xyvd9PZ"}
+{"t":1781877884460,"event":"pageerror","text":"Failed to load resource: net::ERR_FAILED"}
+{"t":1781877884723,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781877884723,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781877884880,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 401 ()"}
+{"t":1781877886446,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1781877886447,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1781877886454,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1781877886473,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1781877886561,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 ()"}
+{"t":1781877887589,"event":"doctrine_assigned","version":"opt-g1-1","params":{"escapeRadius":245,"waryRadius":431,"bulletDangerRadius":175,"enemySizeWeight":0.072,"anticipationFrames":31,"bulletDodgeRadius":264,"bulletAimedCos":0.929,"bulletMissMargin":78,"spawnGraceFrames":234,"spawnEscapeRadius":305,"kindDistancePenalty":98,"approachStopDist":133,"shapeBodyMargin":59,"huntSizeRatio":0.832,"huntRange":360,"huntStandoff":166,"crowdRadius":206,"predatorRatio":1.309,"predatorFleeRadius":340,"edgeBiasWeight":0,"spacingRadius":395,"surroundRadius":277,"spacingFloor":0.023,"spacingGain":1.411,"pressureCap":0.06,"pressureEscape":0.048,"safeLaneMinDeg":115,"safeShapeBias":70,"fragilePhaseScale":1.25,"leadScale":1.108,"dronePentagonBonus":11,"upgradeGraceFrames":193,"upgradeScale":1.3,"preyRatio":0.85,"combatRange":400},"status":{"gen":1,"evalsThisGen":"6/32","totalEvals":6,"champion":2917}}
+{"t":1781877887590,"event":"spawn","ok":true}
+{"t":1781877893702,"event":"heartbeat","elapsed":5304,"alive":true,"life":6112,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":17,"leaderMax":102100,"estRank":5,"boardSize":4,"optGen":1}
+{"t":1781877898949,"event":"heartbeat","elapsed":10543,"alive":true,"life":11359,"deaths":0,"cls":"Tank","lvl":6,"mode":"farm","myScore":125,"leaderMax":225900,"estRank":12,"boardSize":11,"optGen":1}
+{"t":1781877904205,"event":"heartbeat","elapsed":15799,"alive":true,"life":16615,"deaths":0,"cls":"Tank","lvl":7,"mode":"farm","myScore":175,"leaderMax":219500,"estRank":13,"boardSize":12,"optGen":1}
+{"t":1781877909538,"event":"heartbeat","elapsed":21137,"alive":true,"life":21948,"deaths":0,"cls":"Tank","lvl":9,"mode":"crowd-escape+dodge","myScore":253,"leaderMax":226000,"estRank":4,"boardSize":3,"optGen":1}
+{"t":1781877912060,"event":"death","n":1,"lifeMs":24397,"cls":"Tank","lvl":9,"screenshot":"death-2026-06-19T14-04-43-008Z-1.png","enemiesNear":[{"x":645,"y":363,"r":18,"dx":5,"dy":3,"dist":5.8309518948453,"self":false,"vx":0,"vy":0},{"x":645,"y":363,"r":16,"dx":5,"dy":3,"dist":5.8309518948453,"self":false,"vx":0,"vy":0},{"x":1067,"y":497,"r":17,"dx":427,"dy":137,"dist":448.4395165459886,"self":false,"vx":0,"vy":0}]}
+{"t":1781877912061,"event":"life_scored","mode":"es","build":"overlord","fitness":1324,"score":253,"level":9,"lifeMs":24471,"gen":1,"champion":2917}
+{"t":1781877913106,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 ()"}
+{"t":1781877913967,"event":"pageerror","text":"Failed to load resource: net::ERR_CERT_COMMON_NAME_INVALID"}
+{"t":1781877914181,"event":"respawned","alive":true}
+{"t":1781877914188,"event":"doctrine_assigned","version":"opt-g1-1","params":{"escapeRadius":245,"waryRadius":431,"bulletDangerRadius":175,"enemySizeWeight":0.072,"anticipationFrames":31,"bulletDodgeRadius":264,"bulletAimedCos":0.929,"bulletMissMargin":78,"spawnGraceFrames":234,"spawnEscapeRadius":305,"kindDistancePenalty":98,"approachStopDist":133,"shapeBodyMargin":59,"huntSizeRatio":0.832,"huntRange":360,"huntStandoff":166,"crowdRadius":206,"predatorRatio":1.309,"predatorFleeRadius":340,"edgeBiasWeight":0,"spacingRadius":395,"surroundRadius":277,"spacingFloor":0.023,"spacingGain":1.411,"pressureCap":0.06,"pressureEscape":0.048,"safeLaneMinDeg":115,"safeShapeBias":70,"fragilePhaseScale":1.25,"leadScale":1.108,"dronePentagonBonus":11,"upgradeGraceFrames":193,"upgradeScale":1.3,"preyRatio":0.85,"combatRange":400},"status":{"gen":1,"evalsThisGen":"7/32","totalEvals":7,"champion":2917}}
+{"t":1781877914272,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 (Not Found)"}
+{"t":1781877914310,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 (Not Found)"}
+{"t":1781877914456,"event":"pageerror","text":"Failed to load resource: net::ERR_CERT_COMMON_NAME_INVALID"}
+{"t":1781877914456,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 (Not Found)"}
+{"t":1781877914456,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 (Not Found)"}
+{"t":1781877915404,"event":"heartbeat","elapsed":27000,"alive":true,"life":1214,"deaths":1,"cls":"Tank","lvl":8,"mode":"spawn-escape","myScore":157,"leaderMax":227500,"estRank":5,"boardSize":4,"optGen":1}
+{"t":1781877920649,"event":"heartbeat","elapsed":32252,"alive":true,"life":6459,"deaths":1,"cls":"Tank","lvl":8,"mode":"farm","myScore":232,"leaderMax":227700,"estRank":11,"boardSize":10,"optGen":1}
+{"t":1781877925898,"event":"heartbeat","elapsed":37503,"alive":true,"life":11708,"deaths":1,"cls":"Tank","lvl":10,"mode":"escape","myScore":302,"leaderMax":103800,"estRank":3,"boardSize":2,"optGen":1}
+{"t":1781877931237,"event":"heartbeat","elapsed":42836,"alive":true,"life":17047,"deaths":1,"cls":"Tank","lvl":12,"mode":"farm","myScore":537,"leaderMax":228000,"estRank":13,"boardSize":12,"optGen":1}
+{"t":1781877936480,"event":"heartbeat","elapsed":48081,"alive":true,"life":22290,"deaths":1,"cls":"Tank","lvl":13,"mode":"farm","myScore":597,"leaderMax":61000,"estRank":4,"boardSize":3,"optGen":1}
+{"t":1781877941732,"event":"heartbeat","elapsed":53336,"alive":true,"life":27542,"deaths":1,"cls":"Tank","lvl":13,"mode":"farm","myScore":662,"leaderMax":228400,"estRank":6,"boardSize":5,"optGen":1}
+{"t":1781877946976,"event":"heartbeat","elapsed":58577,"alive":true,"life":32785,"deaths":1,"cls":"Tank","lvl":14,"mode":"farm+fire","myScore":757,"leaderMax":86000,"estRank":2,"boardSize":1,"optGen":1}
+{"t":1781877952309,"event":"heartbeat","elapsed":63910,"alive":true,"life":38119,"deaths":1,"cls":"Tank","lvl":14,"mode":"farm","myScore":2098,"leaderMax":231500,"estRank":2,"boardSize":2,"optGen":1}
+{"t":1781877952955,"event":"upgrade_attempt","from":"Tank","tile":1,"to":"Sniper","level":21}
+{"t":1781877953357,"event":"upgrade_ok","to":"Sniper"}

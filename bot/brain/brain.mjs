@@ -533,6 +533,18 @@ export const BRAIN_FN = function (initialDoctrine) {
     if (!grace && (predatorClose || crowded || surrounded || overPressure)) chosen = 'escape';
     const out = (ACT[chosen] || actFarm)();
     moveKeys = out.moveKeys; aim = out.aim;
+    // v26 RETURN FIRE: if a tank is engaging us - chasing/within combat range, or actively shooting
+    // at us - put our fire (bullets, or drones for a drone class) ON it instead of on a shape, until
+    // it's dead or out of range. Never keep plinking blocks while a tank attacks you. Hunt (aims at
+    // prey) and predator-flee (aims at the confirmed hunter) already target the right enemy, so skip.
+    if (!grace && nearest && chosen !== 'hunt' && !predatorClose) {
+      const combatRange = DOCTRINE.combatRange || 400;
+      const engaging = nd < combatRange || state.bullets.some((b) => b.enemy && b.dist < combatRange);
+      if (engaging) {
+        aim = { x: nearest.x, y: nearest.y };
+        if (chosen === 'farm' || chosen === 'patrol') B.mode = B.mode + '+fire';
+      }
+    }
     // Tag the trigger in telemetry (predator-flee labels itself inside actEscape; crowd prefixes here).
     if (!grace && crowded && !predatorClose) B.mode = 'crowd-' + B.mode;
     if (leading) B.mode = 'lead-' + B.mode; // tag so the corpus can A/B time-survived-while-leading

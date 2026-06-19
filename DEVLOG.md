@@ -2,6 +2,14 @@
 
 Newest entries at the top.
 
+## 034 - 2026-06-19 - v26: return fire - shoot the tank attacking you, not the blocks
+
+Joe: "if someone starts shooting at you and they are chasing you, why would you ever continue shooting at blocks. shooting at the enemy should be the main priority until they are dead or you are out of their presence." Exactly right - and the gap was real: while in farm mode the aim only switched to a nearby enemy inside escapeR*1.3 (~280px), so a tank chasing/shooting from a bit farther got ignored while we kept plinking shapes.
+
+v26 adds a RETURN-FIRE aim override after mode selection: if a tank is engaging us - within `combatRange` (400, ES-tunable) by effective distance (so a chaser counts), OR there's an enemy bullet within combatRange (we're being shot at) - we point our fire ON it instead of on a shape, until it's dead or out of range. Works for both classes: bullets for Tank/Sniper, drones for Overseer/Overlord (the mouse-hold already steers drones to the aim point). Hunt (already aims at the prey) and predator-flee (already aims at the confirmed hunter) are skipped so they keep their correct target; the override fills the farm/patrol/escape gap. Movement is unchanged - we still kite/flee/reposition as the mode dictates and the bullet-dodge still sidesteps - but the GUNS stay on the attacker. Tagged `+fire` in telemetry (e.g. `farm+fire`) to measure.
+
+Unit-checked: a chasing-close enemy -> fire on it; a distant quiet enemy -> keep farming; a distant enemy shooting at us -> return fire. ES tunes combatRange; optimizer continued (no reset). Live, 0 errors.
+
 ## 033 - 2026-06-19 - v25: strategic, phase-aware perks to match the predator strategy (Joe's call)
 
 Joe: "this means you should also be adjusting which perks you choose to invest in, be strategic about it." Right - a killing Overlord wants a different stat build than a farming Sniper, and the allocation was a single fixed sequence that front-loaded Movement (escape/farm) and under-invested in the kill+survive stats. Made it strategic and phase-aware (stat keys: 1 Regen / 2 MaxHP / 3 BodyDmg / 4 Bullet+DroneSpeed / 5 BulletPen+DroneHealth / 6 BulletDmg+DroneDmg / 7 Reload / 8 Move):

@@ -1,6 +1,6 @@
 {
  "gen": 1,
- "evalNo": 1,
+ "evalNo": 7,
  "population": [
   {
    "params": {
@@ -37,10 +37,14 @@
     "dronePentagonBonus": 0,
     "upgradeGraceFrames": 180,
     "upgradeScale": 1.3,
-    "preyRatio": 0.85
+    "preyRatio": 0.85,
+    "combatRange": 400
    },
    "fits": [
-    114.602
+    114.602,
+    2912.297,
+    2922.599,
+    6151.39
    ]
   },
   {
@@ -78,9 +82,14 @@
     "dronePentagonBonus": 11,
     "upgradeGraceFrames": 193,
     "upgradeScale": 1.3,
-    "preyRatio": 0.85
+    "preyRatio": 0.85,
+    "combatRange": 400
    },
-   "fits": []
+   "fits": [
+    12126.946,
+    3366.471,
+    1324.297
+   ]
   },
   {
    "params": {
@@ -117,7 +126,8 @@
     "dronePentagonBonus": 13,
     "upgradeGraceFrames": 180,
     "upgradeScale": 1.274,
-    "preyRatio": 0.85
+    "preyRatio": 0.85,
+    "combatRange": 400
    },
    "fits": []
   },
@@ -156,7 +166,8 @@
     "dronePentagonBonus": 0,
     "upgradeGraceFrames": 196,
     "upgradeScale": 1.3,
-    "preyRatio": 0.783
+    "preyRatio": 0.783,
+    "combatRange": 400
    },
    "fits": []
   },
@@ -195,7 +206,8 @@
     "dronePentagonBonus": 13,
     "upgradeGraceFrames": 264,
     "upgradeScale": 1.253,
-    "preyRatio": 0.865
+    "preyRatio": 0.865,
+    "combatRange": 400
    },
    "fits": []
   },
@@ -234,7 +246,8 @@
     "dronePentagonBonus": 0,
     "upgradeGraceFrames": 180,
     "upgradeScale": 1.328,
-    "preyRatio": 0.787
+    "preyRatio": 0.787,
+    "combatRange": 400
    },
    "fits": []
   },
@@ -273,7 +286,8 @@
     "dronePentagonBonus": 68,
     "upgradeGraceFrames": 288,
     "upgradeScale": 1.573,
-    "preyRatio": 0.949
+    "preyRatio": 0.949,
+    "combatRange": 400
    },
    "fits": []
   },
@@ -312,12 +326,52 @@
     "dronePentagonBonus": 71,
     "upgradeGraceFrames": 138,
     "upgradeScale": 1.125,
-    "preyRatio": 0.803
+    "preyRatio": 0.803,
+    "combatRange": 400
    },
    "fits": []
   }
  ],
- "champion": null,
+ "champion": {
+  "params": {
+   "escapeRadius": 216,
+   "waryRadius": 427,
+   "bulletDangerRadius": 161,
+   "enemySizeWeight": 0.082,
+   "anticipationFrames": 31,
+   "bulletDodgeRadius": 257,
+   "bulletAimedCos": 0.844,
+   "bulletMissMargin": 67,
+   "spawnGraceFrames": 256,
+   "spawnEscapeRadius": 305,
+   "kindDistancePenalty": 48,
+   "approachStopDist": 154,
+   "shapeBodyMargin": 59,
+   "huntSizeRatio": 0.832,
+   "huntRange": 360,
+   "huntStandoff": 166,
+   "crowdRadius": 248,
+   "predatorRatio": 1.309,
+   "predatorFleeRadius": 293,
+   "edgeBiasWeight": 0,
+   "spacingRadius": 400,
+   "surroundRadius": 300,
+   "spacingFloor": 0.02,
+   "spacingGain": 1.3,
+   "pressureCap": 0.06,
+   "pressureEscape": 0.075,
+   "safeLaneMinDeg": 130,
+   "safeShapeBias": 70,
+   "fragilePhaseScale": 1.25,
+   "leadScale": 1.3,
+   "dronePentagonBonus": 0,
+   "upgradeGraceFrames": 180,
+   "upgradeScale": 1.3,
+   "preyRatio": 0.85,
+   "combatRange": 400
+  },
+  "fitness": 2917.4480000000003
+ },
  "history": [],
  "space": {
   "escapeRadius": [
@@ -455,6 +509,10 @@
   "preyRatio": [
    0.6,
    1
+  ],
+  "combatRange": [
+   250,
+   520
   ]
  },
  "updated": null

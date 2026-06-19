@@ -2,7 +2,7 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 25,
+  version: 26,
 
   // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
   // by the current class, so the right tile index is clicked even if level reads lag. Tile indices
@@ -155,6 +155,9 @@ export const DOCTRINE = {
 
   // Aim / fire
   autofire: true,
+  // v26 return fire: when a tank is engaging us (within this range, or shooting at us), aim our
+  // fire/drones AT it instead of at a shape, until it's dead or out of range. ES-tunable.
+  combatRange: 400,
 
   // v25 strategic, PHASE-AWARE perk allocation (stat keys: 1 Regen 2 MaxHealth 3 BodyDmg
   // 4 Bullet/DroneSpeed 5 BulletPen/DroneHealth 6 BulletDmg/DroneDmg 7 Reload 8 MoveSpeed).
