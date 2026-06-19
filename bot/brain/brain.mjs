@@ -102,7 +102,7 @@ export const BRAIN_FN = function (initialDoctrine) {
     let best = null, bestScore = Infinity;
     for (const s of shapes) {
       let score = s.dist + rank(s.kind) * DOCTRINE.kindDistancePenalty;
-      if (bias > 0 && toward) {
+      if (bias > 0 && toward && (toward[0] * toward[0] + toward[1] * toward[1] > 0.001)) {
         const m = s.dist || 1;
         const dot = (s.dx / m) * toward[0] + (s.dy / m) * toward[1]; // >0 => toward the threats
         if (dot > 0) score += dot * bias;
@@ -311,13 +311,18 @@ export const BRAIN_FN = function (initialDoctrine) {
     let nearest = null, nd = Infinity;
     for (const e of foes) { const ed = effectiveDist(e); if (ed < nd) { nd = ed; nearest = e; } }
     const bulletThreat = state.bullets.some((b) => b.enemy && b.dist < DOCTRINE.bulletDangerRadius);
-    const escapeR = grace ? DOCTRINE.spawnEscapeRadius : DOCTRINE.escapeRadius;
+    // v18 fragile-phase gating: a pre-drone Tank/Sniper (the "Sniper valley", 68% of all deaths) has
+    // no drone screen, so flee earlier and from farther. The multiplier scales the flee triggers up
+    // (and the pressure-escape threshold down) only while pre-drone; a drone class plays at base radii.
+    const fragile = !isDrone && !grace;
+    const fScale = fragile ? (DOCTRINE.fragilePhaseScale || 1) : 1;
+    const escapeR = grace ? DOCTRINE.spawnEscapeRadius : DOCTRINE.escapeRadius * fScale;
     const myR = state.me.r || 17;
     // Crowd pressure: ~87% of deaths are point-blank (<40px) with 2-3 foes converging, i.e. the
     // pocket gets collapsed because escape only fires on the single nearest enemy crossing escapeR
     // while the others sit just outside it. Count foes inside crowdRadius; if too many, force flight
     // regardless of the chosen policy, and refuse to hunt into a crowd.
-    const crowdN = foes.filter((e) => e.dist < (DOCTRINE.crowdRadius || 300)).length;
+    const crowdN = foes.filter((e) => e.dist < (DOCTRINE.crowdRadius || 300) * fScale).length;
     const crowded = crowdN >= (DOCTRINE.crowdCount || 2);
 
     // v17 threat field: continuous pressure + the open-lane heading. Drives graded spacing while
@@ -325,7 +330,7 @@ export const BRAIN_FN = function (initialDoctrine) {
     // lane), so the pocket never collapses to the point-blank death the corpus shows 84% of the time.
     const tg = threatGeometry(foes);
     const surrounded = !grace && tg.nThreat >= 2 && tg.maxGapDeg < (DOCTRINE.safeLaneMinDeg || 110);
-    const overPressure = !grace && tg.pressure > (DOCTRINE.pressureEscape || 0.075);
+    const overPressure = !grace && tg.pressure > (DOCTRINE.pressureEscape || 0.075) / fScale;
     const gapEsc = tg.gapDir ? [tg.gapDir] : null;
 
     // --- Predator (leaderboard-hunter) detection, MULTI-FRAME confirmed ---
@@ -343,7 +348,7 @@ export const BRAIN_FN = function (initialDoctrine) {
     if (predCand) { B.hunterStreak = Math.min(predConfirm + 4, B.hunterStreak + 1); B.hunterLast = predCand; }
     else { B.hunterStreak = Math.max(0, B.hunterStreak - 2); if (B.hunterStreak === 0) B.hunterLast = null; }
     const predatorConfirmed = B.hunterStreak >= predConfirm && !!B.hunterLast && state.me.alive;
-    const predatorClose = predatorConfirmed && B.hunterLast.dist < (DOCTRINE.predatorFleeRadius || 320);
+    const predatorClose = predatorConfirmed && B.hunterLast.dist < (DOCTRINE.predatorFleeRadius || 320) * fScale;
     // Instrument the encounter: open on first confirmation, track closest approach, mark fled when we
     // actually enter predator-flight. Closed on escape (here) or death (the death branch above).
     if (predatorConfirmed) {
@@ -407,7 +412,7 @@ export const BRAIN_FN = function (initialDoctrine) {
       // waiting for one enemy to cross escapeRadius. gapDir keeps the push out of the field, not just
       // off the single nearest foe.
       if (spaced) {
-        const lane = tg.gapDir || tg.away;
+        const lane = tg.gapDir || ((tg.away[0] || tg.away[1]) ? tg.away : [0, -1]);
         const g = (DOCTRINE.spacingGain || 1.6) * Math.min(1, tg.pressure / (DOCTRINE.pressureCap || 0.06));
         mvx += lane[0] * g; mvy += lane[1] * g;
       }

@@ -2,6 +2,20 @@
 
 Newest entries at the top.
 
+## 024 - 2026-06-19 - v18: a 38-agent hardening pass on v17, then fix the survival funnel (the Sniper valley)
+
+While v17 ground overnight I ran a multi-agent workflow (38 agents): adversarially review the fresh v17 code for bugs (4 dimensions, every finding verified against the actual source), research the diep.io path-to-#1, and design strategy upgrades. Two payoffs.
+
+**Code review: v17 is sound.** The verifiers confirmed the things that mattered - sign conventions correct, no in-page crash/freeze risk, optimizer pipeline + median championing + backfill + hot-swap + self-heal all correct, geometry math right. No critical bugs - the overnight grind was safe. Real findings were tuning/robustness: (1) two v17 knobs (`surroundRadius`, `spacingFloor`) were in the doctrine but missing from the ES SPACE, so the redesign's own params were frozen - added them. (2) `edgeBiasWeight=0.8` pins the bot to a wall, which removes escape lanes and directly conflicts with v17's open-lane spacing (gapDir wants room on all sides); v16 already logged edge-bias as ambivalent - defaulted it OFF (kept in SPACE so the ES can re-discover it). (3) cheap robustness: a zero-vector guard in `bestShape`, a cardinal fallback for the spacing lane when both gapDir and away are zero. (4) moderated the spacing knobs as better seeds (spacingGain 1.6->1.3, safeShapeBias 100->70) to reduce farm-vs-spacing vector cancellation. One agent's headline "fix" (raise pressureEscape 0.075->0.10) was BACKWARDS - raising it weakens the trigger, and crowd-escape already covers the 2-foe case it worried about - so I did not apply it. Verify-everything earns its keep.
+
+**Strategy: it's a survival-FUNNEL problem, not a class problem.** The judged synthesis (research + build + tactics) was decisive and matches our own corpus: the bot does not have a class or DPS problem - it already peaks at rank 2 / 88% of leader as an Overlord. It has a funnel problem - only 22% of lives reach Overseer, 1% reach Overlord, and 68% of all deaths are pre-drone Snipers. Every economy/kill/class lever only operates on the tiny fraction of lives that survive that far. Correct sequencing: funnel-first, then top-band-sustain, then economy. Class is correct - lock Overlord.
+
+So v18 = **fragile-phase survival gating** (the highest-leverage lever, lowest risk). A pre-drone Tank/Sniper has no drones to screen it, so while pre-drone it now flees earlier and from farther - a `fragilePhaseScale` (1.25, ES-tunable [1.0,1.6]) scales the escape/crowd/predator radii up and the pressure-escape threshold down, but ONLY until it becomes a drone class (then base radii, because drones screen). Crucially it still farms at RANGE (a Sniper's long bullets kite-farm without diving in), so the extra caution costs little XP - the intent is to get more lives THROUGH the L15->L30 valley to where drones come online and the bot is already proven competitive. Also bumped the fitness level-weight 55->100 so evolution is rewarded for getting through the funnel, not just for lucky scores.
+
+Deferred to v19 (next, do not stack two behaviors): **lead-protection** - the heartbeat already computes estRank/board every tick but never pushes it to the in-page brain; a `__setMeta` hook (mirroring `__setDoctrine`) + a rank<=2 defensive posture (tighter escape, no hunting, prefer space/patrol) directly attacks SUSTAINING #1, since the documented failure is death right after the peak. Then economy (pentagon-nest farming) after survival lands.
+
+Reset the optimizer to seed fresh from the v18 baseline (the gen-16 champion radii are baked into the doctrine, so no tuning lost; v17 had banked only 8 lives). v18 live on an 8h grind: fragile-phase params logging, space-farm firing, zero brain errors.
+
 ## 023 - 2026-06-19 - v17: the corpus spoke, so I stopped nudging and redesigned. Proactive spacing + a fixed optimizer.
 
 Mined the whole campaign at once (new `analysis/corpus.mjs`): **34 shifts, 754 lives, 30h of alive-time, 1,690 hunter encounters.** Single-shift summaries had been hiding the real story; the corpus made it unambiguous.

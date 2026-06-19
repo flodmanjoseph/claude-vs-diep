@@ -35,11 +35,15 @@ export const SPACE = {
   edgeBiasWeight: [0, 2.2], // strength of the farm-toward-nearest-edge drift (0 = off); v16's lever
   // v17 proactive-spacing tunables (the headline redesign):
   spacingRadius: [300, 480], // foes within this build threat pressure
+  surroundRadius: [250, 400], // foes within this count toward the open-lane / surround analysis
+  spacingFloor: [0.01, 0.05], // pressure above which farming switches to spaced movement
   spacingGain: [0.4, 3.0], // strength of the along-lane spacing push while farming
   pressureCap: [0.03, 0.12], // pressure at which the spacing push saturates
   pressureEscape: [0.04, 0.14], // pressure that forces a full escape
   safeLaneMinDeg: [90, 170], // surround threshold: smallest "open lane" before a forced breakout
   safeShapeBias: [0, 220], // penalty steering farm targets away from the threat centroid
+  // v18 fragile-phase survival gating:
+  fragilePhaseScale: [1.0, 1.6], // how much more cautious a pre-drone Tank/Sniper plays (1.0 = off)
 };
 const KEYS = Object.keys(SPACE);
 
@@ -49,7 +53,7 @@ const EVALS = 4; // lives per candidate to fight arena variance (median needs a 
 const SIGMA = 0.16; // mutation stddev as a fraction of each parameter's range
 
 const clamp = (v, [lo, hi]) => Math.max(lo, Math.min(hi, v));
-const FRACTIONAL = new Set(['bulletAimedCos', 'enemySizeWeight', 'huntSizeRatio', 'predatorRatio', 'edgeBiasWeight', 'spacingGain', 'pressureCap', 'pressureEscape']);
+const FRACTIONAL = new Set(['bulletAimedCos', 'enemySizeWeight', 'huntSizeRatio', 'predatorRatio', 'edgeBiasWeight', 'spacingGain', 'pressureCap', 'pressureEscape', 'spacingFloor', 'fragilePhaseScale']);
 const round = (k, v) => FRACTIONAL.has(k) ? +v.toFixed(3) : Math.round(v);
 
 function gauss() { // Box-Muller
@@ -86,7 +90,10 @@ function randomParams() {
 // reliable long Overlord life out-scores a lucky short spike, and the optimizer optimizes the skill
 // that actually precedes a #1 run. Score still counts fully - it is the ultimate goal.
 export function lifeFitness({ score = 0, level = 0, lifeMs = 0 }) {
-  return score + 55 * level + 7 * (lifeMs / 1000);
+  // v18: level weight 55 -> 100. The bottleneck is the survival funnel (only 22% reach Overseer, 1%
+  // reach Overlord), so reaching a higher class/level must carry real weight to push evolution toward
+  // params that get THROUGH the funnel - the prerequisite for the high-score lives that win #1.
+  return score + 100 * level + 7 * (lifeMs / 1000);
 }
 const median = (a) => { if (!a.length) return 0; const s = [...a].sort((x, y) => x - y); const n = s.length; return n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2; };
 

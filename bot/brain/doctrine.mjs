@@ -2,7 +2,7 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 17,
+  version: 18,
 
   // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
   // by the current class, so the right tile index is clicked even if level reads lag. Tile indices
@@ -28,6 +28,16 @@ export const DOCTRINE = {
   crowdRadius: 248,
   crowdCount: 2,
 
+  // === v18 FRAGILE-PHASE SURVIVAL GATING (the highest-leverage lever per the corpus) ===
+  // The survival FUNNEL is the bottleneck: 90% of lives reach Sniper but only 22% reach Overseer and
+  // 1% reach Overlord; 68% of ALL deaths are pre-drone Snipers (the "Sniper valley"). A Tank/Sniper
+  // has no drones to screen it, so while pre-drone it must play more cautiously - flee earlier and
+  // from farther - but it still farms at RANGE (a Sniper's long bullets let it kite-farm without
+  // diving in), so caution costs little XP. This multiplier scales the flee triggers (escape/crowd/
+  // predator radii up, pressure-escape threshold down) ONLY while pre-drone; a drone class plays at
+  // base radii because its drones screen for it. ES-tunable [1.0, 1.6]; 1.0 = off.
+  fragilePhaseScale: 1.25,
+
   // === v17 PROACTIVE SPACING / ANTI-SURROUND (the headline redesign) ===
   // Corpus of 754 lives: 67% of deaths are in farm mode, 84% point-blank, 89% with >=2 foes within
   // 300px - the bot farms greedily and gets COLLAPSED on, and reactive escape-radius fires too late
@@ -41,11 +51,11 @@ export const DOCTRINE = {
   spacingRadius: 400, // foes within this contribute to threat pressure / centroid
   surroundRadius: 300, // foes within this count toward the open-lane / surround analysis
   spacingFloor: 0.02, // pressure above which farming switches to spaced movement (space-farm)
-  spacingGain: 1.6, // strength of the along-lane spacing push during farming
+  spacingGain: 1.3, // strength of the along-lane spacing push during farming (1.6->1.3: let approach win in low pressure, less farm-stall)
   pressureCap: 0.06, // pressure at which the spacing push (and safe-shape bias) saturates
-  pressureEscape: 0.075, // pressure that forces a full escape, dropping farming entirely
+  pressureEscape: 0.075, // pressure that forces a full escape, dropping farming entirely (crowd-escape already covers the 2-foe-close case; this is the dense-swarm / big-lone-hunter backstop)
   safeLaneMinDeg: 130, // if the largest angular gap between nearby foes is under this, we're surrounded -> breakout
-  safeShapeBias: 100, // px-equivalent penalty for a farm target that lies toward the threat centroid
+  safeShapeBias: 70, // px-equivalent penalty for a farm target that lies toward the threat centroid (100->70: less fighting the approach vector)
   // Predator (leaderboard-hunter) avoidance. 85% of Overseer L30-45 deaths are top-10 players at
   // 2-8x our score running us down, usually in pairs. Flee any tank clearly bigger than us, earlier
   // and harder than a normal enemy. Detection is MULTI-FRAME (predatorConfirmFrames consecutive
@@ -66,8 +76,11 @@ export const DOCTRINE = {
   // toward the nearest single arena edge (one axis only, never a corner -> no trap; targets 0.12/0.88,
   // a buffer inside wallMargin 0.06) so converging foes have ~half the approach angles. Only shapes
   // WHERE we farm during calm farming; escape/flee are untouched, so we still break away freely when
-  // attacked. ES-tunable (SPACE edgeBiasWeight [0,2.2]); 0.8 is a moderate drift the optimizer dials.
-  edgeBiasWeight: 0.8,
+  // attacked. v18: default OFF (0) - edge-bias pins the bot against a wall, removing escape lanes and
+  // directly conflicting with v17's open-lane spacing (gapDir wants room on all sides); v16 also showed
+  // it ambivalent. Kept in SPACE [0,2.2] so the ES can re-discover it; v17 spacing is now the clean
+  // positioning mechanism.
+  edgeBiasWeight: 0,
 
   // Bullet dodging (velocity-based): a bullet aimed at us (cos angle > aimedCos) inside dodgeRadius
   // whose predicted miss distance is under missMargin triggers a perpendicular sidestep.

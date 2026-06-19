@@ -1,0 +1,403 @@
+{
+ "gen": 1,
+ "evalNo": 8,
+ "population": [
+  {
+   "params": {
+    "escapeRadius": 216,
+    "waryRadius": 427,
+    "bulletDangerRadius": 161,
+    "enemySizeWeight": 0.082,
+    "anticipationFrames": 31,
+    "bulletDodgeRadius": 257,
+    "bulletAimedCos": 0.844,
+    "bulletMissMargin": 67,
+    "spawnGraceFrames": 256,
+    "spawnEscapeRadius": 305,
+    "kindDistancePenalty": 48,
+    "approachStopDist": 154,
+    "shapeBodyMargin": 59,
+    "huntSizeRatio": 0.832,
+    "huntRange": 303,
+    "huntStandoff": 166,
+    "crowdRadius": 248,
+    "predatorRatio": 1.309,
+    "predatorFleeRadius": 293,
+    "edgeBiasWeight": 0.8,
+    "spacingRadius": 400,
+    "spacingGain": 1.6,
+    "pressureCap": 0.06,
+    "pressureEscape": 0.075,
+    "safeLaneMinDeg": 130,
+    "safeShapeBias": 100
+   },
+   "fits": [
+    3040.557,
+    4386.952,
+    5471.781,
+    3452.761
+   ]
+  },
+  {
+   "params": {
+    "escapeRadius": 301,
+    "waryRadius": 480,
+    "bulletDangerRadius": 165,
+    "enemySizeWeight": 0.069,
+    "anticipationFrames": 21,
+    "bulletDodgeRadius": 264,
+    "bulletAimedCos": 0.844,
+    "bulletMissMargin": 95,
+    "spawnGraceFrames": 226,
+    "spawnEscapeRadius": 355,
+    "kindDistancePenalty": 27,
+    "approachStopDist": 154,
+    "shapeBodyMargin": 60,
+    "huntSizeRatio": 0.832,
+    "huntRange": 317,
+    "huntStandoff": 161,
+    "crowdRadius": 248,
+    "predatorRatio": 1.312,
+    "predatorFleeRadius": 317,
+    "edgeBiasWeight": 0.223,
+    "spacingRadius": 400,
+    "spacingGain": 0.961,
+    "pressureCap": 0.06,
+    "pressureEscape": 0.055,
+    "safeLaneMinDeg": 130,
+    "safeShapeBias": 100
+   },
+   "fits": [
+    9799.392,
+    6697.106,
+    12711.785,
+    23202.32
+   ]
+  },
+  {
+   "params": {
+    "escapeRadius": 260,
+    "waryRadius": 427,
+    "bulletDangerRadius": 182,
+    "enemySizeWeight": 0.082,
+    "anticipationFrames": 23,
+    "bulletDodgeRadius": 254,
+    "bulletAimedCos": 0.844,
+    "bulletMissMargin": 53,
+    "spawnGraceFrames": 229,
+    "spawnEscapeRadius": 339,
+    "kindDistancePenalty": 57,
+    "approachStopDist": 108,
+    "shapeBodyMargin": 52,
+    "huntSizeRatio": 0.777,
+    "huntRange": 265,
+    "huntStandoff": 144,
+    "crowdRadius": 248,
+    "predatorRatio": 1.316,
+    "predatorFleeRadius": 258,
+    "edgeBiasWeight": 0.474,
+    "spacingRadius": 400,
+    "spacingGain": 1.809,
+    "pressureCap": 0.075,
+    "pressureEscape": 0.072,
+    "safeLaneMinDeg": 123,
+    "safeShapeBias": 89
+   },
+   "fits": []
+  },
+  {
+   "params": {
+    "escapeRadius": 213,
+    "waryRadius": 392,
+    "bulletDangerRadius": 188,
+    "enemySizeWeight": 0.061,
+    "anticipationFrames": 28,
+    "bulletDodgeRadius": 239,
+    "bulletAimedCos": 0.924,
+    "bulletMissMargin": 56,
+    "spawnGraceFrames": 256,
+    "spawnEscapeRadius": 305,
+    "kindDistancePenalty": 48,
+    "approachStopDist": 178,
+    "shapeBodyMargin": 59,
+    "huntSizeRatio": 0.815,
+    "huntRange": 340,
+    "huntStandoff": 178,
+    "crowdRadius": 300,
+    "predatorRatio": 1.374,
+    "predatorFleeRadius": 225,
+    "edgeBiasWeight": 0.8,
+    "spacingRadius": 400,
+    "spacingGain": 1.36,
+    "pressureCap": 0.06,
+    "pressureEscape": 0.075,
+    "safeLaneMinDeg": 130,
+    "safeShapeBias": 65
+   },
+   "fits": []
+  },
+  {
+   "params": {
+    "escapeRadius": 216,
+    "waryRadius": 361,
+    "bulletDangerRadius": 161,
+    "enemySizeWeight": 0.112,
+    "anticipationFrames": 31,
+    "bulletDodgeRadius": 307,
+    "bulletAimedCos": 0.829,
+    "bulletMissMargin": 61,
+    "spawnGraceFrames": 256,
+    "spawnEscapeRadius": 342,
+    "kindDistancePenalty": 36,
+    "approachStopDist": 209,
+    "shapeBodyMargin": 59,
+    "huntSizeRatio": 0.729,
+    "huntRange": 303,
+    "huntStandoff": 166,
+    "crowdRadius": 230,
+    "predatorRatio": 1.468,
+    "predatorFleeRadius": 319,
+    "edgeBiasWeight": 0.751,
+    "spacingRadius": 426,
+    "spacingGain": 1.43,
+    "pressureCap": 0.097,
+    "pressureEscape": 0.079,
+    "safeLaneMinDeg": 136,
+    "safeShapeBias": 81
+   },
+   "fits": []
+  },
+  {
+   "params": {
+    "escapeRadius": 216,
+    "waryRadius": 358,
+    "bulletDangerRadius": 161,
+    "enemySizeWeight": 0.092,
+    "anticipationFrames": 31,
+    "bulletDodgeRadius": 307,
+    "bulletAimedCos": 0.874,
+    "bulletMissMargin": 82,
+    "spawnGraceFrames": 256,
+    "spawnEscapeRadius": 353,
+    "kindDistancePenalty": 64,
+    "approachStopDist": 158,
+    "shapeBodyMargin": 47,
+    "huntSizeRatio": 0.902,
+    "huntRange": 288,
+    "huntStandoff": 171,
+    "crowdRadius": 303,
+    "predatorRatio": 1.309,
+    "predatorFleeRadius": 293,
+    "edgeBiasWeight": 0.503,
+    "spacingRadius": 400,
+    "spacingGain": 1.6,
+    "pressureCap": 0.058,
+    "pressureEscape": 0.075,
+    "safeLaneMinDeg": 121,
+    "safeShapeBias": 100
+   },
+   "fits": []
+  },
+  {
+   "params": {
+    "escapeRadius": 198,
+    "waryRadius": 440,
+    "bulletDangerRadius": 171,
+    "enemySizeWeight": 0.007,
+    "anticipationFrames": 25,
+    "bulletDodgeRadius": 267,
+    "bulletAimedCos": 0.724,
+    "bulletMissMargin": 78,
+    "spawnGraceFrames": 168,
+    "spawnEscapeRadius": 395,
+    "kindDistancePenalty": 183,
+    "approachStopDist": 115,
+    "shapeBodyMargin": 44,
+    "huntSizeRatio": 0.634,
+    "huntRange": 369,
+    "huntStandoff": 156,
+    "crowdRadius": 264,
+    "predatorRatio": 1.24,
+    "predatorFleeRadius": 352,
+    "edgeBiasWeight": 1.895,
+    "spacingRadius": 383,
+    "spacingGain": 1.33,
+    "pressureCap": 0.099,
+    "pressureEscape": 0.099,
+    "safeLaneMinDeg": 121,
+    "safeShapeBias": 91
+   },
+   "fits": []
+  },
+  {
+   "params": {
+    "escapeRadius": 244,
+    "waryRadius": 370,
+    "bulletDangerRadius": 88,
+    "enemySizeWeight": 0.089,
+    "anticipationFrames": 25,
+    "bulletDodgeRadius": 211,
+    "bulletAimedCos": 0.767,
+    "bulletMissMargin": 104,
+    "spawnGraceFrames": 92,
+    "spawnEscapeRadius": 377,
+    "kindDistancePenalty": 22,
+    "approachStopDist": 219,
+    "shapeBodyMargin": 46,
+    "huntSizeRatio": 0.91,
+    "huntRange": 365,
+    "huntStandoff": 196,
+    "crowdRadius": 187,
+    "predatorRatio": 1.298,
+    "predatorFleeRadius": 380,
+    "edgeBiasWeight": 2.107,
+    "spacingRadius": 466,
+    "spacingGain": 2.243,
+    "pressureCap": 0.044,
+    "pressureEscape": 0.108,
+    "safeLaneMinDeg": 155,
+    "safeShapeBias": 135
+   },
+   "fits": []
+  }
+ ],
+ "champion": {
+  "params": {
+   "escapeRadius": 301,
+   "waryRadius": 480,
+   "bulletDangerRadius": 165,
+   "enemySizeWeight": 0.069,
+   "anticipationFrames": 21,
+   "bulletDodgeRadius": 264,
+   "bulletAimedCos": 0.844,
+   "bulletMissMargin": 95,
+   "spawnGraceFrames": 226,
+   "spawnEscapeRadius": 355,
+   "kindDistancePenalty": 27,
+   "approachStopDist": 154,
+   "shapeBodyMargin": 60,
+   "huntSizeRatio": 0.832,
+   "huntRange": 317,
+   "huntStandoff": 161,
+   "crowdRadius": 248,
+   "predatorRatio": 1.312,
+   "predatorFleeRadius": 317,
+   "edgeBiasWeight": 0.223,
+   "spacingRadius": 400,
+   "spacingGain": 0.961,
+   "pressureCap": 0.06,
+   "pressureEscape": 0.055,
+   "safeLaneMinDeg": 130,
+   "safeShapeBias": 100
+  },
+  "fitness": 11255.5885
+ },
+ "history": [],
+ "space": {
+  "escapeRadius": [
+   120,
+   320
+  ],
+  "waryRadius": [
+   240,
+   480
+  ],
+  "bulletDangerRadius": [
+   80,
+   240
+  ],
+  "enemySizeWeight": [
+   0,
+   0.15
+  ],
+  "anticipationFrames": [
+   0,
+   45
+  ],
+  "bulletDodgeRadius": [
+   150,
+   380
+  ],
+  "bulletAimedCos": [
+   0.6,
+   0.96
+  ],
+  "bulletMissMargin": [
+   25,
+   110
+  ],
+  "spawnGraceFrames": [
+   60,
+   320
+  ],
+  "spawnEscapeRadius": [
+   200,
+   460
+  ],
+  "kindDistancePenalty": [
+   0,
+   200
+  ],
+  "approachStopDist": [
+   80,
+   260
+  ],
+  "shapeBodyMargin": [
+   10,
+   60
+  ],
+  "huntSizeRatio": [
+   0.5,
+   1
+  ],
+  "huntRange": [
+   200,
+   460
+  ],
+  "huntStandoff": [
+   110,
+   260
+  ],
+  "crowdRadius": [
+   180,
+   420
+  ],
+  "predatorRatio": [
+   1.05,
+   1.5
+  ],
+  "predatorFleeRadius": [
+   220,
+   420
+  ],
+  "edgeBiasWeight": [
+   0,
+   2.2
+  ],
+  "spacingRadius": [
+   300,
+   480
+  ],
+  "spacingGain": [
+   0.4,
+   3
+  ],
+  "pressureCap": [
+   0.03,
+   0.12
+  ],
+  "pressureEscape": [
+   0.04,
+   0.14
+  ],
+  "safeLaneMinDeg": [
+   90,
+   170
+  ],
+  "safeShapeBias": [
+   0,
+   220
+  ]
+ },
+ "updated": null
+}
