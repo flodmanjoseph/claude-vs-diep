@@ -2,6 +2,15 @@
 
 Newest entries at the top.
 
+## 033 - 2026-06-19 - v25: strategic, phase-aware perks to match the predator strategy (Joe's call)
+
+Joe: "this means you should also be adjusting which perks you choose to invest in, be strategic about it." Right - a killing Overlord wants a different stat build than a farming Sniper, and the allocation was a single fixed sequence that front-loaded Movement (escape/farm) and under-invested in the kill+survive stats. Made it strategic and phase-aware (stat keys: 1 Regen / 2 MaxHP / 3 BodyDmg / 4 Bullet+DroneSpeed / 5 BulletPen+DroneHealth / 6 BulletDmg+DroneDmg / 7 Reload / 8 Move):
+
+- **Early (Tank/Sniper, farming to level up):** lead with Penetration(5) + Damage(6). They kill shapes fast for quick leveling AND - because keys 5/6 double as Drone Health/Damage - they pre-build the eventual drone tank, so the early points aren't wasted when we become an Overseer. Plus Movement(8) + MaxHealth(2) to survive the fragile climb.
+- **Drone class (Overseer/Overlord, PREDATOR MODE):** the killing build - Drone Damage(6) + Drone Health/Pen(5) to win tank fights, woven with MaxHealth(2) and Reload(7) so we survive and sustain the fights we pick (Joe's "adjust for health"), then Movement(8) to chase, Regen(1), Drone Speed(4). First 9 points land as DroneDmg x3 / DroneHP x2 / MaxHP x2 / Reload / Move - a tanky, deadly Overlord, not a glass cannon.
+
+`allocStats` now picks the sequence by class and resets the index on the phase flip, so the moment we upgrade to a drone class the next points go straight to the kill stats. Implementation is self-contained in the brain (reads the HUD class); `droneStatSequence` rides in the doctrine base so every ES candidate inherits it (no ES/fitness change, optimizer continued). Verified: parses, Tank/Sniper -> farming build, Overseer/Overlord -> killing build. Live, 0 errors.
+
 ## 032 - 2026-06-19 - v24 PREDATOR MODE: Joe's call - stop eating blocks, destroy the other tanks
 
 Joe watched the live gameplay and made the call, and he's right: "it just keeps running into the blue blocks in the middle at L30... you're never going to get to first place by just eating blocks. eating blocks is good at the beginning but you're picking the hardest route. destroy the other tanks." This is the strategic truth the whole campaign had been dancing around: we peak at ~34k by passively farming shapes while leaders sit at 60k-690k because they KILL tanks (you absorb a chunk of a victim's score per kill - worth far more than any shape). And v20's pentagon economy was literally steering the Overseer into the dangerous central nest (the "blue blocks").

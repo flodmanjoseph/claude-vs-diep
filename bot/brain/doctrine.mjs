@@ -2,7 +2,7 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 24,
+  version: 25,
 
   // Class build path (the drone line: Tank -> Sniper -> Overseer -> Overlord). Each step is gated
   // by the current class, so the right tile index is clicked even if level reads lag. Tile indices
@@ -156,9 +156,17 @@ export const DOCTRINE = {
   // Aim / fire
   autofire: true,
 
-  // Blind stat allocation: cycle this sequence, one key press per tick when points may exist.
-  // Front-load movement (escape) + penetration/damage (farm), then bulk health, then reload.
-  statSequence: [8, 8, 5, 6, 8, 5, 6, 7, 2, 5, 6, 7, 2, 2, 2, 4, 1, 3],
+  // v25 strategic, PHASE-AWARE perk allocation (stat keys: 1 Regen 2 MaxHealth 3 BodyDmg
+  // 4 Bullet/DroneSpeed 5 BulletPen/DroneHealth 6 BulletDmg/DroneDmg 7 Reload 8 MoveSpeed).
+  // Early (Tank/Sniper, farming to level up): lead with Penetration(5)+Damage(6) - they kill shapes
+  // fast AND, because keys 5/6 double as Drone Health/Damage, they pre-build the eventual drone tank -
+  // plus Movement(8) and Health(2) to survive the fragile climb.
+  statSequence: [5, 6, 8, 5, 6, 2, 8, 5, 6, 2, 7, 8, 5, 6, 2, 1, 4, 3],
+  // Drone class (Overseer/Overlord, PREDATOR MODE): the killing build. Drone Damage(6) + Drone
+  // Health/Penetration(5) to win tank fights, woven with Max Health(2) and Reload(7) so we survive
+  // and sustain the fights we pick (Joe: "adjust for health"), then Movement(8) to chase, Regen(1),
+  // Drone Speed(4). A tanky, deadly Overlord - not a glass cannon, not a farmer.
+  droneStatSequence: [6, 5, 2, 6, 5, 7, 2, 8, 6, 5, 7, 1, 2, 8, 6, 5, 4, 1],
   statTickMs: 700,
 
   // Loop timing

@@ -91,7 +91,13 @@ export const BRAIN_FN = function (initialDoctrine) {
   function allocStats() {
     if (now() - B.lastStat < DOCTRINE.statTickMs) return;
     B.lastStat = now();
-    const seq = DOCTRINE.statSequence;
+    // v25 phase-aware perks: a drone class invests in the KILL+SURVIVE build (drone damage/health,
+    // reload, health) to win tank fights, not the farming build. On the phase flip, reset the index so
+    // the new sequence starts from its top priorities (the next points go to the stats that matter now).
+    const cls = (window.__diep && window.__diep.hud && window.__diep.hud.cls) || 'Tank';
+    const isDrone = DOCTRINE.droneClasses.includes(cls);
+    const seq = (isDrone && DOCTRINE.droneStatSequence) ? DOCTRINE.droneStatSequence : DOCTRINE.statSequence;
+    if (isDrone !== B._lastAllocDrone) { B.statIdx = 0; B._lastAllocDrone = isDrone; }
     const stat = seq[B.statIdx % seq.length];
     B.statIdx++;
     tapKey(String(stat));
