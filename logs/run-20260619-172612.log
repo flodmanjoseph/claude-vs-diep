@@ -1,0 +1,106 @@
+BC A/B on: loaded bc-policy (testAcc 0.9504)
+shift 2026-06-19T22-26-13-108Z | doctrine v35 | 28800s
+death #1 after 34s as Tank L7
+  overlord life fitness 1063 (score 125, L7) | gen 7 32/32
+upgraded Tank -> Sniper (tile 1)
+death #2 after 199s as Sniper L21
+  overlord life fitness 5647 (score 2153, L21) | gen 8 1/32
+upgraded Tank -> Sniper (tile 1)
+upgraded Sniper -> Assassin (tile 0)
+death #3 after 297s as Assassin L31
+  overlord life fitness 12319 (score 7139, L31) | gen 8 2/32
+upgraded Tank -> Sniper (tile 1)
+death #4 after 124s as Sniper L23
+  overlord life fitness 5891 (score 2721, L23) | gen 8 3/32
+upgraded Tank -> Sniper (tile 1)
+upgraded Sniper -> Assassin (tile 0)
+death #5 after 336s as Assassin L37
+  overlord life fitness 18997 (score 12942, L37) | gen 8 4/32
+upgraded Tank -> Sniper (tile 1)
+death #6 after 92s as Sniper L24
+  overlord life fitness 6268 (score 3220, L24) | gen 8 5/32
+upgraded Tank -> Sniper (tile 1)
+death #7 after 227s as Sniper L24
+  overlord life fitness 7255 (score 3263, L24) | gen 8 6/32
+upgraded Tank -> Sniper (tile 1)
+death #8 after 29s as Sniper L16
+  overlord life fitness 2927 (score 1123, L16) | gen 8 7/32
+upgraded Tank -> Sniper (tile 1)
+death #9 after 41s as Sniper L16
+  overlord life fitness 2825 (score 938, L16) | gen 8 8/32
+upgraded Tank -> Sniper (tile 1)
+death #10 after 110s as Sniper L17
+  overlord life fitness 3739 (score 1268, L17) | gen 8 9/32
+upgraded Tank -> Sniper (tile 1)
+death #11 after 71s as Sniper L18
+  overlord life fitness 3632 (score 1338, L18) | gen 8 10/32
+upgraded Tank -> Sniper (tile 1)
+death #12 after 121s as Sniper L21
+  overlord life fitness 5132 (score 2188, L21) | gen 8 11/32
+upgraded Tank -> Sniper (tile 1)
+death #13 after 74s as Sniper L19
+  overlord life fitness 4027 (score 1612, L19) | gen 8 12/32
+death #14 after 40s as Tank L14
+  overlord life fitness 2382 (score 700, L14) | gen 8 13/32
+death #15 after 22s as Tank L14
+  overlord life fitness 2264 (score 707, L14) | gen 8 14/32
+death #16 after 9s as Tank L12
+  overlord life fitness 1757 (score 492, L12) | gen 8 15/32
+death #17 after 59s as Tank L13
+  overlord life fitness 2259 (score 545, L13) | gen 8 16/32
+upgraded Tank -> Sniper (tile 1)
+death #18 after 189s as Sniper L21
+  overlord life fitness 5471 (score 2050, L21) | gen 8 17/32
+upgraded Tank -> Sniper (tile 1)
+upgraded Sniper -> Assassin (tile 0)
+upgraded Assassin -> Ranger (tile 0)
+death #19 after 250s as Ranger L45
+  overlord life fitness 35711 (score 29463, L45) | gen 8 18/32
+upgraded Tank -> Sniper (tile 1)
+death #20 after 86s as Sniper L23
+  overlord life fitness 5890 (score 2990, L23) | gen 8 19/32
+upgraded Tank -> Sniper (tile 1)
+death #21 after 160s as Sniper L22
+  overlord life fitness 5689 (score 2367, L22) | gen 8 20/32
+upgraded Tank -> Sniper (tile 1)
+death #22 after 33s as Sniper L16
+  overlord life fitness 2937 (score 1107, L16) | gen 8 21/32
+upgraded Tank -> Sniper (tile 1)
+death #23 after 167s as Sniper L22
+  overlord life fitness 5700 (score 2333, L22) | gen 8 22/32
+upgraded Tank -> Sniper (tile 1)
+death #24 after 30s as Sniper L16
+  overlord life fitness 2885 (score 1072, L16) | gen 8 23/32
+upgraded Tank -> Sniper (tile 1)
+death #25 after 56s as Sniper L18
+  overlord life fitness 3607 (score 1418, L18) | gen 8 24/32
+upgraded Tank -> Sniper (tile 1)
+death #26 after 65s as Sniper L18
+  overlord life fitness 3761 (score 1503, L18) | gen 8 25/32
+upgraded Tank -> Sniper (tile 1)
+death #27 after 96s as Sniper L20
+  overlord life fitness 4539 (score 1868, L20) | gen 8 26/32
+upgraded Tank -> Sniper (tile 1)
+death #28 after 66s as Sniper L17
+  overlord life fitness 3414 (score 1250, L17) | gen 8 27/32
+upgraded Tank -> Sniper (tile 1)
+death #29 after 41s as Sniper L15
+  overlord life fitness 2702 (score 918, L15) | gen 8 28/32
+upgraded Tank -> Sniper (tile 1)
+upgraded Sniper -> Assassin (tile 0)
+death #30 after 382s as Assassin L32
+  overlord life fitness 13695 (score 7822, L32) | gen 8 29/32
+upgraded Tank -> Sniper (tile 1)
+death #31 after 134s as Sniper L26
+  overlord life fitness 7595 (score 4056, L26) | gen 8 30/32
+upgraded Tank -> Sniper (tile 1)
+death #32 after 10s as Sniper L16
+  overlord life fitness 2639 (score 968, L16) | gen 8 31/32
+upgraded Tank -> Sniper (tile 1)
+death #33 after 47s as Sniper L16
+  overlord life fitness 3035 (score 1108, L16) | gen 8 32/32
+upgraded Tank -> Sniper (tile 1)
+upgraded Sniper -> Assassin (tile 0)
+death #34 after 57s as Assassin L35
+  overlord life fitness 14437 (score 10540, L35) | gen 9 1/32
+upgraded Tank -> Sniper (tile 1)

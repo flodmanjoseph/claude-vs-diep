@@ -1,0 +1,6 @@
+{"t":1781860505190,"event":"shift_start","shiftId":"2026-06-19T09-15-04-712Z","doctrine":20,"shiftMs":28800000}
+{"t":1781860506535,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 401 ()"}
+{"t":1781860507097,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781860507098,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781860508521,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1781860539832,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}

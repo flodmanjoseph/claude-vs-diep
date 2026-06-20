@@ -1,0 +1,6 @@
+{"t":1781899633776,"event":"shift_start","shiftId":"2026-06-19T20-07-13-150Z","doctrine":34,"shiftMs":28800000}
+{"t":1781899634962,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 401 ()"}
+{"t":1781899634982,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781899634982,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781899640437,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1781899641632,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}

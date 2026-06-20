@@ -2,6 +2,16 @@
 
 Newest entries at the top.
 
+## 045 - 2026-06-20 - Reality check: the bot is mid-pack vs ~90k-leader arenas; #1 is a ~3x-score gap
+
+A brutal shift (83 deaths/62min, median life 34s, 16 spawn re-deaths) prompted an honest look at the arenas, and it reframes the whole campaign. Across the last 8 shifts the median leaderMax is consistently **82k-113k** - NOT the quiet 17-60k I'd occasionally cited (those were sparse-board read artifacts). So the current diep.io FFA population runs leaders around ~90k, and our best-ever score is 34,368. That means:
+
+- The old "rank 2 / 88% of leader" was a board-read artifact, not reality. At ~34k peak vs ~90k leaders, the bot is genuinely **mid-pack (~rank 8-15 on a full board)**, not near #1.
+- Rerolling arenas for a "quiet" one won't help - they're all ~90k right now.
+- #1 is therefore a **~3x score gap** (34k -> 90k+). That isn't a hard ceiling (a Ranger sniping+farming for 15-20 min could plausibly compound to 90k) - it's a SURVIVAL-TIME gap: the bot's lives are 2-5 min, it needs 15-20 min unbroken at Ranger. So survival-to-a-long-Ranger-life remains the one true lever, just with a bigger target than I'd been framing.
+
+This shift's arena was also unusually lethal (34s median + 16 re-deaths vs the typical 75-115s for ~90k arenas - a spawn-camp cluster), so I rerolled out of it. No doctrine change - this is a strategic reframe, not a bug: the bot (pure-rules v35 sniper) is competitive/mid-pack and stable; closing the gap to #1 needs a breakthrough in sustained Ranger survival, not another micro-tweak. Flagging the honest reality for Joe: #1 in the current ~90k population is a long, hard grind (or needs a genuinely longer-surviving build); the candidate lever remains a real kite behavior to extend Ranger lives. Watching for any quiet-arena/long-life shot meanwhile.
+
 ## 044 - 2026-06-20 - Clean A/B: rules beat the BC clone; reverted to pure rules
 
 The fixed alternation gave a clean paired BC-vs-rules shift (13 lives each, same arena window):
