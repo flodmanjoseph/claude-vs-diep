@@ -2,6 +2,19 @@
 
 Newest entries at the top.
 
+## 044 - 2026-06-20 - Clean A/B: rules beat the BC clone; reverted to pure rules
+
+The fixed alternation gave a clean paired BC-vs-rules shift (13 lives each, same arena window):
+
+| policy | median fitness | median life | n |
+|---|---|---|---|
+| RULES (bc:0) | 6,039 | 120s | 13 |
+| BC clone (bc:1) | 3,945 | 100s | 13 |
+
+Rules win decisively (~53% higher median fitness, +20s median life). So behavior-cloned imitation plays clearly WORSE than the well-tuned rules - the 95-99% per-decision mode match still loses the decisions that matter, and BC can't exceed its teacher. This closes the imitation-RL question: it's a validated pipeline, not a performance gain.
+
+Switched the bot back to PURE RULES (dropped BC_AB) - the better policy, to maximize real shots at #1. The RL pipeline (Phase-0 logging, Phase-1 BC, in-page __setPolicy deployment, working A/B) stays built and gated, ready if Phase-3 (offline reward-optimized policy) is ever pursued - but per the design critique its ceiling is just better mode-arbitration (marginal), not the aim/control/build layer that decides #1. So Phase-3 is PARKED pending Joe's call, and the campaign refocuses on the sniper build (the real #1 lever) + banking shots at a winnable arena. Pure-rules v35 relaunched, 0 errors.
+
 ## 043 - 2026-06-19 - A/B bug fixed; BC imitation runs ~worse than rules (honest RL read)
 
 The first BC A/B shift exposed a bug AND a finding. Bug: the per-life BC/rules flag was set only in spawnFresh (the INITIAL spawn), not on respawn, so every life ran BC (33/33 bc:1, 0 rules) - no paired baseline. Fixed by moving the alternation into applyNextDoctrine, which runs on every life (spawn + respawn). Finding: that all-BC shift had median life 74s vs v34 rules' ~105s - i.e. the behavior-cloned policy plays somewhat WORSE than the rules it imitates. Expected: BC matches the rules' macro-mode 95-99% per decision, but the disagreements compound over a life, and BC caps at (here, below) the demonstrator. So the mode-residual BC is not a win - it's a validated pipeline, not a performance gain, exactly as the design critique predicted (the residual only re-ranks 4 macro-modes; the real ceiling is in aim/control/build).
