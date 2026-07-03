@@ -1,0 +1,6 @@
+shift 2026-06-19T21-46-50-162Z | doctrine v33 | 3600s
+death #1 after 2s as Tank L1
+  overlord life fitness 116 (score 0, L1)
+upgraded Tank -> Sniper (tile 1)
+upgraded Sniper -> Assassin (tile 0)
+reboot: loop_error

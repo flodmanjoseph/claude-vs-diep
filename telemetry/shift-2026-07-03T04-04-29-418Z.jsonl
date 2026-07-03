@@ -1,0 +1,57 @@
+{"t":1783051469861,"event":"shift_start","shiftId":"2026-07-03T04-04-29-418Z","doctrine":36,"shiftMs":360000}
+{"t":1783051471282,"event":"pageerror","text":"Failed to load resource: net::ERR_ADDRESS_UNREACHABLE"}
+{"t":1783051471282,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 401 ()"}
+{"t":1783051471534,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1783051471535,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1783051472893,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1783051473075,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051473835,"event":"spawn","ok":true,"bc":0}
+{"t":1783051474318,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1783051474553,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051474601,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051477820,"event":"pageerror","text":"Failed to load resource: net::ERR_CONNECTION_REFUSED"}
+{"t":1783051477872,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1783051479805,"event":"heartbeat","elapsed":5162,"alive":true,"life":5970,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":0,"leaderMax":null,"estRank":null,"boardSize":0,"gapRejects":0,"lifeResets":0}
+{"t":1783051485062,"event":"heartbeat","elapsed":10412,"alive":true,"life":11227,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":0,"leaderMax":null,"estRank":null,"boardSize":0,"gapRejects":0,"lifeResets":0}
+{"t":1783051490315,"event":"heartbeat","elapsed":15670,"alive":true,"life":16480,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":0,"leaderMax":null,"estRank":null,"boardSize":0,"gapRejects":0,"lifeResets":0}
+{"t":1783051495624,"event":"heartbeat","elapsed":20977,"alive":true,"life":21789,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":0,"leaderMax":null,"estRank":null,"boardSize":0,"gapRejects":0,"lifeResets":0}
+{"t":1783051495994,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1783051496269,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051496269,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051496314,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051500888,"event":"heartbeat","elapsed":26240,"alive":true,"life":27053,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":0,"leaderMax":null,"estRank":null,"boardSize":0,"gapRejects":0,"lifeResets":0}
+{"t":1783051506149,"event":"heartbeat","elapsed":31501,"alive":true,"life":32314,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":0,"leaderMax":null,"estRank":null,"boardSize":0,"gapRejects":0,"lifeResets":0}
+{"t":1783051511402,"event":"heartbeat","elapsed":36753,"alive":true,"life":37567,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":0,"leaderMax":null,"estRank":null,"boardSize":0,"gapRejects":0,"lifeResets":0}
+{"t":1783051516706,"event":"heartbeat","elapsed":42060,"alive":true,"life":42871,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":0,"leaderMax":null,"estRank":null,"boardSize":0,"gapRejects":0,"lifeResets":0}
+{"t":1783051516803,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1783051517057,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051517058,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051517058,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051517104,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051521957,"event":"heartbeat","elapsed":47312,"alive":true,"life":48122,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":0,"leaderMax":null,"estRank":null,"boardSize":0,"gapRejects":0,"lifeResets":0}
+{"t":1783051527222,"event":"heartbeat","elapsed":52573,"alive":true,"life":53387,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":0,"leaderMax":null,"estRank":null,"boardSize":0,"gapRejects":0,"lifeResets":0}
+{"t":1783051532467,"event":"heartbeat","elapsed":57818,"alive":true,"life":58632,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":0,"leaderMax":null,"estRank":null,"boardSize":0,"gapRejects":0,"lifeResets":0}
+{"t":1783051537759,"event":"heartbeat","elapsed":63108,"alive":true,"life":63924,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":0,"leaderMax":null,"estRank":null,"boardSize":0,"gapRejects":0,"lifeResets":0}
+{"t":1783051538321,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1783051538560,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051538560,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051538560,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051538560,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051538567,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051543008,"event":"heartbeat","elapsed":68359,"alive":true,"life":69173,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":0,"leaderMax":null,"estRank":null,"boardSize":0,"gapRejects":0,"lifeResets":0}
+{"t":1783051548262,"event":"heartbeat","elapsed":73611,"alive":true,"life":74427,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":0,"leaderMax":null,"estRank":null,"boardSize":0,"gapRejects":0,"lifeResets":0}
+{"t":1783051553171,"event":"pageerror","text":"Failed to load resource: net::ERR_CONNECTION_TIMED_OUT"}
+{"t":1783051553517,"event":"heartbeat","elapsed":78867,"alive":true,"life":79682,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":0,"leaderMax":null,"estRank":null,"boardSize":0,"gapRejects":0,"lifeResets":0}
+{"t":1783051554023,"event":"pageerror","text":"Failed to load resource: net::ERR_CERT_COMMON_NAME_INVALID"}
+{"t":1783051558814,"event":"heartbeat","elapsed":84160,"alive":true,"life":84979,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":0,"leaderMax":null,"estRank":null,"boardSize":0,"gapRejects":0,"lifeResets":0}
+{"t":1783051559754,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1783051559953,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051559953,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051559953,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051559953,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051559953,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051559960,"event":"pageerror","text":"Attestation check for Shared Storage on https://www.googleadservices.com failed."}
+{"t":1783051560161,"event":"pageerror","text":"Access to fetch at 'https://mp.4dex.io/prebid?orgid=1361&gzip=1' from origin 'https://diep.io' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested reso"}
+{"t":1783051560161,"event":"pageerror","text":"Failed to load resource: net::ERR_FAILED"}
+{"t":1783051564068,"event":"heartbeat","elapsed":89422,"alive":true,"life":90233,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":0,"leaderMax":null,"estRank":null,"boardSize":0,"gapRejects":0,"lifeResets":0}
+{"t":1783051569318,"event":"heartbeat","elapsed":94673,"alive":true,"life":95483,"deaths":0,"cls":"Tank","lvl":1,"mode":"farm","myScore":0,"leaderMax":null,"estRank":null,"boardSize":0,"gapRejects":0,"lifeResets":0}

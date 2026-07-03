@@ -11,10 +11,10 @@ export const BRAIN_FN = function (initialDoctrine) {
   window.__qtable = window.__qtableSeed || window.__qtable || {};
   window.__rlMeta = window.__rlMetaSeed || window.__rlMeta || { decisions: 0, eps: 0 };
   const CENTER = { x: 640, y: 360 };
-  const KEYCODE = { w: 87, a: 65, s: 83, d: 68, e: 69, c: 67, '1': 49, '2': 50, '3': 51, '4': 52, '5': 53, '6': 54, '7': 55, '8': 56 };
+  const KEYCODE = { w: 87, a: 65, s: 83, d: 68, e: 69, c: 67, ' ': 32, '1': 49, '2': 50, '3': 51, '4': 52, '5': 53, '6': 54, '7': 55, '8': 56 };
 
   const dispatchKey = (type, ch) => {
-    const code = /\d/.test(ch) ? 'Digit' + ch : 'Key' + ch.toUpperCase();
+    const code = ch === ' ' ? 'Space' : /\d/.test(ch) ? 'Digit' + ch : 'Key' + ch.toUpperCase();
     const ev = new KeyboardEvent(type, { key: ch, code, keyCode: KEYCODE[ch], which: KEYCODE[ch], bubbles: true, cancelable: true });
     document.dispatchEvent(ev); window.dispatchEvent(ev);
     const cv = document.getElementById('canvas'); if (cv) cv.dispatchEvent(ev);
@@ -100,10 +100,13 @@ export const BRAIN_FN = function (initialDoctrine) {
   window.__hunterLog = window.__hunterLog || [];
 
   const now = () => performance.now();
-
-  function ensureAutofire() {
-    if (DOCTRINE.autofire && !B.autofireOn) { tapKey('e'); B.autofireOn = true; }
-  }
+  // v36.1: firing is a HELD SPACE KEY (diep's keyboard fire), managed like a movement key.
+  // The old 'e' autofire toggle was STATE-BLIND: a falsely-detected death made start() re-tap E on
+  // a tank whose autofire was already ON, silently turning fire OFF for the rest of the life
+  // (first v36 Sandbox bench: mode 'farm', zero bullets on screen, 290 score in 300s). A held key
+  // is idempotent — there is no toggle state to desync. (A held synthetic MOUSE button was tried
+  // first: diep accepts synthetic mouse for drone steering but not for bullet firing — bench 2
+  // showed zero bullets. Keyboard input is the proven path.)
 
   function allocStats() {
     if (now() - B.lastStat < DOCTRINE.statTickMs) return;
@@ -127,10 +130,16 @@ export const BRAIN_FN = function (initialDoctrine) {
   // squares/triangles, and alpha pentagons hugely more) so a drone class farming SAFELY prioritizes
   // them - a conservative score-ceiling boost (a discount, not a cross-map nest trek). The caller
   // only passes it >0 when isDrone AND pressure is low (pressure-veto), so it never overrides safety.
-  function bestShape(shapes, toward, pressure, pentagonBonus) {
+  function bestShape(shapes, toward, pressure, pentagonBonus, foes, fovMul) {
     if (!shapes.length) return null;
     const rank = (k) => { const i = DOCTRINE.preferKinds.indexOf(k); return i < 0 ? 5 : i; };
     const bias = (DOCTRINE.safeShapeBias || 0) * Math.min(1, (pressure || 0) / (DOCTRINE.pressureCap || 0.06));
+    // v36 far-field routing: shapes sitting in enemy-dense space cost extra "distance", so farming
+    // drifts away from clusters minutes before they become encounters. The corpus's strongest
+    // life-length correlate: long lives see 0.70 hunter encounters/min vs 1.24 for short ones —
+    // being where hunters aren't beats out-fighting them. Low weight: routing, not fleeing.
+    const ffR = DOCTRINE.farFieldRadius || 700;
+    const ffW = DOCTRINE.farFieldWeight || 0;
     let best = null, bestScore = Infinity;
     for (const s of shapes) {
       let score = s.dist + rank(s.kind) * DOCTRINE.kindDistancePenalty;
@@ -139,6 +148,14 @@ export const BRAIN_FN = function (initialDoctrine) {
         const m = s.dist || 1;
         const dot = (s.dx / m) * toward[0] + (s.dy / m) * toward[1]; // >0 => toward the threats
         if (dot > 0) score += dot * bias;
+      }
+      if (ffW > 0 && foes && foes.length) {
+        let dens = 0;
+        for (const e of foes) {
+          const d = Math.hypot(e.x - s.x, e.y - s.y) / (fovMul || 1); // screen coords -> world dist
+          if (d < ffR) dens += 1 - d / ffR;
+        }
+        score += dens * ffW;
       }
       if (score < bestScore) { bestScore = score; best = s; }
     }
@@ -175,10 +192,11 @@ export const BRAIN_FN = function (initialDoctrine) {
   // foes, i.e. the most-open lane out. gapDir is geometry-correct where 8-way sampling is crude: one
   // foe -> straight opposite it; two foes pincering us -> perpendicular to their axis (the only way
   // out). maxGapDeg small => we are surrounded with no clean lane (force a hard breakout early).
-  function threatGeometry(foes, fovMul) {
-    const fm = fovMul || 1; // v32: shrink the spacing/surround radii at wide FOV (world-consistent)
-    const R = (DOCTRINE.spacingRadius || 400) * fm;
-    const SR = (DOCTRINE.surroundRadius || 300) * fm;
+  function threatGeometry(foes) {
+    // v36: perception is world-normalized at the boundary (state.mjs), so no fovMul here — every
+    // dist/r below is already world-equivalent and pressure is zoom-invariant by construction.
+    const R = DOCTRINE.spacingRadius || 400;
+    const SR = DOCTRINE.surroundRadius || 300;
     let pressure = 0, cx = 0, cy = 0;
     const bearings = [];
     for (const e of foes) {
@@ -204,21 +222,44 @@ export const BRAIN_FN = function (initialDoctrine) {
     return { pressure, toward: [cx / cmag, cy / cmag], away: [-cx / cmag, -cy / cmag], gapDir, maxGapDeg: (maxGap * 180) / Math.PI, nThreat: bearings.length };
   }
 
-  const DIRS = [[0, -1], [0.71, -0.71], [1, 0], [0.71, 0.71], [0, 1], [-0.71, 0.71], [-1, 0], [-0.71, -0.71]];
+  // v36: 16 headings (half-step compass). Finer tangents matter for wall slides and the kite band —
+  // with 8 dirs the difference between "along the wall" and "into the wall" is a single 45° step.
+  const DIRS = Array.from({ length: 16 }, (_, i) => {
+    const a = (i * Math.PI) / 8;
+    return [Math.round(Math.cos(a) * 100) / 100, Math.round(Math.sin(a) * 100) / 100];
+  });
   function bestEscapeDir(state, priority, extraDirs) {
     let best = [0, 1], bestScore = -Infinity;
     const foes = enemiesOf(state);
     const pos = state.map; // normalized map position or null
-    // The open-lane heading(s) from threatGeometry are evaluated alongside the 8 compass dirs, so the
+    // The open-lane heading(s) from threatGeometry are evaluated alongside the compass dirs, so the
     // geometry-correct escape still gets the wall/bullet penalties below before being chosen.
     const dirs = extraDirs && extraDirs.length ? DIRS.concat(extraDirs.filter(Boolean)) : DIRS;
     for (const [dx, dy] of dirs) {
       let score = 0;
-      // Never flee into an arena wall: penalize headings that push past an edge we're already near.
+      // v36 wall handling: fleeing into an arena edge is how corner-trap deaths happen, and the old
+      // -5 penalty was 40-120x weaker than the threat terms below, so a hunter could push us straight
+      // into a wall. The penalty now dominates ordinary threat terms, and when pinned near an edge the
+      // TANGENTIAL component earns a bonus so flight slides along the wall instead of stalling on it.
       if (pos) {
         const m = DOCTRINE.wallMargin;
-        if ((pos.x < m && dx < 0) || (pos.x > 1 - m && dx > 0)) score -= 5;
-        if ((pos.y < m && dy < 0) || (pos.y > 1 - m && dy > 0)) score -= 5;
+        const wp = DOCTRINE.wallEscapePenalty || 400;
+        const ws = DOCTRINE.wallSlideBonus || 120;
+        if ((pos.x < m && dx < 0) || (pos.x > 1 - m && dx > 0)) score -= wp;
+        if ((pos.y < m && dy < 0) || (pos.y > 1 - m && dy > 0)) score -= wp;
+        if (pos.x < m || pos.x > 1 - m) score += Math.abs(dy) * ws; // near a vertical wall: slide along y
+        if (pos.y < m || pos.y > 1 - m) score += Math.abs(dx) * ws; // near a horizontal wall: slide along x
+      }
+      // v36 shape blockers: never flee THROUGH a shape field — mid-flight body contact bleeds speed
+      // and HP exactly when it's fatal (80% of deaths are point-blank). A blocker term much weaker
+      // than a same-distance foe: deflect the lane, don't panic over a pentagon.
+      const sr = DOCTRINE.escapeShapeRadius || 220;
+      const sw = DOCTRINE.escapeShapeWeight || 120;
+      for (const s of state.shapes) {
+        if (s.dist > sr) continue;
+        const sm = s.dist || 1;
+        const toward = (dx * s.dx + dy * s.dy) / sm;
+        if (toward > 0) score -= toward * (sw / Math.max(50, s.dist));
       }
       // A confirmed predator dominates the choice: heading toward it is heavily penalized so we put
       // real distance between us and the hunter, not just drift off the average threat vector.
@@ -241,7 +282,22 @@ export const BRAIN_FN = function (initialDoctrine) {
       }
       if (score > bestScore) { bestScore = score; best = [dx, dy]; }
     }
+    B.lastEscapeDir = best; // exposed for tests/telemetry (held keys quantize to 8-way)
     return best;
+  }
+
+  // v36 LEAD AIM: every shot used to target the enemy's CURRENT position — against a strafing tank
+  // at 400-700 world units that misses by 60-150px, so return fire deterred nothing and fleeing
+  // couldn't kill (fled encounters died 39% vs 24% stood). Predict the intercept instead:
+  // eta (frames) = dist / our bullet speed, intercept = pos + v * eta. dist/vx/vy are world units;
+  // the returned point converts back to SCREEN via fovMul (the one place the zoom factor is needed).
+  // bulletPxPerFrame is our own bullet speed in world px/frame — a doctrine tunable (it scales with
+  // the BulletSpeed stat), calibrated in Sandbox. The eta clamp bounds how far a bad velocity read
+  // can drag the aim point.
+  function leadAim(t, fovMul) {
+    const bs = Math.max(4, DOCTRINE.bulletPxPerFrame || 12);
+    const eta = Math.min(45, (t.dist || 0) / bs);
+    return { x: t.x + (t.vx || 0) * eta * (fovMul || 1), y: t.y + (t.vy || 0) * eta * (fovMul || 1) };
   }
 
   // Effective distance of an enemy: its real distance minus how much it will close in the next
@@ -331,6 +387,13 @@ export const BRAIN_FN = function (initialDoctrine) {
   function step() {
     if (!B.running) return;
     B.frames++;
+    // Wall-clock frame delta: every caution/confirmation window below is ms-denominated (v36) so
+    // behavior is display-independent. The old frame-denominated timers ran ~2x fast on this Mac's
+    // 119fps ProMotion panel (spawn grace was really ~2.15s, not the intended 4.3s). Clamped so a
+    // background-tab stall can't dump a giant delta into the accumulators.
+    const tNow = now();
+    const frameDt = Math.min(100, tNow - (B._lastStepMs != null ? B._lastStepMs : tNow));
+    B._lastStepMs = tNow;
     const state = window.__readState();
     if (!state || !state.ok) { B._raf = requestAnimationFrame(step); return; }
 
@@ -340,20 +403,29 @@ export const BRAIN_FN = function (initialDoctrine) {
       // a brief perception flicker mid-life (the tank momentarily undetected, e.g. during the upgrade
       // pause or heavy drone/effect frames). The old ">10 frame gap" alone re-triggered spawn grace
       // MID-LIFE, so the bot went defenseless (no fire + flee) for ~4s, 39x/shift, and kept dying at
-      // the L30 upgrade. Now also require a low level, with a large-gap fallback in case the HUD level
-      // read is briefly stale on a genuine respawn.
-      const lvl = (window.__diep && window.__diep.hud && window.__diep.hud.level) || 99;
+      // the L30 upgrade. v36: the large-gap fallback must ALSO be corroborated by the HUD looking like
+      // a fresh spawn (score reset or base class) — a ~2s perception stall with score/class intact is
+      // a flicker, not a respawn, and re-entering spawn grace there re-opened the exact v23
+      // defenseless-window bug class. gapRejects counts rejected stalls for telemetry.
+      const hud0 = (window.__diep && window.__diep.hud) || {};
+      const lvl = hud0.level || 99;
       const gap = B.frames - B.lastAliveFrame;
-      if (gap > 10 && (lvl <= 3 || gap > 120)) { B.lifeStartFrame = B.frames; B.lastScore = 0; }
+      const looksFresh = (hud0.score || 0) < 500 || (hud0.cls || 'Tank') === 'Tank';
+      if (gap > 10 && (lvl <= 3 || (gap > 120 && looksFresh))) {
+        if (B.lifeStartMs != null) B.lifeResets = (B.lifeResets || 0) + 1; // observable: grace re-entries
+        B.lifeStartFrame = B.frames; B.lifeStartMs = tNow; B.lastScore = 0;
+      } else if (gap > 120) {
+        B.gapRejects = (B.gapRejects || 0) + 1;
+      }
       B.lastAliveFrame = B.frames;
     } else {
       rlTerminal(); // death: charge the terminal penalty to the last RL decision, reset the episode
       // If a predator encounter was open when we died, it killed us: close it as 'died' for the data.
       if (B.activeEncounter) { B.activeEncounter.outcome = 'died'; B.activeEncounter.frames = B.frames - B.activeEncounter.t0; window.__hunterLog.push(B.activeEncounter); B.activeEncounter = null; }
-      B.hunterStreak = 0; B.hunterLast = null; B.lockedPrey = null;
+      B.hunterStreak = 0; B.hunterLast = null; B.lockedPrey = null; B.escaping = false;
     }
-    const sinceSpawn = B.frames - (B.lifeStartFrame || 0);
-    const grace = sinceSpawn < DOCTRINE.spawnGraceFrames;
+    const sinceSpawnMs = tNow - (B.lifeStartMs || 0);
+    const grace = sinceSpawnMs < (DOCTRINE.spawnGraceMs != null ? DOCTRINE.spawnGraceMs : 4300);
 
     // During spawn grace, do NOT fire: diep's spawn protection ends on your first shot. Stay
     // unshielded only after we've used the protection window to flee to open space.
@@ -365,9 +437,15 @@ export const BRAIN_FN = function (initialDoctrine) {
     // its most vulnerable moment. Detect a class UPGRADE (to a non-Tank class; a respawn-to-Tank is
     // handled by spawn grace) and apply a brief caution window so the fresh class flees while its
     // drones deploy. Bridges the L30->45 and L45 transitions.
-    if (cls !== B.lastClass) { if (B.lastClass != null && cls !== 'Tank') B.upgradeFrame = B.frames; B.lastClass = cls; }
-    const postUpgrade = !grace && B.upgradeFrame != null && (B.frames - B.upgradeFrame) < (DOCTRINE.upgradeGraceFrames || 180);
-    if (!grace) { ensureAutofire(); setMouseHold(isDrone); } else { setMouseHold(false); }
+    if (cls !== B.lastClass) { if (B.lastClass != null && cls !== 'Tank') B.upgradeMs = tNow; B.lastClass = cls; }
+    const postUpgrade = !grace && B.upgradeMs != null && (tNow - B.upgradeMs) < (DOCTRINE.upgradeGraceMs || 3000);
+    // Hold fire during spawn grace (diep's spawn protection ends on the first shot) and during the
+    // brief aim-suspension window around trusted upgrade clicks. Drone classes also hold the mouse
+    // (synthetic mousedown steers drones toward the cursor — the v15 drone-screen mechanism).
+    const aimSuspended = B.suspendAimUntil != null && tNow < B.suspendAimUntil;
+    const firing = !grace && !aimSuspended && DOCTRINE.autofire !== false;
+    setMouseHold(firing && isDrone);
+    B.autofireOn = firing; // "firing intent" (kept for snapshot/tests); the space key is added to the held-set below
     allocStats();
 
     let aim = null;
@@ -378,15 +456,12 @@ export const BRAIN_FN = function (initialDoctrine) {
     const foes = enemiesOf(state);
     let nearest = null, nd = Infinity;
     for (const e of foes) { const ed = effectiveDist(e); if (ed < nd) { nd = ed; nearest = e; } }
-    // v32 FOV scaling: the sniper line zooms the camera OUT (measured: a square renders 22px as a Tank
-    // but only 15px as an Assassin = ~0.68), so a fixed-pixel flee threshold covers ~1.5x more WORLD
-    // distance at the wide FOV and the bot flees too early. fovMul rescales the DEFENSIVE distance
-    // thresholds to preserve consistent WORLD behavior across zoom (square-px is a clean zoom proxy -
-    // squares are fixed world-size). No-op at the Tank baseline (mul=1); shrinks the radii as FOV
-    // widens so the Assassin/Ranger isn't over-timid. Offensive ranges (huntRange/combatRange) are left
-    // unscaled so the sniper still exploits its longer reach. Clamped so a noisy read can't do harm.
-    const fovMul = Math.max(0.55, Math.min(1.1, (state.fov || (DOCTRINE.fovBaselinePx || 22)) / (DOCTRINE.fovBaselinePx || 22)));
-    const bulletThreat = state.bullets.some((b) => b.enemy && b.dist < DOCTRINE.bulletDangerRadius * fovMul);
+    // v36: perception normalizes all decision fields to world units at the boundary (state.mjs), so
+    // the v32-era per-threshold fovMul multiplications are GONE — that scheme rescaled only some
+    // radii (deleting the Ranger's FOV reach on the scaled ones, leaving the rest zoom-distorted).
+    // fovMul is still needed exactly once: converting world-frame predictions back to screen for aim.
+    const fovMul = state.fovMul || Math.max(0.45, Math.min(1.15, (state.fov || (DOCTRINE.fovBaselinePx || 22)) / (DOCTRINE.fovBaselinePx || 22)));
+    const bulletThreat = state.bullets.some((b) => b.enemy && b.dist < DOCTRINE.bulletDangerRadius);
     // v18 fragile-phase gating: a pre-drone Tank/Sniper (the "Sniper valley", 68% of all deaths) has
     // no drone screen, so flee earlier and from farther. v19 lead-protection: when a coherent populated
     // board says we're at/near #1, also play defensively (kills aren't worth the exposure; hunters home
@@ -398,7 +473,7 @@ export const BRAIN_FN = function (initialDoctrine) {
       && (meta.myScore || 0) > (DOCTRINE.leadMinScore || 5000)
       && meta.leaderMax > 0 && (meta.myScore || 0) >= meta.leaderMax * (DOCTRINE.leadScoreFrac || 0.45); // v21: reject sparse-board false leads
     const fScale = (fragile ? (DOCTRINE.fragilePhaseScale || 1) : 1) * (leading ? (DOCTRINE.leadScale || 1) : 1) * (postUpgrade ? (DOCTRINE.upgradeScale || 1) : 1);
-    const escapeR = (grace ? DOCTRINE.spawnEscapeRadius : DOCTRINE.escapeRadius * fScale) * fovMul;
+    const escapeR = grace ? DOCTRINE.spawnEscapeRadius : DOCTRINE.escapeRadius * fScale;
     const myR = state.me.r || 17;
     // Crowd pressure: ~87% of deaths are point-blank (<40px) with 2-3 foes converging, i.e. the
     // pocket gets collapsed because escape only fires on the single nearest enemy crossing escapeR
@@ -409,13 +484,13 @@ export const BRAIN_FN = function (initialDoctrine) {
     // weaker than it (a swarm of small tanks is a hunting opportunity, not a reason to flee).
     const preyR = myR * (DOCTRINE.preyRatio || 0.85);
     const dangerFoes = foes.filter((e) => !isDrone || e.r >= preyR);
-    const crowdN = dangerFoes.filter((e) => e.dist < (DOCTRINE.crowdRadius || 300) * fScale * fovMul).length;
+    const crowdN = dangerFoes.filter((e) => e.dist < (DOCTRINE.crowdRadius || 300) * fScale).length;
     const crowded = crowdN >= (DOCTRINE.crowdCount || 2);
 
     // v17 threat field: continuous pressure + the open-lane heading. Drives graded spacing while
     // farming and an EARLY forced breakout when pressure is high or we are being surrounded (no clean
     // lane), so the pocket never collapses to the point-blank death the corpus shows 84% of the time.
-    const tg = threatGeometry(foes, fovMul);
+    const tg = threatGeometry(foes);
     const surrounded = !grace && tg.nThreat >= 2 && tg.maxGapDeg < (DOCTRINE.safeLaneMinDeg || 110);
     const overPressure = !grace && tg.pressure > (DOCTRINE.pressureEscape || 0.075) / fScale;
     const gapEsc = tg.gapDir ? [tg.gapDir] : null;
@@ -427,15 +502,18 @@ export const BRAIN_FN = function (initialDoctrine) {
     // (the 24,971-style phantom) can never make us flee a ghost. The streak decays x2 as fast as it
     // builds, so flicker can't accumulate into a false trigger. A confirmed predator is fled at
     // predatorFleeRadius, well beyond the normal escapeRadius (flee big tanks early, they're faster).
-    const predConfirm = DOCTRINE.predatorConfirmFrames || 16;
+    // v36: the confirmation streak is a wall-clock ms accumulator (display-independent); it still
+    // builds only on consecutive presence and decays 2x as fast as it builds, capped just above the
+    // threshold so a long stalk can't bank hours of confirmation.
+    const predConfirm = DOCTRINE.predatorConfirmMs || 270;
     let predCand = null, pcd = Infinity;
     for (const e of foes) {
-      if (e.r >= myR * (DOCTRINE.predatorRatio || 1.15) && e.dist < (DOCTRINE.predatorDetectRadius || 460) * fovMul && e.dist < pcd) { pcd = e.dist; predCand = e; }
+      if (e.r >= myR * (DOCTRINE.predatorRatio || 1.15) && e.dist < (DOCTRINE.predatorDetectRadius || 550) && e.dist < pcd) { pcd = e.dist; predCand = e; }
     }
-    if (predCand) { B.hunterStreak = Math.min(predConfirm + 4, B.hunterStreak + 1); B.hunterLast = predCand; }
-    else { B.hunterStreak = Math.max(0, B.hunterStreak - 2); if (B.hunterStreak === 0) B.hunterLast = null; }
+    if (predCand) { B.hunterStreak = Math.min(predConfirm + 80, B.hunterStreak + frameDt); B.hunterLast = predCand; }
+    else { B.hunterStreak = Math.max(0, B.hunterStreak - 2 * frameDt); if (B.hunterStreak === 0) B.hunterLast = null; }
     const predatorConfirmed = B.hunterStreak >= predConfirm && !!B.hunterLast && state.me.alive;
-    const predatorClose = predatorConfirmed && B.hunterLast.dist < (DOCTRINE.predatorFleeRadius || 320) * fScale * fovMul;
+    const predatorClose = predatorConfirmed && B.hunterLast.dist < (DOCTRINE.predatorFleeRadius || 320) * fScale;
     // Instrument the encounter: open on first confirmation, track closest approach, mark fled when we
     // actually enter predator-flight. Closed on escape (here) or death (the death branch above).
     if (predatorConfirmed) {
@@ -469,26 +547,30 @@ export const BRAIN_FN = function (initialDoctrine) {
     const canHunt = (cls !== 'Tank' || ramNow) && !grace;
     let prey = null;
     if (canHunt) {
-      const PURSUIT = DOCTRINE.pursuitFrames || 90;
+      const PURSUIT = DOCTRINE.pursuitMs || 1500; // v36 ms-denominated
       const MATCH = DOCTRINE.preyMatchRadius || 90;
-      if (B.lockedPrey) { B.lockedPrey.x += B.lockedPrey.vx || 0; B.lockedPrey.y += B.lockedPrey.vy || 0; } // dead-reckon
+      // The lock stores SCREEN x/y (aiming space) with SCREEN velocities (svx/svy = world v * fovMul)
+      // for dead-reckoning; the ghost's decision fields are converted back to world units. Mixing the
+      // two spaces here was a real bug class once perception went world-normalized (v36).
+      if (B.lockedPrey) { B.lockedPrey.x += B.lockedPrey.svx || 0; B.lockedPrey.y += B.lockedPrey.svy || 0; } // dead-reckon
       let matched = null;
       if (B.lockedPrey) {
         let bestD = MATCH;
-        for (const e of foes) { if (e.r >= myR * (DOCTRINE.preyRatio || 0.85)) continue; const d = Math.hypot(e.x - B.lockedPrey.x, e.y - B.lockedPrey.y); if (d < bestD) { bestD = d; matched = e; } }
+        for (const e of foes) { if (e.r >= myR * (DOCTRINE.preyRatio || 0.85)) continue; const d = Math.hypot(e.x - B.lockedPrey.x, e.y - B.lockedPrey.y) / fovMul; if (d < bestD) { bestD = d; matched = e; } }
       }
       const canPursue = !crowded && !predatorClose && !surrounded && !overPressure;
       if (matched) {
         prey = matched;
-        B.lockedPrey = { x: matched.x, y: matched.y, vx: matched.vx || 0, vy: matched.vy || 0, r: matched.r, seen: B.frames };
-      } else if (B.lockedPrey && canPursue && (B.frames - B.lockedPrey.seen) < PURSUIT) {
+        B.lockedPrey = { x: matched.x, y: matched.y, svx: (matched.vx || 0) * fovMul, svy: (matched.vy || 0) * fovMul, r: matched.r, seen: tNow };
+      } else if (B.lockedPrey && canPursue && (tNow - B.lockedPrey.seen) < PURSUIT) {
         // lost sight of the locked prey but recently committed -> chase its predicted spot to finish it
         const lp = B.lockedPrey;
-        prey = { x: lp.x, y: lp.y, dx: lp.x - CENTER.x, dy: lp.y - CENTER.y, dist: Math.hypot(lp.x - CENTER.x, lp.y - CENTER.y), r: lp.r, vx: 0, vy: 0, ghost: true };
+        const gdx = (lp.x - CENTER.x) / fovMul, gdy = (lp.y - CENTER.y) / fovMul;
+        prey = { x: lp.x, y: lp.y, dx: gdx, dy: gdy, dist: Math.hypot(gdx, gdy), r: lp.r, vx: 0, vy: 0, ghost: true };
       } else {
         B.lockedPrey = null; // no lock or it expired/we're in danger -> acquire fresh
         const fresh = bestPrey(foes, myR);
-        if (fresh && canPursue) { prey = fresh; B.lockedPrey = { x: fresh.x, y: fresh.y, vx: fresh.vx || 0, vy: fresh.vy || 0, r: fresh.r, seen: B.frames }; }
+        if (fresh && canPursue) { prey = fresh; B.lockedPrey = { x: fresh.x, y: fresh.y, svx: (fresh.vx || 0) * fovMul, svy: (fresh.vy || 0) * fovMul, r: fresh.r, seen: tNow }; }
       }
     } else { B.lockedPrey = null; }
     // v34: don't chase prey while a clearly-bigger tank is near. 8/25 Sniper deaths were hunt-chase:
@@ -500,24 +582,52 @@ export const BRAIN_FN = function (initialDoctrine) {
     const huntable = DOCTRINE.huntEnabled && prey && !crowded && !predatorClose && !surrounded && !overPressure && !leading && !biggerNear;
 
     // Each tactical mode is an action: it returns the movement keys + aim and labels B.mode.
+    // v36 KITE BAND: pure straight-line flight measurably LOSES to standing ground (fled encounters
+    // died 39% vs 24% stood, n=2,735) because ranged hunters kill from ~280 units stand-off — the
+    // bot was shot down while running, never caught (median closure only ~20px). So once the pursuer
+    // is outside the hard flee radius (escapeR) but still inside the kite band, blend TANGENTIAL
+    // headings into the escape sampler (hold/open the range band instead of giving the hunter a
+    // zero-deflection stern chase) and keep LEAD-FIRING at the pursuer the whole way — a sniper's
+    // version of the v15 drone screen, the one intervention that ever beat ranged hunters.
+    const kiteCandidates = (t) => {
+      const m = Math.hypot(t.dx, t.dy) || 1;
+      const ux = t.dx / m, uy = t.dy / m; // unit toward the pursuer
+      const s = 0.7071;
+      // Both pure tangents plus both 45° retreat-tangent blends (normalize(away + tangent));
+      // bestEscapeDir scores them against walls/shapes/other foes, so a tangent into a second
+      // threat or a wall never wins.
+      return [
+        [-uy, ux], [uy, -ux], // pure tangents
+        [(-ux - uy) * s, (ux - uy) * s], // away + tangent1
+        [(-ux + uy) * s, (-ux - uy) * s], // away + tangent2
+      ];
+    };
     const actEscape = () => {
       // Predator flight takes priority: flee the confirmed hunter specifically (it dominates the
       // direction sampler), not just the average threat vector.
       if (predatorClose && B.hunterLast) {
-        B.mode = 'predator-flee';
         if (B.activeEncounter) B.activeEncounter.fled = true;
+        const hd = B.hunterLast.dist || 0;
+        const kiting = !isDrone && hd >= escapeR && hd < escapeR * (DOCTRINE.kiteBandMul || 1.6);
+        B.mode = kiting ? 'predator-kite' : 'predator-flee';
         // Flee along the open lane (gapDir), not just away from the one hunter - the corpus shows
-        // straight-line flight from a hunter loses ground (fled died 43% vs not-fled 25%) because we
-        // run into the rest of the field. The lane keeps the whole threat field behind us.
-        const [dx, dy] = bestEscapeDir(state, B.hunterLast, gapEsc);
+        // straight-line flight from a hunter loses ground because we run into the rest of the field.
+        const extra = kiting ? (gapEsc || []).concat(kiteCandidates(B.hunterLast)) : gapEsc;
+        const [dx, dy] = bestEscapeDir(state, B.hunterLast, extra);
+        // v36: a bullet-class tank fleeing a predator aims at THE HUNTER (with lead), not at the
+        // nearest foe — Ranger recoil also pushes us away from it. Drone classes keep the v15
+        // drone-screen aim (drives drones onto the hunter).
         const aim = (DOCTRINE.droneScreen && isDrone)
           ? { x: B.hunterLast.x, y: B.hunterLast.y }
-          : (nearest ? { x: nearest.x, y: nearest.y } : { x: B.hunterLast.x, y: B.hunterLast.y });
+          : leadAim(B.hunterLast, fovMul);
         return { moveKeys: vectorToKeys(dx, dy), aim };
       }
-      B.mode = grace ? 'spawn-escape' : (surrounded ? 'breakout' : 'escape');
-      const [dx, dy] = bestEscapeDir(state, null, gapEsc);
-      return { moveKeys: vectorToKeys(dx, dy), aim: nearest ? { x: nearest.x, y: nearest.y } : (window.__lastAim || { x: 900, y: 360 }) };
+      const kt = !grace && !isDrone && nearest ? nearest : null;
+      const kiting = kt && nd >= escapeR && nd < escapeR * (DOCTRINE.kiteBandMul || 1.6);
+      B.mode = grace ? 'spawn-escape' : (surrounded ? 'breakout' : (kiting ? 'kite' : 'escape'));
+      const extra = kiting ? (gapEsc || []).concat(kiteCandidates(kt)) : gapEsc;
+      const [dx, dy] = bestEscapeDir(state, null, extra);
+      return { moveKeys: vectorToKeys(dx, dy), aim: nearest ? leadAim(nearest, fovMul) : (window.__lastAim || { x: 900, y: 360 }) };
     };
     const actHunt = () => {
       const t = prey || nearest; // chase the chosen prey, not just whoever is nearest
@@ -526,13 +636,13 @@ export const BRAIN_FN = function (initialDoctrine) {
       // Close to standoff so drones reach the target, then hold (don't body-ram a tank). When pursuing
       // a prey that slipped out of sight, always push toward its predicted spot to catch and finish it.
       const mk = (t.ghost || t.dist > standoff) ? vectorToKeys(t.dx, t.dy) : vectorToKeys(-t.dx, -t.dy);
-      return { moveKeys: mk, aim: { x: t.x, y: t.y } };
+      return { moveKeys: mk, aim: leadAim(t, fovMul) }; // v36: intercept the prey, don't trail it
     };
     function actFarm() {
       // v20 economy: only chase high-XP pentagons as a drone class when it's genuinely calm
       // (pressure below the spacing floor) - a pressure veto so the score push never trades away survival.
       const econ = (isDrone && tg.pressure < (DOCTRINE.spacingFloor || 0.02)) ? (DOCTRINE.dronePentagonBonus || 0) : 0;
-      const target = bestShape(state.shapes, tg.toward, tg.pressure, econ);
+      const target = bestShape(state.shapes, tg.toward, tg.pressure, econ, foes, fovMul);
       if (!target) return actPatrol();
       const spaced = tg.pressure > (DOCTRINE.spacingFloor || 0.02);
       B.mode = spaced ? 'space-farm' : 'farm';
@@ -572,9 +682,26 @@ export const BRAIN_FN = function (initialDoctrine) {
         B.anchorIdx = B.anchorIdx ?? 0;
         let a = anchors[B.anchorIdx % anchors.length];
         if (Math.hypot(a[0] - pos.x, a[1] - pos.y) < DOCTRINE.anchorReachedDist) { B.anchorIdx = (B.anchorIdx + 1) % anchors.length; a = anchors[B.anchorIdx]; }
-        return { moveKeys: vectorToKeys(a[0] - pos.x, a[1] - pos.y), aim: { x: 640 + (a[0] - pos.x) * 600, y: 360 + (a[1] - pos.y) * 600 } };
+        // v36 far-field: blend the anchor heading away from any enemy presence en route, so patrol
+        // routes around occupied space instead of marching through it.
+        const ah = Math.hypot(a[0] - pos.x, a[1] - pos.y) || 1;
+        let hx = (a[0] - pos.x) / ah, hy = (a[1] - pos.y) / ah;
+        const ffR = DOCTRINE.farFieldRadius || 700;
+        if ((DOCTRINE.farFieldWeight || 0) > 0 && nearest && nd < ffR) {
+          const k = Math.min(0.7, 1 - nd / ffR);
+          const m = nearest.dist || 1;
+          hx = hx * (1 - k) - (nearest.dx / m) * k;
+          hy = hy * (1 - k) - (nearest.dy / m) * k;
+        }
+        return { moveKeys: vectorToKeys(hx, hy), aim: { x: 640 + hx * 600, y: 360 + hy * 600 } };
       }
-      return { moveKeys: vectorToKeys(0.6, -0.5), aim: { x: 1000, y: 200 } };
+      // v36.1: no minimap read (Sandbox renders no arrow) -> SWEEP instead of a fixed diagonal.
+      // The old fixed (0.6,-0.5) heading marched the tank into the nearest corner and pinned it
+      // there for good once local shapes ran dry (bench 3: 180s of corner-staring patrol). A slow
+      // rotating heading leaves any corner and re-crosses the shape fields.
+      const a = ((tNow / 9000) % 1) * Math.PI * 2;
+      const hx = Math.cos(a), hy = Math.sin(a);
+      return { moveKeys: vectorToKeys(hx, hy), aim: { x: 640 + hx * 600, y: 360 + hy * 600 } };
     }
     const ACT = { escape: actEscape, hunt: actHunt, farm: actFarm, patrol: actPatrol };
 
@@ -626,6 +753,18 @@ export const BRAIN_FN = function (initialDoctrine) {
     // converging crowd, being surrounded (no clean lane), or threat pressure over the escape budget.
     // Any breaks farming/hunting immediately so the pocket never closes to the point-blank collapse.
     if (!grace && (predatorClose || crowded || surrounded || overPressure)) chosen = 'escape';
+    // v36 KITE HYSTERESIS: entering escape latches it; the latch releases only once the field is
+    // calm AND the nearest foe has been pushed clearly outside the exit band (kiteExitMul*escapeR).
+    // Without this the mode thrashed farm<->escape right at the escapeR boundary — never actually
+    // opening distance, which is the corpus's signature of being slowly run down. The latch defers
+    // to hunt (prey engagement is gated by its own danger checks), it only overrides farm/patrol.
+    if (!grace) {
+      if (chosen === 'escape') B.escaping = true;
+      else if (B.escaping
+        && (!nearest || nd > escapeR * (DOCTRINE.kiteExitMul || 1.4))
+        && !bulletThreat && !predatorClose && !crowded && !surrounded && !overPressure) B.escaping = false;
+      if (B.escaping && (chosen === 'farm' || chosen === 'patrol')) chosen = 'escape';
+    } else B.escaping = false;
 
     // === RL Phase 0: per-decision transition logging ===
     // The brain decides at frame rate but telemetry only logged ~5s heartbeats, so no (state,action,
@@ -634,10 +773,11 @@ export const BRAIN_FN = function (initialDoctrine) {
     // telemetry/transitions-*.jsonl. The rules bot thus becomes a behavior-policy data factory: the
     // 16-dim feature vector (values already computed above) + the action + score (for offline reward =
     // next.score - score) + the qStateKey + forced-override + life id. Pure logging - no behavior change.
-    const RL_LOG_EVERY = DOCTRINE.transitionLogEvery || 12; // ~5 decisions/sec at 60fps
-    if (!grace || (B.frames % (RL_LOG_EVERY * 2) === 0)) { // log fewer during spawn grace
-      if (B.frames - (B._lastTxFrame || -999) >= RL_LOG_EVERY) {
-        B._lastTxFrame = B.frames;
+    const RL_LOG_MS = DOCTRINE.transitionLogMs || 200; // ~5 decisions/sec, display-independent (v36)
+    {
+      const cadence = grace ? RL_LOG_MS * 2 : RL_LOG_MS; // log fewer during spawn grace
+      if (tNow - (B._lastTxMs != null ? B._lastTxMs : -1e9) >= cadence) {
+        B._lastTxMs = tNow;
         (window.__transitionLog = window.__transitionLog || []).push({
           f: B.frames, life: B.lifeStartFrame || 0, sKey: qStateKey(state, { isDrone, nearest, nd, foes, bulletThreat, escapeR, myR }),
           x: feat.map((v) => +v.toFixed(3)), a: chosen, bc: B.bcActive ? 1 : 0,
@@ -659,7 +799,7 @@ export const BRAIN_FN = function (initialDoctrine) {
       const combatRange = DOCTRINE.combatRange || 400;
       const engaging = nd < combatRange || state.bullets.some((b) => b.enemy && b.dist < combatRange);
       if (engaging) {
-        aim = { x: nearest.x, y: nearest.y };
+        aim = leadAim(nearest, fovMul); // v36: return fire leads the target
         if (chosen === 'farm' || chosen === 'patrol') B.mode = B.mode + '+fire';
       }
     }
@@ -673,18 +813,23 @@ export const BRAIN_FN = function (initialDoctrine) {
     const dodge = bulletDodge(state);
     if (dodge) { moveKeys = vectorToKeys(dodge[0], dodge[1]); B.mode = B.mode + '+dodge'; }
 
+    if (firing) moveKeys.add(' '); // v36.1: SPACE = fire, held exactly like a movement key
     setHeld(moveKeys);
-    if (aim && DOCTRINE.aimEveryFrame) moveMouse(aim.x, aim.y);
+    // v36: the runner suspends synthetic aim briefly around trusted upgrade clicks (a stable pointer
+    // is all the click needs) — movement keeps running, so the tank no longer freezes at L15/30/45.
+    if (aim && DOCTRINE.aimEveryFrame && !aimSuspended) moveMouse(aim.x, aim.y);
 
     B._raf = requestAnimationFrame(step);
   }
 
   // start() begins a fresh life: autofire is off on a new tank, so allow it to be re-enabled.
-  B.start = () => { if (B.running) return; B.running = true; B.autofireOn = false; B._raf = requestAnimationFrame(step); };
+  // v36: stamp the life clock here too — the runner calls start() right after each (re)spawn, so
+  // the ms-denominated spawn grace measures from the actual life start, not from page navigation.
+  B.start = () => { if (B.running) return; B.running = true; B.autofireOn = false; B.lifeStartMs = now(); B._raf = requestAnimationFrame(step); };
   B.stop = () => { B.running = false; releaseAll(); };
   // pause()/resume() bracket a brief external action (e.g. an upgrade click) WITHOUT touching
   // autofire state, so resuming does not toggle E and turn our guns off mid-life.
   B.pause = () => { B.running = false; releaseAll(); };
   B.resume = () => { if (B.running) return; B.running = true; B._raf = requestAnimationFrame(step); };
-  B.snapshot = () => ({ frames: B.frames, mode: B.mode, statIdx: B.statIdx, autofireOn: B.autofireOn, hunterStreak: B.hunterStreak, predator: !!B.hunterLast });
+  B.snapshot = () => ({ frames: B.frames, mode: B.mode, statIdx: B.statIdx, autofireOn: B.autofireOn, hunterStreak: B.hunterStreak, predator: !!B.hunterLast, gapRejects: B.gapRejects || 0, lifeResets: B.lifeResets || 0 });
 };

@@ -1,0 +1,155 @@
+{"t":1781905611807,"event":"shift_start","shiftId":"2026-06-19T21-46-50-162Z","doctrine":33,"shiftMs":3600000}
+{"t":1781905615756,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 403 ()"}
+{"t":1781905618713,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 401 ()"}
+{"t":1781905618806,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781905618806,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781905622369,"event":"pageerror","text":"Access to fetch at 'https://restcountries.com/v3.1/alpha/US' from origin 'https://diep.io' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource"}
+{"t":1781905622370,"event":"pageerror","text":"Failed to load resource: net::ERR_FAILED"}
+{"t":1781905622838,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1781905624954,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1781905624955,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1781905624955,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1781905625020,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 (Not Found)"}
+{"t":1781905625666,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 424 (Failed Dependency)"}
+{"t":1781905625723,"event":"pageerror","text":"Failed to load resource: net::ERR_HTTP2_SERVER_REFUSED_STREAM"}
+{"t":1781905625723,"event":"pageerror","text":"Failed to load resource: net::ERR_HTTP2_SERVER_REFUSED_STREAM"}
+{"t":1781905626013,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 424 (Failed Dependency)"}
+{"t":1781905626013,"event":"pageerror","text":"Failed to load resource: net::ERR_HTTP2_SERVER_REFUSED_STREAM"}
+{"t":1781905626013,"event":"pageerror","text":"Failed to load resource: net::ERR_HTTP2_SERVER_REFUSED_STREAM"}
+{"t":1781905626094,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 424 (Failed Dependency)"}
+{"t":1781905626094,"event":"pageerror","text":"Failed to load resource: net::ERR_HTTP2_SERVER_REFUSED_STREAM"}
+{"t":1781905626094,"event":"pageerror","text":"Failed to load resource: net::ERR_HTTP2_SERVER_REFUSED_STREAM"}
+{"t":1781905626206,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 400 (Bad Request)"}
+{"t":1781905626413,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781905626413,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781905626570,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 401 ()"}
+{"t":1781905626678,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 424 (Failed Dependency)"}
+{"t":1781905627300,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1781905628669,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 (Not Found)"}
+{"t":1781905629403,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 400 (Bad Request)"}
+{"t":1781905629577,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 400 (Bad Request)"}
+{"t":1781905629582,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 400 (Bad Request)"}
+{"t":1781905629582,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 400 (Bad Request)"}
+{"t":1781905630049,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1781905632438,"event":"spawn","ok":true}
+{"t":1781905633254,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 400 (Bad Request)"}
+{"t":1781905633254,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 400 (Bad Request)"}
+{"t":1781905633257,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 400 (Bad Request)"}
+{"t":1781905633260,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 400 (Bad Request)"}
+{"t":1781905633260,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 400 (Bad Request)"}
+{"t":1781905633260,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 400 (Bad Request)"}
+{"t":1781905633260,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 400 (Bad Request)"}
+{"t":1781905634772,"event":"death","n":1,"lifeMs":2017,"cls":"Tank","lvl":1,"screenshot":"death-2026-06-19T21-46-50-162Z-1.png","enemiesNear":[]}
+{"t":1781905634772,"event":"life_scored","mode":"rules","build":"overlord","fitness":116,"score":0,"level":1,"lifeMs":2334}
+{"t":1781905635478,"event":"respawned","alive":true}
+{"t":1781905638311,"event":"heartbeat","elapsed":5055,"alive":true,"life":2832,"deaths":1,"cls":"Tank","lvl":1,"mode":"spawn-escape","myScore":0,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905643569,"event":"heartbeat","elapsed":10309,"alive":true,"life":8090,"deaths":1,"cls":"Tank","lvl":3,"mode":"farm","myScore":50,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905648828,"event":"heartbeat","elapsed":15573,"alive":true,"life":13349,"deaths":1,"cls":"Tank","lvl":5,"mode":"farm","myScore":90,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905654205,"event":"heartbeat","elapsed":20938,"alive":true,"life":18726,"deaths":1,"cls":"Tank","lvl":6,"mode":"farm","myScore":245,"leaderMax":245,"estRank":1,"boardSize":12}
+{"t":1781905658710,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 404 (Not Found)"}
+{"t":1781905658716,"event":"pageerror","text":"Failed to load resource: net::ERR_NAME_NOT_RESOLVED"}
+{"t":1781905659539,"event":"heartbeat","elapsed":26277,"alive":true,"life":24060,"deaths":1,"cls":"Tank","lvl":9,"mode":"farm","myScore":295,"leaderMax":294,"estRank":1,"boardSize":8}
+{"t":1781905664791,"event":"heartbeat","elapsed":31535,"alive":true,"life":29312,"deaths":1,"cls":"Tank","lvl":11,"mode":"farm","myScore":490,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905670046,"event":"heartbeat","elapsed":36787,"alive":true,"life":34567,"deaths":1,"cls":"Tank","lvl":12,"mode":"farm","myScore":530,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905675396,"event":"heartbeat","elapsed":42143,"alive":true,"life":39917,"deaths":1,"cls":"Tank","lvl":14,"mode":"farm","myScore":730,"leaderMax":725,"estRank":1,"boardSize":3}
+{"t":1781905680647,"event":"heartbeat","elapsed":47393,"alive":true,"life":45168,"deaths":1,"cls":"Tank","lvl":14,"mode":"farm","myScore":795,"leaderMax":795,"estRank":1,"boardSize":9}
+{"t":1781905681261,"event":"upgrade_attempt","from":"Tank","tile":1,"want":"Sniper","level":15}
+{"t":1781905681683,"event":"upgrade_ok","from":"Tank","to":"Sniper","want":"Sniper","tile":1}
+{"t":1781905685726,"event":"heartbeat","elapsed":52475,"alive":true,"life":50247,"deaths":1,"cls":"Sniper","lvl":16,"mode":"farm","myScore":990,"leaderMax":990,"estRank":1,"boardSize":12}
+{"t":1781905690978,"event":"heartbeat","elapsed":57720,"alive":true,"life":55499,"deaths":1,"cls":"Sniper","lvl":16,"mode":"farm","myScore":1065,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905696320,"event":"heartbeat","elapsed":63069,"alive":true,"life":60841,"deaths":1,"cls":"Sniper","lvl":17,"mode":"farm","myScore":1195,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905701576,"event":"heartbeat","elapsed":68318,"alive":true,"life":66097,"deaths":1,"cls":"Sniper","lvl":17,"mode":"farm","myScore":1290,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905706829,"event":"heartbeat","elapsed":73576,"alive":true,"life":71350,"deaths":1,"cls":"Sniper","lvl":18,"mode":"farm","myScore":1495,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905712078,"event":"heartbeat","elapsed":78826,"alive":true,"life":76599,"deaths":1,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1570,"leaderMax":1600,"estRank":1,"boardSize":1}
+{"t":1781905717427,"event":"heartbeat","elapsed":84176,"alive":true,"life":81948,"deaths":1,"cls":"Sniper","lvl":19,"mode":"farm","myScore":1675,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905722670,"event":"heartbeat","elapsed":89424,"alive":true,"life":87191,"deaths":1,"cls":"Sniper","lvl":20,"mode":"farm","myScore":1855,"leaderMax":1900,"estRank":1,"boardSize":1}
+{"t":1781905727933,"event":"heartbeat","elapsed":94671,"alive":true,"life":92454,"deaths":1,"cls":"Sniper","lvl":20,"mode":"farm","myScore":1940,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905733177,"event":"heartbeat","elapsed":99926,"alive":true,"life":97698,"deaths":1,"cls":"Sniper","lvl":21,"mode":"farm","myScore":2125,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905738525,"event":"heartbeat","elapsed":105272,"alive":true,"life":103046,"deaths":1,"cls":"Sniper","lvl":21,"mode":"farm","myScore":2460,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905743772,"event":"heartbeat","elapsed":110521,"alive":true,"life":108293,"deaths":1,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2510,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905749021,"event":"heartbeat","elapsed":115772,"alive":true,"life":113542,"deaths":1,"cls":"Sniper","lvl":22,"mode":"farm","myScore":2778,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905754268,"event":"heartbeat","elapsed":121019,"alive":true,"life":118789,"deaths":1,"cls":"Sniper","lvl":23,"mode":"farm","myScore":2970,"leaderMax":3000,"estRank":1,"boardSize":1}
+{"t":1781905759639,"event":"heartbeat","elapsed":126386,"alive":true,"life":124160,"deaths":1,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3075,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905764891,"event":"heartbeat","elapsed":131635,"alive":true,"life":129412,"deaths":1,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3205,"leaderMax":3200,"estRank":1,"boardSize":1}
+{"t":1781905770140,"event":"heartbeat","elapsed":136889,"alive":true,"life":134661,"deaths":1,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3305,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905775393,"event":"heartbeat","elapsed":142138,"alive":true,"life":139914,"deaths":1,"cls":"Sniper","lvl":24,"mode":"farm","myScore":3505,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905780743,"event":"heartbeat","elapsed":147492,"alive":true,"life":145264,"deaths":1,"cls":"Sniper","lvl":25,"mode":"farm","myScore":3710,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905785991,"event":"heartbeat","elapsed":152739,"alive":true,"life":150512,"deaths":1,"cls":"Sniper","lvl":25,"mode":"farm","myScore":3845,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905791246,"event":"heartbeat","elapsed":157995,"alive":true,"life":155767,"deaths":1,"cls":"Sniper","lvl":26,"mode":"farm","myScore":3925,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905796507,"event":"heartbeat","elapsed":163250,"alive":true,"life":161028,"deaths":1,"cls":"Sniper","lvl":26,"mode":"farm","myScore":4040,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905801858,"event":"heartbeat","elapsed":168605,"alive":true,"life":166379,"deaths":1,"cls":"Sniper","lvl":26,"mode":"farm","myScore":4250,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905807118,"event":"heartbeat","elapsed":173862,"alive":true,"life":171639,"deaths":1,"cls":"Sniper","lvl":26,"mode":"farm","myScore":4325,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905812372,"event":"heartbeat","elapsed":179120,"alive":true,"life":176893,"deaths":1,"cls":"Sniper","lvl":26,"mode":"farm","myScore":4395,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905817634,"event":"heartbeat","elapsed":184378,"alive":true,"life":182155,"deaths":1,"cls":"Sniper","lvl":27,"mode":"farm","myScore":4510,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905823008,"event":"heartbeat","elapsed":189748,"alive":true,"life":187529,"deaths":1,"cls":"Sniper","lvl":27,"mode":"farm","myScore":4735,"leaderMax":4700,"estRank":1,"boardSize":1}
+{"t":1781905828265,"event":"heartbeat","elapsed":195014,"alive":true,"life":192786,"deaths":1,"cls":"Sniper","lvl":27,"mode":"farm","myScore":4812,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905833532,"event":"heartbeat","elapsed":200277,"alive":true,"life":198053,"deaths":1,"cls":"Sniper","lvl":27,"mode":"farm","myScore":4920,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905838791,"event":"heartbeat","elapsed":205539,"alive":true,"life":203312,"deaths":1,"cls":"Sniper","lvl":28,"mode":"farm","myScore":5040,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905844149,"event":"heartbeat","elapsed":210892,"alive":true,"life":208670,"deaths":1,"cls":"Sniper","lvl":28,"mode":"farm","myScore":5110,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905849415,"event":"heartbeat","elapsed":216156,"alive":true,"life":213936,"deaths":1,"cls":"Sniper","lvl":28,"mode":"farm","myScore":5175,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905854666,"event":"heartbeat","elapsed":221413,"alive":true,"life":219187,"deaths":1,"cls":"Sniper","lvl":28,"mode":"farm","myScore":5515,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905859933,"event":"heartbeat","elapsed":226678,"alive":true,"life":224454,"deaths":1,"cls":"Sniper","lvl":29,"mode":"farm","myScore":5600,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905865296,"event":"heartbeat","elapsed":232038,"alive":true,"life":229817,"deaths":1,"cls":"Sniper","lvl":29,"mode":"farm","myScore":5730,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905870554,"event":"heartbeat","elapsed":237300,"alive":true,"life":235075,"deaths":1,"cls":"Sniper","lvl":29,"mode":"farm","myScore":5885,"leaderMax":5900,"estRank":1,"boardSize":1}
+{"t":1781905875804,"event":"heartbeat","elapsed":242553,"alive":true,"life":240325,"deaths":1,"cls":"Sniper","lvl":29,"mode":"farm","myScore":6070,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905881071,"event":"heartbeat","elapsed":247808,"alive":true,"life":245592,"deaths":1,"cls":"Sniper","lvl":29,"mode":"farm","myScore":6169,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905885012,"event":"upgrade_attempt","from":"Sniper","tile":0,"want":"Assassin","level":30}
+{"t":1781905885436,"event":"upgrade_ok","from":"Sniper","to":"Assassin","want":"Assassin","tile":0}
+{"t":1781905886649,"event":"heartbeat","elapsed":253399,"alive":true,"life":251170,"deaths":1,"cls":"Assassin","lvl":30,"mode":"up-farm","myScore":6355,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905891903,"event":"heartbeat","elapsed":258651,"alive":true,"life":256424,"deaths":1,"cls":"Assassin","lvl":30,"mode":"farm","myScore":6432,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905897168,"event":"heartbeat","elapsed":263915,"alive":true,"life":261689,"deaths":1,"cls":"Assassin","lvl":30,"mode":"farm","myScore":6530,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905902423,"event":"heartbeat","elapsed":269172,"alive":true,"life":266944,"deaths":1,"cls":"Assassin","lvl":30,"mode":"farm","myScore":6760,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905907788,"event":"heartbeat","elapsed":274530,"alive":true,"life":272309,"deaths":1,"cls":"Assassin","lvl":31,"mode":"farm","myScore":6975,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905913051,"event":"heartbeat","elapsed":279795,"alive":true,"life":277572,"deaths":1,"cls":"Assassin","lvl":31,"mode":"farm","myScore":7040,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905918303,"event":"heartbeat","elapsed":285053,"alive":true,"life":282824,"deaths":1,"cls":"Assassin","lvl":31,"mode":"farm","myScore":7115,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905923662,"event":"heartbeat","elapsed":290407,"alive":true,"life":288183,"deaths":1,"cls":"Assassin","lvl":31,"mode":"farm","myScore":7185,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905928915,"event":"heartbeat","elapsed":295663,"alive":true,"life":293436,"deaths":1,"cls":"Assassin","lvl":31,"mode":"farm","myScore":7295,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905934169,"event":"heartbeat","elapsed":300916,"alive":true,"life":298690,"deaths":1,"cls":"Assassin","lvl":31,"mode":"farm","myScore":7480,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905939425,"event":"heartbeat","elapsed":306172,"alive":true,"life":303946,"deaths":1,"cls":"Assassin","lvl":31,"mode":"farm","myScore":7580,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905944799,"event":"heartbeat","elapsed":311544,"alive":true,"life":309320,"deaths":1,"cls":"Assassin","lvl":31,"mode":"farm","myScore":7750,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905950066,"event":"heartbeat","elapsed":316810,"alive":true,"life":314587,"deaths":1,"cls":"Assassin","lvl":32,"mode":"farm","myScore":7825,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905955323,"event":"heartbeat","elapsed":322069,"alive":true,"life":319844,"deaths":1,"cls":"Assassin","lvl":32,"mode":"farm","myScore":7910,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905960582,"event":"heartbeat","elapsed":327328,"alive":true,"life":325103,"deaths":1,"cls":"Assassin","lvl":32,"mode":"farm","myScore":8005,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905965939,"event":"heartbeat","elapsed":332685,"alive":true,"life":330460,"deaths":1,"cls":"Assassin","lvl":32,"mode":"farm","myScore":8260,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905971198,"event":"heartbeat","elapsed":337945,"alive":true,"life":335719,"deaths":1,"cls":"Assassin","lvl":32,"mode":"farm","myScore":8456,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905976456,"event":"heartbeat","elapsed":343204,"alive":true,"life":340977,"deaths":1,"cls":"Assassin","lvl":32,"mode":"farm","myScore":8510,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905981707,"event":"heartbeat","elapsed":348457,"alive":true,"life":346228,"deaths":1,"cls":"Assassin","lvl":33,"mode":"farm","myScore":8560,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905987070,"event":"heartbeat","elapsed":353810,"alive":true,"life":351591,"deaths":1,"cls":"Assassin","lvl":33,"mode":"farm","myScore":8730,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905992335,"event":"heartbeat","elapsed":359083,"alive":true,"life":356856,"deaths":1,"cls":"Assassin","lvl":33,"mode":"farm","myScore":8810,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781905997596,"event":"heartbeat","elapsed":364338,"alive":true,"life":362117,"deaths":1,"cls":"Assassin","lvl":33,"mode":"farm","myScore":9000,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906002863,"event":"heartbeat","elapsed":369606,"alive":true,"life":367384,"deaths":1,"cls":"Assassin","lvl":33,"mode":"farm","myScore":9230,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906008232,"event":"heartbeat","elapsed":374972,"alive":true,"life":372753,"deaths":1,"cls":"Assassin","lvl":33,"mode":"farm","myScore":9445,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906013492,"event":"heartbeat","elapsed":380235,"alive":true,"life":378013,"deaths":1,"cls":"Assassin","lvl":34,"mode":"farm","myScore":9538,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906018755,"event":"heartbeat","elapsed":385498,"alive":true,"life":383276,"deaths":1,"cls":"Assassin","lvl":34,"mode":"farm","myScore":9580,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906024021,"event":"heartbeat","elapsed":390762,"alive":true,"life":388542,"deaths":1,"cls":"Assassin","lvl":34,"mode":"farm","myScore":9760,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906029388,"event":"heartbeat","elapsed":396131,"alive":true,"life":393909,"deaths":1,"cls":"Assassin","lvl":34,"mode":"farm","myScore":9864,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906034639,"event":"heartbeat","elapsed":401390,"alive":true,"life":399160,"deaths":1,"cls":"Assassin","lvl":34,"mode":"farm","myScore":9965,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906039895,"event":"heartbeat","elapsed":406643,"alive":true,"life":404416,"deaths":1,"cls":"Assassin","lvl":34,"mode":"farm","myScore":10105,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906045154,"event":"heartbeat","elapsed":411899,"alive":true,"life":409675,"deaths":1,"cls":"Assassin","lvl":34,"mode":"farm","myScore":10165,"leaderMax":10200,"estRank":1,"boardSize":1}
+{"t":1781906050522,"event":"heartbeat","elapsed":417262,"alive":true,"life":415043,"deaths":1,"cls":"Assassin","lvl":34,"mode":"farm","myScore":10234,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906055774,"event":"heartbeat","elapsed":422522,"alive":true,"life":420295,"deaths":1,"cls":"Assassin","lvl":35,"mode":"farm","myScore":10425,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906061046,"event":"heartbeat","elapsed":427779,"alive":true,"life":425567,"deaths":1,"cls":"Assassin","lvl":35,"mode":"farm","myScore":10525,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906066309,"event":"heartbeat","elapsed":433051,"alive":true,"life":430830,"deaths":1,"cls":"Assassin","lvl":35,"mode":"farm","myScore":10610,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906071682,"event":"heartbeat","elapsed":438420,"alive":true,"life":436203,"deaths":1,"cls":"Assassin","lvl":35,"mode":"farm","myScore":10830,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906076949,"event":"heartbeat","elapsed":443688,"alive":true,"life":441470,"deaths":1,"cls":"Assassin","lvl":35,"mode":"farm","myScore":10925,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906082209,"event":"heartbeat","elapsed":448956,"alive":true,"life":446730,"deaths":1,"cls":"Assassin","lvl":35,"mode":"farm","myScore":11000,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906087463,"event":"heartbeat","elapsed":454210,"alive":true,"life":451984,"deaths":1,"cls":"Assassin","lvl":35,"mode":"farm","myScore":11210,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906092825,"event":"heartbeat","elapsed":459571,"alive":true,"life":457346,"deaths":1,"cls":"Assassin","lvl":35,"mode":"farm","myScore":11294,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906098084,"event":"heartbeat","elapsed":464829,"alive":true,"life":462605,"deaths":1,"cls":"Assassin","lvl":35,"mode":"farm","myScore":11360,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906103333,"event":"heartbeat","elapsed":470084,"alive":true,"life":467854,"deaths":1,"cls":"Assassin","lvl":36,"mode":"farm","myScore":11470,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906108604,"event":"heartbeat","elapsed":475343,"alive":true,"life":473125,"deaths":1,"cls":"Assassin","lvl":36,"mode":"farm","myScore":11550,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906113972,"event":"heartbeat","elapsed":480721,"alive":true,"life":478493,"deaths":1,"cls":"Assassin","lvl":36,"mode":"farm","myScore":11720,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906119233,"event":"heartbeat","elapsed":485977,"alive":true,"life":483754,"deaths":1,"cls":"Assassin","lvl":36,"mode":"farm","myScore":11770,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906124496,"event":"heartbeat","elapsed":491240,"alive":true,"life":489017,"deaths":1,"cls":"Assassin","lvl":36,"mode":"farm","myScore":11959,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906129767,"event":"heartbeat","elapsed":496510,"alive":true,"life":494288,"deaths":1,"cls":"Assassin","lvl":36,"mode":"farm","myScore":12045,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906135136,"event":"heartbeat","elapsed":501876,"alive":true,"life":499657,"deaths":1,"cls":"Assassin","lvl":36,"mode":"farm","myScore":12150,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906140399,"event":"heartbeat","elapsed":507139,"alive":true,"life":504920,"deaths":1,"cls":"Assassin","lvl":36,"mode":"farm","myScore":12260,"leaderMax":12300,"estRank":1,"boardSize":1}
+{"t":1781906145661,"event":"heartbeat","elapsed":512405,"alive":true,"life":510182,"deaths":1,"cls":"Assassin","lvl":36,"mode":"farm","myScore":12375,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906150922,"event":"heartbeat","elapsed":517668,"alive":true,"life":515443,"deaths":1,"cls":"Assassin","lvl":36,"mode":"farm","myScore":12450,"leaderMax":null,"estRank":null,"boardSize":0}
+{"t":1781906154731,"event":"canvas_lost","elapsed":522257}
+{"t":1781906154734,"event":"reboot","reason":"loop_error"}
+{"t":1781906157080,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 403 ()"}
+{"t":1781906157458,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781906157458,"event":"pageerror","text":"%c%d font-size:0;color:transparent NaN"}
+{"t":1781906158004,"event":"pageerror","text":"Failed to load resource: the server responded with a status of 401 ()"}
+{"t":1781906159226,"event":"reboot_fail","attempt":1,"text":"Error: page.waitForTimeout: Target page, context or browser has been closed"}

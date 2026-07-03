@@ -2,6 +2,42 @@
 
 Newest entries at the top.
 
+## 046 - 2026-07-03 - v36: the survival rework — mined all 61 shifts, six systemic fixes, test harness, 2.9x farm rate
+
+Joe asked for the bot to be *upgraded*, so this was a full-depth pass: 6 parallel analysis agents mined every shift file (1,283 deaths, 2,735 hunter encounters, 35k heartbeats), the 5,139-record transition corpus, the code, and this DEVLOG; a 7th synthesized a ranked plan; an 8th adversarially re-checked the data claims against the evidence screenshots. Everything below shipped **with tests** — there is now a synthetic brain harness (`bot/brain/test-harness.mjs` + `brain-test.mjs`, `bot/perception/state-test.mjs`, `npm test`, 40 assertions) that runs BRAIN_FN in Node against hand-built scenes with a controllable clock.
+
+### What the mining actually found (with two corrections to entry 045)
+
+1. **The escape subsystem is the #1 killer.** 73% of deaths happen in escape-family modes (42.4 deaths/hr vs 3.5 in farm); FLED encounters die 39% vs 24% stood (n=2,735); died encounters show median minDist 279px with only ~20px closure — the bot is shot down while running, never caught. 25 doctrine versions of radius tuning never moved the 32% encounter death rate.
+2. **Encounters that start far don't kill: >=450px starts die 8.2% vs 39-48% under 350px.** Earlier detection is the strongest lever in the corpus — and the v32 fovMul rescaling was deleting exactly that (the max-FOV class reacted at Tank distances).
+3. **CORRECTION to 045/016: the >=15k "glitch" scores were mostly REAL.** The death screens prove it (`death-2026-06-13T01-01-51-187Z-8.png`: Score 24,971, L45, "You've killed filet"). Big kills legitimately spike score+level in one heartbeat. The real scraper bug was the LEVEL clamp rejecting genuine kill-jumps (a read=45 rejected during a real L45 life). **Best-ever 34,368 stands.** Leader-kills are worth 10-25k each — Joe's kills-doctrine is even more right than we thought.
+4. **CORRECTION to the 15-20min estimate: 90k at observed clean rates needs 44-55 unbroken minutes** (Ranger income never legitimately measured; L45 has never been verifiably reached in 1,283 lives — the funnel peaks at 1 life reaching L40). Survival isn't *a* lever, it's the only lever — with leader-kills as the multiplier that could compress it.
+5. **v35 was the worst survivor since v10** (median 47s vs v18-v20's 161-198s) — crowned partly on miscounted fitness. Under survival-weighted clean fitness (score+100*level+25*sec, `analysis/clean-fitness.json`), v18-v20 are the top-3 of all time.
+6. A stack of correctness bugs: every frame-denominated timer runs ~2x fast on this 119fps ProMotion display (spawn grace was really ~2.15s); a 2s perception stall mid-life re-entered the defenseless spawn-grace window (the v23 bug class, back); the escape wall penalty (-5) was 40-120x weaker than threat terms (corner traps); fleeing never consulted shapes (pentagon-nest lanes); no aim lead anywhere; predator-flee aimed at the *nearest* foe instead of the hunter killing it; crossing entities could share a velocity source (phantom velocities).
+
+### What shipped (v36, all Layer-1 tested)
+
+1. **Kite-with-lead-fire** (the lever 007/040/045 kept naming): `leadAim()` intercept prediction at every aim site (hunt, escape, return-fire, predator-flee); predator-flee now lead-fires THE HUNTER for bullet classes; a kite band (`escapeR..1.6x`) blends tangential headings into the escape sampler while firing; an escape latch with hysteresis (exit only >1.4x) kills the farm<->escape boundary thrash. One-to-one velocity matching feeds it clean data.
+2. **World-unit perception**: all decision fields (dx/dy/dist/r/v) normalized by fovMul at the perception boundary; the scattered per-threshold scalings in the brain are gone; zoom-invariance is a regression test (same world scene at fovMul 1.0 vs 0.68 must decide identically). Tank/bullet classifier is world-based (8px circles at Assassin zoom are tanks again). predatorDetectRadius un-shrunk to 550 world. Far-field routing: farming/patrol drift away from enemy density (long lives see 0.70 enc/min vs 1.24 short — position beats fighting).
+3. **v36 doctrine baseline = v18-v20 survival family** (predatorRatio 1.211, crowdRadius 260, spacingGain 1.475, bulletAimedCos 0.887; extraction in `analysis/v18-20-params.json`), keeping the v31 tile map, v34 hunt gate, damage-forward build. ES state archived; fresh seeding under the survival-weighted fitness; SPACE gains the v36 tunables.
+4. **ms-denominated timers** (spawnGraceMs 4300, upgradeGraceMs, predatorConfirmMs, pursuitMs, transitionLogMs) — display-independent, tested at mocked 60 and 119fps. Life-boundary resets now require HUD corroboration (score<500 or class Tank), with `gapRejects`/`lifeResets` counters in heartbeats.
+5. **Escape-lane scoring**: wall penalty -400/axis + tangential slide bonus, shape-blocker terms, 16 headings.
+6. **Ops**: level filter accepts score-corroborated kill-jumps (gated >=5k via the empirical curve); arena-abandon after 3 consecutive sub-30s lives (spawn-camp signature only); canvas_lost probes 10s for in-place recovery before the destructive reload (both prior canvas_losts killed top-decile lives); upgrade clicks no longer freeze the tank (aim-suspension replaces brain pause — the tank keeps moving at L15/30/45).
+
+### The benchmark caught three real bugs before they cost a single live shift
+
+Sandbox regression runs (private arena, nobody else involved) against the v33 sandbox baseline (Sniper@50s, L30@251s, 3,075@120s, 7,580@300s):
+- **Bench 1 froze at 290 score**: the 'e' autofire toggle is state-blind — a false-death respawn re-tapped E and silently disarmed the tank. Screenshot: aiming, zero bullets.
+- **Bench 2 scored 0**: firing via held synthetic MOUSE doesn't work for bullet classes (diep takes synthetic mouse for drone steering only). **Firing is now a held SPACE key** — keyboard path, idempotent, nothing to desync.
+- **Bench 3 froze at 4,100 in patrol**: Sandbox renders no minimap arrow, and the no-map patrol fallback was a FIXED diagonal that pinned the tank in a corner once local shapes ran dry. Now a slow rotating sweep.
+- **Bench 4 (final): Sniper@48.9s, 9,060@120s (2.9x baseline), 13,725@300s (1.8x), Assassin L38 by 305s, 0 errors** — beat the baseline's entire 515s run in 305s. Evidence: `evidence/bench-v36-assassin-l38.png`.
+
+### Honest scope
+
+Sandbox proves farming, leveling, upgrade mechanics, ops robustness, and the timer/perception correctness. **It cannot prove the PvP changes** (kite, lead-fire, predator handling) — those are covered by the synthetic scene tests only. Live validation stays under the one-behavior-change-per-shift discipline with pre-registered judges: escape-family deaths/hr (42.4), encounter death rate (32%), share of encounters starting >=450px, median life (100s). Suggested live order: the correctness batch is inseparable now (it IS v36); watch kite via the new 'kite'/'predator-kite' mode tags and `hunter_encounter` fled/died rates.
+
+Known wrinkle: mid-life grace re-entries can still fire while score<500 (the corroboration gate can't distinguish a stall from a respawn that early); costs a few defenseless seconds in the first ~40s of a life, self-resolves after. Counter is in telemetry (`lifeResets`).
+
 ## 045 - 2026-06-20 - Reality check: the bot is mid-pack vs ~90k-leader arenas; #1 is a ~3x-score gap
 
 A brutal shift (83 deaths/62min, median life 34s, 16 spawn re-deaths) prompted an honest look at the arenas, and it reframes the whole campaign. Across the last 8 shifts the median leaderMax is consistently **82k-113k** - NOT the quiet 17-60k I'd occasionally cited (those were sparse-board read artifacts). So the current diep.io FFA population runs leaders around ~90k, and our best-ever score is 34,368. That means:

@@ -6,7 +6,8 @@
   "description": "Claude's autonomous campaign for the diep.io leaderboard",
   "scripts": {
     "probe": "node bot/probe.mjs",
-    "shift": "node bot/runner.mjs"
+    "shift": "node bot/runner.mjs",
+    "test": "node bot/brain/brain-test.mjs && node bot/perception/state-test.mjs"
   },
   "dependencies": {
     "playwright": "^1.60.0"

@@ -65,10 +65,23 @@ function trustScore(s) {
 // collapses to the class floor.
 const CLASS_FLOOR = { Tank: 1, Sniper: 15, Overseer: 30, Overlord: 45, Smasher: 30, Spike: 45 };
 const CLASS_CEIL = { Tank: 16, Sniper: 31, Overseer: 46, Overlord: 60, Smasher: 46, Spike: 60 };
-function trustLevel(l, cls) {
+// v36 KILL-JUMP EXCEPTION (DEVLOG 046): a big kill spikes score AND level in one heartbeat — you
+// absorb a chunk of the victim's score, and the death screens prove those single-read jumps are
+// REAL leader-kills, not glitches. At exactly those moments the CLASS read lags the level read
+// ("Sniper" while the level says 42), so the band clamp was pinning genuine kill-jumps low and
+// understating every big life. A read above the class ceiling is now ACCEPTED when the SCORE
+// corroborates it via the empirical level curve score(L) ≈ 20L² − 320L − 2600.
+// The curve is an upper-range fit (credible from ~L29/5k up; it over-implies at small scores), so
+// the exception is gated at score >= 5000 — exactly the kill-jump regime it exists for.
+const impliedLevel = (score) => (score >= 5000 ? Math.min(45, (320 + Math.sqrt(102400 + 80 * (2600 + score))) / 40) : null);
+function trustLevel(l, cls, score) {
   const floor = CLASS_FLOOR[cls] ?? 1, ceil = CLASS_CEIL[cls] ?? 60;
+  if (l != null && l > ceil + 2) {
+    const imp = impliedLevel(score || 0);
+    if (imp != null && l <= imp + 3) { lastGoodLevel = Math.max(lastGoodLevel, Math.min(60, l)); return lastGoodLevel; }
+  }
   if (l == null || l < floor - 2 || l > ceil + 2) { lastGoodLevel = Math.max(floor, lastGoodLevel || floor); return lastGoodLevel; }
-  lastGoodLevel = Math.max(floor, Math.min(ceil, l)); return lastGoodLevel;
+  lastGoodLevel = Math.max(lastGoodLevel, Math.max(floor, Math.min(ceil, l))); return lastGoodLevel;
 }
 async function applyNextDoctrine() {
   lifeMaxScore = 0; lifeMaxLevel = 0;
@@ -217,10 +230,13 @@ async function takeUpgrades() {
     return f.texts.filter((t) => { const s = (t.t || '').trim(); return s.length >= 3 && s.length <= 18 && t.x > 0 && t.x < 360 && t.y > 40 && t.y < 520; }).map((t) => (t.t || '').trim());
   }).catch(() => []);
   if (panel.length) log({ event: 'upgrade_scan', from: curClass, level: curLevel, panel });
-  await page.evaluate(() => window.__brain && window.__brain.pause()).catch(() => {});
+  // v36: do NOT pause the brain for the click. pause()->releaseAll() froze the tank mid-flight for
+  // every attempt — 84 failed clicks each parked it at exactly L15/L30/L45, its most hunted moments.
+  // The trusted click only needs a STABLE POINTER, so suspend the brain's synthetic aim (mousemove)
+  // briefly while movement keys keep running.
+  await page.evaluate(() => { const b = window.__brain; if (b) b.suspendAimUntil = performance.now() + 700; }).catch(() => {});
   await enableTrustedCanvasClicks(page);
   await clickTile(page, step.tile);
-  await page.evaluate(() => window.__brain && window.__brain.resume()).catch(() => {});
   log({ event: 'upgrade_attempt', from: curClass, tile: step.tile, want: step.to, level: curLevel });
   await page.waitForTimeout(420);
   const lc2 = await readLevelClass(page);
@@ -266,6 +282,7 @@ let deadSince = 0;
 let extending = false;
 let bestRank = 99;
 let rank1Streak = 0;
+let shortLifeStreak = 0; // v36: consecutive sub-30s lives (spawn-camp detector)
 
 // A shift ends at SHIFT_MS, EXCEPT while the current life is still going: a strong life is the
 // whole point, so we extend until it ends naturally (hard cap 4x to bound the process).
@@ -313,11 +330,11 @@ while (true) {
     if (txlog.length) fs.appendFileSync(txPath, txlog.map((t) => JSON.stringify(t)).join('\n') + '\n');
     const { leaderMax, myScore: rawScore, board, boardSize, estRank } = await readRank();
     const myScore = trustScore(rawScore); // null if this sample was a glitch
-    const trustedLevel = trustLevel(curLevel, curClass);
+    const trustedLevel = trustLevel(curLevel, curClass, myScore || lifeMaxScore); // v36: score-corroborated kill-jumps accepted
     if (myScore) lifeMaxScore = Math.max(lifeMaxScore, myScore);
     lifeMaxLevel = Math.max(lifeMaxLevel, trustedLevel);
     if (estRank != null) bestRank = Math.min(bestRank, estRank);
-    log({ event: 'heartbeat', elapsed, alive, life: Date.now() - lifeStart, deaths, cls: curClass, lvl: trustedLevel, mode: snap?.mode, myScore, leaderMax, estRank, boardSize, optGen: opt?.status().gen });
+    log({ event: 'heartbeat', elapsed, alive, life: Date.now() - lifeStart, deaths, cls: curClass, lvl: trustedLevel, mode: snap?.mode, myScore, leaderMax, estRank, boardSize, optGen: opt?.status().gen, gapRejects: snap?.gapRejects, lifeResets: snap?.lifeResets });
     // v19: push live rank into the in-page brain so it can adopt a lead-protection posture near #1.
     // Uses the glitch-filtered myScore so a spurious spike can't fake "leading". One evaluate per
     // heartbeat (slow cadence), off the hot path.
@@ -357,10 +374,16 @@ while (true) {
   }
 
   if (!live) {
-    // Possibly arena closed / disconnected. Try to get back in.
+    // Possibly arena closed / disconnected. v36: both canvas_lost events in the corpus killed
+    // top-decile lives (240s and 515s) because this handler re-navigated almost immediately —
+    // destroying a live session over what may be a transient render stall. Probe for in-place
+    // recovery for up to ~10s first; only a genuinely dead canvas gets the destructive reload.
     log({ event: 'canvas_lost', elapsed });
-    await page.waitForTimeout(1500);
-    if (!(await canvasLive())) { await page.goto('https://diep.io', { waitUntil: 'domcontentloaded' }).catch(() => {}); await spawnFresh(); lifeStart = Date.now(); }
+    let back = false;
+    for (let i = 0; i < 10 && !back; i++) { await page.waitForTimeout(1000); back = await canvasLive(); }
+    if (back) { log({ event: 'canvas_recovered' }); continue; }
+    await page.goto('https://diep.io', { waitUntil: 'domcontentloaded' }).catch(() => {});
+    await spawnFresh(); lifeStart = Date.now();
     continue;
   }
 
@@ -373,13 +396,29 @@ while (true) {
       const shotPath = evidence(`death-${shiftId}-${deaths}.png`);
       await page.screenshot({ path: shotPath }).catch(() => {});
       const lastState = await page.evaluate(() => window.__readState?.() ?? null).catch(() => null);
-      lifeMaxLevel = Math.max(lifeMaxLevel, trustLevel(curLevel, curClass));
+      lifeMaxLevel = Math.max(lifeMaxLevel, trustLevel(curLevel, curClass, lifeMaxScore));
       log({ event: 'death', n: deaths, lifeMs: life, cls: curClass, lvl: curLevel, screenshot: path.basename(shotPath), enemiesNear: lastState?.enemies?.slice(0, 3) ?? [] });
       console.log(`death #${deaths} after ${(life / 1000).toFixed(0)}s as ${curClass} L${curLevel}`);
       scoreLife();
       deadSince = 0;
       if (elapsed >= SHIFT_MS) break; // shift timer already up: record the death, don't respawn
-      await respawn();
+      // v36 ARENA ABANDON: diep respawns you near your killer, and a spawn-camped lobby turns that
+      // into a death loop (one shift ran 16 re-deaths, 34s median life, vs 75-115s in its siblings).
+      // Three consecutive sub-30s lives = a pathological lobby -> reload for a fresh arena
+      // assignment instead of feeding the camper. (Rerolling is NOT a strategy in normal lobbies —
+      // arenas are survival-equivalent — this fires only on the spawn-camp signature.)
+      shortLifeStreak = life < 30_000 ? shortLifeStreak + 1 : 0;
+      if (shortLifeStreak >= 3) {
+        log({ event: 'arena_abandoned', streak: shortLifeStreak });
+        console.log(`${shortLifeStreak} consecutive sub-30s lives: abandoning arena (reroll)`);
+        shortLifeStreak = 0;
+        await page.evaluate(() => window.__brain && window.__brain.stop()).catch(() => {});
+        await page.goto('https://diep.io', { waitUntil: 'domcontentloaded' }).catch(() => {});
+        resetUpgrades();
+        await spawnFresh();
+      } else {
+        await respawn();
+      }
       lifeStart = Date.now();
     }
   } else {

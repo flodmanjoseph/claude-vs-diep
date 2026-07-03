@@ -23,29 +23,38 @@ export const STATE_FN = function () {
     const W = window.__diep.W || 1280, H = window.__diep.H || 720;
     const cx = W / 2, cy = H / 2;
 
+    // v36 WORLD-UNIT NORMALIZATION. The sniper line zooms the camera out (a square renders 22px as a
+    // Tank but ~15px as an Assassin), so raw screen distances mean different WORLD distances per class.
+    // v32 patched this by multiplying SOME brain thresholds by fovMul - which silently deleted the
+    // Ranger's reach advantage and left other thresholds unscaled (the "blinder at long range, jumpier
+    // at mid range" bug class). Instead, normalize ONCE here at the perception boundary: every
+    // decision-space field (dx/dy/dist/r/vx/vy, me.r) is divided by fovMul so the brain always thinks
+    // in world-equivalent units, while x/y stay SCREEN coordinates (that's what aiming needs).
+    // fovMul comes from the previous frame's median-square read (zoom changes slowly; squares are
+    // fixed world-size), clamped so a noisy read can't distort geometry.
+    const fovMul = Math.max(0.45, Math.min(1.15, (window.__sqMed || 22) / 22));
     const me = { x: cx, y: cy, r: 0, alive: false };
     const enemies = [];
     const bullets = [];
     const shapes = [];
 
-    // Circles: tanks (large), bullets/drones (small). Color → side. v30: the tank/bullet size cutoff
-    // was a fixed 12px tuned at the narrow Tank/Sniper FOV. The sniper line (Assassin/Ranger) zooms the
-    // camera OUT, so every entity renders smaller - a distant tank could drop under 12px and be mis-read
-    // as a bullet (invisible to threat/prey logic). Lowered to 10 (strictly catches MORE tanks, never
-    // fewer; bullets are mostly <8px & fast, so the 10-12 band is almost all small tanks). A precise
-    // zoom-scaled cutoff comes next once the exposed `fov` signal (median square px) is measured per class.
-    const TANK_MIN = 10;
+    // Circles: tanks (large), bullets/drones (small), split by WORLD radius so the cutoff is
+    // zoom-invariant - at Ranger zoom a distant small tank no longer shrinks under a screen-px
+    // threshold and vanishes from threat/prey logic (it was being misread as a bullet).
+    const TANK_MIN_WORLD = 10;
     for (const c of f.circles) {
       const isSelf = near(c.c, SELF);
       const isEnemy = near(c.c, ENEMY);
       const dist = Math.hypot(c.x - cx, c.y - cy);
-      if (isSelf && dist < 60 && c.r > 8) {
-        if (c.r > me.r) { me.r = c.r; me.alive = true; }
+      const wr = c.r / fovMul;
+      if (isSelf && dist < 60 && wr > 8) {
+        if (wr > me.r) { me.r = wr; me.alive = true; }
         continue;
       }
       if (isEnemy || isSelf) {
-        if (c.r >= TANK_MIN) enemies.push({ x: c.x, y: c.y, r: c.r, dx: c.x - cx, dy: c.y - cy, dist, self: isSelf });
-        else bullets.push({ x: c.x, y: c.y, r: c.r, dx: c.x - cx, dy: c.y - cy, dist, enemy: isEnemy });
+        const wd = { x: c.x, y: c.y, r: wr, dx: (c.x - cx) / fovMul, dy: (c.y - cy) / fovMul, dist: dist / fovMul };
+        if (wr >= TANK_MIN_WORLD) enemies.push({ ...wd, self: isSelf });
+        else bullets.push({ ...wd, enemy: isEnemy });
       }
     }
 
@@ -66,9 +75,10 @@ export const STATE_FN = function () {
       else if (near(p.c, TRIANGLE)) kind = 'triangle';
       else if (near(p.c, PENTAGON)) kind = 'pentagon';
       if (!kind) continue;
-      if (p.r < 3 || p.r > 120) continue; // v30: 4->3 so smaller-rendered shapes at the wide sniper FOV aren't dropped
+      const wr = p.r / fovMul; // v36: size gate in world units (zoom-invariant)
+      if (wr < 3 || wr > 120) continue;
       const dist = Math.hypot(p.x - cx, p.y - cy);
-      shapes.push({ x: p.x, y: p.y, r: p.r, kind, dx: p.x - cx, dy: p.y - cy, dist });
+      shapes.push({ x: p.x, y: p.y, r: wr, kind, dx: (p.x - cx) / fovMul, dy: (p.y - cy) / fovMul, dist: dist / fovMul });
     }
 
     enemies.sort((a, b) => a.dist - b.dist);
@@ -76,33 +86,47 @@ export const STATE_FN = function () {
     bullets.sort((a, b) => a.dist - b.dist);
 
     // Velocity estimation: match entities to the previous frame by proximity and difference the
-    // positions (px/frame, ~60fps). Unmatched entities get v=0. The brain calls this every rAF,
-    // so the previous-frame store stays fresh; stale gaps (>20 frames) reset tracking.
+    // positions. Unmatched entities get v=0; stale gaps (>20 frames) reset tracking.
+    // v36 ONE-TO-ONE: the old matcher let two crossing entities both claim the same previous point,
+    // handing one of them a phantom velocity — poison for lead aim. Pairs are now taken in
+    // ascending-distance order and each previous point is consumed exactly once.
+    // Matching runs in SCREEN space (positions are screen px); the resulting velocities are divided
+    // by fovMul so they land in world px/frame like every other decision field.
     const prev = window.__prevEnts;
     const dt = prev ? f.t - prev.t : 0;
     const attachVel = (arr, prevArr, maxJump) => {
-      for (const e of arr) {
-        e.vx = 0; e.vy = 0;
-        if (!prevArr || dt <= 0 || dt > 20) continue;
-        let best = null, bestD = maxJump * dt;
-        for (const p of prevArr) {
-          const d = Math.hypot(e.x - p.x, e.y - p.y);
-          if (d < bestD) { bestD = d; best = p; }
+      for (const e of arr) { e.vx = 0; e.vy = 0; }
+      if (!prevArr || !prevArr.length || dt <= 0 || dt > 20) return;
+      const cap = maxJump * dt;
+      const pairs = [];
+      for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < prevArr.length; j++) {
+          const d = Math.hypot(arr[i].x - prevArr[j].x, arr[i].y - prevArr[j].y);
+          if (d < cap) pairs.push([d, i, j]);
         }
-        if (best) { e.vx = (e.x - best.x) / dt; e.vy = (e.y - best.y) / dt; }
+      }
+      pairs.sort((a, b) => a[0] - b[0]);
+      const usedE = new Set(), usedP = new Set();
+      for (const [, i, j] of pairs) {
+        if (usedE.has(i) || usedP.has(j)) continue;
+        usedE.add(i); usedP.add(j);
+        const e = arr[i], p = prevArr[j];
+        e.vx = (e.x - p.x) / dt / fovMul;
+        e.vy = (e.y - p.y) / dt / fovMul;
       }
     };
-    attachVel(bullets, prev?.bullets, 14); // bullets move fast: allow up to 14 px/frame jump
+    attachVel(bullets, prev?.bullets, 14); // bullets move fast: allow up to 14 screen-px/frame jump
     attachVel(enemies, prev?.enemies, 10);
     window.__prevEnts = { t: f.t, bullets: bullets.map((b) => ({ x: b.x, y: b.y })), enemies: enemies.map((e) => ({ x: e.x, y: e.y })) };
 
     // The minimap may redraw intermittently (cached layers), so persist the last-known position.
     if (map) window.__lastMap = map;
     // FOV/zoom proxy (v30): squares are a fixed WORLD size and don't grow with our level, so the median
-    // on-screen square radius tracks the camera zoom (smaller = wider FOV). Exposed for measurement and
-    // future zoom-scaled thresholds. Persist last-known so it's stable when no squares are in view.
-    const sq = shapes.filter((s) => s.kind === 'square').map((s) => s.r).sort((a, b) => a - b);
+    // on-screen square radius tracks the camera zoom (smaller = wider FOV). Persist last-known so it's
+    // stable when no squares are in view. NOTE shape radii are already world-normalized above, so
+    // multiply back by the fovMul used this frame to keep the proxy in SCREEN px.
+    const sq = shapes.filter((s) => s.kind === 'square').map((s) => s.r * fovMul).sort((a, b) => a - b);
     if (sq.length) window.__sqMed = sq[sq.length >> 1];
-    return { ok: true, t: f.t, W, H, me, enemies, bullets, shapes, map: map || window.__lastMap || null, fov: window.__sqMed || null };
+    return { ok: true, t: f.t, W, H, me, enemies, bullets, shapes, map: map || window.__lastMap || null, fov: window.__sqMed || null, fovMul };
   };
 };

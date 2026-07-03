@@ -18,20 +18,21 @@ export const SPACE = {
   bulletDangerRadius: [80, 240],
   enemySizeWeight: [0, 0.15],
   anticipationFrames: [0, 45],
-  bulletDodgeRadius: [150, 380],
+  bulletDodgeRadius: [150, 400],
   bulletAimedCos: [0.6, 0.96],
   bulletMissMargin: [25, 110],
-  spawnGraceFrames: [60, 320],
+  spawnGraceMs: [1500, 8000], // v36: ms-denominated (was spawnGraceFrames)
   spawnEscapeRadius: [200, 460],
   kindDistancePenalty: [0, 200],
   approachStopDist: [80, 260],
   shapeBodyMargin: [10, 60],
   huntSizeRatio: [0.5, 1.0],
-  huntRange: [200, 460],
-  huntStandoff: [110, 260],
+  huntRange: [250, 650], // v36: world units (wider — sniper reach)
+  huntStandoff: [140, 320], // v36: world units
   crowdRadius: [180, 420], // how far out a converging swarm triggers forced flight
   predatorRatio: [1.05, 1.5], // size ratio at which a bigger tank counts as a hunter to flee
   predatorFleeRadius: [220, 420], // how early to flee a confirmed hunter
+  predatorDetectRadius: [400, 700], // v36: how far out hunter confirmation starts (world units)
   edgeBiasWeight: [0, 2.2], // strength of the farm-toward-nearest-edge drift (0 = off); v16's lever
   // v17 proactive-spacing tunables (the headline redesign):
   spacingRadius: [300, 480], // foes within this build threat pressure
@@ -49,14 +50,24 @@ export const SPACE = {
   // v20 economy:
   dronePentagonBonus: [0, 300], // px discount steering a safe drone toward high-XP pentagons (0 = off)
   // v22 post-upgrade caution:
-  upgradeGraceFrames: [60, 360], // frames of caution after a class upgrade
+  upgradeGraceMs: [1000, 6000], // ms of caution after a class upgrade (v36: was upgradeGraceFrames)
   upgradeScale: [1.0, 1.7], // flee-radius multiplier during the post-upgrade window (1.0 = off)
   // v24 predator mode:
   preyRatio: [0.6, 1.0], // a tank smaller than myR*this is prey (lower = pickier, higher = more aggressive)
   // v26 return fire:
-  combatRange: [250, 520], // how far an engaging enemy pulls our fire off shapes onto it
+  combatRange: [300, 650], // how far an engaging enemy pulls our fire off shapes onto it (v36 world)
   // v27 pursuit:
-  pursuitFrames: [30, 180], // how long to chase a prey that left the frame before giving up
+  pursuitMs: [500, 3000], // how long to chase a prey that left the frame (v36: was pursuitFrames)
+  // v36 kite-with-lead-fire:
+  bulletPxPerFrame: [8, 18], // our bullet speed model for lead aim (world px/frame)
+  kiteBandMul: [1.3, 2.0], // kite band upper bound as a multiple of escapeR
+  kiteExitMul: [1.2, 1.6], // escape-latch release distance as a multiple of escapeR
+  // v36 escape-lane scoring:
+  wallEscapePenalty: [200, 800],
+  wallSlideBonus: [40, 240],
+  escapeShapeWeight: [40, 240],
+  // v36 far-field routing:
+  farFieldWeight: [0, 120],
 };
 const KEYS = Object.keys(SPACE);
 
@@ -66,7 +77,7 @@ const EVALS = 4; // lives per candidate to fight arena variance (median needs a 
 const SIGMA = 0.16; // mutation stddev as a fraction of each parameter's range
 
 const clamp = (v, [lo, hi]) => Math.max(lo, Math.min(hi, v));
-const FRACTIONAL = new Set(['bulletAimedCos', 'enemySizeWeight', 'huntSizeRatio', 'predatorRatio', 'edgeBiasWeight', 'spacingGain', 'pressureCap', 'pressureEscape', 'spacingFloor', 'fragilePhaseScale', 'leadScale', 'upgradeScale', 'preyRatio']);
+const FRACTIONAL = new Set(['bulletAimedCos', 'enemySizeWeight', 'huntSizeRatio', 'predatorRatio', 'edgeBiasWeight', 'spacingGain', 'pressureCap', 'pressureEscape', 'spacingFloor', 'fragilePhaseScale', 'leadScale', 'upgradeScale', 'preyRatio', 'kiteBandMul', 'kiteExitMul']);
 const round = (k, v) => FRACTIONAL.has(k) ? +v.toFixed(3) : Math.round(v);
 
 function gauss() { // Box-Muller
@@ -106,7 +117,11 @@ export function lifeFitness({ score = 0, level = 0, lifeMs = 0 }) {
   // v18: level weight 55 -> 100. The bottleneck is the survival funnel (only 22% reach Overseer, 1%
   // reach Overlord), so reaching a higher class/level must carry real weight to push evolution toward
   // params that get THROUGH the funnel - the prerequisite for the high-score lives that win #1.
-  return score + 100 * level + 7 * (lifeMs / 1000);
+  // v36: survival seconds 7 -> 25. The clean-fitness replay over all 1,228 lives (DEVLOG 046,
+  // analysis/clean-fitness.json) showed survival time is what separates the real top versions
+  // (v18-v20, median lives 161-198s) from the score-chasing ones; under this weighting the ES ranks
+  // versions the same way the honest telemetry does.
+  return score + 100 * level + 25 * (lifeMs / 1000);
 }
 const median = (a) => { if (!a.length) return 0; const s = [...a].sort((x, y) => x - y); const n = s.length; return n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2; };
 

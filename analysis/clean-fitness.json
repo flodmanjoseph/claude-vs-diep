@@ -1,0 +1,846 @@
+{
+  "generatedAt": "2026-07-03T03:37:54.121Z",
+  "filter": {
+    "jumpThreshold": 6000,
+    "confirmRatio": 0.7,
+    "levelDeviation": 8,
+    "curve": "score(L)=20L^2-320L-2600 through (35,10700),(40,16600),(45,23500); impliedLevel capped at 45",
+    "fitness": "cleanScore + 100*maxLevel + 25*lifeSec"
+  },
+  "nLives": 1228,
+  "table": {
+    "v12": {
+      "n": 154,
+      "medianCleanFitness": 7775,
+      "maxCleanScore": 26190,
+      "medianLifeS": 100.8
+    },
+    "smasher": {
+      "n": 7,
+      "medianCleanFitness": 4950,
+      "maxCleanScore": 2270,
+      "medianLifeS": 80.5
+    },
+    "v13": {
+      "n": 19,
+      "medianCleanFitness": 9293,
+      "maxCleanScore": 24971,
+      "medianLifeS": 109.3
+    },
+    "v14": {
+      "n": 12,
+      "medianCleanFitness": 6859.5,
+      "maxCleanScore": 6843,
+      "medianLifeS": 106.1
+    },
+    "v15": {
+      "n": 242,
+      "medianCleanFitness": 8093,
+      "maxCleanScore": 34368,
+      "medianLifeS": 114.4
+    },
+    "v16": {
+      "n": 274,
+      "medianCleanFitness": 7510.5,
+      "maxCleanScore": 30311,
+      "medianLifeS": 109.8
+    },
+    "v17": {
+      "n": 8,
+      "medianCleanFitness": 10331,
+      "maxCleanScore": 20180,
+      "medianLifeS": 134.7
+    },
+    "v18": {
+      "n": 37,
+      "medianCleanFitness": 11461,
+      "maxCleanScore": 32849,
+      "medianLifeS": 161.4
+    },
+    "v19": {
+      "n": 20,
+      "medianCleanFitness": 11373,
+      "maxCleanScore": 9198,
+      "medianLifeS": 172.7
+    },
+    "v20": {
+      "n": 18,
+      "medianCleanFitness": 12509,
+      "maxCleanScore": 8711,
+      "medianLifeS": 198
+    },
+    "v21": {
+      "n": 17,
+      "medianCleanFitness": 8180,
+      "maxCleanScore": 31437,
+      "medianLifeS": 112.8
+    },
+    "v22": {
+      "n": 24,
+      "medianCleanFitness": 9396.5,
+      "maxCleanScore": 9000,
+      "medianLifeS": 135.9
+    },
+    "v23": {
+      "n": 24,
+      "medianCleanFitness": 10108.5,
+      "maxCleanScore": 11737,
+      "medianLifeS": 143.3
+    },
+    "v24": {
+      "n": 1,
+      "medianCleanFitness": 152,
+      "maxCleanScore": 0,
+      "medianLifeS": 2.1
+    },
+    "v25": {
+      "n": 5,
+      "medianCleanFitness": 4217,
+      "maxCleanScore": 7009,
+      "medianLifeS": 72.5
+    },
+    "v26": {
+      "n": 5,
+      "medianCleanFitness": 4829,
+      "maxCleanScore": 6517,
+      "medianLifeS": 52.6
+    },
+    "v27": {
+      "n": 9,
+      "medianCleanFitness": 5333,
+      "maxCleanScore": 6793,
+      "medianLifeS": 108.2
+    },
+    "v28": {
+      "n": 7,
+      "medianCleanFitness": 13427,
+      "maxCleanScore": 7263,
+      "medianLifeS": 262.4
+    },
+    "v29": {
+      "n": 12,
+      "medianCleanFitness": 8520.5,
+      "maxCleanScore": 14784,
+      "medianLifeS": 128.6
+    },
+    "v30": {
+      "n": 28,
+      "medianCleanFitness": 7487,
+      "maxCleanScore": 29056,
+      "medianLifeS": 111.5
+    },
+    "v31": {
+      "n": 31,
+      "medianCleanFitness": 6495,
+      "maxCleanScore": 10990,
+      "medianLifeS": 113.8
+    },
+    "v32": {
+      "n": 31,
+      "medianCleanFitness": 6852,
+      "maxCleanScore": 24879,
+      "medianLifeS": 94.2
+    },
+    "v33": {
+      "n": 38,
+      "medianCleanFitness": 5522,
+      "maxCleanScore": 8514,
+      "medianLifeS": 71.1
+    },
+    "v34": {
+      "n": 57,
+      "medianCleanFitness": 7081,
+      "maxCleanScore": 33704,
+      "medianLifeS": 105.3
+    },
+    "v35": {
+      "n": 148,
+      "medianCleanFitness": 4071,
+      "maxCleanScore": 17595,
+      "medianLifeS": 47.2
+    }
+  },
+  "rankingByMedianCleanFitness": [
+    {
+      "version": "v28",
+      "n": 7,
+      "medianCleanFitness": 13427,
+      "maxCleanScore": 7263,
+      "medianLifeS": 262.4
+    },
+    {
+      "version": "v20",
+      "n": 18,
+      "medianCleanFitness": 12509,
+      "maxCleanScore": 8711,
+      "medianLifeS": 198
+    },
+    {
+      "version": "v18",
+      "n": 37,
+      "medianCleanFitness": 11461,
+      "maxCleanScore": 32849,
+      "medianLifeS": 161.4
+    },
+    {
+      "version": "v19",
+      "n": 20,
+      "medianCleanFitness": 11373,
+      "maxCleanScore": 9198,
+      "medianLifeS": 172.7
+    },
+    {
+      "version": "v17",
+      "n": 8,
+      "medianCleanFitness": 10331,
+      "maxCleanScore": 20180,
+      "medianLifeS": 134.7
+    },
+    {
+      "version": "v23",
+      "n": 24,
+      "medianCleanFitness": 10108.5,
+      "maxCleanScore": 11737,
+      "medianLifeS": 143.3
+    },
+    {
+      "version": "v22",
+      "n": 24,
+      "medianCleanFitness": 9396.5,
+      "maxCleanScore": 9000,
+      "medianLifeS": 135.9
+    },
+    {
+      "version": "v13",
+      "n": 19,
+      "medianCleanFitness": 9293,
+      "maxCleanScore": 24971,
+      "medianLifeS": 109.3
+    },
+    {
+      "version": "v29",
+      "n": 12,
+      "medianCleanFitness": 8520.5,
+      "maxCleanScore": 14784,
+      "medianLifeS": 128.6
+    },
+    {
+      "version": "v21",
+      "n": 17,
+      "medianCleanFitness": 8180,
+      "maxCleanScore": 31437,
+      "medianLifeS": 112.8
+    },
+    {
+      "version": "v15",
+      "n": 242,
+      "medianCleanFitness": 8093,
+      "maxCleanScore": 34368,
+      "medianLifeS": 114.4
+    },
+    {
+      "version": "v12",
+      "n": 154,
+      "medianCleanFitness": 7775,
+      "maxCleanScore": 26190,
+      "medianLifeS": 100.8
+    },
+    {
+      "version": "v16",
+      "n": 274,
+      "medianCleanFitness": 7510.5,
+      "maxCleanScore": 30311,
+      "medianLifeS": 109.8
+    },
+    {
+      "version": "v30",
+      "n": 28,
+      "medianCleanFitness": 7487,
+      "maxCleanScore": 29056,
+      "medianLifeS": 111.5
+    },
+    {
+      "version": "v34",
+      "n": 57,
+      "medianCleanFitness": 7081,
+      "maxCleanScore": 33704,
+      "medianLifeS": 105.3
+    },
+    {
+      "version": "v14",
+      "n": 12,
+      "medianCleanFitness": 6859.5,
+      "maxCleanScore": 6843,
+      "medianLifeS": 106.1
+    },
+    {
+      "version": "v32",
+      "n": 31,
+      "medianCleanFitness": 6852,
+      "maxCleanScore": 24879,
+      "medianLifeS": 94.2
+    },
+    {
+      "version": "v31",
+      "n": 31,
+      "medianCleanFitness": 6495,
+      "maxCleanScore": 10990,
+      "medianLifeS": 113.8
+    },
+    {
+      "version": "v33",
+      "n": 38,
+      "medianCleanFitness": 5522,
+      "maxCleanScore": 8514,
+      "medianLifeS": 71.1
+    },
+    {
+      "version": "v27",
+      "n": 9,
+      "medianCleanFitness": 5333,
+      "maxCleanScore": 6793,
+      "medianLifeS": 108.2
+    },
+    {
+      "version": "smasher",
+      "n": 7,
+      "medianCleanFitness": 4950,
+      "maxCleanScore": 2270,
+      "medianLifeS": 80.5
+    },
+    {
+      "version": "v26",
+      "n": 5,
+      "medianCleanFitness": 4829,
+      "maxCleanScore": 6517,
+      "medianLifeS": 52.6
+    },
+    {
+      "version": "v25",
+      "n": 5,
+      "medianCleanFitness": 4217,
+      "maxCleanScore": 7009,
+      "medianLifeS": 72.5
+    },
+    {
+      "version": "v35",
+      "n": 148,
+      "medianCleanFitness": 4071,
+      "maxCleanScore": 17595,
+      "medianLifeS": 47.2
+    },
+    {
+      "version": "v24",
+      "n": 1,
+      "medianCleanFitness": 152,
+      "maxCleanScore": 0,
+      "medianLifeS": 2.1
+    }
+  ],
+  "top10CleanLives": [
+    {
+      "shiftId": "2026-06-13T05-14-58-607Z",
+      "score": 34368,
+      "level": 45,
+      "lifeS": 294.8,
+      "version": "v15",
+      "cleanFitness": 46237,
+      "recordedScore": 34368,
+      "hadRejectedSpike": false
+    },
+    {
+      "shiftId": "2026-06-19T20-10-58-673Z",
+      "score": 33704,
+      "level": 45,
+      "lifeS": 359.6,
+      "version": "v34",
+      "cleanFitness": 47195,
+      "recordedScore": 33704,
+      "hadRejectedSpike": false
+    },
+    {
+      "shiftId": "2026-06-19T07-01-22-852Z",
+      "score": 32849,
+      "level": 45,
+      "lifeS": 516.5,
+      "version": "v18",
+      "cleanFitness": 50262,
+      "recordedScore": 32849,
+      "hadRejectedSpike": false
+    },
+    {
+      "shiftId": "2026-06-19T10-22-14-233Z",
+      "score": 31437,
+      "level": 45,
+      "lifeS": 431.9,
+      "version": "v21",
+      "cleanFitness": 46734,
+      "recordedScore": 31437,
+      "hadRejectedSpike": false
+    },
+    {
+      "shiftId": "2026-06-19T20-10-58-673Z",
+      "score": 30421,
+      "level": 45,
+      "lifeS": 203.7,
+      "version": "v34",
+      "cleanFitness": 40013,
+      "recordedScore": 30421,
+      "hadRejectedSpike": false
+    },
+    {
+      "shiftId": "2026-06-13T22-21-44-145Z",
+      "score": 30311,
+      "level": 45,
+      "lifeS": 307.3,
+      "version": "v16",
+      "cleanFitness": 42494,
+      "recordedScore": 30311,
+      "hadRejectedSpike": false
+    },
+    {
+      "shiftId": "2026-06-19T02-09-12-016Z",
+      "score": 29252,
+      "level": 45,
+      "lifeS": 272.6,
+      "version": "v16",
+      "cleanFitness": 40568,
+      "recordedScore": 29252,
+      "hadRejectedSpike": false
+    },
+    {
+      "shiftId": "2026-06-13T05-14-58-607Z",
+      "score": 29174,
+      "level": 45,
+      "lifeS": 267.1,
+      "version": "v15",
+      "cleanFitness": 40352,
+      "recordedScore": 29174,
+      "hadRejectedSpike": false
+    },
+    {
+      "shiftId": "2026-06-19T15-38-42-957Z",
+      "score": 29056,
+      "level": 45,
+      "lifeS": 142,
+      "version": "v30",
+      "cleanFitness": 37107,
+      "recordedScore": 29056,
+      "hadRejectedSpike": false
+    },
+    {
+      "shiftId": "2026-06-13T05-14-58-607Z",
+      "score": 28341,
+      "level": 45,
+      "lifeS": 204.1,
+      "version": "v15",
+      "cleanFitness": 37943,
+      "recordedScore": 28341,
+      "hadRejectedSpike": false
+    }
+  ],
+  "validation": {
+    "hi15kLives": 32,
+    "hi15kWithDiscontinuityRejected": 1,
+    "hi15kWithDiscontinuityConfirmedClean": 29,
+    "hi15k": [
+      {
+        "t": 1781349593886,
+        "shiftId": "2026-06-13T05-14-58-607Z",
+        "version": "v15",
+        "recScore": 34368,
+        "recLevel": 45,
+        "cleanScore": 34368,
+        "cleanLevel": 45,
+        "lifeS": 294.8,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781907813892,
+        "shiftId": "2026-06-19T20-10-58-673Z",
+        "version": "v34",
+        "recScore": 33704,
+        "recLevel": 45,
+        "cleanScore": 33704,
+        "cleanLevel": 45,
+        "lifeS": 359.6,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781854633271,
+        "shiftId": "2026-06-19T07-01-22-852Z",
+        "version": "v18",
+        "recScore": 32849,
+        "recLevel": 45,
+        "cleanScore": 32849,
+        "cleanLevel": 45,
+        "lifeS": 516.5,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781865284949,
+        "shiftId": "2026-06-19T10-22-14-233Z",
+        "version": "v21",
+        "recScore": 31437,
+        "recLevel": 45,
+        "cleanScore": 31437,
+        "cleanLevel": 45,
+        "lifeS": 431.9,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781900929042,
+        "shiftId": "2026-06-19T20-10-58-673Z",
+        "version": "v34",
+        "recScore": 30421,
+        "recLevel": 45,
+        "cleanScore": 30421,
+        "cleanLevel": 45,
+        "lifeS": 203.7,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781407488308,
+        "shiftId": "2026-06-13T22-21-44-145Z",
+        "version": "v16",
+        "recScore": 30311,
+        "recLevel": 45,
+        "cleanScore": 30311,
+        "cleanLevel": 45,
+        "lifeS": 307.3,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781910340787,
+        "shiftId": "2026-06-19T22-26-13-108Z",
+        "version": "v35",
+        "recScore": 29463,
+        "recLevel": 45,
+        "cleanScore": 5847,
+        "cleanLevel": 29,
+        "lifeS": 249.7,
+        "discontinuity": true,
+        "rejectedSpikes": [
+          {
+            "read": 29463,
+            "prev": 5847
+          }
+        ]
+      },
+      {
+        "t": 1781843234194,
+        "shiftId": "2026-06-19T02-09-12-016Z",
+        "version": "v16",
+        "recScore": 29252,
+        "recLevel": 45,
+        "cleanScore": 29252,
+        "cleanLevel": 45,
+        "lifeS": 272.6,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781341641242,
+        "shiftId": "2026-06-13T05-14-58-607Z",
+        "version": "v15",
+        "recScore": 29174,
+        "recLevel": 45,
+        "cleanScore": 29174,
+        "cleanLevel": 45,
+        "lifeS": 267.1,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781885255064,
+        "shiftId": "2026-06-19T15-38-42-957Z",
+        "version": "v30",
+        "recScore": 29056,
+        "recLevel": 28,
+        "cleanScore": 29056,
+        "cleanLevel": 45,
+        "lifeS": 142,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781340088545,
+        "shiftId": "2026-06-13T05-14-58-607Z",
+        "version": "v15",
+        "recScore": 28341,
+        "recLevel": 45,
+        "cleanScore": 28341,
+        "cleanLevel": 45,
+        "lifeS": 204.1,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781327379377,
+        "shiftId": "2026-06-13T02-28-37-680Z",
+        "version": "v15",
+        "recScore": 27855,
+        "recLevel": 24,
+        "cleanScore": 27855,
+        "cleanLevel": 45,
+        "lifeS": 154.5,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781340842713,
+        "shiftId": "2026-06-13T05-14-58-607Z",
+        "version": "v15",
+        "recScore": 27654,
+        "recLevel": 45,
+        "cleanScore": 27654,
+        "cleanLevel": 45,
+        "lifeS": 218.2,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781293767899,
+        "shiftId": "2026-06-12T17-52-04-451Z",
+        "version": "v12",
+        "recScore": 26190,
+        "recLevel": 45,
+        "cleanScore": 26190,
+        "cleanLevel": 45,
+        "lifeS": 106.9,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781294337826,
+        "shiftId": "2026-06-12T17-52-04-451Z",
+        "version": "v12",
+        "recScore": 25490,
+        "recLevel": 45,
+        "cleanScore": 25490,
+        "cleanLevel": 45,
+        "lifeS": 76.1,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781901696355,
+        "shiftId": "2026-06-19T20-10-58-673Z",
+        "version": "v34",
+        "recScore": 25475,
+        "recLevel": 45,
+        "cleanScore": 25475,
+        "cleanLevel": 45,
+        "lifeS": 132.2,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781332466143,
+        "shiftId": "2026-06-13T05-14-58-607Z",
+        "version": "v15",
+        "recScore": 25335,
+        "recLevel": 45,
+        "cleanScore": 25335,
+        "cleanLevel": 45,
+        "lifeS": 72.3,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781313500698,
+        "shiftId": "2026-06-13T01-01-51-187Z",
+        "version": "v13",
+        "recScore": 24971,
+        "recLevel": 45,
+        "cleanScore": 24971,
+        "cleanLevel": 45,
+        "lifeS": 36.5,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781354339945,
+        "shiftId": "2026-06-13T05-14-58-607Z",
+        "version": "v15",
+        "recScore": 24962,
+        "recLevel": 45,
+        "cleanScore": 24962,
+        "cleanLevel": 45,
+        "lifeS": 29.6,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781895370708,
+        "shiftId": "2026-06-19T17-53-37-711Z",
+        "version": "v32",
+        "recScore": 24879,
+        "recLevel": 45,
+        "cleanScore": 24879,
+        "cleanLevel": 45,
+        "lifeS": 70,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781887018818,
+        "shiftId": "2026-06-19T15-38-42-957Z",
+        "version": "v30",
+        "recScore": 23548,
+        "recLevel": 21,
+        "cleanScore": 23548,
+        "cleanLevel": 45,
+        "lifeS": 167.4,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781885849965,
+        "shiftId": "2026-06-19T15-38-42-957Z",
+        "version": "v30",
+        "recScore": 23091,
+        "recLevel": 22,
+        "cleanScore": 23091,
+        "cleanLevel": 44,
+        "lifeS": 117.1,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781288829845,
+        "shiftId": "2026-06-12T17-52-04-451Z",
+        "version": "v12",
+        "recScore": 22068,
+        "recLevel": 44,
+        "cleanScore": 22068,
+        "cleanLevel": 44,
+        "lifeS": 169.2,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781837682135,
+        "shiftId": "2026-06-19T02-09-12-016Z",
+        "version": "v16",
+        "recScore": 21408,
+        "recLevel": 43,
+        "cleanScore": 21408,
+        "cleanLevel": 43,
+        "lifeS": 219.7,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781848018944,
+        "shiftId": "2026-06-19T05-26-39-094Z",
+        "version": "v17",
+        "recScore": 20180,
+        "recLevel": 42,
+        "cleanScore": 20180,
+        "cleanLevel": 42,
+        "lifeS": 101.8,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781848504322,
+        "shiftId": "2026-06-19T05-50-47-602Z",
+        "version": "v18",
+        "recScore": 19730,
+        "recLevel": 42,
+        "cleanScore": 19730,
+        "cleanLevel": 42,
+        "lifeS": 75.4,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781883933685,
+        "shiftId": "2026-06-19T15-38-42-957Z",
+        "version": "v30",
+        "recScore": 18945,
+        "recLevel": 25,
+        "cleanScore": 18945,
+        "cleanLevel": 42,
+        "lifeS": 405.7,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781914496337,
+        "shiftId": "2026-06-19T23-31-57-982Z",
+        "version": "v35",
+        "recScore": 17595,
+        "recLevel": 41,
+        "cleanScore": 17595,
+        "cleanLevel": 41,
+        "lifeS": 501.2,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781885730662,
+        "shiftId": "2026-06-19T15-38-42-957Z",
+        "version": "v30",
+        "recScore": 17462,
+        "recLevel": 30,
+        "cleanScore": 17462,
+        "cleanLevel": 41,
+        "lifeS": 408.3,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781865749301,
+        "shiftId": "2026-06-19T10-22-14-233Z",
+        "version": "v21",
+        "recScore": 16865,
+        "recLevel": 40,
+        "cleanScore": 16865,
+        "cleanLevel": 40,
+        "lifeS": 462.1,
+        "discontinuity": false,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781291376281,
+        "shiftId": "2026-06-12T17-52-04-451Z",
+        "version": "v12",
+        "recScore": 15465,
+        "recLevel": 39,
+        "cleanScore": 15465,
+        "cleanLevel": 39,
+        "lifeS": 827.9,
+        "discontinuity": false,
+        "rejectedSpikes": []
+      },
+      {
+        "t": 1781390312632,
+        "shiftId": "2026-06-13T22-21-44-145Z",
+        "version": "v16",
+        "recScore": 15168,
+        "recLevel": 39,
+        "cleanScore": 15168,
+        "cleanLevel": 39,
+        "lifeS": 72.5,
+        "discontinuity": true,
+        "rejectedSpikes": []
+      }
+    ],
+    "knownClean16865": {
+      "pass": true,
+      "cleanScore": 16865,
+      "cleanLevel": 40,
+      "lifeS": 462.1,
+      "shiftId": "2026-06-19T10-22-14-233Z",
+      "version": "v21"
+    }
+  }
+}

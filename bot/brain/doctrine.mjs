@@ -2,19 +2,25 @@
 // Stat indices (diep number keys 1-8):
 //   1 HealthRegen 2 MaxHealth 3 BodyDamage 4 BulletSpeed 5 BulletPenetration 6 BulletDamage 7 Reload 8 MovementSpeed
 export const DOCTRINE = {
-  version: 35,
+  // v36: the survival rework. (1) Baseline params reverted to the v18-v20 family — the honest
+  // survival record (median lives 161-198s vs v35's 47s; see analysis/v18-20-params.json and
+  // clean-fitness.json) — keeping the post-v30 keepers (tile-map upgrades, hunt gate, damage build).
+  // (2) Kite-with-lead-fire escape. (3) World-unit perception. (4) ms-denominated timers.
+  // (5) Escape-lane scoring. All Layer-1 tested (npm test).
+  version: 36,
   // v34: a squishy sniper must not chase weak prey while a clearly-bigger tank is near (it gets run
   // down to point-blank). Suppress hunting when a tank r >= myR*snipeAvoidRatio sits within
   // snipeAvoidRadius. Direct (not ES-tuned), narrow (only gates hunting; no blanket fleeing).
   snipeAvoidRatio: 1.1,
-  snipeAvoidRadius: 300,
+  snipeAvoidRadius: 420, // v36: WORLD units (was 300 screen px, unscaled = ~440 world at Ranger zoom)
   // v32 FOV scaling: median on-screen square radius (px) at the baseline Tank FOV. Measured ~22 (Tank),
   // 19 (Sniper), 15 (Assassin) - so the sniper line zooms out and defensive distance thresholds are
   // rescaled by (currentSquarePx / this) to stay world-consistent. 1.0 multiplier at the Tank baseline.
   fovBaselinePx: 22,
-  // RL Phase 0: log a per-decision transition every N frames (~5/sec at 60fps) so the rules bot banks
-  // a real (state,action,reward,next-state) corpus to pre-train the residual policy on. Logging only.
-  transitionLogEvery: 12,
+  // RL Phase 0: log a per-decision transition every N ms (~5/sec) so the rules bot banks a real
+  // (state,action,reward,next-state) corpus to pre-train the residual policy on. Logging only.
+  // v36: ms-denominated (was every 12 frames = 2x the intended rate on this 119fps display).
+  transitionLogMs: 200,
 
   // v29 BUILD: the SNIPER line (Joe's call - "you have good aim, keep upgrading the sniper, no more
   // overlord, that tank sucks"). Upgrades are picked by CLASS NAME from this priority list (the runner
@@ -48,7 +54,7 @@ export const DOCTRINE = {
   // Crowd flight: being collapsed on by several foes at once is the dominant death (87% of deaths
   // are point-blank with 2-3 foes near). If >= crowdCount foes sit within crowdRadius, force escape
   // and don't hunt, so a converging swarm breaks farming before the pocket closes to body contact.
-  crowdRadius: 248,
+  crowdRadius: 260, // v36: v18-v20 family (median 253, top-quartile 266)
   crowdCount: 2,
 
   // === v18 FRAGILE-PHASE SURVIVAL GATING (the highest-leverage lever per the corpus) ===
@@ -87,7 +93,8 @@ export const DOCTRINE = {
   // Overseer (drones not yet deployed) plays full-aggressive at its weakest moment. For a brief
   // window after ANY upgrade, scale up the flee triggers (same machinery as fragile/lead) so the new
   // class survives while its drones mature. Bridges L15->Sniper, L30->Overseer, L45->Overlord.
-  upgradeGraceFrames: 180, // ~3s of caution after a class upgrade (ES-tunable [60,360])
+  // v36: ms-denominated (was 180 frames = ~1.5s real on this 119fps display, half the intent).
+  upgradeGraceMs: 3000, // caution window after a class upgrade (ES-tunable [1000,6000])
   upgradeScale: 1.3, // flee-radius multiplier during the post-upgrade window (ES-tunable [1.0,1.7])
 
   // === v17 PROACTIVE SPACING / ANTI-SURROUND (the headline redesign) ===
@@ -103,7 +110,7 @@ export const DOCTRINE = {
   spacingRadius: 400, // foes within this contribute to threat pressure / centroid
   surroundRadius: 300, // foes within this count toward the open-lane / surround analysis
   spacingFloor: 0.02, // pressure above which farming switches to spaced movement (space-farm)
-  spacingGain: 1.3, // strength of the along-lane spacing push during farming (1.6->1.3: let approach win in low pressure, less farm-stall)
+  spacingGain: 1.475, // v36: v18-v20 top-quartile median (the 278-647s lives ran ~1.475)
   pressureCap: 0.06, // pressure at which the spacing push (and safe-shape bias) saturates
   pressureEscape: 0.075, // pressure that forces a full escape, dropping farming entirely (crowd-escape already covers the 2-foe-close case; this is the dense-swarm / big-lone-hunter backstop)
   safeLaneMinDeg: 130, // if the largest angular gap between nearby foes is under this, we're surrounded -> breakout
@@ -112,9 +119,15 @@ export const DOCTRINE = {
   // 2-8x our score running us down, usually in pairs. Flee any tank clearly bigger than us, earlier
   // and harder than a normal enemy. Detection is MULTI-FRAME (predatorConfirmFrames consecutive
   // frames) so a single-frame size misread can never trigger flight - same lesson as the score glitch.
-  predatorRatio: 1.309, // enemy with radius > myR * this is a candidate hunter (clearly bigger)
-  predatorDetectRadius: 460, // only consider big tanks within this as hunters
-  predatorConfirmFrames: 16, // ~0.27s of persistent presence before we trust it (anti-phantom)
+  predatorRatio: 1.211, // v36: v18-v20 family — v35's 1.309 only feared MUCH-bigger tanks; the
+  // survival-record versions confirmed hunters at 1.211 (earlier, more inclusive detection)
+  // v36: WORLD units, and UN-SHRUNK. Under v32 scaling this was effectively ~313 world at Ranger
+  // zoom — the max-FOV class was confirming hunters at Tank-class distances, using ~40% of its
+  // visible screen. Encounters starting >=450 die 8.2% vs 39-48% under 350: earlier DETECTION is
+  // the single strongest lever in the encounter data. Flee radii below stay at their world values —
+  // this is earlier awareness, not blanket timidity (the v8 lesson).
+  predatorDetectRadius: 550,
+  predatorConfirmMs: 270, // persistent presence before we trust it (anti-phantom; v36 ms-denominated)
   predatorFleeRadius: 293, // flee a confirmed hunter within this (vs escapeRadius ~216 for normals)
   // Drone screen (#2): ENABLED v15. v14 hunter-encounter data (7 Overseer L30+ encounters) confirmed
   // predators are faster and kill from RANGE (166-403px): straight-line flight LOST ~88px/encounter
@@ -136,17 +149,29 @@ export const DOCTRINE = {
 
   // Bullet dodging (velocity-based): a bullet aimed at us (cos angle > aimedCos) inside dodgeRadius
   // whose predicted miss distance is under missMargin triggers a perpendicular sidestep.
-  bulletDodgeRadius: 257,
-  bulletAimedCos: 0.844,
-  bulletMissMargin: 67,
+  // v36: WORLD units (previously unscaled screen px — a Ranger was dodge-blind in its outer view).
+  bulletDodgeRadius: 300,
+  bulletAimedCos: 0.887, // v36: v18-v20 top-quartile (dodge only genuinely-aimed bullets; less twitch)
+  bulletMissMargin: 75,
 
   // Spawn safety: fresh respawns drop us at ~level 2 next to the killer. For the first few seconds
   // of a life, flee from any enemy within an enlarged radius and do not farm.
-  spawnGraceFrames: 256, // ~4.3s at 60fps
+  // v36: ms-denominated. The old 256 FRAMES was ~4.3s only at 60fps; on this Mac's 119fps ProMotion
+  // display it elapsed in ~2.15s — half the intended protection window (same for every other
+  // frame-denominated timer, which is why they're all ms now).
+  spawnGraceMs: 4300,
   spawnEscapeRadius: 305,
 
   // Map awareness (positions normalized 0..1 from the minimap arrow).
   wallMargin: 0.06, // treat being within this of an edge as "at the wall" for escape penalties
+  // v36 escape-lane scoring: the wall term must DOMINATE ordinary threat terms (the old -5 was
+  // 40-120x weaker than the -600 predator / -200*w foe terms, so hunters pushed us into corners),
+  // plus a tangential slide bonus so wall-adjacent flight moves along the wall, and a shape-blocker
+  // term so the flight lane deflects around pentagon nests instead of body-ramming through them.
+  wallEscapePenalty: 400, // per violated axis (ES-tunable [200,800])
+  wallSlideBonus: 120, // x |tangential component| when pinned near an edge (ES-tunable [40,240])
+  escapeShapeRadius: 220, // shapes within this can deflect the escape lane
+  escapeShapeWeight: 120, // blocker strength (~10x weaker than a same-distance foe; ES-tunable [40,240])
   patrolAnchors: [[0.2, 0.2], [0.8, 0.2], [0.8, 0.8], [0.2, 0.8]], // quiet-ish corner waypoints
   anchorReachedDist: 0.08, // advance to next anchor when this close
 
@@ -159,7 +184,7 @@ export const DOCTRINE = {
   // nest. Eating shapes is the early-game route to level up, but it does NOT reach #1; killing tanks
   // does (v24 predator mode). Kept in SPACE so the ES could revive a mild version, but off by default.
   dronePentagonBonus: 0,
-  approachStopDist: 154, // stop closing on a shape inside this; shoot it from range
+  approachStopDist: 180, // stop closing on a shape inside this; shoot it from range (v36 world units)
   shapeBodyMargin: 59, // if a shape is within me.r+shape.r+this, back off (avoid lethal body contact)
   wanderWhenEmpty: true,
 
@@ -172,20 +197,32 @@ export const DOCTRINE = {
   preyCrowdRadius: 220, // count a prey's nearby allies within this when ranking targets
   preyCrowdPenalty: 200, // px-equivalent penalty per ally near a prey (prefer isolated kills)
   huntSizeRatio: 0.832, // (legacy, unused by v24 predator mode; bestPrey uses preyRatio)
-  huntRange: 360, // only hunt prey within this distance
+  huntRange: 500, // only hunt prey within this distance (v36 world units; preserves sniper reach)
   huntMaxFoes: 1, // (legacy, unused by v24; danger-aware crowd handles swarms of dangerous tanks)
-  huntStandoff: 166, // close to this distance, then hold (drones do the work; don't body-ram a tank)
+  huntStandoff: 220, // close to this, then hold — a sniper's bullets cover the rest (v36 world units)
   // v27 target lock + pursuit: commit to a prey and chase it to finish the kill instead of dropping it
   // when it leaves the frame. We dead-reckon its last-known position by velocity and pursue for this
   // many frames before giving up; a visible enemy within preyMatchRadius of that spot is the same prey.
-  pursuitFrames: 90, // ~1.5s of pursuit after losing sight (ES-tunable)
-  preyMatchRadius: 90, // px: re-acquire the locked prey among visible enemies within this of its predicted pos
+  pursuitMs: 1500, // pursuit after losing sight (ES-tunable; v36 ms-denominated)
+  preyMatchRadius: 120, // world units: re-acquire the locked prey among visible enemies within this of its predicted pos
 
   // Aim / fire
   autofire: true,
+  // === v36 KITE-WITH-LEAD-FIRE (the devlog's named-but-never-built lever, entries 007/040/045) ===
+  // Fled encounters died 39% vs 24% stood (n=2,735): straight-line flight from a ranged hunter is
+  // a losing move — the bot gets shot down while running (median closure only ~20px). The kite band
+  // holds/opens the range gap with tangential motion while continuously LEAD-FIRING at the pursuer.
+  bulletPxPerFrame: 12, // our bullet speed, world px/frame (Sandbox-calibrated; scales with stat 4)
+  kiteBandMul: 1.6, // kite (tangent+fire) while pursuer in [escapeR, escapeR*this] (ES [1.3, 2.0])
+  kiteExitMul: 1.4, // escape latch releases only past escapeR*this — hysteresis, no thrash (ES [1.2, 1.6])
   // v26 return fire: when a tank is engaging us (within this range, or shooting at us), aim our
   // fire/drones AT it instead of at a shape, until it's dead or out of range. ES-tunable.
-  combatRange: 400,
+  combatRange: 550, // v36: world units (preserves the v32-era effective reach at Ranger zoom)
+  // v36 far-field routing (change 2c): farming/patrol drift away from enemy-dense space long before
+  // contact. Long lives see 0.70 hunter encounters/min vs 1.24 for short ones — positioning beats
+  // fighting. Low weight by design: it routes, it never overrides threat handling. 0 = off.
+  farFieldRadius: 700, // world units: enemies within this of a farm target/route count as density
+  farFieldWeight: 40, // px-equivalent penalty per unit of enemy density (ES-tunable [0,120])
 
   // v34 SNIPER perk build - DAMAGE-FORWARD (stat keys: 1 Regen 2 MaxHealth 3 BodyDmg 4 BulletSpeed
   // 5 BulletPen 6 BulletDmg 7 Reload 8 MoveSpeed). v33 tried movement-forward (Move x3 early) to fix
